@@ -16,13 +16,11 @@
 
 \onehalfspacing
 
-\theoremstyle{plain}
+\theoremstyle{definition}
 \newtheorem{proposition}{Proposition}[section]
 \newtheorem{theorem}[proposition]{Théorème}
 \newtheorem{corollaire}[proposition]{Corollaire}
 \newtheorem{lemme}[proposition]{Lemme}
-
-\theoremstyle{definition}
 \newtheorem{definition}[proposition]{Définition}
 
 \DeclareMathOperator{\vect}{Vect}
@@ -139,7 +137,8 @@ Dans toute cette section, on fixe un $K$-ev $E$ et une famille $(x_i)_{i \in I}$
 \begin{definition}
 Une \uline{combinaison linéaire} de vecteurs $x_i,\, i\in I$ est un élément de la forme $\sum\limits_{i \in I} \lambda_i x_i$, où $(\lambda_i)_{i \in I}$ est une famille \uline{presque nulle} d'éléments de $K$, càd que $S = \{ i \in I \mid \lambda_i \neq 0\}$ est fini. \\
 La somme $\sum\limits_{i \in I} \lambda_i x_i$ signifie simplement $\sum\limits_{i \in S} \lambda_i x_i$ \\
-On note $\vect(x_i)_{i \in I}$ et on appelle \uline{sous-espace vectoriel engendré par les $x_i,\, i \in I$}, l'ensemble de ces combinaisons linéaires. \\
+On note $\vect(x_i)_{i \in I}$ et on appelle \uline{sous-espace vectoriel engendré par les $x_i,\, i \in I$} \\
+l'ensemble de ces combinaisons linéaires. \\
 Si $I = \llbracket 1, r \rrbracket$ la définition devient:
 \[\vect(x_1, ...\, , x_r) = \left\lbrace\sum_{i = 1}^r \lambda_i x_i \mid \lambda_1, ...\, , \lambda_r \in K \right\rbrace\]
 \end{definition}

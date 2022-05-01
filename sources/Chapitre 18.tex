@@ -1,0 +1,599 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Mat}{Mat}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 18. Espaces vectoriels de dimension finie}}
+\end{center}
+
+\section{Définitions et lemmes fondamentaux}
+\subsection{Sous-familles}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une \uline{sous-famille} d'une famille $F = (x_i)_{i \in I}$ est une famille de la forme $(x_j)_{j \in J}$ où $J \subseteq I$
+\item En particulier, une sous-famille de $(x_i)_{i = 1}^n$ est une famille de la forme $(x_{i_k})_{k = 1}^r$  \\
+où $1 \leq i_1 < i_2 < ... < i_r \leq n$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $F$ une famille de vecteurs d'un ev $E$ et $G$ une sous-famille de $F$.
+\begin{itemize}
+\item Si $F$ est libre, alors $G$ aussi.
+\item Si $G$ est génératrice, alors $F$ aussi.
+\end{itemize}
+\end{proposition}
+\begin{lemme}[Lemme de précipitation]
+Soit $(x_1, ...\, , x_n)$ une famille libre d'un ev $E$ et $y \in E$. \\
+Alors $(x_1, ...\, , x_n, y)$ est liée ssi $y \in \vect(x_1, ...\, , x_n)$
+\end{lemme}
+
+\subsection{Espaces vectoriels de dimension finie}
+On fixe un ev $E$.
+\begin{lemme}[Théorème de la base incomplète, version forte]
+\hfill \\
+Soit $(x_1, ...\, , x_n, y_1, ...\, , y_p)$ une famille de vecteurs de E telle que:
+\begin{itemize}
+\item $(x_1, ...\, , x_n)$ libre.
+\item $(x_1, ...\, , x_n, y_1, ...\, , y_p)$ génératrice.
+\end{itemize}
+Alors il existent $1 \leq j_1 < ... < j_r \leq p$ tels que $(x_1, ...\, , x_n, y_{j_1}, ...\, , y_{j_r})$ soit une base de $E$.
+\end{lemme}
+\begin{corollaire}[théorème de la base extraite]
+Soit $(y_1, ...\, , y_p)$ une famille génératrice de $E$. \\
+Alors on peut en "extraire" une base: il existe $1 \leq j_1 < ... < j_r \leq p$ tels que $(y_{j_1}, ...\, , y_{j_r})$ soit une base de $E$.
+\end{corollaire}
+\begin{corollaire}
+$E$ admet une base finie ssi $E$ admet une famille génératrice finie.
+\end{corollaire}
+\begin{definition}
+On dit que $E$ est de dimension finie s'il admet une base finie (ou une famille génératrice finie, puisque c'est équivalent).
+\end{definition}
+\begin{corollaire}[Théorème de la base incomplète, version faible]
+Supposons $E$ de dimension finie. \\
+Soit $(x_1, ...\, , x_n)$ une famille libre de vecteurs de $E$. On peut alors la "compléter" en une base: \\
+on peut trouver $z_1, ...\, , z_r \in E$ tels que $(x_1, ...\, , x_n, z_1, ...\, , z_r)$ soit une base de $E$.
+\end{corollaire}
+
+\subsection{Dimension}
+\begin{lemme}[Lemme de l'échange de Steinitz]
+Soit $e_1, ...\, , e_n \subseteq E$. \\
+Alors toute famille de $n + 1$ vecteurs de $\vect (e_1, ...\, , e_n)$ est liée.
+\end{lemme}
+\begin{corollaire}
+Soit $E$ un espace vectoriel de dimension finie.
+\begin{itemize}
+\item Si $\mathcal{L}$ est une famille libre de vecteurs de $E$ et $\mathcal{G}$ une famille génératrice de vecteurs de $E$ \\
+alors $\mathcal{G}$ a au moins autant d'éléments que $\mathcal{L}$.
+\item Toutes les bases de $E$ ont le même nombre d'éléments.
+\end{itemize}
+\end{corollaire}
+\begin{definition}
+Soit $E$ un evdf [ev de dimension finie]. \\
+On en définit sa \uline{dimension} $\dim E \in \mathbb{N}$ comme étant le nombre de vecteurs de ses bases.
+\end{definition}
+
+\pagebreak
+
+\begin{definition}
+\hfill
+\begin{itemize}
+\item \uline{Une droite (vectorielle)} est un ev de dimension 1.
+\item \uline{Un plan (vectoriel)} est un ev de dimension 2.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $E$ un evdf et $\mathcal{F} = (x_1, ...\, , x_n)$ une famille de vecteurs de $E$. \\
+Alors:
+\begin{itemize}
+\item Si $\mathcal{F}$ est libre, on a $n \leq \dim E$
+\item Si $\mathcal{F}$ est génératrice, on a $\dim E \leq n$
+\item Si $n = \dim E$, alors LASSÉ:
+\begin{enumerate}
+\item $\mathcal{F}$ libre.
+\item $\mathcal{F}$ engendre $E$.
+\item $\mathcal{F}$ est une base de $E$. 
+\end{enumerate}
+\end{itemize}
+\end{theorem}
+
+\subsection{Retour aux familles échelonnées}
+\begin{theorem}
+Soit $P_0, P_1, ...\, , P_k \in K[X]$ tels que $\forall i \in \llbracket 0, n \rrbracket$, $\deg P_i = i$. \\
+Alors $(P_0, ...\, , P_n)$ est une base de $K_n[X]$. 
+\end{theorem}
+
+\subsection{Classification des evdf à isomorphisme près}
+\begin{theorem}
+Soit $E$, $F$ deux ev.
+\begin{itemize}
+\item Si $E$ et $F$ sont isomorphes, $E$ est de dimension finie si et seulement si $F$ l'est.
+\item Si $E$ et $F$ sont de dimension finie, alors $E$ et $F$ sont isomorphes ssi $\dim E = \dim F$.
+\end{itemize}
+\end{theorem}
+
+\section{EV de dimension infinie (hors-programme)}
+Si $E$ possède une famille libre infinie $(e_i)_{i \in I}$, alors $E$ est de \uline{dimension infinie} (càd qu'il n'est pas de dimension finie). \\
+En effet, si $E$ était de dimension finie $d = \dim E$ on pourrait extraire de $(e_i)_{i \in I}$ une famille (nécessairement libre) à $d + 1$ vecteurs, ce qui est absurde. Cela donne des exemples d'espaces vectoriels de dimension infinie:
+\begin{itemize}
+\item $K[X]$, avec sa base $(X^n)_{n \in \mathbb{N}}$
+\item $\mathbb{R}^\mathbb{N}$, e.g. $\begin{pmatrix}
+(1, 0, 0, 0, ... \, , \hspace{1em} ) \phantom{, etc...} \\
+(0, 1, 0, 0, ... \, , \hspace{1em} ) \phantom{, etc...} \\
+(0, 0, 1, 0, ... \, , \hspace{1em} ), \text{etc...} \\
+\end{pmatrix}$
+\item $\mathbb{R}^\mathbb{R}$, ou $C^\infty (\mathbb{R}, \mathbb{R})$ e.g. $(x \to e^{\alpha x})_{\alpha \in \mathbb{R}}$
+\end{itemize}
+Toute la suite du B est hors-programme.
+
+\subsection{Existence de bases}
+\begin{itemize}
+\item Le lemme de précipitation marche très bien avec des familles infinies.
+\item Le théorème de la base incomplète reste vrai avec essentiellement la même preuve: la famille libre maximale est fournie par le lemme de Zorn.
+\end{itemize}
+\begin{lemme}
+Soit $(I_\tau)_{\tau \in T}$ une famille d'ensembles telle que $\forall \tau_1, \tau_2 \in T$, $I_{\tau_1} \subseteq I_{\tau_2}$ ou $I_{\tau_2} \subseteq I_{\tau_1}$ \\
+On note $I = \bigcup\limits_{I \in T} I_\tau$ et on prend une famille $(x_i)_{i \in I}$. \\
+Si toutes les familles $(x_i)_{i \in I_\tau}$ sont libres, alors $(x_i)_{i \in I}$ est libre.
+\end{lemme}
+\begin{corollaire}
+Tout espace vectoriel admet une base.
+\end{corollaire}
+
+\subsection{Définition de la dimension}
+\begin{lemme}
+Soit $(x_i)_{i \in I}$ et $(y_j)_{j \in J}$ une famille libre de vecteurs de $\vect (x_i)_{i \in I}$ \\
+Alors il existe une injection $J \to I$.
+\end{lemme}
+\begin{corollaire}
+Si $(e_i)_{i \in I}$ et $(f_j)_{j \in J}$ sont deux bases d'un même ev $E$, alors $I$ et $J$ sont en bijection.
+\end{corollaire}
+
+\subsection{Bases de Hamel}
+\begin{definition}
+Une \uline{base de Hamel} est une base du $\mathbb{Q}$-ev $\mathbb{R}$.
+\end{definition}
+
+\section{Sous-espaces vectoriels et dimensions}
+\subsection{Inégalité des dimensions, base adaptée}
+\begin{theorem}
+Soit $E$ un espace vectoriel de dimension finie et $F$ un sev de $E$. \\
+Alors $F$ est de dimension finie et $\dim F \leq \dim E$.
+\end{theorem}
+\begin{theorem}
+Soit $E$ un evdf et $F$ un sev de $E$. \\
+Alors il existe une base $(e_1, ...\, , e_r, e_{r + 1}, ...\, , e_n)$ de $E$ telle que $(e_1, ...\, , e_r)$ soit une base de $F$.
+\end{theorem}
+\begin{theorem}
+Soit $E$ un evdf et $F$ un sev de $E$. \\
+Si $\dim F = \dim E$, alors $F = E$.
+\end{theorem}
+\begin{definition}
+Un \uline{hyperplan} d'un espace vectoriel de dimension finie $E$ est un sev de $E$ de dimension $\dim \left. E - 1 \right.$.
+\end{definition}
+
+\subsection{Sommes (directes) et dimension}
+\begin{lemme}
+Soit $E$ un espace vectoriel et $F_1, ...\, , F_r$ des sous-espaces vectoriels de $E$ de dimension finie et en somme directe. Alors $\bigoplus\limits_{i = 1} F_i$ est de dimension finie et $\dim (\bigoplus\limits_{i = 1} F_i) = \sum\limits_{i = 1}^{r} \dim F_i$
+\end{lemme}
+\begin{proposition}
+Soit $E_1, ...\, , E_r$ des espaces vectoriels de dimension finie. \\
+Alors $E_1 \times ... \times E_r$ est de dimension finie, et $\dim (E_1 \times ... \times E_r) = \sum\limits_{i = 1}^{r} \dim E_i$
+\end{proposition}
+\begin{proposition}
+Soit $E$ un evdf et $F$ un sev de $E$. \\
+Alors $F$ possède (au moins) un supplémentaire dans $E$ et tous les supplémentaires de $F$ sont de dimension $\dim E - \dim F$
+\end{proposition}
+\begin{theorem}[Formule de Grassmann]
+Soit $E$ un ev. Soit $F$, $G$ deux sev de $E$ de dimension finie. \\
+Alors $\dim (F + G) = \dim F + \dim G - \dim (F \cap G)$
+\end{theorem}
+\begin{theorem}
+Soit $F$, $G$ deux sev de dimension finie d'un ev $E$.
+\begin{itemize}
+\item $F$ et $G$ sont en somme directe ssi $\dim (F + G) = \dim F + \dim G$
+\item Supposons $E$ de dimension finie $\dim E = \dim F + \dim G$. \\
+Alors les assertions suivantes sont équivalentes:
+\begin{enumerate}
+\item $F$ et $G$ sont en somme directe.
+\item $F + G = E$
+\item $F$ et $G$ sont supplémentaires: $E = F \oplus G$
+\end{enumerate}
+\end{itemize}
+\end{theorem}
+
+\subsection{Rang d'une famille de vecteurs}
+\begin{definition}
+Soit $x_1, ...\, , x_p$ des vecteurs d'un ev $E$. \\
+On définit le \uline{rang} de cette famille: $\rg (x_1, ...\, , x_p) = \dim \vect (x_1, ...\, , x_p)$
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item On a $\rg (x_1, ...\, , x_p) \leq p$
+\item Si $E$ est de dimension finie, $\rg (x_1, ...\, , x_p) \leq \dim E$ ( et donc $\rg (x_1, ...\, , x_p) \leq \min (p, \dim E)$ )
+\item On a $(x_1, ...\, , x_p)$ libre ssi $\rg (x_1, ...\, , x_p) = p$
+\item On a $(x_1, ...\, , x_p)$ engendre $E$ ssi $\rg (x_1, ...\, , x_p) = \dim E$
+\item $(x_1, ...\, , x_p)$ est une base de $E$ ssi $\rg (x_1, ...\, , x_p) = p = \dim E$
+\end{itemize}
+\end{proposition}
+
+\section{Applications linéaires et dimensions}
+\subsection{Injectivité et surjectivité}
+\begin{theorem}
+Soit $E$ et $F$ deux espaces vectoriels et $f \in \mathcal{L}(E, F)$
+\begin{itemize}
+\item Si $F$ est de dimension finie et $f$ injective, alors $E$ est de dimension finie et $\dim E \leq \dim F$
+\item Si $E$ est de dimension finie et que $f$ est surjective, alors $F$ est de dimension finie et $\dim F \leq \dim E$
+\item Si $E$ et $F$ sont de dimension finie et que $\dim E = \dim F$, LASSÉ:
+\begin{enumerate}
+\item $f$ injective.
+\item $f$ surjective.
+\item $f$ est un isomorphisme.
+\end{enumerate}
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Soit $E$ un evdf et $f \in \mathcal{L}(E)$. \\
+Alors $f$ injectif $\iff$ $f$ surjective $\iff$ $f \in GL(E)$
+\end{corollaire}
+\begin{corollaire}
+Soit $E$ un evdf et $u \in \mathcal{L}(E)$. LASSÉ:
+\begin{enumerate}
+\item $u$ est inversible à gauche: $\exists v \in \mathcal{L}(E)$, $v \circ u = id_E$
+\item $u$ est inversible à droite: $\exists v \in \mathcal{L}(E)$, $u \circ v = id_E$
+\item $u$ est un isomorphisme.
+\end{enumerate}
+\end{corollaire}
+\begin{theorem}
+Soit $A$ une $K$-algèbre et $B$ une sous-algèbre de $A$ de dimension finie. \\
+Soit $x \in B \cap A^\times$ (càd $x\in B$ et il possède un inverse dans $A$). \\
+Alors $x \in B^\times$ (càd l'inverse $x^{-1} \in B$).
+\end{theorem}
+
+\subsection{Rang d'une application linéaire}
+\begin{definition}
+Soit $E$, $F$ deux ev et $f \in \mathcal{L}(E, F)$
+\begin{itemize}
+\item On dit que $f$ est de \uline{rang fini} si $\im f$ est de dimension finie.
+\item Si c'est le cas, le \uline{rang} de $f$ est $\rg (f) = \dim (\im f)$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $E$, $F$ deux espaces vectoriels et $f \in \mathcal{L}(E, F)$
+\begin{itemize}
+\item Si $E$ est de dimension finie, alors $f$ est de rang fini, est $\rg f \leq \dim E$
+\item Si $F$ est de dimension finie, alors $f$ est de rang fini, est $\rg f \leq \dim F$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $E$, $F$, $G$ trois espaces vectoriels et $f \in \mathcal{L}(E, F)$, $g \in \mathcal{L}(F, G)$.
+\begin{itemize}
+\item Si $f$ est de rang fini, alors $g \circ f$ aussi et $\rg (g \circ f) \leq \rg f$
+\item Si $g$ est de rang fini, alors $g \circ f$ aussi et $\rg (g \circ f) \leq \rg g$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+On reprend les notations de la question précédente.
+\begin{itemize}
+\item Si $f$ est un isomorphisme et que $g$ est de rang fini, on a $\rg (g \circ f) = \rg g$
+\item Si $g$ est un isomorphisme et que $f$ est de rang fini, on a $\rg (g \circ f) = \rg f$
+\end{itemize}
+\end{proposition}
+
+\subsection{Théorème du rang}
+\begin{theorem}[du rang / rank-nullity theorem]
+Soit $E$, $F$ deux espaces vectoriels de dimension finie et $\left. f \in \mathcal{L}(E, F) \right.$.
+\begin{itemize}
+\item Soit $S$ un supplémentaire de $\ker f$ dans $E$ ($E = \ker f \oplus S$). \\
+Alors $f$ induit un isomorphisme $\tilde{f} : S \to \im f$
+\item On a la \uline{formule du rang}: $\rg f = \dim E - \dim \ker f$
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Avec les mêmes notations, on a:
+\begin{itemize}
+\item $f$ injective $\iff$ $\dim \ker f = 0$ $\iff$ $\rg f = \dim E$
+\item $f$ surjective $\iff$ $\rg f = \dim F$
+\item $f$ iso $\iff$ $\rg f = \dim E = \dim F$
+\end{itemize}
+On retrouve les résultats de la section 1.
+\end{corollaire}
+
+\subsection{Formes linéaires et hyperplans}
+\begin{definition}
+Soit $E$ un espace vectoriel de dimension finie. \\
+Une \uline{forme linéaire} sur $E$ est une AL $E \to K$. \\
+On note $E^* = \mathcal{L}(E, K)$ et on appelle \uline{dual} de $E$ l'espace des formes linéaires sur $E$.
+\end{definition}
+\begin{proposition}
+Soit E un espace vectoriel de dimension finie.
+\begin{itemize}
+\item Soit $\alpha \in E^*$ non nulle. Alors $\ker \alpha$ est un hyperplan de $E$.
+\item Soit $H$ un hyperplan de $E$
+\begin{itemize}
+\item Il existe $\alpha \in E^*$ non nulle tel que $H = \ker \alpha$
+\item Si $\alpha, \beta \in E^*$ vérifient $\ker \alpha = \ker \beta = H$ alors $\exists \lambda \in K \setminus \{0\} : \beta = \lambda \alpha$
+\end{itemize}
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $E$ un ev de dimension $n$.
+\begin{itemize}
+\item Tout sev $F$ de $E$ de dimension $d$ est l'intersection $F = H_1 \cap ... \cap H_{n - d}$ de $n - d$ hyperplans.
+\item Réciproquement, si $H_1, ...\, , H_r$ sont $r$ hyperplans de $E$, alors $\dim (H_1 \cap ... \cap H_r) \geq n - r$.
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Étant donné un sev $F$ de $E$, on définit sa \uline{codimension} $\cod (F) = \dim E - \dim F$
+\end{definition}
+\begin{lemme}
+Si $F_1, ...\, , F_r$ sont des sev de $E$, alors $\cod (F_1 \cap ... \cap F_r) \leq \sum\limits_{i = 1}^{r} \cod (F_i)$
+\end{lemme}
+
+\section{Représentation matricielle}
+\subsection{Matrices d'un vecteur, d'une famille, d'une AL}
+Dans toute cette section, $E$ est un espace vectoriel de $\dim p$, muni d'une base $\mathcal{B} = (e_1, ...\, , e_p)$ \\
+\hspace*{4.32cm} $F$ est un espace vectoriel de $\dim n$, muni d'une base $\mathcal{C} = (f_1, ...\, , f_p)$
+
+\uline{Rappel}: Tout vecteur $y \in F$ a une matrice $\Mat_\mathcal{C} (y) = \begin{pmatrix}
+\lambda_1 \\
+\vdots \\
+\lambda_n
+\end{pmatrix}$, où $\lambda_1, ...\, , \lambda_n \in K$ sont tels que $y = \sum\limits_{i = 1}^{n} \lambda_i f_i$
+\begin{definition}
+Soit $y_1, ...\, , y_p \in F$. On définit la \uline{matrice de la famille $(y_1, ...\, , y_p)$ dans la base $\mathcal{C}$}:
+\[\Mat_\mathcal{C} (y_1, ...\, , y_p) = \begin{pmatrix}
+\Mat_\mathcal{C} (y_1) & \Big| & \cdots & \Big| & \Mat_\mathcal{C} (y_p)
+\end{pmatrix} \in M_{np} (K)\]
+\end{definition}
+\begin{definition}
+Soit $u \in \mathcal{L}(E, F)$. On définit le \uline{matrice de $u$ dans les bases $\mathcal{B}$ et $\mathcal{C}$}:
+\[\Mat_{\mathcal{B}, \mathcal{C}} (u) = \Mat_\mathcal{C} (u(e_1), ...\, , u(e_p)) = \begin{pmatrix}
+Mat_\mathcal{C} (u(e_1)) & \Big| & \cdots & \Big| & \Mat_\mathcal{C} (u(e_p))
+\end{pmatrix} \in M_{np} (K)\]
+\end{definition}
+\begin{definition}
+Soit $u \in \mathcal{L}(E)$. On définit la matrice de $u$ dans la base $\mathcal{B}$:
+\[\Mat_\mathcal{B} (u) = \Mat_{\mathcal{B}, \mathcal{B}} (u) \in M_p (K) \]
+\end{definition}
+\begin{proposition}["évaluer c'est multiplier"]
+Soit $x \in E$. \\
+Alors
+\[\Mat_\mathcal{C} (u(x)) = \Mat_{\mathcal{B}, \mathcal{C}} (u) \Mat_\mathcal{B} (x)\]
+\end{proposition}
+\begin{corollaire}
+Soit $u \in \mathcal{L}(E, F)$. On a:
+\begin{itemize}
+\item Pour tout $x \in E$, $x \in \ker u \iff \Mat_\mathcal{B}(x) \in \ker \Mat_{\mathcal{B}, \mathcal{C}}(u)$
+\item Pour tout $y \in F$, $y \in \im u \iff \Mat_\mathcal{C}(y) \in \im \Mat_{\mathcal{B}, \mathcal{C}}(u)$
+\end{itemize}
+\end{corollaire}
+\begin{proposition}["composer c'est multiplier"]
+Soit $E$, $F$, $G$ trois evdf de bases \\
+$\mathcal{B} = (e_1, ...\, , e_p)$, $\mathcal{C} = (f_1, ...\, , f_n)$, $\left. \mathcal{D} = (g_1, ...\, , g_m) \right.$ et $u \in \mathcal{L}(E, F)$ et $v \in \mathcal{L}(F, G)$ \\
+Alors
+\[\Mat_{\mathcal{B}, \mathcal{D}}(v \circ u) = \Mat_{\mathcal{C}, \mathcal{D}}(v) \Mat_{\mathcal{C}, \mathcal{D}}(u)\]
+\end{proposition}
+
+\subsection{Application linéaire associées à des matrices}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item $\Mat_\mathcal{C} : F \to K^n$ est un isomorphisme (d'év).
+\item $\Mat_{\mathcal{B}, \mathcal{C}} : \mathcal{L}(E, F) \to M_{np}(K)$ est un isomorphisme (d'év).
+\item $\Mat_\mathcal{B} : \mathcal{L}(E) \to M_p(K)$ est un isomorphisme (d'év).
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+On a $\dim \mathcal{L}(E, F) =  \dim E \cdot \dim F$
+\end{corollaire}
+\begin{corollaire}[du corollaire]
+\hfill
+\begin{itemize}
+\item $\dim \mathcal{L}(E) = (\dim E)^2$
+\item $\dim E^* = \dim \mathcal{L}(E, K) = \dim E$
+\end{itemize}
+\end{corollaire}
+\begin{corollaire}
+Soit $u \in \mathcal{L}(E)$ \\
+Alors $u$ est un automorphisme ssi $\Mat_\mathcal{B}(u)$ est inversible. \\
+Autrement dit: $u \in GL(E) \iff \Mat_\mathcal{B}(u) \in GL_p(K)$
+\end{corollaire}
+
+\subsection{Rang d'une matrice}
+\begin{definition}
+Soit $A \in M_{np}(K)$ \\
+On définit le \uline{rang} de $A$: $\rg A = \dim (\im A)$
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $y_1, ...\, , y_p \in F$. On a $\rg (y_1, ...\, , y_p) = \rg \Mat_\mathcal{C} (y_1, ...\, , y_p)$
+\item Soit $u \in \mathcal{L}(E, F)$. On a $\rg u = \rg \Mat_{\mathcal{B}, \mathcal{C}}(u)$
+\end{itemize}
+\end{proposition}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item $\forall A \in M_{np}(K)$, $\rg A \leq \min (n, p)$
+\item $\forall A \in M_{np}(K)$, $\forall B \in M_{pq}(K)$, $\rg (AB) \leq (\rg A, \, \rg B)$
+\item $\forall A \in M_{np}(K)$, $\begin{cases}
+\forall P \in GL_n(K),\, \rg (PA) = \rg A \\
+\forall Q \in GL_p(K),\, \rg (AQ) = \rg A
+\end{cases}$
+\end{itemize}
+\end{theorem}
+
+\pagebreak
+
+\begin{theorem}[Théorème du rang]
+\hfill
+\begin{itemize}
+\item $\forall A \in M_{np}(K)$, $\rg A = p - \dim \ker A$
+\item Pour tout $A \in M_{np}(K)$, $\ker A = \{ 0_{K^P} \} \iff \rg A = p$ \\
+\phantom{Pour tout $A \in M_{np}(K)$,} $\im A = K^n \iff \rg A = n$
+\item En particulier, pour tout $A \in M_n(K)$, on a \\
+$\rg A = n \iff A \in GL_n(K) \iff \ker A = \{0_{K^n}\} \iff \im A = K^n$
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Soit $A \in M_{np}(K)$ et $A' \in M_{np}(K)$ la matrice obtenue en effectuant des opérations élémentaires (échanges, dilatations, transvections) sur les lignes et les colonnes de $A$. Alors $\rg (A') = \rg (A)$ \\
+"Le rang est invariant par opérations élémentaires".
+\end{corollaire}
+
+\section{Changement de bases}
+\subsection{Formules}
+\begin{definition}
+Soit $F$ un ev de dimension $n$ et $\mathcal{C} = (f_1, ...\, , f_n)$ et $\mathcal{C}' = (f_1', ...\, , f_n')$ deux bases de $F$. \\
+On définit la \uline{matrice de passage de $\mathcal{C}$ à $\mathcal{C}'$}:
+\[P_{\mathcal{C} \to \mathcal{C}'} = \Mat_\mathcal{C}(\mathcal{C}') = \Mat_\mathcal{C}(f_1', ...\, , f_n')\]
+\end{definition}
+\begin{proposition}
+Soit $F$ un ev de $\dim n$ et $\mathcal{C}$, $\mathcal{C}'$ deux bases de $F$.
+\begin{itemize}
+\item On a $P_{\mathcal{C} \to \mathcal{C}'} = \Mat_{\mathcal{C}', \mathcal{C}}(id_F)$
+\item On a $P_{\mathcal{C} \to \mathcal{C}'} \in GL_n(K)$ et $P_{\mathcal{C} \to \mathcal{C}'}^{-1} = P_{\mathcal{C}' \to \mathcal{C}}$
+\item Pour toute matrice $Q \in GL_n(K)$ et toute base $\mathcal{D}$ de $F$, il existe une unique base $\mathcal{D}'$ de $F$ telle que $P_{\mathcal{D} \to \mathcal{D}'} = Q$
+\end{itemize}
+\end{proposition}
+\begin{theorem}[Changement de bases pour un vecteur]
+Soit $F$ un ev de $\dim n$ et $\mathcal{C}$, $\mathcal{C}'$ deux bases de $F$. \\
+Pour tout $x \in F$, on a
+\[\Mat_{\mathcal{C}'}(x) = P_{\mathcal{C} \to \mathcal{C}'}^{-1} \Mat_\mathcal{C}(x)\]
+\end{theorem}
+\begin{theorem}[Changement de bases pour les AL]
+Soit $E$ et $F$ deux ev, de dimension $p$ et $n$ respectivement. \\
+Soit $\mathcal{B}$, $\mathcal{B}'$ deux bases de $E$ et deux bases $\mathcal{C}$, $\mathcal{C}'$ de F. Alors, pour tout $u \in \mathcal{L}(E, F)$, on a
+\[\Mat_{\mathcal{B}', \mathcal{C}'} = P_{\mathcal{C} \to \mathcal{C}'}^{-1} \Mat_{\mathcal{B}, \mathcal{C}}(u) P_{\mathcal{B} \to \mathcal{B}'}\]
+\end{theorem}
+\begin{corollaire}
+Soit $E$ un ev de $\dim p$ et $\mathcal{B}$, $\mathcal{B}'$ deux bases de $E$. Pour tout $u \in \mathcal{L}(E)$, on a:
+\[\Mat_{\mathcal{B}'}(u) = P_{\mathcal{B} \to \mathcal{B}'}^{-1} \Mat_\mathcal{B}(u) P_{\mathcal{B} \to \mathcal{B}'}\]
+\end{corollaire}
+
+\subsection{Similitude}
+\begin{definition}
+Deux matrices $A, B \in M_p(K)$ sont \uline{semblables} (et on note $A \sim B$) si $\exists P \in GL_p(K) : B = P^{-1}AP$
+\end{definition}
+\begin{proposition}
+$\sim$ est une relation d'équivalence sur $M_p(K)$
+\end{proposition}
+
+\subsection{Équivalence}
+\begin{definition}
+Soit $A, B \in M_{np}(K)$. \\
+On dit que $A$ et $B$ sont \uline{équivalents} s'il existe $P \in GL_n(K)$ et $Q \in GL_p(K)$ telles que $B = PAQ$
+\end{definition}
+\begin{proposition}
+La relation d'équivalence est une relation d'équivalence.
+\end{proposition}
+
+\pagebreak
+
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Deux matrices de $M_{np}(K)$ sont équivalentes ssi elles ont le même rang.
+\item Toute matrice de $M_{np}(K)$ de rang $r \in \llbracket 0, \min (n, p) \rrbracket$ est équivalente à
+\[J_r = \left(\begin{array}{cccccc|c}
+1 &   &   &   &   &   & \\  
+  & 1 &   &   &   &   & \\
+  &   & 1 &   &   &   & (0) \\
+  &   &   & \ddots  &   &   &\\
+  &   &   &   & 1 &   & \\
+\hline
+  &   & (0) &   &   &   & (0)
+\end{array}\right) = \sum\limits_{k = 1}^{r} E_{k, k} \]
+\end{itemize}
+\end{theorem}
+
+\subsection{Rang d'une transposée}
+\begin{theorem}
+Soit $A \in M_{np}(K)$. \\
+Alors $\rg (A) = \rg (A^T)$
+\end{theorem}
+\begin{lemme}
+$\mathcal{B}^* = (e_1^*, ...\, , e_n^*)$ est une base de $E^*$ (que l'on appelle la \uline{base duale} de $\mathcal{B}$).
+\end{lemme}
+\begin{definition}
+Soit $A \in M_{np}(K)$. \\
+Soit $I = \{i_1, ...\, , i_q\} \subseteq \llbracket 1, n \rrbracket$ et $J = \{ j_1, ...\, , j_s\} \subseteq \llbracket 1, p \rrbracket$ tels que $i_1 < ... < i_q$ et $j_1 < ... < j_s$ \\
+On définit alors la \uline{matrice extraite}:
+\[A_{I,J} = (a_{i_k, j_l})_{\substack{1 \leq k \leq q \\ 1 \leq l \leq s}} \in M_{qs}(K)\]
+Autrement dit, on ne garde que les lignes dont le numéro appartient à $I$ et les colonnes dont le numéro appartient à $J$.
+\end{definition}
+\begin{theorem}
+Soit $A \in M_{np}(K)$.
+\begin{itemize}
+\item Toute matrice extraite de $A$ possède un rang $\leq \rg A$
+\item Le rang de $A$ est la taille maximale d'une matrice carrée inversible extraite de $A$.
+\end{itemize}
+\end{theorem}
+
+\subsection{Forme des matrices carrées}
+Soit $E$ un ev de dimension $n$ et $\mathcal{B} = (e_1, ...\, , e_n)$ une base de $E$. Examinons des cas où $\Mat_\mathcal{B}(u)$ possède des formes remarquables.
+
+1) \[\Mat_\mathcal{B}(u) = \begin{pmatrix}
+\lambda_1 & & \\
+ & \ddots & \\
+ & & \lambda_n
+\end{pmatrix} \in D_n(K)\]
+signifie $\forall i \in \llbracket 1, n \rrbracket$, $u(e_i) = \lambda_i e_i$ \\
+$\Mat_\mathcal{B}(u)$ est diagonalisable ssi $\mathcal{B}$ est une base de vecteurs propres de $u$. On dira que $u$ est \uline{diagonalisable} s'il existe une telle base.
+
+2) \[\Mat_\mathcal{B}(u) = \left(\begin{array}{c|c}
+* & \:\:*\:\: \\
+\hline
+(0) & *
+\end{array}\right)\]
+"triangulaire par blocs" \\
+Signifie $\forall i \in \llbracket 1, r \rrbracket$, $u(e_i) \in \vect(e_i, ...\, , e_r)$ \\
+Autrement dit, $\vect(e_1, ...\, ,e_r)$ stable sous $u$.
+
+3) \[\Mat_\mathcal{B}(u) = \left(\begin{array}{c|c}
+* & (0) \\
+\hline
+(0) & *
+\end{array}\right)\]
+"diagonale par blocs" \\
+Signifie que $\vect(e_1, ...\, , e_r)$ et $\vect(e_{r + 1}, ...\, , e_n)$ sont stables sous $u$. \\
+Autrement dit, $u$ stabilise les deux sev de la décomposition $E = \vect(e_1, ...\, , e_r) \oplus \vect(e_{r + 1}, ...\, , e_n)$
+
+4) \[\Mat\mathcal{B}(u) = \begin{pmatrix}
+* & & (*) \\
+ & \ddots & \\
+(0) & & *
+\end{pmatrix} \in T_n^+(K)\]
+Signifie que $u$ stabilise tous les sev $\vect(e_1, ...\, , e_k)$, pour $k \in \llbracket 0, n \rrbracket$ qui forment une suite de sev emboîtés les uns dans les autres (ce qu'on appelle un \uline{drapeau}. Ici, on a des sev de toutes les dimensions, donc on parle de \uline{drapeau complet}).
+\end{document}

@@ -1,0 +1,173 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 21: Intégration}}
+\end{center}
+Dans tout le chapitre: $I$ désigne un intervalle de $\mathbb{R}$
+
+\section{Fonctions en escalier, fonctions continues par morceau}
+\subsection{Subdivisions d'un segment}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une \uline{subdivision} du segment $[a, b]$ est une famille $\sigma = (x_{0}, ... , x_{n})$, où \\ $a = x_{0} < x_{1} < ... < x_{n} = b$
+\item les $x_{i}$ sont les \uline{points} de la subdivision
+\item les intervalles $[x_{i}, x_{i+1}]$ (resp. $]x_{i}, x_{i+1}[$) sont les \uline{composantes fermées} (resp. \uline{ouverte}) de $\sigma$
+\item le \uline{pas} de la subdivision $\sigma$ est $\max{\{x_{i+1} - x_{i} \mid i \in \llbracket 0, n-1 \rrbracket\}}$
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $\sigma$, $\sigma'$ deux subdivisions d'un segment $[a, b]$. \\
+On dit que $\sigma'$ \uline{raffine} $\sigma$ (ou: est plus fine que $\sigma$) si toute composante (ouverte) de $\sigma'$ est incluse dans une composante (ouverte) de $\sigma$.
+\end{definition}
+\begin{proposition}
+Deux subdivisions $\sigma_{1}$, $\sigma_{2}$ de $[a, b]$ possèdent toujours un raffinement commun.
+\end{proposition}
+
+\subsection{Fonctions en escalier}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une fonction $\varphi: [a, b] \to \mathbb{R}$ sera dite \uline{en escalier} s'il existe une subdivision $\sigma$ de $[a, b]$ telle que $\varphi$ soit constante sur chaque composante de $\sigma$
+\item On dit alors que $\sigma$ est \uline{adaptée} à $\varphi$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+L'ensemble $\mathcal{E}([a, b])$ des fonctions en escalier sur $[a, b]$ est une sous-algèbre de $\mathbb{R}^{[a, b]}$ \\
+et, $\forall f \in \mathcal{E}([a, b])$, $|f| \in \mathcal{E}([a, b])$
+\end{proposition}
+
+\subsection{Fonctions continues par morceaux}
+\begin{definition}
+Une fonction $f: [a,b] \to \mathbb{R}$ est \uline{continue par morceaux} s'il existe une subdivision $\sigma = (x_{0}, ... ,x_{n})$ de $[a, b]$ telle que:
+\begin{itemize}
+\item la restriction $f_{|]x_{i}, x_{i+1}[}$ de $f$ à chaque composante ouverte est continue
+\item $f$ admet des limites à gauche (resp. à droite) en tout point de la subdivision, sauf $a = x_{0}$ (resp. $b = x_{0}$)
+\end{itemize}
+\end{definition}
+\begin{lemme}
+L'ensemble $C^{\circ}_{pm}([a, b])$ des fonctions continues par morceaux est la somme $C^{\circ}([a, b]) + \mathcal{E}([a, b])$.
+\end{lemme}
+\begin{corollaire}
+Toute fonction continue par morceaux est bornée.
+\end{corollaire}
+
+\section{Convergence uniforme}
+\subsection{Convergence simple}
+
+\begin{definition}
+Soit $(f_n)_{n \in \mathbb{N}}$ une suite de fonctions $I \rightarrow \mathbb{R}$. \\
+On dit que $(f_n)_{n \in \mathbb{N}}$ \uline{converge simplement} vers $f: I \to \mathbb{R}$ si $\forall x \in I$, $f_n(x) \xrightarrow[n \to +\infty]{} f(x)$ \\
+On notera $f_n \xrightarrow[n \to +\infty]{CS} f$
+\end{definition}
+\begin{definition}
+Si $f: I \to \mathbb{R}$ est bornée, on définit sa \uline{norme uniforme}: $ \lVert f \rVert_\infty$ = $\sup{\{ |f(t)| \mid t \in I \}}$
+\end{definition}
+\begin{proposition}
+La norme uniforme $\lVert . \rVert_\infty$ est une \uline{norme} sur l'espace vectoriel $L^\infty(I)$ des fonctions $I \to \mathbb{R}$ bornées:
+\begin{itemize}
+\item Positivité: $\forall f \in L^\infty(I)$, $\lVert f \rVert_\infty \geq 0$
+\item Séparation: $\forall f \in L^\infty(I)$, $\lVert f \rVert_\infty = 0 \implies f = 0$
+\item Homogénéité: $\forall f \in L^\infty(I)$, $\forall \lambda \in \mathbb{R}$, $\lVert \lambda f \rVert_\infty = |\lambda| \cdot \lVert f \rVert_\infty$
+\item Inégalité triangulaire: $\forall f, g \in L^\infty(I)$, $\lVert f + g \rVert_\infty \leq \lVert f \rVert_\infty + \lVert g \rVert_\infty$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $(f_n)_{n \in \mathbb{N}}$ une suite de fonctions $I \to \mathbb{R}$ bornées et $f: I \to \mathbb{R}$ bornée. \\
+On dit que $(f_n)_{n \in \mathbb{N}}$ \uline{converge uniformément} vers $f$ si $\lVert f_n - f \rVert_\infty \xrightarrow[n \to +\infty]{} 0$ \\
+On note alors $f_n \xrightarrow[n \to +\infty]{CU} f$
+\end{definition}
+\begin{proposition}
+Soit $(\varphi_n)_{n \in \mathbb{N}}$ et $(\psi_n)_{n \in \mathbb{N}}$  deux suites de fonctions bornées sur $I$ et $f, g: I \to \mathbb{R}$ bornées telles que
+\[\begin{cases}\varphi_n \xrightarrow[n \to +\infty]{CU} f \\
+\psi_n \xrightarrow[n \to +\infty]{CU} g
+\end{cases}\]
+Alors:
+\begin{itemize}
+\item $\forall \lambda \in \mathbb{R}$, $\varphi_n + \lambda \psi_n \xrightarrow[n \to +\infty]{CU} f + \lambda g$
+\item $|\varphi_n| \xrightarrow[n \to +\infty]{CU} f$ 
+\end{itemize} 
+\end{proposition}
+\begin{theorem}
+Soit $(\varphi_n)_{n \in \mathbb{N}}$ une suite de fonctions bornées et $f: I \to \mathbb{R}$ bornée telle que $\varphi_n \xrightarrow[n \to +\infty]{CU} f$. \\
+Alors, si pour tout $n \in \mathbb{N}$, $\varphi_n$ est continue, $f$ l'est aussi. 
+\end{theorem}
+
+\subsection{Approximation uniforme}
+\begin{theorem}
+Soit $f \in C^{\circ}_{pm}([a, b])$. \\
+Alors il existe une suite $(\varphi_n)_{n \in \mathbb{N}}$ de fonctions en escalier telle que $\varphi_n \xrightarrow[n \to +\infty]{CU} f$
+\end{theorem}
+
+\section{Définition de l'intégrale}
+\subsection{Intégrale des fonctions en escalier}
+\begin{definition}
+Soit $\varphi \in \mathcal{E}([a, b])$ et $\sigma = (a = x_0, ... , x_n = b)$ une subdivision adaptée à $\varphi$. \\
+On peut donc écrire 
+\[\varphi = \sum\limits_{i=0}^{n} \lambda_i \mathds{1}_{x_i} + \sum\limits_{j=0}^{n-1} \mu_j \mathds{1}_{]x_j, x_{j+1}[}\]
+On définit alors \uline{l'intégrale de $\varphi$}: 
+\[\int\limits_a^b \varphi = \sum\limits_{j=0}^{n-1} \mu_j (x_{j+1} - x_j)\]
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Cette intégrale est bien définie.
+\item L'intégrale est une forme linéaire $\int\limits_a^b : \mathcal{E}([a, b]) \to \mathbb{R}$
+\item (Inégalité triangulaire \textnormal{\&} contrôle uniforme): $ \forall f \in \mathcal{E}([a, b])$, $|\int\limits_a^b \varphi \,| \leq \int\limits_a^b |\varphi| \leq (b - a)\lVert \varphi \rVert_\infty$
+\item Relation de Chasles: si $a < b < c$, on a $\forall \varphi \in \mathcal{E}([a, b])$, $\int\limits_a^c \varphi = \int\limits_a^b \varphi + \int\limits_b^c \varphi$
+\end{itemize}
+\end{proposition}
+
+\subsection{Lemme fondamental et définition}
+\begin{theorem}
+Soit $f \in C_{pm}^{\circ}([a, b])$ et $(\varphi_n)_{n \in \mathbb{N}}$ une suite d'éléments de $\mathcal{E}([a, b])$ \\
+convergent uniformément vers $f$. \\
+Alors:
+\begin{itemize}
+\item La suite $(\int\limits_a^b \varphi_n)_{n \in \mathbb{N}}$ converge.
+\item Si $(\psi)_{n \in \mathbb{N}} \in \mathcal{E}([a, b])^{\mathbb{N}}$ vérifie également $\psi_n \xrightarrow[n \to +\infty]{CU} f$, alors $\lim\limits_{n \to +\infty} \int\limits_a^b \varphi_n = \lim\limits_{n \to +\infty} \int\limits_a^b \varphi_n$
+\end{itemize}
+\end{theorem}
+\begin{definition}
+Soit $f \in C_{pm}^{\circ}([a, b])$ \\
+On définit \uline{l'intégrale de $f$}: 
+$\int\limits_a^b f = \int\limits_a^b f(t)dt$ comme la limite $\lim\limits_{n \to +\infty} \int\limits_a^b \varphi_n$ où $(\varphi_n)_{n \in \mathbb{N}}$ est une suite de fonctions en escalier convergeant uniformément vers f.
+\end{definition}
+
+\subsection{Propriétés de base}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item L'intégrale est une forme linéaire $\int\limits_a^b : C_{pm}^{\circ}([a, b]) \to \mathbb{R}$
+\item Inégalité triangulaire et contrôle uniforme: $\forall f \in C_{pm}^{\circ}([a, b])$, $|\int\limits_a^b f \,| \leq \int\limits_a^b |f| \leq (b-a) \lVert f \rVert_\infty$
+\item si $f, g \in C_{pm}^{\circ}([a, c])$ et que $f$ et $g$ coïncident sur le complémentaire d'un ensemble fini, alors $\int\limits_a^b f = \int\limits_a^b g$
+\item \uline{Positivité}: Soit $f \in C_{pm}^{\circ}([a, b])$ positive. Alors $\int\limits_a^b f \geq 0$
+\item \uline{Croissance}: Soit $f, g \in C_{pm}^{\circ}([a, b])$ telles que $f \leq g$. Alors $\int\limits_a^b f \leq \int\limits_a^b g$
+\end{itemize}
+\end{theorem}
+\end{document}

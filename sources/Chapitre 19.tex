@@ -1,0 +1,261 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 19. Arithmétique des polynômes}}
+\end{center}
+On fixe un corps $K$ des scalaires. \medskip
+
+\uline{Rappels}:
+\begin{itemize}
+\item On dit que $P \in K[X]$ \uline{divise} $Q \in K$ s'il existe $R \in K[X]$ tel que $Q = PR$
+\item Si $z \in K$, on a l'équivalence $P(z) = 0 \iff X - z \mid P$
+\end{itemize}
+
+\section{Multiplicité des racines}
+\subsection{Généralités}
+\begin{definition}
+Soit $P \in K[X]$ not nul et $z \in K$ une racine de $P$ \\
+\uline{L'ordre de multiplicité de $z$ en tant que racine de $P$}, $\mu_z(P)$ est le plus grand entier $k \in \mathbb{N}^*$ tel que $(X - z)^k \mid P$ \\
+On étend cette notion en posant:
+\begin{itemize}
+\item $\mu_{z}(P) = 0$ si $z$ n'est pas racine de $P$
+\item $\mu_{z}(P) = +\infty$ si $P$ est le polynôme nul.
+\end{itemize}
+On dit que z est une racine \uline{simple} (resp. \uline{double}, \uline{triple}, ... , \uline{n-uple}) si $\mu_{z}(P) = 1$ (resp. 2, 3, ... , n), \\
+\uline{multiple} si $\mu_{z}(P) \geq 2$
+\end{definition}
+\begin{lemme}
+Soit $P \in K[X]$, $z \in K$ et $n \in \mathbb{N}$ \\
+Alors $\mu_{z}(P) = n$ ss'il existe $P_0 \in K[X]$ tel que $P = (X - z)^n P_0$ et $P_0(z) \neq 0$
+\end{lemme}
+\begin{proposition}
+Soit $P, Q \in K[X]$ et $z \in K$ On a:
+\begin{itemize}
+\item $\mu_{z}(P + Q) \geq \min{(\mu_{z}(P), \; \mu_{z}(Q))}$, avec égalité si $\mu_{z}(P) \neq \mu_{z}(Q)$
+\item $\mu_{z}(PQ) = \mu_{z}(P) + \mu_{z}(Q)$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $P \in \mathbb{R}[X]$ et $z \in \mathbb{C}$ \\
+On a alors $\mu_{z}(P) = \mu_{\bar{z}}(P)$
+\end{proposition}
+
+\subsection{Critère radical de nullité}
+\begin{theorem}
+Soit $P \in K[X]$, $z_1, ... , z_r \in K$ distincts et $n_1, ... ,n_r \in \mathbb{N}$
+\begin{itemize}
+\item Si $\forall i \in \llbracket 1, r \rrbracket$, $\mu_{z_i}(P) \geq n_i$, alors $\prod\limits_{i = 1}^r (X - z_i)^{n_i} \mid P$
+\item Si en outre, $P \neq 0$, on a $\sum\limits_{i=1}^r n_i \leq \deg{P}$
+\item Si $P \in K[X]$ vérifie $\forall i \in \llbracket 1, r \rrbracket$, $\mu_{z_i}(P) \geq n_i$ et que $\sum\limits_{i = 1}^r n_i > n$, alors $P = 0$
+\end{itemize}
+\end{theorem}
+
+\subsection{Polynômes scindés}
+\begin{definition}
+Soit $P \neq 0$. Les assertions suivantes sont équivalentes:
+\begin{enumerate}
+\item Les racines $z_1, ... , z_r$ de $P$ vérifient $\sum\limits_{i=1}^r \mu_{z_i}(P) = \deg{P}$
+\item Il existe $\lambda \in K$ non nul, $z_1, ... , z_r \in K$ et $n_1, ... , n_r \in \mathbb{N}^*$ tels que $P = \lambda \prod\limits_{i=1}^r (X - z_i)^{n_i}$
+\end{enumerate}
+Quand ces assertions sont vraies, on dit que le polynôme P est \uline{scindé}.
+\end{definition}
+
+\pagebreak
+
+\begin{theorem}[Relation coefficients racines, ou formules de Viète]
+Soit
+\[P = \sum\limits_{k = 0}^{n} a_k X^k = \prod\limits_{i = 1}^{n} (X - z_i)\]
+un polynôme scindé unitaire. On a alors
+\[\forall k \in \llbracket 1, n \rrbracket ,\, a_{n - k} = (-1)^k \sum\limits_{1 \leq i_1 < i_2 < ... < i_k \leq n} z_{i_1} ... \; z_{i_k}\]
+En particulier,
+\begin{align*}
+a_0 &= (-1)^n z_1 z_2 ...\, z_n &(k = n) \\ 
+a_{n-1} &= -(z_1 + z_2 + ... + z_n) &(k = 1)
+\end{align*}
+\end{theorem}
+
+\subsection{Lien avec la dérivée}
+\begin{theorem}
+Soit $P \in K[X]$ et $z \in K$ \\
+Alors $\mu_z(P)$ est le plus grand entier $k$ tel que $P(z) = P'(z) = ... = P^{(k - 1)}(z) = 0$ \quad ($k$ scalaires)
+\end{theorem}
+
+\section{Décomposition en facteurs irréductibles}
+\subsection{Polynômes associés}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item On a $K[X]^\times = \{ \lambda \mid \lambda \in K^* \}$ \quad (rappel)
+\item Soit $P, Q \in K[X]$. On a $P \mid	Q$ et $Q \mid P$ ssi $\exists \lambda \in K^*: P = \lambda Q$
+\end{itemize}
+Dans ce cas, on dit que $P$ et $Q$ sont associés.
+\end{proposition}
+
+\subsection{PGCD}
+\begin{definition}
+Soit $P, Q \in K[X]$ non tous deux nuls.
+\begin{itemize}
+\item On définit \uline{un PGCD} de $P$ et $Q$ comme un diviseur commun à $P$ et $Q$ de degré maximal.
+\item \uline{Le PGCD} de $P$ et $Q$, noté $P \wedge Q$ sera l'unique PGCD unitaire de $P$ et $Q$.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $P, Q \in K[X]$ deux polynômes non nuls. \\
+Alors il existe $D \in K[X]$ tel que $\{ PU + QV \mid U, V \in K[X] \} = \{ DW \mid W \in K[X] \}$
+\end{theorem}
+\begin{definition}
+On dit que $I$ est un \uline{idéal} de $K[X]$ si:
+\begin{itemize}
+\item $I$ est un sous-groupe de $(K[X], \; +)$
+\item On a $\forall R \in I$, $\forall S \in K[X]$, $RS \in I$
+\end{itemize}
+\end{definition}
+\begin{lemme}
+Tout idéal de $K[X]$ est de la forme $DK[X] = \{ DW \mid W \in K[X] \}$ pour un certain $D \in K[X]$ \\
+(On dit que $K[X]$ est un \uline{anneau principal}.)
+\end{lemme}
+\begin{corollaire}
+Soit $P,Q \in K[X]$ et $D$ comme dans le théorème. Alors:
+\begin{enumerate}
+\item $D$ divise à la fois $P$ et $Q$: Il suffit de remarquer que $P = P \cdot 1 + Q \cdot 0 \in DK[X]$, et \uline{idem} pour $Q$
+\item $D$ est un multiple de tout diviseur commun $\Delta$ de $P$ et $Q$. \\
+En effet, on peut trouver $U, V \in K[X]$ tels que l'on ait une \uline{relation de Bézout}: $PU + QV = D$. Comme $\Delta \mid P$ et $\Delta \mid Q$, on doit avoir $\Delta \mid D$. En particulier, $\deg{\Delta} \leq \deg{D}$ \\
+On en déduit que $D$ est un PGCD de $P$ et $Q$. En particulier, si $\Delta$ est un PGCD de $P$ et $Q$, on a $\Delta \mid D$ et $\deg{\Delta} = \deg{D}$: On en déduit que $\Delta$ et $D$ sont associés.
+\end{enumerate}
+\end{corollaire}
+
+\subsection{Lemme de Gauss et conséquences}
+\begin{theorem}[Lemme de Gauss]
+Soit $P, Q, R \in K[X]$ \\
+Si $P \mid QR$ et $P \perp Q$, alors $P \mid Q$
+\end{theorem}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item Soit $P \in K[X]$. L'ensemble des polynômes premiers avec $P$ est stable par produit.
+\item Soit $P, Q \in K[X]$ premiers entre eux et $n, m \in \mathbb{N}$. Alors $P^n$ et $Q^m$ sont premiers entre eux.
+\end{itemize}
+\end{corollaire}
+
+\subsection{Polynômes irréductibles}
+\begin{definition}
+Un polynôme $P \in K[X]$ non constant est dit \uline{irréductible} si \\
+$\forall Q, R \in K[X]$, $P = QR \implies \deg{Q} = 0$ ou $\deg{R} = 0$
+\end{definition}
+
+\subsection{Décomposition en facteurs irréductibles}
+\begin{theorem}
+Soit $P \in K[X]$ non nul. \\
+Alors il existe $u \in K[X]$, $Q_1, ... , Q_r \in K[X]$ irréductibles distincts et $\alpha_1, ... , \alpha_r \in \mathbb{N}^*$ tels que
+\[P = u \prod\limits_{i = 1}^{r} Q_i^{\alpha_i}\]
+Par ailleurs, cette décomposition est unique: Si
+\[P = u \prod\limits_{i = 1}^{r} Q_i^{\alpha_i} = v \prod\limits_{j = 1}^{s} R_j^{\beta_j}\] sont deux telles décompositions, on a $u = v$, $r = s$, et, quitte à permuter les $R_j$, \\
+on a $\forall i \in \llbracket 1, r \rrbracket$, $(Q_i = R_i \text{ et } \alpha_i = \beta_i)$
+\end{theorem}
+
+\section{Quelques corps particuliers}
+\subsection{$\mathbb{C}$}
+\begin{theorem}[D'Alembert-Gauss]
+Tout polynôme de $\mathbb{C}[X]$ possède une racine.
+\end{theorem}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item Tout polynôme non nul de $\mathbb{C}[X]$ est scindé.
+\item Les polynômes irréductibles de $\mathbb{C}[X]$ sont exactement les polynômes de degré 1.
+\item Deux polynômes $P, Q \in \mathbb{C}[X]$ sont premiers entre eux ss'ils n'ont pas de racine commune.
+\end{itemize}
+\end{corollaire}
+
+\subsection{Polynômes minimaux des nombres algébriques}
+On fixe une extension de corps $L / K$. (Par exemple, $K = \mathbb{Q}$ ou $K = \mathbb{R}$ et $L = \mathbb{C}$)
+\begin{definition}
+Un élément $x \in L$ est dit \uline{algébrique sur $K$} s'il est racine d'un certain polynôme non nul \\
+$P \in K[X]$. Il est \uline{transcendant} sur K sinon.
+\end{definition}
+\begin{proposition}
+Soit $z \in L$ algébrique sur $K$. Alors il existe un unique polynôme unitaire $P \in K[X]$ tel que:
+\begin{itemize}
+\item $P(z) = 0$
+\item $\forall Q \in K[X]$, $Q(z) = 0 \implies P \mid Q$
+\end{itemize}
+Ce polynôme $P$ est irréductible dans $K[X]$. On l'appelle le \uline{polynôme minimal de $z$ (sur $K$)}.
+\end{proposition}
+
+\subsection{$\mathbb{R}$}
+Dans toute cette section, si $z \in \mathbb{C} \setminus \mathbb{R}$, on note
+\[P_z = (X - z)(X - \bar{z}) = X^2 - 2\text{Ré}(z)X + |z|^2\]
+son polynôme minimal. Il est irréductible:
+\begin{itemize}
+\item D'après la proposition générale de la section 2.
+\item Variant: si $P_z$ admettait une décomposition $P_z = QR$, où $\deg{Q}, \deg{R} \geq 1$. On aurait $\deg{Q} = \deg{R} = 1$ donc $Q$ et $R$ auraient des racines réelles et donc $P$ aussi, ce qui n'est pas.
+\end{itemize}
+Les polynômes de second degré à discriminant $< 0$ sont exactement les $u P_z$, pour $u \in \mathbb{R}^*$ (un tel polynôme a forcément $z$ et $\bar{z}$ comme racines).
+\begin{theorem}
+Les polynômes irréductibles sur $\mathbb{R}$ sont:
+\begin{itemize}
+\item Les polynômes de degré $1$.
+\item Les polynômes du seconde degré à discriminant $< 0$.
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Tout polynôme de $\mathbb{R}[X]$ possède une décomposition en facteurs irréductibles
+\[P = u \prod\limits_{i = 1}^{r} (X - t_i)^{\alpha_i} \prod\limits_{j = 1}^{s} P_{z_j}^{\beta_j}\]
+où:
+\begin{itemize}
+\item $u$ est le coefficient dominant de $P$.
+\item Les $t_i$ sont les racines de $P$ et les $\alpha_i$ leur multiplicités.
+\item Les $z_i$ sont les racines de $P$ dans le demi-plan $\mathbb{H} = \{ z \in \mathbb{C} \mid \textup{Im}(z) > 0 \}$ et $\beta_j = \mu_{z_j}(P) = \mu_{\bar{z}_j}(P)$
+\end{itemize}
+\end{corollaire}
+
+\begin{proposition}[Hors programme mais à savoir faire absolument]
+Soit $P \in \mathbb{R}[X]$ non constant.
+\begin{itemize}
+\item Si $P$ est \uline{simplement scindé} (scindé et toutes ses racines sont simples), alors $P'$ aussi.
+\item Si $P$ est scindé, $P'$ aussi.
+\end{itemize}
+\end{proposition}
+
+\subsection{$\mathbb{Q}$ (hors-programme)}
+On va montrer qu'il existe des irréductibles de tout degré dans $\mathbb{Q}[X]$.
+\begin{lemme}[Gauss]
+Soit $P \in \mathbb{Z}[X]$ \\
+On suppose que toute décomposition $P = QR$, où $Q, R \in \mathbb{Z}[X]$ est triviale (càd $\deg{P} = 0$ ou $\deg{Q} = 0$). \\
+Alors $P$ est irréductible dans $\mathbb{Q}[X]$.
+\end{lemme}
+\begin{theorem}["critère" d'Eisenstein]
+Soit $P \in \mathbb{Z}[X]$ unitaire de degré $d \in \mathbb{N}^*$ et $p$ un nombre premier tel que:
+\begin{itemize}
+\item On a $\forall k \in \llbracket 0, d - 1 \rrbracket$, $p \mid \text{coeff}_k(P)$
+\item On a $p^2 \nmid \text{coeff}_0(P) = P(0)$
+\end{itemize}
+Alors $P$ est irréductible dans $\mathbb{Q}[X]$
+\end{theorem}
+\end{document}

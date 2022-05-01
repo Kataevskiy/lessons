@@ -1,0 +1,148 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 20: Fractions rationnelles}}
+\end{center}
+Dans tout ce chapitre, on fixe un corps $K$ des scalaires.
+
+\section{Généralités}
+\subsection{Corps K(X)}
+\begin{definition}
+\uline{Le corps $K(X)$ des fractions rationnelles} est le corps des fractions de l'anneau intègre $K[X]$, $K(X) = Frac \; K[X]$
+\end{definition}
+\begin{definition}
+Soit $P, Q \in K[X]$, où $Q \neq 0$.
+\begin{itemize}
+\item Si $P \perp Q$, on dit que la fraction rationnelle $\frac{P}{Q}$ est sous \uline{forme irréductible}.
+\item Si $P \perp Q$ et que $Q$ est unitaire, la fraction rationnelle est dite sous \uline{forme irréductible unitaire}.
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Si $F = \frac{P}{Q}$ est sous forme irréductible, alors les autres formes de la fraction sont les $\frac{PD}{QD}$, \\
+où $D \in K[X]$
+\end{proposition}
+\begin{definition}
+Soit $F = \frac{P}{Q} \in K(X)$. On définit son \uline{degré} $\deg{F} = \deg{P} - \deg{Q} \in \mathbb{Z} \cup \{-\infty\}$
+\end{definition}
+\begin{proposition}
+Soit $F_1, F_2 \in K(X)$
+\begin{itemize}
+\item On a $\deg{(F_1 + F_2)} \leq \max{(\deg{F_1},\; \deg{F_2})}$
+\item On a $\deg{(F_1 + F_2)} = \deg{F_1} + \deg{F_2}$
+\end{itemize}
+\end{proposition}
+
+\subsection{Racines et pôles}
+\begin{definition}
+Soit $F = \frac{P}{Q} \in K(X)$ \uline{sous forme irréductible}.
+\begin{itemize}
+\item Une \uline{racine} de $F$ est une racine de P.
+\item Une \uline{pôle} de $F$ est une racine de Q.
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $F = \frac{P}{Q} \in K$ sous forme irréductible dont les pôles forment l'ensemble Pôles(F). \\
+Alors la \uline{fonction rationnelle associée} à $F$ est: $\begin{cases}
+K \setminus \text{Pôles(F)} \to K \\
+z \to \frac{P(z)}{Q(z)}
+\end{cases}$
+\end{definition}
+\begin{proposition}[Ctirère radical de nullité]
+Une fraction rationnelle possédant une infinité de racines est nulle.
+\end{proposition}
+\begin{corollaire}
+Si les fonctions rationnelles associées à $F_1$ et $F_2 \in K(X)$ coïncident sur un ensemble infini, \\
+alors $F_1 = F_2$
+\end{corollaire}
+
+\subsection{Autres opérations}
+On peut définir la dérivée d'une fonction rationnelle $F = \frac{P}{Q} \in K(X)$ en posant: $F' = \frac{P'Q - PQ'}{Q^2}$
+\begin{proposition}
+Si $G = \frac{P}{Q}$ et $F \in K(X)$ sont deux fractions rationnelles, on peut "évaluer" $P$ et $Q$ en $F$. Par exemple, si $Q = \sum\limits_{k = 0}^{n} q_k X^k$, on a $Q(F) = \sum\limits_{k = 0}^{n} q_k F^k \in K(X)$. Dès que $Q(F) \neq 0$, on peut considérer la composition
+\[G \circ F = G(F) = \frac{P(F)}{Q(F)} \in K(X)\]
+\end{proposition}
+
+\subsection{Partie entière}
+\begin{proposition}
+Soit $F \in K(X)$. \\
+Il existe un unique couple $(E, F_0) \in K[X] \times K(X)$ tel que: $\begin{cases}
+F = E + F_0 \\
+\deg{F_0} < 0
+\end{cases}$ \\
+On dit que le polynôme $E$ est la \uline{partie entière} de $F$.
+\end{proposition}
+
+\section{Décomposition en éléments simples}
+\subsection{Le résultat}
+\begin{theorem}
+Soit $F = \frac{P}{Q} \in K(X)$ sous forme irréductible unitaire. Soit $Q = Q_1^{\alpha_1} ... Q_r^{\alpha_r}$ la décomposition en facteurs irréductibles de $Q$. \\
+Il existe alors un unique $E \in K[X]$ et une unique famille $(R_{i, j})_{\substack{1 \leq i \leq r \\ 1 \leq j \leq \alpha_i}}$ de polynômes telles que \\
+$\forall i \in \llbracket 1, \alpha_i \rrbracket$, $\deg{R_{ij}} < \deg{Q_i}$ et
+\[F = E + \sum\limits_{i = 1}^r \sum\limits_{j = 1}^{\alpha_i} \frac{R_{ij}}{Q_i^j}\]
+Cette écriture est la \uline{décomposition en éléments simples} de $F$.
+\end{theorem}
+\begin{corollaire}[DES sur $\mathbb{C}$]
+Soit $F = \frac{P}{Q} \in \mathbb{C}(X)$ sous forme irréductible unitaire et
+\[Q = \prod\limits_{i = 1}^r (X - z_i)^{\alpha_i}\]
+la DFI de $Q$. \\
+Alors il existe un unique $E \in K[X]$ et une unique famille de complexes $(\lambda_{i,j})_{\substack{1 \leq i \leq r \\ 1 \leq j \leq \alpha_i}}$ telle que
+\[F = E + \sum\limits_{i = 1}^r \sum\limits_{j = 1}^{\alpha_i} \frac{\lambda_{i,j}}{(X - z_i)^j}\]
+\end{corollaire}
+\begin{corollaire}[DES sur $\mathbb{R}$]
+Soit $F = \frac{P}{Q} \in \mathbb{R}(X)$ sous forme irréductible et $Q = \prod\limits_{i = 1}^r (X - t_i)^{\alpha_i} \prod\limits_{k = 1}^s Q_k^{\beta_k}$ la DFI de $Q$, où $t_1, ... ,t_r$ sont les racines réelles de $Q$ et $Q_1, ... ,Q_s$ sont ses facteurs irréductibles de degré 2. \\
+Alors il existe:
+\begin{itemize}
+\item Un unique $E \in K[X]$
+\item Une unique famille de réels $(\lambda_{i,j})_{\substack{1 \leq i \leq r \\ 1 \leq j \leq \alpha_i}}$
+\item d'uniques familles $(\mu_{k,j})_{\substack{1 \leq k \leq s \\ 1 \leq j \leq \beta_k}}$ et $(\nu_{k,j})_{\substack{1 \leq k \leq s \\ 1 \leq j \leq \beta_k}}$
+\end{itemize}
+telles que
+\[F = E + \sum\limits_{i = 1}^r \sum\limits_{j = 1}^{\alpha_i} \frac{\lambda_{i,j}}{(X - z_i)^j} + \sum\limits_{k = 1}^s \sum\limits_{j = 1}^{\beta_k} \frac{\mu_{k,j} X + \nu_{k, j}}{Q_k^j}\]
+\end{corollaire}
+
+\subsection{Techniques de calcul}
+\begin{proposition}
+Soit $F = \frac{P}{Q}$ sous forme irréductible et $z \in K$ un pôle simple de $F$, càd une racine simple de $Q$. On écrit $Q = (X - z) Q_0$ \\
+La partie polaire associée au pôle $z$ est $\frac{\lambda}{X - z}$, où $\lambda = \frac{P(z)}{Q(z)} = \frac{P(z)}{Q'(z)}$
+\end{proposition}
+\begin{proposition}
+Si $F = \frac{P}{Q}$ (forme irréductible unitaire) et que $z$ est un pôle d'ordre $\alpha$, on écrit $Q = (X - z)^\alpha Q_0$ \\
+La partie polaire associée au pôle $z$ est $\sum\limits_{j = 1}^\alpha \frac{\lambda_j}{(X - z)^j}$, où
+\[\lambda_\alpha = \frac{P(z)}{Q_0(z)} = \frac{\alpha! P(z)}{Q^{(\alpha)}(z)}\]
+\end{proposition}
+
+\subsection{Applications}
+\begin{proposition}
+Soit $P \in K[X]$ scindé: $P = u \prod\limits_{i = 1}^n (X - z_i)^{\alpha_i}$ \\
+Alors
+\[\frac{P'}{P} = \sum\limits_{i = 1}^n \frac{\alpha_i}{X - z_i}\]
+\end{proposition}
+\begin{corollaire}[Théorème de Gauss-Lucas]
+Soit $P \in \mathbb{C}$ non constant. Alors les racines de $P'$ sont \uline{combinaisons convexes} de racines de P.
+\end{corollaire}
+\end{document}

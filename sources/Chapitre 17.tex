@@ -1,0 +1,582 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+
+\theoremstyle{definition}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\mat}{Mat}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 17. Espaces vectoriels}}
+\end{center}
+Dans ce chapitre, on fixe un corps $K$, appelé \uline{corps des scalaires}. \medskip
+
+\uline{Pseudo-définition}: Étant donné $n$ objets $x_1, ...\, , x_n$, une \uline{combinaison linéaire} (CL) de $x_1, ...\, , x_n$ est (quand ça a un sens) une expression de la forme $\sum\limits_{i = 1}^n \lambda_i x_i$, où $\lambda_1, ...\, , \lambda_n \in K$.
+
+\section{Espaces vectoriels}
+\subsection{Définition}
+\begin{definition}
+Un \uline{espace vectoriel sur $K$} (ou \uline{$K$-espace vectoriel}) est un ensemble $E$ muni de deux opérations:
+\begin{align*}
+&+: \begin{cases}
+E \times E \to E \\
+(x, y) \mapsto x + y
+\end{cases}
+&
+&\cdot \begin{cases}
+K \times E \to E \\
+(\lambda, x) \mapsto \lambda x
+\end{cases}
+\end{align*}
+telles que:
+\begin{itemize}
+\item $(E, +)$ est un groupe abélien.
+\item On a $\forall x \in E$, $1 x = x$
+\item On a $\forall \lambda, \mu \in K$, $\forall x \in E$, $\lambda(\mu x) = (\lambda \mu)x$
+\item On a $\forall \lambda, \mu \in K$, $\forall x \in E$, $(\lambda + \mu) x = \lambda x + \mu x$
+\item On a $\forall \lambda \in K$, $\forall x, y \in E$, $\lambda (x + y) = \lambda x + \lambda y$
+\end{itemize}
+\end{definition}
+
+\subsection{Premiers exemples}
+1)L'espace vectoriel $K^n$ pour $n \in \mathbb{N}$
+
+2)L'ensemble $M_{np}(K)$
+
+3)L'ensemble $K^\Omega$ des fonctions $\Omega \to K$
+
+4)Si $E$ et $F$ sont des $K$-ev, $E \times F$ est un $K$-ev
+
+5)L'ensemble $K[X]$ des polynômes et, pour tout $n \in \mathbb{N}$, l'ensemble $K_n[X]$
+
+6)L'ensemble $\{0_E\}$ est un $K$-ev que l'on qualifie d'espace vectoriel \uline{nul} (ou \uline{trivial})
+
+\subsection{Quelques règles de calcul}
+\begin{proposition}
+Soit $E$ un ev.
+On a:
+\begin{itemize}
+\item $\forall \lambda \in K$, $\lambda 0_E = 0_E$
+\item $\forall x \in E$, $0x = 0_E$
+\item $\forall x \in E$, $-x = (-1)x$
+\end{itemize}
+\end{proposition}
+\begin{proposition}["règle de produit scalaire-vecteur nul"]
+Soit $E$ un ev et $\lambda \in K$, $x \in E$ tels que $\lambda x = 0_E$. \\
+Alors $\lambda = 0$ ou $x = 0_E$
+\end{proposition}
+
+\pagebreak
+
+\subsection{Algèbres}
+\begin{definition}
+Une $K$-algèbre est un ensemble $A$ muni de trois relations:
+\begin{align*}
+&+: \begin{cases}
+A \times A \to A \\
+(x, y) \mapsto x + y
+\end{cases}
+&
+&\bullet: \begin{cases}
+K \times A \to A \\
+(\lambda, x) \mapsto \lambda x
+\end{cases}
+&
+&\times: \begin{cases}
+A \times A \mapsto A \\
+(x, y) \to xy
+\end{cases}
+\end{align*}
+telles que:
+\begin{itemize}
+\item $(A, +, \cdot)$ soit un $K$-espace vectoriel.
+\item $(A, +, \times)$ soit un anneau.
+\item La multiplication $\times$ soit bilinéaire, càd $\forall x, y \in A$, $\forall \lambda \in K$, $(x \times (\lambda y) = (\lambda x) \times y = \lambda \times (x y))$
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+Soit $L / K$ une extension de corps (càd  $L$ est un corps dont $K$ est un sous-corps). \\
+Alors $L$ est un $K$-algèbre pour les lois usuelles, càd l'addition et la multiplication de $L$ et la multiplication restreinte
+\[\begin{cases}
+K \times L \to L \\
+(\lambda, x) \mapsto \lambda x
+\end{cases}\]
+Par exemple, $\mathbb{C}$ est une $\mathbb{R}$-algèbre (et donc un $\mathbb{R}$-ev) \\
+\phantom{Par exemple,} $\mathbb{R}$ est une $\mathbb{Q}$-algèbre (et donc un $\mathbb{Q}$-ev) 
+\end{proposition}
+
+\section{Familles de vecteurs}
+Dans toute cette section, on fixe un $K$-ev $E$ et une famille $(x_i)_{i \in I}$ d'éléments de $E$ (si $I = \llbracket 1, r \rrbracket$, on le notera plus simplement $(x_1, ...\, , x_r)$).
+\subsection{Combinaisons linéaires}
+\begin{definition}
+Une \uline{combinaison linéaire} de vecteurs $x_i,\, i\in I$ est un élément de la forme $\sum\limits_{i \in I} \lambda_i x_i$, où $(\lambda_i)_{i \in I}$ est une famille \uline{presque nulle} d'éléments de $K$, càd que $S = \{ i \in I \mid \lambda_i \neq 0\}$ est fini. \\
+La somme $\sum\limits_{i \in I} \lambda_i x_i$ signifie simplement $\sum\limits_{i \in S} \lambda_i x_i$ \\
+On note $\vect(x_i)_{i \in I}$ et on appelle \uline{sous-espace vectoriel engendré par les $x_i,\, i \in I$}, l'ensemble de ces combinaisons linéaires. \\
+Si $I = \llbracket 1, r \rrbracket$ la définition devient:
+\[\vect(x_1, ...\, , x_r) = \left\lbrace\sum_{i = 1}^r \lambda_i x_i \mid \lambda_1, ...\, , \lambda_r \in K \right\rbrace\]
+\end{definition}
+
+\subsection{Familles libres}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une \uline{relation de liaison entre les $x_i,\, i\in I$} est une égalité de la forme $\sum\limits_{i \in I} \lambda_i x_i = 0_E$
+\item Cette relation de liaison est dite \uline{triviale} si $\forall i \in I$, $\lambda_i = 0$ et \uline{non triviale} sinon.
+\end{itemize}
+\end{definition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item La famille $(x_i)_{i \in I}$ est dite \uline{liée} s'il existe une relation de liaison non triviale entre les $x_i,\, i \in I$.
+\item Elle est dite \uline{libre} dans le cas contraire. (On dit aussi que les $x_i,\, i \in I$ sont \uline{linéairement indépendants}).
+\end{itemize}
+\end{definition}
+
+\pagebreak
+
+\begin{definition}[Colinéarité]
+Soit $u,v \in E$. LASSÉ:
+\begin{enumerate}
+\item Il existe $\omega \in E$ et $\lambda, \mu \in K$ tels que $\begin{cases}
+u = \lambda \omega \\
+v = \mu \omega
+\end{cases}$
+\item $(\exists \alpha \in K : v = \alpha u)$ ou $(\exists \beta \in K : u = \beta v)$
+\end{enumerate}
+Quand ces assertions sont vraies, on dit que u et v sont \uline{colinéaires}.
+\end{definition}
+\begin{proposition}[Liberté de petites familles]
+\hfill
+\begin{enumerate}
+\item[0.] La famille $()$ est libre.
+\item[1.] Soit $v \in E$. La famille $(v)$ est libre ssi $v \neq 0_E$
+\item[2.] Soit $u,v \in E$. La famille $(u, v)$ est libre ssi $u$ et $v$ ne sont pas colinéaires.
+\end{enumerate}
+\end{proposition}
+\begin{proposition}
+La famille $(x_i)_{i \in I}$ est liée si et seulement si l'un des vecteurs est CL des autres.
+\end{proposition}
+
+\subsection{Familles génératrices}
+\begin{definition}
+On dit que $(x_i)_{i \in I}$ \uline{engendre} $E$ (ou \uline{est génératrice} de $E$) si $\vect(x_i)_{i \in I} = E$, càd si tout vecteur de $E$ est CL de vecteurs $x_i,\, i \in I$
+\end{definition}
+
+\subsection{Bases}
+\begin{definition}
+On dit que $(x_i)_{i \in I}$ est une \uline{base} de $E$ si $(x_i)_{i \in I}$ est libre et qu'elle engendre $E$.
+\end{definition}
+
+\subsection{Décomposition selon une base}
+\begin{proposition}
+On a les équivalences suivantes:
+\begin{itemize}
+\item La famille $(x_i)_{i \in I}$ engendre $E$ ssi tout vecteur $v \in E$ possède une écriture $v = \sum\limits_{i \in I} \lambda_i x_i$, pour une certaine $\lambda \in K^{(I)}$
+\item La famille $(x_i)_{i \in I}$ est libre ssi tout vecteur $v \in E$ possède au plus une écriture.
+\item La famille $(x_i)_{i \in I}$ est une base de $E$ ssi tout vecteur $v \in E$ possède exactement une écriture.
+\end{itemize}
+\end{proposition}
+\begin{definition}
+On suppose que $E$ a une base finie $\mathcal{B} = (e_1, ...\, , e_r)$. Soit $v \in E$. \\
+L'unique $n$-uplet $\begin{pmatrix}
+\lambda_1 \\
+\vdots \\
+\lambda_n
+\end{pmatrix} \in K^n$ tel que $v = \lambda_1 e_1 + ... + \lambda_n e_n$ est noté $\mat_\mathcal{B}(v)$ \\
+On dit que $\lambda_1, ...\, , \lambda_n$ sont les \uline{coordonnées} du vecteur $v$ dans la base $\mathcal{B}$.
+\end{definition}
+
+\section{Sous-espaces vectoriels}
+\subsection{Définitions}
+Philosophiquement, un sous-espace vectoriel (sev) de $E$ est une partie de $E$ \uline{stable par combinaison linéaire}, càd que dès qu'elle contient une famille de vecteurs $(x_i)_{i \in I}$ elle contient toutes les CL des $x_i,\, i \in I$. \\
+En particulier, elle doit toujours contenir $0_E$, qui est une CL de $0$ vecteurs.\medskip
+
+Dans toute cette section, $E$ désigne un $K$-ev.
+\begin{definition}
+Un \uline{sous-espace vectoriel de $E$} est une partie $I \subseteq E$ telle que:
+\begin{itemize}
+\item $0_E \in F$
+\item $\forall x \in F$, $\forall \lambda \in K$, $\lambda x \in F$
+\item $\forall x, y \in F$, $x + y \in F$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Stabilité par CL]
+Soit $F$ un sev de $E$. \\
+Alors $F$ est stable par CL: pour toute famille $(x_i)_{i \in I}$ d'éléments de $F$, on a $\vect(x_i)_{i \in I} \subseteq F$
+\end{theorem} 
+\begin{proposition}
+Soit $F \subseteq E$ une partie non vide telle que $\forall \lambda \in K$, $\forall x, y \in F$, $x + \lambda y \in F$ \\
+Alors $F$ est un sev de $E$.
+\end{proposition}
+\begin{proposition}
+Soit $(x_i)_{i \in I}$ une famille de vecteurs de $E$. \\
+Alors $\vect(x_i)_{i \in I}$ est un sous-espace vectoriel de $E$.
+\end{proposition}
+\begin{proposition}
+Soit $(F_i)_{i \in I}$ une famille de sev $E$. \\
+Alors $\bigcap\limits_{i \in I} F_i$ est un sev de $E$.
+\end{proposition}
+
+\subsection{Exemples}
+\begin{proposition}
+Soit $A \in M_{np}(K)$
+\begin{itemize}
+\item $\ker A = \{ X \in K^p \mid AX = 0_{K^n} \}$ est un sev de $K^p$
+\item $\im A = \{ AX \mid X \in K^p \}$ est un sev de $K^n$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $A \in M_{np}(K)$ \\
+Alors $\im A = \vect(C_1(A), ...\, , C_p(A))$
+\end{proposition}
+
+\subsection{Bases d'un sous-espace vectoriel}
+Si $F$ est un sev de $E$, $F$ hérite d'une structure de ev. On peut dont s'intéresser à une famille $(x_i)_{i \in I}$ d'éléments de $F$ et se demander si elle est libre / génératrice de $F$ / une base de $F$. \\
+En pratique, il y a deux méthodes pour vérifier que $(x_i)_{i \in I}$ est une base de $F$ \vspace{1em}
+
+\uline{Méthode 1}: retour aux définitions.
+\begin{enumerate}
+\item[0.] On vérifie que $\forall i \in I$, $x_i \in F$ (ce qui montre $\vect(x_i)_{i \in I} \subseteq F$ par stabilité par CL).
+\item[1.] On vérifie que $(x_i)_{i \in I}$ est libre.
+\item[2.] On vérifie que tout $y \in F$ est CL des $x_i,\, i \in I$, ce qui montre $F \subseteq \vect(x_i)_{i \in I}$
+\end{enumerate} \medskip
+
+\uline{Méthode 2}: par analyse-synthèse.
+\begin{enumerate}
+\item[0.] idem.
+\item[1.] On vérifie que tout $y \in F$ s'écrit de \uline{manière unique} comme CL des $x_i,\, i \in I$
+\end{enumerate}
+
+\section{Familles et bases échelonnées}
+\begin{definition}
+Une famille $(P_i)_{i \in I}$ de polynômes non nuls est dite \uline{échelonnée} si tous les degrés $\deg P_i,\, i\ \in I$ sont différents.
+\end{definition}
+\begin{proposition}
+Toute famille échelonnée de polynômes est libre.
+\end{proposition}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Soit $(P_i)_{i \in \mathbb{N}}$ une famille de polynômes tels que $\forall i \in \mathbb{N}$, $\deg P_i = i$. Alors $(P_i)_{i \in \mathbb{N}}$ est une base de $K[X]$
+\item Soit $(P_i)_{i \in \llbracket 0, n \rrbracket}$ une famille de polynômes tels que $\forall i \in \llbracket 0, n \rrbracket$, $\deg P_i = i$. Alors $(P_i)_{i \in \llbracket 0, n \rrbracket}$ est une base de $K[X]$
+\end{itemize}
+\end{theorem}
+
+\pagebreak
+
+\section{Somme de sous-espaces vectoriels}
+Dans toute cette section, on fixe un espace vectoriel $E$.
+\subsection{Définition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Soit $F_1$, $F_2$ deux sev de $E$. \\
+On définit leur \uline{somme} $F_1 + F_2 = \{ x_1 + x_2 \mid x_1 \in F_1,\, x_2 \in F_2 \}$
+\item Soit $(F_i)_{i \in I}$ une famille de sev de $E$. \\
+On définit leur \uline{somme} $\sum\limits_{i \in I} F_i$ comme l'ensemble des sommes $\sum\limits_{i \in I} x_i$ où $(x_i)_{i \in I}$ est une famille presque nulle d'éléments de $E$ telle que $\forall i \in I$, $x_i \in F_i$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item La somme d'une famille de sev de $E$ est un sev de $E$.
+\item C'est même le plus petit sev de $E$ dans lequel sont inclus tous les éléments de la famille.
+\end{itemize}
+\end{proposition}
+
+\subsection{Somme directe}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Soit $F_1$, $F_2$ deux sev de $E$. \\
+On dit que $F_1$ et $F_2$ sont en \uline{somme directe} si tout élément de $F_1 + F_2$ s'écrit de manière unique sous la forme $x_1 + x_2$, où $x_1 \in F_1$ et $x_2 \in F_2$. \\
+Si c'est le cas, on note $F_1 \oplus F_2 = F_1 + F_2$
+\item Soit $(F_i)_{i \in I}$ une famille de sev. On dit que les $F_i,\, i \in I$ sont en \uline{somme directe} si tout élément de $\sum\limits_{i \in I} F_i$ s'écrit de manière unique sous la forme $\sum\limits_{i \in I} x_i$, où $(x_i)_{i \in I}$ est une famille presque nulles d'éléments de $E$ telle que $\forall i \in I$, $x_i \in F_i$. \\
+Si c'est le cas, on note $\bigoplus\limits_{i \in I} F_i = \sum\limits_{i \in I} F_i$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $(F_i)_{i \in I}$ une famille de sev de $E$. \\
+Alors les $F_i,\, i \in I$ sont en somme directe si et seulement si la seule décomposition de $0_E$ sous la forme $\sum\limits_{i \in I} x_i$ est la décomposition $0_E = \sum\limits_{i \in I} 0_E$
+\end{proposition}
+\begin{proposition}
+Soit $F_1$, $F_2$ deux sous-espaces vectoriels de $E$. \\
+Alors $F_1$ et $F_2$ sont en somme directe ssi $F_1 \cap F_2 = \{ 0_E \}$
+\end{proposition}
+
+\subsection{Sous-espaces vectoriels supplémentaires}
+\begin{definition}
+Soit $F_1$ et $F_2$ deux sev de $E$. \\
+On dit qu'ils sont \uline{supplémentaires} si $F_1 \oplus F_2 = E$
+\end{definition}
+
+\subsection{Bases adaptées à une décomposition en somme directe}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Soit $F_1$ et $F_2$ deux sev de $E$ en somme directe. Supposons que $(x_1, ...\, , x_n)$ soit une base de $F_1$ et $(y_1, ...\, , y_p)$ soit une base de $F_2$ \\
+Alors la \uline{concaténation} $(x_1, ...\, , x_n, y_1, ...\, ,y_p)$ est une base de $F_1 \oplus F_2$
+\item Plus généralement, si $(F_i)_{i \in I}$ est une famille de sev de $E$ en somme directe et que, pour tout $i \in I$, $(x_{i, j})_{j \in J_i}$ est une base de $F_i$, alors la "concaténation" $(x_{i, j})_{\substack{i \in I \\ j \in J_i}}$ est une base de $\bigoplus\limits_{i \in I} F_i$ 
+\end{itemize}
+\end{theorem}
+
+\pagebreak
+
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Soit $(x_1, ...\, , x_r, x_{r + 1}, ...\, , x_n)$ une base de $E$. \\
+Alors $\vect(x_1, ...\, , x_r) \oplus \vect(x_{r + 1}, ...\, , x_n) = E$
+\item Soit $(x_i)_{i \in I}$ une base de $E$ et $(I_j)_{j \in J}$ une famille de parties de $I$ formant un recouvrement disjoint de $I$ \\
+(càd $I = \bigsqcup\limits_{j \in J} I_j)$. Alors $E = \bigoplus\limits_{j \in J} \vect(x_i)_{i \in I_j}$
+\end{itemize}
+\end{theorem}
+
+\section{Applications linéaires}
+Soit $E$ et $F$ deux espaces vectoriels.
+\subsection{Définition}
+\begin{definition}
+Une \uline{application $K$-linéaire} $f: E \to F$ est une application telle que:
+\begin{itemize}
+\item $\forall x, y \in E$, $f(x + y) = f(x) + f(y)$
+\item $\forall x \in E$, $\lambda \in K, f(\lambda x) = \lambda f(x)$
+\end{itemize}
+On note $\mathcal{L}(E, F)$ ou $\mathcal{L}_K(E, F)$ l'ensemble des applications linéaires $E \to F$
+\end{definition}
+\begin{proposition}
+Soit $f \in \mathcal{L}(E, F)$. Alors $f$ "préserve les CL", càd:
+\begin{itemize}
+\item $f(0_E) = 0_F$
+\item $\forall x_1, ...\, , x_n \in E$, $\forall \lambda_1, ...\, , \lambda_n \in K$, $f(\sum\limits_{i = 1}^{n} \lambda_i x_i ) = \sum\limits_{i = 1}^{n} \lambda_i f(x_i)$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $f: E \to F$ une application telle que $\forall x, y \in E$, $\forall \lambda \in K$, $f(x + \lambda y) = f(x) + \lambda f(y)$ \\
+Alors $f \in \mathcal{L}(E, F)$
+\end{proposition}
+\begin{proposition}
+$\mathcal{L}(E, F)$ est un sev de $F^E$ \\
+(Autrement dit: une CL d'applications linéaires est linéaire).
+\end{proposition}
+\begin{proposition}[Stabilité par composition]
+Soit $E$, $F$, $G$ trois espaces vectoriels, $f \in \mathcal{L}(E, F)$ et $g \in \mathcal{L}(F, G)$ \\
+Alors $g \circ f \in \mathcal{L}(E, G)$
+\end{proposition}
+\begin{proposition}[Bilinéarité de la composition]
+La composition des applications linéaires est bilinéaire. \\
+Soit $E$, $F$, $G$ trois espaces vectoriels. Soit $\lambda \in K$.
+\begin{itemize}
+\item Soit $f \in \mathcal{L}(E, F)$ et $g_1, g_2 \in \mathcal{L}(F, G)$. \\
+On a $(g_1 + g_2) \circ f = g_1 \circ f + g_2 \circ f$ et $(\lambda g_1) \circ f = \lambda (g_1 \circ f)$
+\item Soit $f_1, f_2 \in \mathcal{L}(E, F)$ et $g \in \mathcal{L}(F, G)$. \\
+On a $g \circ (f_1 + f_2) = g \circ f_1 + g \circ f_2$ et $g \circ (\lambda f_1) = \lambda (g \circ f_1)$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Un \uline{endomorphisme} de $E$ est une application linéaire $E \to E$ \\
+On note $\mathcal{L}(E) = \mathcal{L}(E, E)$
+\end{definition}
+\begin{corollaire}
+$(\mathcal{L}(E), +, \circ)$ est un anneau, et même une $K$-algèbre.
+\end{corollaire}
+
+\subsection{Exemples}
+\uline{Cas particulier crucial}: Si $A \in M_{np}(K)$, on a une AL
+\[\varphi_A: \begin{cases}
+K^P \to K^n \\
+X \mapsto AX
+\end{cases}\]
+C'est \uline{l'application linéaire canoniquement associée à $A$}.
+
+\subsection{Noyaux et images}
+\begin{definition}
+Soit $f \in \mathcal{L}(E, F)$. \\
+On définit:
+\begin{itemize}
+\item Son \uline{noyau} $\ker f = \{ x \in E \mid f(x) = 0_E \}$
+\item son \uline{image} $\im f = \{ f(x) \mid x \in E \}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $f \in \mathcal{L}(E, F)$.
+\begin{itemize}
+\item $\ker f$ est un sev de $E$.
+\item $\im f$ est un sev de $F$.
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $f \in \mathcal{L}(E, F)$
+\begin{itemize}
+\item Si $H$ est un sev de $F$, alors $f^{-1}[H]$ est un sev de $E$.
+\item Si $G$ est un sev de $E$, alors $f[G]$ est un sev de $F$.
+\end{itemize}
+\end{proposition}
+\begin{theorem}
+Soit $f \in \mathcal{L}(E, F)$
+\begin{itemize}
+\item Deux vecteurs $x_1, x_2 \in E$ ont la même image par $f$ ssi $x_2 - x_1 \in \ker f$
+\item On a $f$ injective $\iff$ $\ker f = \{ 0_E \}$
+\item On a $f$ surjective $\iff$ $\im f = F$
+\end{itemize}
+\end{theorem}
+
+\subsection{Sous-espaces affines d'un espace vectoriel}
+\begin{definition}
+Un \uline{Sous-espace affine de $E$} est un ensemble de la forme $a + G = \{ a + x \mid x \in G \}$ \\
+où $a \in E$ et $G$ est un sev de $E$. \\
+On dit que l'espace vectoriel $G$ est \uline{la direction} du sous-espace affine.
+\end{definition}
+
+\uline{Notation}: La direction $G$ d'un sous-espace affine $A \subseteq E$ est parfois noté $\vec{A}$.
+
+\begin{proposition}
+Soit $f \in \mathcal{L}(E, F)$ et $y \in F$. \\
+Alors $f^{-1}[\{y\}] = \{ x \in E \mid f(x) = y \}$ est soit vide, soit un sous-espace affine de direction $\ker f$.
+\end{proposition}
+\begin{proposition}
+Soit $(A_i)_{i \in I}$ une famille de sous-espaces affines de $E$. \\
+Alors $\bigcap\limits_{i \in I} A_i$ est soit vide, soit un sous-espace affine, de direction $\bigcap\limits_{i \in I} \vec{A_i}$
+\end{proposition}
+
+\subsection{Isomorphismes}
+\begin{definition}
+Soit $f \in \mathcal{L}(E, F)$. \\
+On dit que $f$ est un isomorphisme si $f$ est bijective. \\
+On dit que $E$ et $F$ sont \uline{isomorphes} s'il existe un isomorphisme $E \to F$.
+\end{definition}
+\begin{proposition}
+Soit $f \in \mathcal{L}(E, F)$ un isomorphisme. \\
+Alors $f^{-1}: F \to E$ est linéaire (et donc un isomorphisme).
+\end{proposition}
+\begin{proposition}
+Soit $E$, $F$, $G$ trois sev et $f: E \to F$ et $g: F \to G$ deux isomorphismes. \\
+Alors $g \circ f$ est un isomorphisme et $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$
+\end{proposition}
+
+\section{Endomorphismes}
+On fixe un $K$-ev. $E$ \medskip
+
+\uline{Rappel}: $(\mathcal{L}(E), +, \circ)$ est un anneau (et même une $K$-algèbre).
+\begin{definition}
+Un \uline{automorphisme} de $E$ est un endomorphisme bijectif de $E$. \\
+On note $GL(E)$, et on appelle \uline{groupe linéaire de $E$}, l'ensemble des automorphismes de $E$.
+\end{definition}
+\begin{definition}
+Deux endomorphismes $f, g \in \mathcal{L}(E)$ \uline{commutent} si $g \circ f = f \circ g$.
+\end{definition}
+\begin{proposition}
+Soit $f, g \in \mathcal{L}(E)$ commutant. \\
+Alors $\ker f$ et $\im f$ sont stables par $g$.
+\end{proposition}
+\begin{definition}
+Soit $f \in \mathcal{L}(E)$. \\
+On définit son commutant $C(f) = \{ g \in \mathcal{L}(E) \mid g \circ f = f \circ g \}$
+\end{definition}
+
+\section{Applications linéaires et familles}
+Soit $E$, $F$ deux ev et $f \in \mathcal{L}(E, F)$
+\subsection{Prolongement des identités}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Soit $(x_i)_{i \in I}$ une famille de vecteurs de $E$ et $f,g \in \mathcal{L}(E, F)$ telles que $\forall i \in I$, $f(x_i) = g(x_i)$ \\
+Alors $f$ et $g$ coïncident sur $\vect(x_i)_{i \in I}$: $\forall v \in \vect(x_i)_{i \in I}$, $f(v) = g(v)$
+\item Si en outre $(x_i)_{i \in I}$ engendre $E$, alors $f = g$
+\end{itemize}
+\end{theorem}
+
+\subsection{Caractérisation de l'injectivité, la surjectivité}
+\noindent \uline{Notation non standard}: Si $\mathcal{B} = (e_i)_{i \in I}$ est une base de $E$, on notera: \\
+$f_*(\mathcal{B}) = (f(e_i))_{i \in I}$ qui est une famille de vecteurs de $F$.
+\begin{proposition}
+Soit $\mathcal{B}$ une base de $E$. \\
+Alors:
+\begin{itemize}
+\item $f$ est injective ssi $f_*(\mathcal{B})$ est libre.
+\item $f$ est surjective ssi $f_*(\mathcal{B})$ engendre $F$.
+\item $f$ est un isomorphisme ssi $f_*(\mathcal{B})$ est une base de $F$.
+\end{itemize}
+\end{proposition}
+
+\subsection{Propriété universelle des bases}
+\begin{theorem}
+Soit $\mathcal{B} = (e_i)_{i \in I}$ une base de $E$ et $F = (y_i)_{i \in I}$ une famille de vecteurs de $F$. \\
+Alors il existe une unique AL $f \in \mathcal{L}(E, F)$ telle que $f_*(\mathcal{B}) = F$. $(\forall i \in I,\, f(e_i) = y_i)$
+\end{theorem}
+
+\section{Applications linéaires et décomposition en somme directe}
+\subsection{Propriété universelle de la somme directe}
+\begin{theorem}
+Soit $E$, $F$ deux espaces vectoriels et $(S_i)_{i \in I}$ une famille de sev de $E$ telle que $E = \bigoplus\limits_{i \in I} S_i$. On se donne, pour tout $i \in I$, une AL $f_i \in \mathcal{L}(S_i, F)$ \\
+Alors il existe une unique AL $f \in \mathcal{L}(E, F)$ telle que $\forall i \in I$, $f_{|S_i} = f_i$
+\end{theorem}
+
+\pagebreak
+
+\subsection{Projecteurs et symétries}
+On fixe un espace vectoriel $E$
+\begin{definition}
+Soit $F$, $G$ deux sev de $E$ tels que $E = F \oplus G$
+\begin{itemize}
+\item \uline{Le projecteur sur F parallèlement à G} est l'unique endomorphisme $f \in \mathcal{L}(E)$ tel que \\
+$\forall x \in F$, $f(x) = x$ et $\forall x \in G$, $f(x) = 0_E$
+\item (On suppose que $K$ n'est pas de caractéristique 2) \\
+\uline{La symétrie d'axe F parallèlement à G} est l'unique endomorphisme $f \in \mathcal{L}(E)$ tel que \\
+$\forall x \in F$, $f(x) = x$ et $\forall x \in G$, $f(x) = -x$
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $f \in \mathcal{L}(E)$ et $\lambda \in K$. \\
+On définit \uline{l'espace propre} de $f$ associé à $\lambda$: $E_\lambda(f) = \ker(f - \lambda id_E) = \{ x \in E \mid f(x) = \lambda x \}$ \\
+On dit que $\lambda$ est \uline{valeur propre} de $f$ si $E_\lambda(f) \neq \{ 0_E \}$ et on appelle \uline{vecteur propre associé à la valeur propre $\lambda$} tout élément non nul de $E_\lambda(f)$ (Autrement dit, tout vecteur $x$ non nul tel que $f(x) = \lambda x$) \\
+On appelle \uline{spectre de $f$} l'ensemble $S_p(f) = S_{p_K}(f)$ de valeurs propres de $F$.
+\end{definition}
+\begin{proposition}
+Soit $F$, $G$ deux sev de $E$ tels que $E = F \oplus G$
+\begin{itemize}
+\item On note $p$ le projecteur sur $F$ parallèlement à $G$. \\
+On a alors $F = \im(p) = E_1(p)$, $G = \ker(p) = E_0(p)$ et $\forall \lambda \in K \setminus \{ 0, 1\}$, $E_\lambda(p) = \{ 0_E \}$ \\
+(Autrement dit, $S_p(p) \subseteq \{ 0, 1 \}$)
+\item (On suppose $\textnormal{car}(K) \neq 2$) \\
+On note $s$ la symétrie d'axe $F$ parallèlement à $G$. \\
+On a alors $F = E_1(s)$ et $G = E_{-1}(s)$ et $\forall \lambda \in K \setminus \{ -1, 1 \}$, $E_\lambda(s) = \{ 0_E \}$ \\
+(Autrement dit, $S_p(s) \subseteq \{ -1, 1 \}$)
+\end{itemize}
+\end{proposition}
+\begin{theorem}
+Soit $f \in \mathcal{L}(E)$
+\begin{itemize}
+\item $f$ est un projecteur ssi $f^2 = f$
+\item (On suppose $\textnormal{car}(K) \neq 2$) \\
+$f$ est une symétrie ssi $f^2 = id_E$
+\end{itemize}
+\end{theorem}
+\end{document}

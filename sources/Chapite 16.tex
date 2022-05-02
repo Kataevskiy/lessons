@@ -1,0 +1,387 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator*{\eqv}{\sim}
+\DeclareMathOperator*{\negl}{o}
+\DeclareMathOperator*{\dom}{O}
+\DeclareMathOperator{\dl}{DL}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 16. Analyse asymptotique}}
+\end{center}
+\uline{Cadre}: Dans tout le chapitre, on regardera des fonctions $f: I \to \mathbb{R}$ et un point $a \in \bar{I} \cup \{  \pm\infty \}$ en lequel il est pertinent de s'intéresser à la limite de $f$. En pratique, $I$ sera un intervalle (et $a$ un point ou une extrémité de $I$) ou $I$ sera $\mathbb{N}$ (et $a = +\infty$) dans le cas des suites.
+
+\section{Équivalence}
+\subsection{Définitions}
+\begin{definition}
+Soit $f,g: I \to \mathbb{R}$. On dit que $f$ et $g$ sont équivalentes au voisinage de $a$ et on note \\
+$f(x) \eqv\limits_{x \to a} g(x)$ ou $f \eqv\limits_{a} g$ s'il existe un voisinage $V$ de $a$ dans $I$ et $\mu: V \to \mathbb{R}$ telle que:
+\[ \begin{cases}
+\forall x \in V ,\, g(x) = \mu(x) f(x) \\
+\mu(x) \xrightarrow[x \to a]{} 1
+\end{cases} \]
+En pratique, on sera dans l'un des 2 cas suivants:
+\begin{itemize}
+\item $f$ et $g$ ne s'annulent pas au voisinage de $a$
+\item $f(a) = g(a) = 0$ et il existe un voisinage de $a$ tel que $f$ et $g$ ne s'annulent pas sur $V \setminus \{ a \}$ \\
+(On dit que $a$ est un  \uline{zéro isolé} de $f$ et $g$). \\
+Dans ce cas, la définition devient simplement:
+\[ f(x) \eqv\limits_{x \to a} g(x) \iff \frac{g(x)}{f(x)} \xrightarrow[x \to a]{} 1 \]
+\end{itemize}
+\end{definition}
+\medskip
+\noindent \uline{\textbf{Avertissement}}: En particulier: $f(x) \eqv\limits_{x \to a} 0$ signifie que $f$ est nulle au voisinage de $a$. \\
+C'est une assertion que l'on lit souvent après des erreurs de calculs.
+\begin{proposition}
+$\sim$ est une relation d'équivalence: Soit $f,g,h : I \to \mathbb{R}$
+\begin{itemize}
+\item \uline{Réflexivité}: On a $f(x) \eqv\limits_{x \to a} f(x)$
+\item \uline{Symétrie}: Si $f \eqv\limits_{a} g$, alors $g \eqv\limits_{a} f$
+\item \uline{Transitivité}: Si $f \eqv\limits_{a} g$ et $g \eqv\limits_{a} h$, alors $f \eqv\limits_{a} h$
+\end{itemize}
+\end{proposition}
+
+\subsection{Propriétés multiplicatives}
+\begin{proposition}
+Soit $f_1, f_2, g_1, g_2: I \to \mathbb{R}$ tels que: $\begin{cases}
+g_1(x) \eqv\limits_{x \to a} f_1(x) \\
+g_2(x) \eqv\limits_{x \to a} f_2(x)
+\end{cases}$
+\begin{itemize}
+\item Alors $g_1 g_2 (x) \eqv\limits_{x \to a} f_1 f_2 (x)$
+\item Si $g_1$ et $g_2$ ne sont pas nulles au voisinage de $a$, $\frac{g_1(x)}{g_2(x)} \eqv\limits_{x \to a} \frac{f_1(x)}{f_2(x)}$
+\item On peut élever un équivalent à une puissance (constante). \\
+Soit $\alpha \in \mathbb{R}$, on a $f_1(x)^\alpha \eqv\limits_{x \to a} g_1(x)^\alpha$ (à conditions que ces fonctions soient définis au voisinage de $a$).
+\end{itemize}
+\end{proposition}
+
+\subsection{Propriétés de l'équivalence}
+\begin{proposition}
+Soit $f, g: I \to \mathbb{R}$
+\begin{itemize}
+\item Si $\begin{cases}
+f(x) \eqv\limits_{x \to a} g(x) \\
+f(x) \xrightarrow[x \to a]{} l \in \overline{\mathbb{R}}
+\end{cases}$ alors $g(x) \xrightarrow[x \to a]{} l$
+\item Si $l \in \mathbb{R}^*$ (ni $\pm\infty$, ni 0) et tel que $\begin{cases}
+f(x) \xrightarrow[x \to a]{} l \\
+g(x) \xrightarrow[x \to a]{} l
+\end{cases}$ alors $f(x) \eqv\limits_{x \to a} g(x)$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $f,g: I \to \mathbb{R}$ telles que $f(x) \eqv\limits_{x \to a} g(x)$ \\
+Alors $f$ et $g$ ont le même signe au voisinage de $a$. \\
+Plus précisément: il existe un voisinage $V$ de $a$ dans $I$ tel que, pour tout $x \in V$, $f(x)$ et $g(x)$ ont le même signe ($<0$, nul, $>0$).
+\end{proposition}
+
+\section{Négligeabilité et domination}
+\subsection{Définitions}
+\begin{definition}
+Soit $f,g: I \to \mathbb{R}$
+\begin{itemize}
+\item On dit que \uline{$f$ est négligeable devant $g$ au voisinage de $a$}, et on note $f(x) = \negl\limits_{x \to a} (g(x))$ (ou $f = \negl\limits_{a}(g)$ s'il existe un voisinage $V$ de $a$ dans $I$ et $\varepsilon(x) \xrightarrow[x \to a]{} 0$
+\item On dit que \uline{$f$ est dominée par $g$ au voisinage de $a$} et on note $f(x) = \dom\limits_{x \to a}(g(x))$ (ou $f = \dom\limits_{a}(g)$) s'il existe un voisinage $V$ de $a$ dans $I$ et $c: V \to \mathbb{R}$ bornée tels que $\forall x \in V$, $f(x) = c(x) g(x)$
+\end{itemize}
+\end{definition}
+\medskip
+\noindent \uline{Remarque important}: Dans les cas usuels, on a
+\begin{itemize}
+\item $f(x) = \negl\limits_{x \to a}(g(x))$ ssi $\frac{f(x)}{g(x)} \xrightarrow[x \to a]{} 0$
+\item $f(x) = \dom\limits_{x \to a}(g(x))$ ssi $x \mapsto \frac{f(x)}{g(x)}$ est bornée au voisinage de $a$
+\end{itemize}
+
+\subsection{Opérations}
+\begin{proposition}
+Soit $f,g: I \to \mathbb{R}$
+\begin{itemize}
+\item Si $f(x) \eqv\limits_{x \to a} g(x)$ alors $f(x) = \dom\limits_{x \to a}(g(x))$
+\item Si $f(x) = \negl\limits_{x \to a}(g(x))$ alors $f(x) = \dom\limits_{x \to a}(g(x))$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $f,g,h: I \to \mathbb{R}$
+\begin{itemize}
+\item Si $f(x) = \dom\limits_{x \to a}(g(x))$ et $g(x) = \dom\limits_{x \to a}(h(x))$ alors $f(x) = \dom\limits_{x \to a}(h(x))$
+\item Si l'une des relations de dominations est remplacée par une relation de négligeabilité, on obtient \\
+$f(x) = \negl\limits_{x \to a}(h(x))$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $f_1, f_2, g: I \to \mathbb{R}$ et $\lambda, \mu \in \mathbb{R}$ \\
+Si $\begin{cases}
+f_1(x) = \negl\limits_{x \to a}(g(x)) \\
+f_2(x) = \negl\limits_{x \to a}(g(x))
+\end{cases}$ alors $\lambda f_1(x) + \mu f_2(x) = \negl\limits_{x \to a}(g(x))$
+\end{proposition}
+\begin{proposition}
+Soit $f_1, f_2, g_1, g_2: I \to \mathbb{R}$ \\
+Si $\begin{cases}
+f_1(x) = \dom\limits_{x \to a}(g_1(x)) \\
+f_2(x) = \dom\limits_{x \to a}(g_2(x))
+\end{cases}$ alors $f_1(x) f_2(x) = \dom\limits_{x \to a}(g_1(x) g_2(x))$ \\
+Si l'une de deux relations de domination est remplacée par une relation de négligeabilité, on a \\
+$f_1(x) f_2(x) = \negl\limits_{x \to a}(g_1(x) g_2(x))$
+\end{proposition}
+\begin{proposition}
+Soit $\varphi: J \to I$ une fonction telle que $\varphi(t) \xrightarrow[t \to b]{} a$ et $b \in \overline{J} \cup \{ \pm\infty \}$ et $f, g: I \to \mathbb{R}$ \\
+Alors, si $f(x) \eqv\limits_{x \to a} g(x)$ on a $f(\varphi(t)) \eqv\limits_{t \to b} g(\varphi(t))$ \\
+Idem avec $\negl$ ou $\dom$.
+\end{proposition}
+
+\pagebreak
+
+\subsection{Notations de Landau}
+On utilisera $\negl\limits_{x \to a}(g(x))$ et $\dom\limits_{x \to a}(g(x))$ dans des égalités pour designer une fonction non nommée, dont on garantit qu'elle est négligeable ou dominée par $g(x)$. \\
+Par exemple, on écrira $\sin(x) = x - \frac{x^3}{6} + \negl\limits_{x \to 0}(x^4)$ pour dire $\sin(x) = x - \frac{x^3}{6} + f_1(x)$, où $f_1(x) = \negl\limits_{x \to 0}(x^4)$ \\
+Attention! Cette pratique a des conséquences surprenantes:
+\begin{itemize}
+\item Par exemple, on ne peut pas simplifier $\negl\limits_{x \to 0}(x) - \negl\limits_{x \to 0}(x)$ \\
+Cette expression veut dire $f_1(x) - f_2(x)$ où $f_1(x), f_2(x) = \negl\limits_{x \to 0}(x)$ \\
+On remplacera par un unique $\negl\limits_{x \to 0}(x)$
+\item On sait que $x^4 = \negl\limits_{x \to 0}(x^3)$. On en déduit que si $f_1(x) = \negl\limits_{x \to 0}(x^4)$ alors $f_1(x) = \negl\limits_{x \to 0}(x^3)$. \\
+Dans un calcul:
+\begin{align*}
+\sin(x) &= x - \frac{x^3}{6} + \negl\limits_{x \to 0}(x^4) \\
+        &= x - \frac{x^3}{6} + \negl\limits_{x \to 0}(x^3)
+\end{align*}
+On a en fait écrit $\negl\limits_{x \to 0}(x^4) = \negl\limits_{x \to 0}(x^3)$ mais cette égalité n'est pas symétrique: \\
+on ne peut pas remplacer $\negl\limits_{x \to 0}(x^3)$ par un $\negl\limits_{x \to 0}(x^4)$
+\end{itemize}
+\begin{theorem}
+Soit $f,g: I \to \mathbb{R}$ LASSÉ:
+\begin{enumerate}
+\item $f(x) \eqv\limits_{x \to a} g(x)$
+\item $f(x) = g(x) + \negl\limits_{x \to a}(g(x))$
+\item $g(x) = f(x) + \negl\limits_{x \to a}(f(x))$
+\end{enumerate}
+\end{theorem}
+
+\section{Développements limités}
+\subsection{Définition et premières propriétés}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$ et $a \in I$ \\
+On dit que $f$ admet \uline{un développement limité à l'ordre n en a}: $\dl_n(a)$ s'il existe $c_0, ...\,, c_n \in \mathbb{R}$ tels que \\
+$f(x) = c_0 + c_1(x - a) + c_2(x - a)^2 + ... + c_n(x - a)^n + \negl\limits_{x \to a}((x - a)^n)$ \\
+( ou $f(a + h) = c_0 + c_1 h + c_2 h^2 + ... + c_n h^n + \negl\limits_{h \to 0}(h^n)$ )
+\end{definition}
+\begin{proposition}[Troncature de DL]
+Soit $m \leq n$ deux entiers naturels. \\
+Si $f$ admet un $\dl_n(a): f(a + h) = c_0 + c_1 h + ... + c_n h^n +\negl(h^n)$ \\
+alors elle admet un $\dl_m(a): f(a + h) = c_0 + c_1 h + ... + c_m h^m + \negl(h^m)$
+\end{proposition}
+\begin{proposition}
+Soit $f: I \to \mathbb{R}$ admettant un $\dl_n(a): f(a + h) = c_0 + c_1 h + ... + c_n h^n + \negl(h^n)$ \\
+Si $c_0, c_1, ...\,, c_n$ ne sont pas tous nuls, on note $\mu = \min \{ i \in \llbracket 0, n \rrbracket \mid c_i \neq 0 \}$ et on a: $f(a + h) \eqv\limits_{h \to 0} c_\mu h^\mu$
+\end{proposition}
+\begin{proposition}
+Soit $f: I \to \mathbb{R}$ et $a \in I$
+\begin{itemize}
+\item $f$ est continue et $a$ ssi elle admet un $\dl_0(a)$ ( le DL est alors $f(a + h) = f(a) + \negl(1)$ )
+\item $f$ est dérivable en $a$ ssi elle admet un $\dl_1(a)$ ( le DL est alors $f(a + h) = f(a) + f'(a)h + \negl(h)$ )
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Unicité du DL]
+Soit $f: I \to \mathbb{R}$ et $b_0, ...\,, b_n$, $c_0, ...\,, c_n \in \mathbb{R}$ tels que
+\begin{align*}
+f(a + h) &= b_0 + b_1 h + ... + b_n h^n + \negl(h^n) \\
+         &= c_0 + c_1 h + ... + c_n h^n + \negl(h^n)
+\end{align*}
+Alors $\forall i \in \llbracket 0, n \rrbracket$, $b_i = c_i$
+\end{proposition}
+\begin{corollaire}
+Soit $f: I \to \mathbb{R}$ admettant un $\dl_n(0): f(h) = c_0 + c_1 h + ... + c_n h^n + \negl(h^n)$
+\begin{itemize}
+\item Si $f$ est paire, on a $c_1 = c_3 = ... = 0$
+\item Si $f$ est impaire, alors $c_0 = c_2 = ... = 0$
+\end{itemize}
+\end{corollaire}
+
+\subsection{Lemme de primitivation des DL}
+\begin{lemme}
+Soit $f: I \to \mathbb{R}$ dérivable et $a \in I$ \\
+On suppose que $f'$ admet un $\dl_n(a): f'(a + h) = c_0 + c_1 h + ... + c_n h^n + \negl(h^n)$ \\
+Alors $f$ admet un $\dl_{n + 1}(a): f(a + h) = f(a) + c_0 h + c_1 \frac{h^2}{2} + ... + c_n \frac{h^{n + 1}}{n + 1} + \negl(h^{n + 1})$
+\end{lemme}
+
+\subsection{Théorème de Taylor-Young}
+\noindent \uline{Rappel}: Si $f: I \to \mathbb{R}$ est $n$ fois dérivable et $a \in I$, il existe un unique polynôme $P$ de $\mathbb{R}_n[X]$ tel que \\
+$\forall k \in \llbracket 0, n \rrbracket$, $f^{(k)}(a) = P^{(k)}(a)$ c'est \uline{le $n$-ième polynôme de Taylor de $f$ en $a$}:
+\[\sum\limits_{k = 0}^{n} \frac{f^{(k)}(a)}{k!} (X - a)^k\]
+\begin{theorem}[Taylor-Young]
+Soit $f \in C^n(I)$ et $a \in I$ \\
+Alors
+\[ f(x) = \sum_{k = 0}^n \frac{f^{(k)}(a)}{k!} (x - a)^k + \negl\limits_{x \to a}((x - a)^n)\]
+càd
+\[ f(a + h) = \sum_{k = 0}^n \frac{f^{(k)}(a)}{k!} h^k + \negl\limits_{h \to 0}(h^n)\]
+Notamment, $f$ admet un $\dl_n(a)$
+\end{theorem}
+\begin{theorem}[Formulaire]
+Pour tout $n \in \mathbb{N}$, on a:
+\begin{align*}
+\frac{1}{1 - h} &= 1 + h + h^2 + ... + h^n + \negl(h^n) \\
+\frac{1}{1 + h} &= 1 - h + h^2 - h^3 + ... + (-1)^n h^n + \negl(h^n) \\
+(1 + h)^\alpha &= 1 + \alpha h + \frac{\alpha (\alpha - 1)}{2!} h^2 + \frac{\alpha (\alpha - 1) (\alpha - 2)}{3!} h^3 + ... + \frac{\alpha (\alpha - 1) (\alpha - 2) ... (\alpha - n + 1)}{n!} h^n + \negl(h^n) \\
+\ln(1 + h) &= h - \frac{h^2}{2} + \frac{h^3}{3} + ... + (-1)^{n - 1} \frac{h^n}{n} + \negl(h^n) \\
+\arctan(h) &= h - \frac{h^3}{3} + \frac{h^5}{5} + ... + (-1)^n \frac{h^{2n + 1}}{2n + 1} + \negl(h^{2n + 1}) \\
+\exp(h) &= 1 + h + \frac{h^2}{2!} + \frac{h^3}{3!} + ... + \frac{h^n}{n!} + \negl(h^n) \\
+\cosh(h) &= 1 + \frac{h^2}{2!} + \frac{h^4}{4!} + ... + \frac{h^{2n}}{(2n)!} + \negl(h^{2n}) \\
+\sinh(h) &= h + \frac{h^3}{3!} + \frac{h^5}{5!} + ... + \frac{h^{2n + 1}}{(2n + 1)!} + \negl(h^{2n + 1}) \\
+\cos(h) &= 1 - \frac{h^2}{2!} + \frac{h^4}{4!} + ... + (-1)^n \frac{h^{2n}}{(2n)!} + \negl(h^{2n}) \\
+\sin(h) &= h - \frac{h^3}{3!} + \frac{h^5}{5!} + ... + (-1)^n \frac{h^{2n + 1}}{(2n + 1)!}
+\end{align*}
+\end{theorem}
+
+\section{Calculs pratiques}
+\subsection{Somme et produit}
+On retrouve le DL de $\cosh$:
+\begin{align*}
+e^h &= 1 + h + \frac{h^2}{2!} + ... + \frac{h^{2n - 1}}{(2n - 1)!} + \frac{h^n}{n!} + \negl(h^n) \\
+e^{-h} &= 1 - h + \frac{h^2}{2!} + ... - \frac{h^{2n - 1}}{(2n -1)!} + \frac{h^n}{n!} + \negl(h^n)
+\end{align*}
+Donc 
+\[ \cosh(h) = \frac{e^h + e^{-h}}{2} = 1 + \frac{h^2}{2!} + ... + \frac{h^{2n}}{(2n)!} + \negl(h^{2n}) \]
+Cela marche plus généralement pour les parties paire ( $x \mapsto \frac{f(x) + f(-x)}{2}$ ) et impaire ( $x \mapsto \frac{f(x) - f(-x)}{2}$ ) d'une fonction $f$. \medskip
+
+$\dl_3(0)$ de $x \mapsto e^x \sinh(x)$:
+\begin{align*}
+e^x \sinh(x) &= \left(1 + x + \frac{x^2}{2} + \negl(x^2)\right)\left(x + \frac{x^3}{6} + \negl(x^3)\right) \\
+&= x + x^2 + \frac{x^3}{2} + \frac{x^3}{6} + \negl(x^3) \\
+&= x + x^2 + \frac{2}{3} x^3 + \negl(x^3)
+\end{align*}
+Si un facteur a une valuation $> 0$, on peut développer l'autre à une précision moindre.
+
+\subsection{Composition}
+On peut facilement composer un DL avec une puissance de $x$: par exemple, donnons un $\dl_5(0)$ de \\
+$x \mapsto \sin(x^2) \cos(x)$
+\begin{align*}
+\sin(x^2) \cos(x) &= (x^2 + \negl(x^5))(1 - \frac{x^2}{2} + \negl(x^3)) \\
+&= x^2 - \frac{1}{2} x^4 + \negl(x^5)
+\end{align*} \medskip
+
+On peut aussi composer avec des fonction plus compliquées. Donnons  un $\dl_2(0)$ de $x \mapsto e^{\sin(x)}$
+\begin{align*}
+e^{\sin(x)} &= 1 + \sin(x) + \frac{(\sin(x))^2}{2} + \negl(x^2) \\
+&= 1 + (x + \negl(x^2)) + \frac{(x + \negl(x))^2}{2} + \negl(x^2) \\
+&= 1 + x + \frac{1}{2} x^2 + \negl(x^2)
+\end{align*}
+
+\pagebreak
+
+\subsection{Quotient}
+Pas besoin de nouvelle technique: on utilise le DL de $u \mapsto \frac{1}{1 + u}$ \medskip
+
+$\dl_4(0)$ de $\frac{1}{cos}$
+\begin{align*}
+\frac{1}{\cos(x)} &= \frac{1}{1 + (\cos(x) - 1)} \\
+&= 1 - \left(- \frac{x^2}{2} + \frac{x^4}{24} + \negl(x^4)\right) + \left(- \frac{x^2}{2} + \negl(x^2)\right)^2 + \negl(x^4) \\
+&= 1 + \frac{x^2}{2} - \frac{x^4}{24} + \frac{x^4}{4} + \negl(x^4) \\
+&= 1 + \frac{1}{2} x^2 + \frac{5}{24} x^4 + \negl(x^4)
+\end{align*} \medskip
+
+$\dl_5(0)$ de $\tan$
+\begin{align*}
+\tan(x) = \frac{\sin(x)}{\cos(x)} &= \left(x - \frac{x^3}{6} + \frac{x^5}{120} + \negl(x^5)\right)\left(1 + \frac{x^2}{2} + \frac{5 x^4}{24} + \negl(x^4)\right) \\
+&= x + \frac{x^3}{2} - \frac{x^3}{6} + \frac{5 x^5}{24} - \frac{x^5}{12} + \frac{x^5}{120} + \negl(x^5) \\
+&= x + \frac{1}{3} x^3 + \frac{2}{15} x^5 + \negl(x^5)
+\end{align*} \medskip
+
+\noindent \uline{Remarque}: Selon le programme officiel,
+\[\tan(x) = x + \frac{1}{3} x^3 + \negl(x^3)\]
+est à connaître.
+
+\section{Applications}
+\subsection{Limites et équivalents}
+Déterminons la limite en 0 de $\frac{1}{\sin^2(x)} - \frac{1}{x^2}$
+\begin{align*}
+\frac{1}{\sin^2(x)} - \frac{1}{x^2} &= \frac{x^2 - \sin^2(x)}{x^2 \sin^2(x)} \\
+\intertext{Or}
+x^2 - \sin^2(x) &= \frac{x^4}{3} + \negl(x^4) \\
+x^2 - \sin^2(x) &\eqv\limits_{x \to 0} \frac{x^4}{3} \\
+\intertext{Donc}
+\frac{x^2 - \sin^2(x)}{x^2 \sin^2(x)} &\eqv\limits_{x \to 0} \frac{x^4}{3 x^4} = \frac{1}{3} \\
+\intertext{Donc}
+\frac{x^2 - \sin^2(x)}{x^2 \sin^2(x)} &\xrightarrow[x \to 0]{} \frac{1}{3}
+\end{align*}
+
+Équivalent en 0 de $x \mapsto (\cosh(x))^x - (\cos(x))^x$
+\begin{align*}
+(\cosh(x))^x &= \exp(x \ln(\cosh(x))) \\
+&= \exp\left(x\left(\left(\frac{x^2}{2} + \negl(x^3)\right) + \negl(x^3)\right)\right) \\
+&= 1 + \frac{x^3}{2} + \negl(x^3) \\
+\intertext{De même}
+(\cos(x))^x &= 1 - \frac{x^3}{2} + \negl(x^3) \\
+\intertext{Donc}
+(\cosh(x))^x - (\cos(x))^x &= x^3 + \negl(x^3) \\
+&\eqv\limits_{x \to 0} x^3
+\end{align*}
+
+\subsection{Étude locale d'une fonction}
+On rappelle que $f: I \to \mathbb{R}$ admet un $\dl_0(a)$ ssi $f$ est continue en $a$. \\
+\phantom{\indent On rappelle que $f: I \to \mathbb{R}$ admet un} $\dl_1(a)$ ssi $f$ est dérivable en $a$. \medskip
+
+Un DL de la forme $f(a + h) = f(a) + f'(a) h + \lambda h^\nu + \negl(h^\nu)$ permet de déterminer la position de $f$ par rapport à sa tangente:
+\[f(a + h) - (f(a) + f'(a)h) \eqv\limits_{h \to 0} \lambda h^\nu\]
+et deux fonctions équivalentes ont localement le même signe. \\
+Cela montre notamment le résultat suivant:
+\begin{proposition}
+Soit $f \in C^2(I)$ et $a \in I$ un point intérieur.
+\begin{itemize}
+\item Si $f$ a un minimum local en $a$, alors $f'(a) = 0$ et $f''(a) \geq 0$
+\item Si $f'(a) = 0$ et $f''(a) > 0$, $f$ admet un minimum local en a.
+\end{itemize}
+\end{proposition}
+
+\pagebreak
+
+\subsection{Asymptotes}
+On peut calculer des \uline{développements asymptotiques} plus généraux que des DL. \medskip
+
+Donnons un DA à la précision $\negl\limits_{x \to 0}(x)$ de $x \mapsto \frac{1}{e^x - 1}$
+\begin{align*}
+\frac{1}{e^x - 1} &= \frac{1}{x + \frac{x^2}{2} + \frac{x^3}{6} + \negl(x^3)} \\
+&= \frac{1}{x} \frac{1}{1 + \frac{x}{2} + \frac{x^2}{6} + \negl(x^2)} \\
+&= \frac{1}{x} \left(1 - \left( \frac{x}{2} + \frac{x^2}{6} + \negl(x^2) \right) + \left( \frac{x}{2} + \negl(x) \right)^2 + \negl(x^2) \right) \\
+&= \frac{1}{x} \left(1 - \frac{x}{2} + \frac{x^2}{12} + \negl(x^2) \right) \\
+&= \frac{1}{x} - \frac{1}{2} + \frac{x}{12} + \negl(x)
+\end{align*} \medskip
+
+\uline{Remarque}: On peut calculer certains DA quand $x \to +\infty$ en passant par la fonction $h \mapsto f(\frac{1}{h})$ \medskip
+
+Considérons $x \mapsto x^2 \ln(\frac{x}{x - 1})$
+\begin{align*}
+f(\frac{1}{h}) &= \frac{1}{h^2} \ln\left(\frac{\frac{1}{h}}{\frac{1}{h} - 1}\right) \\
+&= \frac{1}{h^2} \ln\left(\frac{1}{1 - h}\right) \\
+&= -\frac{1}{h^2} \ln(1 - h) \\
+&= -\frac{1}{h^2} \left(-h -\frac{h^2}{2} - \frac{h^3}{3} + \negl(h^3)\right) \\
+&= \frac{1}{h} + \frac{1}{2} + \frac{h}{3} + \negl\limits_{h \to 0}(h)
+\end{align*}
+Donc
+\[f(x) = x + \frac{1}{2} + \frac{1}{3x} + \negl\limits_{x \to \pm\infty}\left(\frac{1}{x}\right)\]
+Graphiquement, cela dit que la droite d'équation $y = x + \frac{1}{2}$ est une asymptote du graphe de $f$ et cela donne la position relative du graphe et de l'asymptote.
+\end{document}

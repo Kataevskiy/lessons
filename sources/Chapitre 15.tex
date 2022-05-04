@@ -1,0 +1,154 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 15. Convexité}}
+\end{center}
+Dans tout le chapitre, $I$ désigne un intervalle non trivial.
+
+\section{Généralités}
+\subsection{Définitions}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une fonction $f: I \to \mathbb{R}$ est \uline{convexe} si $\forall a, b \in I$, $\forall \lambda \in [0, 1]$ 
+\[f((1 - \lambda)a + \lambda b) \leq (1 - \lambda)f(a) + \lambda f(b)\]
+\item Elle est dite \uline{concave} si $\forall a, b \in I$, $\forall \lambda \in [0, 1]$
+\[f((1 - \lambda)a + \lambda b) \geq (1 - \lambda)f(a) + \lambda f(b)\]
+\end{itemize}
+\end{definition}
+
+\subsection{Opérations}
+\begin{proposition}
+Soit $f, g: I \to \mathbb{R}$
+\begin{itemize}
+\item Si $f$ et $g$ sont convexes (resp. concaves), alors $f + g$ aussi.
+\item Si $f$ et $g$ sont convexes, $\max(f, g)$ est convexe.
+\item Si $f$ et $g$ sont concaves, $\min(f, g)$ est concave.
+\item L'opposé d'une fonction convexe est concave et réciproquement.
+\end{itemize}
+\end{proposition}
+
+\subsection{Inégalité de Jensen}
+\begin{definition}
+Soit $x_1, ...\, , x_n \in \mathbb{R}$ \\
+Une \uline{combinaison convexe} de $x_1, ...\, , x_n$ est un nombre de la forme $\lambda_1 x_1 + ... + \lambda_n x_n$ où $\begin{cases}
+\lambda_1, ...\, , \lambda_n \in \mathbb{R}_+ \\
+\lambda_1 + ... + \lambda_n = 1
+\end{cases}$  \\
+On parle aussi de \uline{barycentre} des $a_1, ...\, , a_n$ (et dans le cas $\lambda_1 = ... = \lambda_n = \frac{1}{n}$ on parle d'\uline{isobarycentre}).
+\end{definition}
+\begin{theorem}[Inégalité de Jensen / de convexité]
+Soit $f: I \to \mathbb{R}$ convexe, $a_1, ...\, , a_n \in \mathbb{R}$ et $\lambda_1, ...\, , \lambda_n \in \mathbb{R}_+$ tels que $\lambda_1 + ... + \lambda_n = 1$ \\
+Alors
+\[f(\sum_{i = 1}^n \lambda_i a_i) \leq \sum_{i = 1}^n \lambda_i f(a_i)\]
+\end{theorem}
+
+\subsection{Position de sécantes}
+\begin{proposition}
+Soit $f:I \to \mathbb{R}$ convexe et $a < b \in I$. Alors:
+\begin{itemize}
+\item Sur $I \cap \left]-\infty, a\right]$ le graphe de $f$ est au-dessus (au sens large) de la droite reliant $\begin{pmatrix} a \\ f(a) \end{pmatrix}$ et $\begin{pmatrix} b \\ f(b) \end{pmatrix}$
+\item Sur $I \cap [b, +\infty[$ idem.
+\item Sur $[a, b]$ le graphe est en-dessous de la droite.
+\end{itemize}
+\end{proposition}
+
+\subsection{Pentes}
+\begin{proposition}[Inégalité de trois pentes]
+Soit $f: I \to \mathbb{R}$ et $s < t < u \in I$ \\
+Alors
+\[\frac{f(t) - f(s)}{t - s} \leq \frac{f(u) - f(s)}{u - s} \leq \frac{f(u) - f(t)}{u - t}\]
+\end{proposition}
+\begin{proposition}
+Une fonction $f: I \to \mathbb{R}$ est convexe si et seulement si, pour tout $a \in I$, la fonction \\
+taux d'accroissement
+\[ \tau_{[f, a]} \begin{cases}
+I \setminus \{ a \} \to \mathbb{R} \\
+x \mapsto \frac{f(x) - f(a)}{x - a}
+\end{cases} \]
+est croissante.
+\end{proposition}
+
+\section{Convexité et régularité}
+\subsection{Régularité automatique}
+\begin{proposition}
+Soit $f: I \to \mathbb{R}$ convexe et $a \in I$ intérieur. \\
+Alors $f$ est dérivable à gauche et à droite en $a$ et $f'_g(a) \leq f'_d(a)$
+\end{proposition}
+\begin{theorem}
+Une fonction convexe est continue en tout point intérieur de son intervalle de définition.
+\end{theorem}
+\begin{corollaire}
+Si $I$ est un intervalle ouvert, toute fonction $f: I \to \mathbb{R}$ convexe est continue.
+\end{corollaire}
+
+\subsection{Caractérisation des fonctions convexes (deux fois) dérivables}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ dérivable. \\
+Alors $f$ est convexe ssi $f'$ croît.
+\end{theorem}
+\begin{corollaire}
+Soit $f: I \to \mathbb{R}$ deux fois dérivable. \\
+Alors $f$ est convexe ssi $f'' \geq 0$
+\end{corollaire}
+\begin{corollaire}
+Soit $f \in D^1(I)$ convexe et $a < b \in I$ \\
+On a
+\[ f'(a) \leq \frac{f(b) - f(a)}{b - a} \leq f'(b) \]
+\end{corollaire}
+
+\subsection{Applications}
+Le critère de convexité pour les fonctions deux fois dérivables montre directement que:
+\begin{itemize}
+\item $\exp$ est convexe.
+\item $\ln$ est concave.
+\item $\sin$ est concave sur $[0, - \pi]$
+\end{itemize}
+\begin{proposition}[Inégalité arithmético-géométrique générale]
+Soit $\alpha_1, ...\, , \alpha_n \in \mathbb{R}_+$ de somme 1 et $\left.x_1, ...\, , x_n \in \mathbb{R}_+^*\right.$ \\
+Alors
+\[x_1^{\alpha_1} x_2^{\alpha_2} ... x_n^{\alpha_n} \leq \alpha_1 x_1 + \alpha_2 x_2 + ... + \alpha_n x_n\]
+\end{proposition}
+
+\subsection{Position par rapport à la tangente}
+\begin{proposition}
+Soit $f \in D^1(I)$ convexe et $a \in I$ \\
+Alors $\forall x \in I$, $f(x) \geq f(a) + f'(a)(x - a)$
+\end{proposition}
+\noindent Cette proposition permet de retrouver des inégalités classiques:
+\begin{itemize}
+\item $\forall x \in \mathbb{R}$, $e^x \geq 1 + x$
+\item $\forall x \in \mathbb{R}_+^*$, $\ln(x) \leq x + 1$
+\item $\forall h \in \left]-1, +\infty\right[$, $\ln(1 + h) \leq h$
+\end{itemize}
+La concavité sur $[0, \pi]$ de $\sin$ donne: \\
+$\forall x \in [0, \pi]$, $\sin(x) \leq x$ (on a même $\forall x \in \mathbb{R}$, $|\sin(x)| \leq |x|$) \\
+La position par rapport aux sécantes montre aussi \\
+$\forall x \in \left[0, \frac{\pi}{2}\right]$, $\sin(x) \geq \frac{2}{\pi} x$
+\end{document}

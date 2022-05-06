@@ -23,7 +23,7 @@
 \newtheorem{lemme}[proposition]{Lemme}
 \newtheorem{definition}[proposition]{Définition}
 
-\DeclareMathOperator*{\eqv}{\sim}
+\DeclareMathOperator*{\eqv}{\thicksim}
 \DeclareMathOperator*{\negl}{o}
 \DeclareMathOperator*{\dom}{O}
 \DeclareMathOperator{\dl}{DL}
@@ -296,7 +296,7 @@ e^{\sin(x)} &= 1 + \sin(x) + \frac{(\sin(x))^2}{2} + \negl(x^2) \\
 \subsection{Quotient}
 Pas besoin de nouvelle technique: on utilise le DL de $u \mapsto \frac{1}{1 + u}$ \medskip
 
-$\dl_4(0)$ de $\frac{1}{cos}$
+$\dl_4(0)$ de $\frac{1}{\cos}$
 \begin{align*}
 \frac{1}{\cos(x)} &= \frac{1}{1 + (\cos(x) - 1)} \\
 &= 1 - \left(- \frac{x^2}{2} + \frac{x^4}{24} + \negl(x^4)\right) + \left(- \frac{x^2}{2} + \negl(x^2)\right)^2 + \negl(x^4) \\
@@ -373,9 +373,9 @@ Donnons un DA à la précision $\negl\limits_{x \to 0}(x)$ de $x \mapsto \frac{1
 
 \uline{Remarque}: On peut calculer certains DA quand $x \to +\infty$ en passant par la fonction $h \mapsto f(\frac{1}{h})$ \medskip
 
-Considérons $x \mapsto x^2 \ln(\frac{x}{x - 1})$
+Considérons $x \mapsto x^2 \ln\left(\frac{x}{x - 1}\right)$
 \begin{align*}
-f(\frac{1}{h}) &= \frac{1}{h^2} \ln\left(\frac{\frac{1}{h}}{\frac{1}{h} - 1}\right) \\
+f\left(\frac{1}{h}\right) &= \frac{1}{h^2} \ln\left(\frac{\frac{1}{h}}{\frac{1}{h} - 1}\right) \\
 &= \frac{1}{h^2} \ln\left(\frac{1}{1 - h}\right) \\
 &= -\frac{1}{h^2} \ln(1 - h) \\
 &= -\frac{1}{h^2} \left(-h -\frac{h^2}{2} - \frac{h^3}{3} + \negl(h^3)\right) \\

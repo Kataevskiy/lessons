@@ -1,0 +1,323 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 15. Dérivation}}
+\end{center}
+\uline{Cadre}: Dans tout le chapitre, $I$ est un intervalle. \\
+(même si les résultats généraux s'étendent à des parties de $\mathbb{R}$ quelconques, pourvu que $a \in I$ ne soit pas \uline{isolé} dans $I$, càd pourvu que $a \in \overline{I \setminus \{ a \}}$)
+
+\section{Généralités}
+\subsection{Définition}
+\begin{definition}
+Soit $a \in I$ et $f: I \to \mathbb{R}$
+\begin{itemize}
+\item On définit la fonction \uline{taux d'accroissement de f en a}:
+\[\tau_{[f; a]} : \begin{cases}
+I \setminus \{ a \} \to \mathbb{R} \\
+x \mapsto \frac{f(x) - f(a)}{x - a}
+\end{cases}\]
+\item La fonction $f$ est \uline{dérivable en $a$} si $\tau_{[f; a]}$ possède une limite finie en a. \\
+Si c'est le cas, on définit \uline{le nombre dérivé}:
+\[f'(a) = \lim\limits_{x \to a} \frac{f(x) - f(a)}{x - a}\]
+\item La fonction est \uline{dérivable} si elle est dérivable en tout point de $I$
+\end{itemize}
+On note $D^1(I) = D^1(I; \mathbb{R})$ l'ensemble des fonctions dérivables.
+\end{definition}
+\begin{proposition}
+Soit $f:I \to \mathbb{R}$ et $a \in I$. LASSÉ:
+\begin{enumerate}
+\item $f$ est dérivable en a.
+\item Il existe une fonction $\kappa: I \to \mathbb{R}$ continue en $a$ et telle que $\forall x \in I$, $f(x) = f(a) + \kappa(x)(x - a)$
+\item Il existe $\nu \in \mathbb{R}$ et une fonction $\eta: I \to \mathbb{R}$ telle que $\begin{cases}
+\forall x \in I ,\, f(x) = f(a) + \nu(x - a) + (x - a) \eta(x) \\
+\eta(x) \xrightarrow[x \to a]{} 0 
+\end{cases}$
+\item Il existe $\nu \in \mathbb{R}$ et une fonction $\varepsilon: I_a \to \mathbb{R}$ telle que $\begin{cases}
+\forall h \in I_a ,\, f(a + h) = f(a) + \nu h + h \varepsilon(h) \\
+\varepsilon(h) \xrightarrow[h \to 0]{} 0
+\end{cases}$
+\end{enumerate}
+Si c'est le cas, on a $f'(a) = \kappa(a) = \nu$
+\end{proposition}
+\begin{proposition}
+Soit $f: I \to \mathbb{R}$ \\
+Si $f$ est dérivable en $a \in I$ alors elle est continue en $a$. On a donc $D^1(I) \subseteq C^0(I)$
+\end{proposition}
+
+\subsection{Caractère local de la dérivabilité}
+\begin{proposition}
+Soit $f, g: I \to \mathbb{R}$ qui coïncident au voisinage de $a \in I$ \\
+Alors $f$ est dérivable en $a$ ssi $g$ l'est. Si c'est le cas, $f'(a) = g'(a)$
+
+\subsection{Dérivées à gauche et à droite}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$ et $a \in I$
+\begin{itemize}
+\item (Si $a$ n'est pas l'extrémité gauche de $I$), on dit que $f$ est \uline{dérivable à gauche} en $a$ si $\tau_{[f;a]}$ admet une limite finie par valeurs inférieures en $a$. Si c'est le cas, on note
+\[f'_g(a) = \lim\limits_{\substack{x \to a \\ x < a}} \frac{f(x) - f(a)}{x - a}\]
+\item Idem à droite, avec
+\[f'_d(a) = \lim\limits_{\substack{x \to a \\ x > a}} \frac{f(x) - f(a)}{x - a}\]
+(Si cette limite existe)
+\end{itemize}
+\end{definition}
+\end{proposition}
+
+\subsection{Opérations}
+\begin{proposition}
+Soit $f,g: I \to \mathbb{R}$, $a \in I$ et $\lambda \in \mathbb{R}$
+\begin{itemize}
+\item Si $f$ est dérivable en $a$, $\lambda f$ aussi et $(\lambda f)' (a) = \lambda f'(a)$
+\item Si $f$ est dérivable en $a$, $f + g$ aussi et $(f + g)'(a) = f'(a) + g'(a)$
+\item Si $f$ et $g$ sont dérivables en $a$, $fg$ aussi et
+\[(fg)'(a) = f'(a)g(a) + f(a)g'(a)\]
+\item Si $f$ et $g$ sont dérivables en $a$ et que $g(a) \neq 0$, $\frac{f}{g}$ aussi et
+\[\left(\frac{f}{g}\right)'(a) = \frac{f'(a)g(a) - f(a)g'(a)}{g(a)^2}\]
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+Si $f,g : I \to \mathbb{R}$ sont dérivables et que $\lambda \in \mathbb{R}$
+\begin{itemize}
+\item $\lambda f$, $f + g$, $fg$ sont dérivables.
+\item Si en outre, $g$ ne s'annule pas sur $I$, $\frac{f}{g}$ est dérivable.
+\end{itemize}
+\end{corollaire}
+\begin{corollaire}
+$D^1(I)$ est un sous-algèbre de $C^0(I)$ (ou de $\mathbb{R}^I$), càd un sous-anneau stable par opération linéaire.
+\end{corollaire}
+\begin{proposition}[Dérivation des fonctions composées, ou "chain rule"]
+\hfill \\
+Soit $I, J \subseteq \mathbb{R}$ deux intervalles et $f: I \to J$, $g: J \to \mathbb{R}$
+\begin{itemize}
+\item Soit $a \in I$. Si $f$ est dérivable en $a$ et que $g$ est dérivable en $f(a)$, alors $g \circ f$ est dérivable en $a$ et \\
+$(g \circ f)'(a) = g'(f(a)) f'(a)$
+\item Si $f$ et $g$ sont dérivables, $g \circ f$ aussi et $(g \circ f)' = (g' \circ f)f'$
+\end{itemize}
+\end{proposition}
+
+\subsection{Critère de dérivabilité des fonctions réciproques}
+\begin{proposition}
+Soit $I, J \subseteq \mathbb{R}$ deux intervalles, $f: I \to J$ une bijection dérivable, $a \in I$ et $b = f(a) \in J$ \\
+Alors $f^{-1}$ est dérivable en $b$ ssi $f'(a) \neq 0$ \\
+Si c'est le cas, on a
+\[(f^{-1})'(b) = \frac{1}{f'(a)} = \frac{1}{f'(f^{-1}(b)}\]
+\end{proposition}
+
+\section{Théorèmes principaux}
+\subsection{Extrema locaux}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$ et $a \in I$
+\begin{itemize}
+\item On dit que $f$ \uline{possède un minimum local en $a$} s'il existe $\delta > 0$ tel que \\
+$\forall x \in I$, $|x - a| \leq \delta \implies f(x) \geq f(a)$
+\item On dit que $f$ \uline{possède un maximum local en $a$} s'il existe $\delta > 0$ tel que \\
+$\forall x \in I$, $|x - a| \leq \delta \implies f(x) \leq f(a)$
+\end{itemize}
+On dit que $f$ possède un \uline{extremum local} en $a$ si elle possède un minimum ou un maximum local en $a$.
+\end{definition}
+\begin{definition}
+Un élément $a \in I$ est dit \uline{intérieur} s'il n'est pas une extrémité de $I$.
+\end{definition}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ dérivable. \\
+Soit $a \in I$ un point intérieur en lequel $f$ admet un extremum local. Alors $f'(a) = 0$ 
+\end{theorem}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ et $a \in I$ intérieur. \\
+Si $f$ est dérivable en $a$ et qu'elle admet un extremum local en $a$, alors $f'(a) = 0$
+\end{theorem}
+\begin{definition}
+Un point $a \in I$ où $f: I \to \mathbb{R}$ est dérivable et tel que $f'(a) = 0$ s'appelle un \uline{point critique} (ou un \uline{point stationnaire}) pour $f$.
+\end{definition}
+
+\subsection{Théorème de Rolle et des accroissements finis}
+\begin{theorem}[Théorème de Rolle]
+Soit $f: [a, b] \to \mathbb{R}$ continue et dérivable en tout point de $]a, b[$ \\
+Si $f(a) = f(b)$ alors il existe $c \in \left]a, b\right[$ tel que $f'(c) = 0$
+\end{theorem}
+\begin{theorem}[Théorème des accroissements finis]
+Soit $f: [a, b] \to \mathbb{R}$ continue, \\
+dérivable en tout point de $]a, b[$ \\
+Alors il existe $c \in \left]a, b\right[$ tel que
+\[f'(c) = \frac{f(b) - f(a)}{b - a}\]
+\end{theorem}
+\medskip
+\noindent \uline{Interprétation cinématique}: Dans un mouvement rectiligne, la vitesse instantanée vaut, à un certain moment, la vitesse moyenne.
+
+\subsection{Monotonie et signe de la dérivée}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ dérivable. Alors:
+\begin{itemize}
+\item $f$ est constante ssi $f' = 0$
+\item $f$ est croissante ssi $f' \geq 0$
+\item $f$ est strictement croissante ssi $f' \geq 0$ et que la restriction de $f'$ à tout intervalle non trivial est non nulle.
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Soit $f \in C^0(I)$ \\
+Si $f' > 0$ sur $I$, sauf éventuellement en un nombre fini de points, alors $f$ est strictement croissante.
+\end{corollaire}
+
+\subsection{Inégalité des accroissements finis}
+\begin{proposition}
+Soit $f: I \to \mathbb{R}$ dérivable et $k \in \mathbb{R}$ tel que $\forall x \in I$, $|f'(x)| \leq k$ \\
+Alors $\forall x, y \in I$, $|f(y) - f(x)| \leq k |y - x|$
+\end{proposition}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$
+\begin{itemize}
+\item Pour $k \in \mathbb{R}_+$, on dit que $f$ est \uline{$k$-lipschitzienne} si $\forall x, y \in I$, $|f(y) - f(x)| \leq k|y - x|$
+\item On dit que $f$ est \uline{lipschitzienne} s'il existe $k \in \mathbb{R}_+$ telle que $f$ soit $k$-lipschitzienne.
+\item On dit que $f$ est une \uline{contraction} s'il existe $k \in [0, 1[$ telle que $f$ soit $k$-lipschitzienne.
+\end{itemize}
+\end{definition}
+\begin{proposition}["Reformulation" de l'inégalité des accroissements finis]
+Soit $f: I \to \mathbb{R}$ dérivable.
+\begin{itemize}
+\item Pour tout $k \in \mathbb{R}_+$, $f$ est $k$-lipschitzienne ssi $\forall x \in I$, $|f'(x)| \leq k$
+\item $f$ est lipschitzienne ssi $f'$ est bornée.
+\end{itemize}
+\end{proposition}
+
+\subsection{Théorème de la limite de la dérivée}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ continue et $a \in I$. \\
+On suppose que:
+\begin{itemize}
+\item $f$ est dérivable en tout point de $I \setminus \{ a \}$
+\item $f'(x) \xrightarrow[\substack{x \to a \\ x \neq a}]{} l \in \mathbb{R}$
+\end{itemize}
+Alors $f$ est dérivable en $a$, et $f'(a) = l$
+\end{theorem}
+\begin{theorem}
+Soit $f \in C^0(I)$, $a \in I$ tel que $f$ dérivable sur $I \setminus \{ a \}$ et $f'(x) \xrightarrow[\substack{x \to a \\ x \neq a}]{} \pm\infty$ \\
+Alors
+\[\frac{f(a + h) - f(a)}{h} \xrightarrow[h \to 0]{} \pm\infty\]
+En particulier, $f'$ n'est pas dérivable.
+\end{theorem}
+
+\section{Fonction de classe $C^n$}
+\subsection{Généralités}
+On rappelle que, pour $n \geq 1$, on peut considérer l'ensemble $D^n(I) = D^n(I; \mathbb{R})$ des fonctions $n$ fois dérivables. Si $f \in D^n(I)$, on note $f^{(n)}$ la \uline{dérivée $n$-ième} de $f$.
+\begin{definition}
+\hfill
+\begin{itemize}
+\item $f: I \to \mathbb{R}$ est dite \uline{de classe $C^n$} si elle est $n$ fois dérivable et que $f^{(n)}$ est continue.
+\item $f: I \to \mathbb{R}$ est dite \uline{lisse} ou \uline{de classe $C^\infty$} si elle est $n$ fois dérivable pour tout $n \geq 1$.
+\end{itemize}
+On note $C^n(I) = C^n(I; \mathbb{R})$ et $C^\infty(I) = C^\infty(I; \mathbb{R})$ les ensembles continues de ces fonctions. \\
+Comme une fonction dérivable est continue, on a:
+\[ ... \subseteq D^3(I) \subseteq C^2(I) \subseteq D^2(I) \subseteq C^1(I) \subseteq D^1(I) \subseteq C^0(I) \subseteq \mathbb{R}^I\]
+et on a $C^\infty(I) = \bigcap\limits_{n \in \mathbb{N}^*} D^n(I) = \bigcap\limits_{n \in \mathbb{N}} C^n(I)$
+\end{definition}
+
+\subsection{Fonctions continûment dérivables}
+\uline{Remarque}: "Continûment dérivable" = "de classe $C^1$"
+\begin{proposition}[Théorème de la limite de la dérivée, version $C^1$]
+Soit $f \in C^0(I)$ et $a \in I$ \\
+Si $f_{|I \setminus \{ a \}}$ est de classe $C^1$ et que $f'(x) \xrightarrow[\substack{x \to a \\ x \neq a}]{} l$ alors $f \in C^1(I)$ et $f'(a) = l$
+\end{proposition}
+\begin{proposition}
+Soit $f \in C^1([a, b])$ \\
+Alors $f$ est lipschitzienne.
+\end{proposition}
+\begin{proposition}
+Soit $f \in C^1(I; \mathbb{R})$ et $a \in I$ tel que $f'(a) > 0$ \\
+Alors $f$ est strictement croissante au voisinage de $a$.
+\end{proposition}
+
+\subsection{Opérations algébriques}
+\begin{proposition}
+Soit $f, g: I \to \mathbb{R}$ de classe $C^n$ (resp. $n$ fois dérivables) et $\lambda \in \mathbb{R}$
+\begin{itemize}
+\item Alors $\lambda f$ est de classe $C^n$ (resp. $n$ fois dérivable) et $(\lambda f)^{(n)} = \lambda f^{(n)}$
+\item Alors $f + g$ est de classe $C^n$ est $(f + g)^{(n)} = f^{(n)} + g^{(n)}$
+\item (Formule de Leibniz) $fg$ est de classe $C^n$ et
+\[(fg)^{(n)} = \sum\limits_{k = 0}^n \binom{n}{k} f^{(k)} g^{(n - k)}\]
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+$C^n(I)$ et $D^n(I)$ sont des sous-algèbres de $\mathbb{R}^I$ \\
+(rappel: des sous-anneaux stables par combinaison linéaire) \\
+Par intersection, il en va de même de $C^\infty(I)$
+\end{corollaire}
+
+\subsection{Composition et réciproque}
+\begin{theorem}
+Soit $I$ et $J$ deux intervalles de $\mathbb{R}$ et $f: I \to J$ et $g: J \to \mathbb{R}$ de classe $C^n$ (resp. $n$ fois dérivables). \\
+Alors $g \circ f$ est de classe $C^n$.
+\end{theorem}
+\begin{theorem}
+Soit $n \in \mathbb{N}^*$ et $f \in C^n(I)$ telle que $f'$ ne s'annule pas. \\
+Alors $f$ induit une bijection de $I$ sur un intervalle $J$ et $f^{-1}: J \to I$ est de classe $C^n$.
+\end{theorem}
+
+\section{Brève extension aux fonctions à valeurs complexes}
+\subsection{Généralités}
+\begin{definition}
+Soit $f: I \to \mathbb{C}$ et $a \in I$ \\
+La fonction $f$ est dérivable en $a$ si $x \mapsto \frac{f(x) - f(a)}{x - a}$ possède une limite ($\in \mathbb{C}$) quand $x \to a$ \\
+Si c'est le cas, cette limite est $f'(a) \in \mathbb{C}$
+\end{definition}
+\begin{proposition}
+Soit $f: I \to \mathbb{C}$ et $c \in I$ \\
+La fonction $f$ est dérivable en $a$ ssi $\re f, \im f : I \to \mathbb{R}$ le sont. \\
+Si c'est le cas, $(f')(a) = \re(f)'(a) + i \im(f)'(a)$ (autrement dit: $\re f'(a) = (\re f)'(a)$, etc...).
+\end{proposition}
+S'étendent sans difficulté au cadre complexe: le caractère local, les théorèmes d'opération et la notion de fonction de classe $C^n$: on obtient des ensembles $D^n(I, \mathbb{C})$, $C^n(I, \mathbb{C})$, $C^\infty(I, \mathbb{C})$. \medskip
+
+\noindent \uline{Rappel}: On a vu au chapitre $5$ que $\begin{cases}
+\mathbb{R} \to \mathbb{C} \\
+x \mapsto e^{\alpha x} \quad (\alpha \in \mathbb{C})
+\end{cases}$
+est dérivable, de dérivée $x \mapsto \alpha e^{\alpha x}$. \\
+Par une récurrence immédiate, c'est juste une fonction lisse. \\
+En revanche, notre section B s'écroule:
+\begin{itemize}
+\item La notion d'extremum n'a plus de sens
+\item L'énoncé du théorème de Rolle aurait un sens, mais il est faux.
+\end{itemize}
+Par exemple: $f: \begin{cases}
+\mathbb{R} \to \mathbb{C} \\
+t \mapsto e^{it}
+\end{cases}$
+est lisse, vérifie $f(0) = f(2 \pi)$ et pourtant $f': t \mapsto ie^{it}$ ne s'annule jamais \\
+(on a même $|f'| = 1$) \\
+Rolle et TAF sont fondamentalement des théorèmes en dimension $1$.
+
+\subsection{Inégalité des accroissements finis}
+Le programme officiel énonce l'inégalité des accroissements finis pour $f \in C^1(I, \mathbb{C})$ avec la démo suivante (qu'on comprendra plus tard).
+\begin{proposition}
+Si $\forall t \in [a, b]$, $|f'(t)| \leq k$, on a
+\[|f(b) - f(a)| = \left| \int\limits_a^b f'(t) \, dt \right| \leq \int\limits_a^b \left|f'(t)\right| \, dt \leq \int\limits_a^b k \, dt \leq k |b - a|\]
+En fait, l'inégalité des accroissements finis reste vraie, pour $f \in D^1(I, \mathbb{C})$
+\end{proposition}
+\end{document}

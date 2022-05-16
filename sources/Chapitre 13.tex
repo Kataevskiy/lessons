@@ -1,0 +1,87 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 13. Limites et continuité}}
+\end{center}
+
+\section{Voisinage}
+\begin{definition}
+Soit $a \in\overline{\mathbb{R}}$ \\
+Un \uline{voisinage de $a$}:
+\begin{itemize}
+\item Si $a \in \mathbb{R}$, est un ensemble qui contient $[a - \delta, a + \delta]$, pour un certain $\delta > 0$
+\item Si $a = +\infty$, est un ensemble $\left[A, +\infty\right[$ pour un certain $A \in \mathbb{R}$
+\item Si $a = -\infty$, est un ensemble $\left]-\infty, A\right]$ pour un certain $A \in \mathbb{R}$
+\end{itemize}
+\end{definition}
+\begin{lemme}
+Soit $V$ un voisinage de $+\infty$ \\
+Alors il existe une suite $(v_n)_{n \in \mathbb{N}} \in V^{\mathbb{N}}$ telle que $v_n \xrightarrow[x \to +\infty]{} +\infty$ 
+\end{lemme}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$ et $a \in \overline{\mathbb{R}}$ \\
+On dit qu'une propriété (de la fonction $f$) est vraie \uline{au voisinage de $a$} s'il existe un voisinage $V$ de $a$ tel que la propriété soit vraie sur $V \cap I$
+\end{definition}
+
+\section{Notion de limite}
+\uline{Cadre}: Dans cette section, $f: I \to \mathbb{R}$ est une fonction définie sur une partie $I$ de $\mathbb{R}$ et $a$ est un élément de $I$ ou $\pm\infty$. En pratique, $I$ sera un intervalle et $a$ un point ou une borne de l'intervalle.
+\subsection{Limites en $\pm\infty$}
+\begin{definition}
+Soit $I$ un ensemble non majoré et $f: I \to \mathbb{R}$
+On dit que:
+\begin{itemize}
+\item \uline{$f$ converge vers $l \in \mathbb{R}$ en $+\infty$} si $\forall \varepsilon > 0$, $\exists H \in \mathbb{R}$: $\forall x \in I$, $x \geq H \implies |f(x) - l| \leq \varepsilon$
+\item \uline{$f$ tend vers $+\infty$ en $+\infty$} si $\forall A \in \mathbb{R}$, $\exists H \in \mathbb{R}$: $\forall x \in I$, $x \geq H \implies f(x) \geq A$
+\item \uline{$f$ tend vers $-\infty$ en $+\infty$} si $\forall A \in \mathbb{R}$, $\exists H \in \mathbb{R}$: $\forall x \in I$, $x \geq H \implies f(x) \leq A$
+\end{itemize}
+\end{definition}
+
+\subsection{Limites en un réel}
+\uline{Cadre}: $a \in \overline{I}$
+\begin{definition}
+Soit $a \in \overline{I}$ et $f: I \to \mathbb{R}$
+\begin{itemize}
+\item On dit que \uline{$f$ tend vers $l \in \mathbb{R}$ en $a$} si \\
+$\forall \varepsilon > 0$, $\exists \lambda > 0$: $\forall x \in I$, $|x - a| \leq \delta \implies |f(x) - l| \leq \varepsilon$
+\item On dit que \uline{$f$ tend vers $+\infty$ en $a$} si \\
+$\forall A \in \mathbb{R}$, $\exists \lambda > 0$: $\forall x \in I$, $|x - a| \leq \delta \implies f(a) \geq A$
+\item On dit que \uline{$f$ tend vers $-\infty$ en $a$} si \\
+$\forall A \in \mathbb{R}$, $\exists \lambda > 0$: $\forall x \in I$, $|x - a| \leq \delta \implies f(a) \leq A$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $a \in I$ \\
+Si $f$ admet une limite (dans $\overline{\mathbb{R}}$) en $a$, cette limite est nécessairement $f(a)$
+\end{proposition}
+
+\subsection{Variantes}
+\end{document}

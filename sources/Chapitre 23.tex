@@ -1,0 +1,110 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator*{\negl}{o}
+\DeclareMathOperator*{\dom}{O}
+\DeclareMathOperator*{\eqv}{\sim}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 23: Séries}}
+\end{center}
+
+\section{Généralités}
+\subsection{Définition}
+\begin{definition}
+Soit $(u_n)_{n \in \mathbb{N}} \in \mathbb{C}^{\mathbb{N}}$ \\
+On dit que \uline{la série $\sum u_n$ converge} si la suite $\left( \sum\limits_{k = 0}^n u_k \right)_{n \in \mathbb{N}}$ converge, et qu'elle \uline{diverge} sinon.
+\begin{itemize}
+\item Le nombre $\sum\limits_{k = 0}^n u_k$ est la \uline{n-ième somme partielle} de la serie.
+\item Le nombre $u_n$ est le \uline{terme général} de la série.
+\item Si la série converge, la \uline{somme} de la série est $\sum\limits_{n = 0}^{+\infty} u_n = \lim\limits_{n \to +\infty} \sum\limits_{k = 0}^{n} u_k$
+\end{itemize}
+\end{definition}
+\begin{proposition}[Linéarité de la somme]
+Soit $\sum\limits_n u_n$ est $\sum\limits_n v_n$ deux séries convergentes. \\
+Alors $\sum\limits_n (u_n + \lambda v_n)$ converge pour tout $\lambda \in \mathbb{C}$ et
+\[\sum\limits_{n = 0}^{+\infty} (u_n + \lambda v_n) = \sum\limits_{n = 0}^{+\infty} + \lambda \sum\limits_{n = 0}^{+\infty} v_n\]
+\end{proposition}
+\begin{definition}
+Soit $\sum\limits_n u_n$ est une série convergente. \\
+Le \uline{$n$-ième reste} de la série est la somme $\sum\limits_{k = n + 1}^{+\infty} u_k$
+\end{definition}
+\begin{proposition}
+La suite des restes d'une série convergente converge vers $0$.
+\end{proposition}
+
+\subsection{Divergence grossière}
+\begin{proposition}
+Soit $\sum\limits_n u_n$ une série convergente. \\
+Alors $u_n \xrightarrow[n \to +\infty]{} 0$
+\end{proposition}
+
+\subsection{Critère spécial des séries alternées}
+\begin{theorem}
+Soit $(u_n)_{n \in \mathbb{N}}$ une suite réelle:
+\begin{itemize}
+\item décroissante
+\item telle que $u_n \xrightarrow[n \to +\infty]{} 0$
+\end{itemize}
+Alors la série $\sum\limits_n (-1)^n u_n$ converge.
+\end{theorem}
+
+\section{Séries à termes positifs}
+\begin{definition}
+Soit $(u_n)_{n \in \mathbb{N}}$ une suite à valeurs réelles positives. \\
+On dit alors que $\sum\limits_n u_n$ est \uline{une série à termes positifs} (SÀTP)
+\end{definition}
+
+\subsection{Théorèmes de comparaison}
+\begin{theorem}
+Soit $\sum\limits_n u_n$ est $\sum\limits_n v_n$ deux SÀTP telles que $u_n \leq v_n$ àpcr. \\
+Alors $\sum\limits_n v_n$ converge $\implies$ $\sum\limits_n u_n$ converge. 
+\end{theorem}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item Soit $\sum\limits_n u_n$ et $\sum\limits_n v_n$ deux SÀTP telles que $u_n = \dom\limits_{n \to +\infty} (v_n)$ \\
+Alors $\sum v_n$ converge $\implies$ $\sum u_n$ converge.
+\item C'est en particulier le cas si $u_n \eqv\limits_{n \to +\infty} v_n$ ou si $u_n = \negl\limits_{n \to +\infty} (v_n)$
+\end{itemize}
+\end{corollaire}
+
+\subsection{Comparaison série-intégrale}
+\begin{theorem}[Comparaison série/intégrale, cas décroissant]
+Soit $f: \mathbb{R}_+^* \to \mathbb{R}$ décroissante et continue par morceaux. \\
+Alors pour tout $n \in \mathbb{N}^*$
+\[\int\limits_n^{n + 1}f \leq \sum_{k = 1}^n f(k) \leq \int\limits_1^{n + 1}f + f(1) - f(n+1)\]
+\end{theorem}
+\begin{theorem}
+Soit $f: \mathbb{R}_+ \to \mathbb{R}$ continue par morceaux et croissante. Alors pour tout $n \in \mathbb{N}$
+\[\int\limits_{0}^{n + 1} f - ( f(n + 1) - f(0)) \leq \sum_{k = 0}^n f(k) \leq \int\limits_{0}^{n + 1} f\]
+\end{theorem}
+\begin{theorem}[Série de Riemann]
+Soit $\alpha \in \mathbb{R}$ \\
+Alors la série $\sum_n \frac{1}{n^\alpha}$ converge ssi $\alpha > 1$
+\end{theorem}
+\end{document}

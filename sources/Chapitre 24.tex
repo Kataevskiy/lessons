@@ -1,0 +1,64 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 24: Familles sommables}}
+\end{center}
+\section{Familles de nombres positifs}
+\subsection{Généralités}
+\begin{definition}
+Soit $x = (x_j)_{j \in J}$ une famille de réels $\geq 0$ indexés par une ensemble $J$ \\
+On définit
+\[\sum\limits_{j \in J} x_j = \sup \left\{ \sum\limits_{j \in J_0} x_j \mid J_0 \in \mathcal{P}_f(J) \right\} \in [0, +\infty]\]
+Avec la convention que la forme supérieure vaut $+\infty$ si l'ensemble n'est pas majoré. \\
+(Ici, $\mathcal{P}_f$ désigne l'ensemble des parties finies de $J$)
+\end{definition}
+\begin{proposition}
+Soit $x, y \in \mathbb{R}_+^J$, des familles indexées par $J$ \\
+On a:
+\begin{itemize}
+\item \uline{Restriction}: Si $K \subseteq J$, $\sum\limits_{j \in K} x_j \leq \sum\limits_{j \in J} x_j$
+\item \uline{Linéarité}: $\forall \lambda \in \mathbb{R}_+^*$, $\sum\limits_{j \in J} (x_j + \lambda y_j) = \sum\limits_{j \in J} x_j + \lambda \sum_{j \in J} y_j$
+\item \uline{Croissance}: Si $\forall j \in J$, $x_j \leq y_j$, alors $\sum\limits_{j \in J} x_j \leq \sum\limits_{j \in J} y_j$
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+Supposons $j = \bigsqcup\limits_{k = 1}^n J_k$ \\
+Alors, pour toute famille $x \in \mathbb{R}_+^J$, on a $\sum\limits_{j \in J} x_j = \sum\limits_{k = 1}^n \sum\limits_{j \in J_k} x_j$
+\end{corollaire}
+
+\subsection{Commutativité}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $\sigma: I \to J$ une bijection et $x \in \mathbb{R}_+^J$ \\
+Alors $\sum\limits_{i \in I} x_{\sigma(I)} = \sum\limits_{j \in J} x_j$
+\item En particulier, si $\sigma: J \to I$ est bijective \\
+$\sum\limits_{j \in J} x_j = \sum\limits_{j \in J} x_{\sigma(j)}$
+\end{itemize}
+\end{proposition}
+\end{document}

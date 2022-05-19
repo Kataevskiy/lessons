@@ -123,4 +123,28 @@ On a $f(x) \xrightarrow[x \to a]{} l$ si et seulement si, pour toute suite $(\xi
 \end{theorem}
 
 \subsection{Composition des limites}
+\begin{theorem}[À retenir mais mal énoncé]
+Si $f(x) \xrightarrow[x \to a]{} b$ et $g(y) \xrightarrow[y \to b]{} l$, alors $g(f(x)) \xrightarrow[x \to a]{} l$
+\end{theorem}
+\begin{theorem}[Plus précis]
+Soit $f: I \to J$ et $a \in \overline{I} \cup \{ \pm\infty \}$ et $b \in \overline{\mathbb{R}}$ tels que $f(x) \xrightarrow[x \to a]{} b$
+\begin{itemize}
+\item Déjà, $b \in \overline{J} \cup \{ \pm\infty \}$
+\item Pour toute fonction $g: J \to \mathbb{R}$ telle que $g(y) \xrightarrow[y \to b]{} l \in \overline{\mathbb{R}}$, on a $g(f(x)) \xrightarrow[x \to a]{} l$
+\end{itemize}
+\end{theorem}
+
+\subsection{Théorème de la limite monotone}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ une fonction monotone.
+\begin{itemize}
+\item Si $I$ n'est pas majoré, $f$ admet une limite $l \in \overline{\mathbb{R}}$ et $+\infty$
+\item Si $I$ n'est pas minoré, $f$ admet une limite $l \in \overline{\mathbb{R}}$ en $-\infty$
+\item Si $a$ est un réel tel que $a \in \overline{I \cap \left]-\infty, a\right[}$, $f$ admet une limite $l \in \overline{\mathbb{R}}$ à gauche de $a$
+\item Si $a$ est un réel tel que $a \in \overline{I \cap \left]a, +\infty\right[}$, $f$ admet une limite $l \in \overline{\mathbb{R}}$ à droite de $a$
+\end{itemize}
+\end{theorem}
+
+\section{Continuité}
+\subsection{Continuité en un point}
 \end{document}

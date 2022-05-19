@@ -84,4 +84,43 @@ Si $f$ admet une limite (dans $\overline{\mathbb{R}}$) en $a$, cette limite est 
 \end{proposition}
 
 \subsection{Variantes}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$, $J$ une partie de $I$ et $a \in \overline{I} \cup \{ \pm\infty \}$. On suppose que $a$ est arbitrairement proche d'éléments de $J$ ( càd $a \in \overline{J}$ ou ($a = +\infty$ et $J$ n'est pas majoré) ou ($a = -\infty$ et $J$ n'est pas minoré) ) \\
+On dit alors que $f(x) \xrightarrow[\substack{x \to a \\ x \in J}]{} l \in \mathbb{R}$ si:
+\[\forall \varepsilon > 0, \, \exists \delta > 0: \forall x \in J, \, |x - a| \leq \delta \implies |f(x) - l| \leq \varepsilon\ \quad (\text{cas } a \in \mathbb{R})\]
+\[\forall \varepsilon > 0, \, \exists H \in \mathbb{R}: \forall x \in J, \, x \geq H \implies |f(x) - l| \leq \varepsilon \quad (\text{cas } a = +\infty)\]
+etc...
+\end{definition}
+\begin{proposition}
+Soit $J_1, J_2$ deux parties de $I$, $a \in I \cup \{ \pm\infty \}$ et $l \in \overline{R}$. On suppose que $a$ est arbitrairement proche d'éléments de $J_1$ et de $J_2$ \\
+Alors
+\[ f(x) \xrightarrow[\substack{x \to a \\ x \in J_1 \cup J_2}]{} l \iff \begin{cases}
+f(x) \xrightarrow[\substack{x \to a \\ x \in J_1}]{} l \\ f(x) \xrightarrow[\substack{x \to a \\ x \in J_2}]{} l \end{cases}\]
+\end{proposition}
+
+\section{Propriétés de la limite}
+\subsection{Caractère local}
+\begin{proposition}
+Soit $f, g: I \to \mathbb{R}$ et $a \in \overline{I} \cup \{ \pm\infty \}$ arbitrairement proches d'éléments de $I$ \\
+Si $f$ et $g$ coïncident au voisinage de $a$, alors $f$ admet une limite en $a$ ssi $g$ en admet une. Dans ce cas, ces limites sont les mêmes.
+\end{proposition}
+
+\subsection{Propriétés des fonctions convergentes}
+\begin{proposition}
+Les fonctions convergentes sont localement bornés: \\
+Soit $f: I \to \mathbb{R}$, $a \in \overline{I} \cup \{ \pm\infty \}$ tel que $f(x) \xrightarrow[x \to a]{} l \in \mathbb{R}$ \\
+Alors $f$ est bornée au voisinage de $a$.
+\end{proposition}
+\begin{proposition}[$\mathbb{R}_+^*$ est ouvert]
+Soit $f: I \to \mathbb{R}$ et $a \in \overline{I} \cup \{ \pm\infty \}$ \\
+Si $f(x) \xrightarrow[x \to a]{} l \in \mathbb{R}_+^*$, alors $f$ est $>0$ au voisinage de $a$.
+\end{proposition}
+
+\subsection{Caractérisation séquentielle de la limite}
+\begin{theorem}
+Soit $f: I \to \mathbb{R}$ et $a \in \overline{I} \cup \{ \pm\infty \}$. Soit $l \in \overline{\mathbb{R}}$ \\
+On a $f(x) \xrightarrow[x \to a]{} l$ si et seulement si, pour toute suite $(\xi_n)_{n \in \mathbb{N}} \in I^\mathbb{N}$ telle que $\xi_n \xrightarrow[x \to +\infty]{} a$, on a $f(\xi_n) \xrightarrow[x \to +\infty]{} l$
+\end{theorem}
+
+\subsection{Composition des limites}
 \end{document}

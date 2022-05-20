@@ -23,6 +23,9 @@
 \newtheorem{lemme}[proposition]{Lemme}
 \newtheorem{definition}[proposition]{Définition}
 
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
 \begin{document}
 \renewcommand{\labelitemi}{$*$}
 \begin{center}
@@ -47,8 +50,9 @@ On a:
 \end{itemize}
 \end{proposition}
 \begin{corollaire}
-Supposons $j = \bigsqcup\limits_{k = 1}^n J_k$ \\
-Alors, pour toute famille $x \in \mathbb{R}_+^J$, on a $\sum\limits_{j \in J} x_j = \sum\limits_{k = 1}^n \sum\limits_{j \in J_k} x_j$
+Supposons $J = \bigsqcup\limits_{k = 1}^n J_k$ \\
+Alors, pour toute famille $x \in \mathbb{R}_+^J$, on a 
+\[\sum\limits_{j \in J} x_j = \sum\limits_{k = 1}^n \sum\limits_{j \in J_k} x_j\]
 \end{corollaire}
 
 \subsection{Commutativité}
@@ -56,9 +60,94 @@ Alors, pour toute famille $x \in \mathbb{R}_+^J$, on a $\sum\limits_{j \in J} x_
 \hfill
 \begin{itemize}
 \item Soit $\sigma: I \to J$ une bijection et $x \in \mathbb{R}_+^J$ \\
-Alors $\sum\limits_{i \in I} x_{\sigma(I)} = \sum\limits_{j \in J} x_j$
-\item En particulier, si $\sigma: J \to I$ est bijective \\
-$\sum\limits_{j \in J} x_j = \sum\limits_{j \in J} x_{\sigma(j)}$
+Alors 
+\[\sum\limits_{i \in I} x_{\sigma(I)} = \sum\limits_{j \in J} x_j\]
+\item En particulier, si $\sigma: J \to I$ est bijective
+\[\sum\limits_{j \in J} x_j = \sum\limits_{j \in J} x_{\sigma(j)}\]
 \end{itemize}
 \end{proposition}
+
+\subsection{Sommation par paquets}
+\begin{theorem}[Sommation par paquets]
+Soit $x \in \mathbb{R}_+^J$ et un recouvrement disjoint $J = \bigsqcup\limits_{\lambda \in \Lambda} J_\lambda$ \\
+Alors
+\[\sum\limits_{j \in J} x_j = \sum\limits_{\lambda \in \Lambda} \sum\limits_{j \in J_\lambda} x_j\]
+\end{theorem}
+\begin{corollaire}[Théorème de Fubini]
+Soit $(x_{i, j})_{(i, j) \in I \times J}$ une famille de réels positifs. \\
+Alors
+\[ \sum\limits_{i \in I} \sum\limits_{j \in J} x_{i, j} = \sum\limits_{(i, j) \in I \times J} x_{i, j} = \sum\limits_{j \in J} \sum\limits_{i \in I} x_{i, j}\]
+\end{corollaire}
+
+\pagebreak
+
+\section{Familles sommables de nombres complexes}
+\subsection{Généralités}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une famille $x = (x_j)_{j \in J} \in \mathbb{C}^J$ est dite \uline{sommable} si $\sum\limits_{j \in J} |x_j| < +\infty$
+\item On note $l^1(J; \mathbb{C})$ l'ensemble des familles sommables indexées par $J$
+\item Si $x \in \mathbb{R}^J$ est sommable, on définit sa \uline{somme} $\sum\limits_{j \in J} x_j = \sum\limits_{j \in J} x_j^+ - \sum\limits_{j \in J} x_j^-$
+\item Si $x \in \mathbb{C}^J$ est sommable, on définit sa \uline{somme} $\sum\limits_{j \in J} x_j = \sum\limits_{j \in J} \re(x_j) + i \sum\limits_{j \in J} \im(x_j)$
+\end{itemize}
+\end{definition}
+\begin{lemme}
+Soit $x \in l^1(J; \mathbb{C})$. Pour tout $\varepsilon > 0$, il existe une partie $J_0 \subseteq J$ finie telle que
+\[\forall K \in \mathcal{P}_f(J), \, J_0 \in K \implies \left| \sum\limits_{j \in J} x_j - \sum\limits_{j \in K} x_j \right| \leq \varepsilon\]
+\end{lemme}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item En appliquant le lemme à $\varepsilon = 2^{-n}$, on peut trouver une suite $(J_n)_{n \in \mathbb{N}}$ de parties finies de $J$ telles que $\sum\limits_{j \in J} x_j \xrightarrow[n \to +\infty]{} \sum\limits_{j \in J} x_j$ (en remplaçant $J_n$ par $J_0 \cup ... \cup J_n$ on peut même imposer qu'elle soit croissante)
+\item Étant donné $x, y \in l^1(J; \mathbb{C})$ et $\varepsilon > 0$, on peut trouver $J_0$ et $K_0$ comme dans le lemme et l'ensemble fini $L_0 = J_0 \cup K_0$ vérifie
+\[\left| \sum\limits_{j \in J} x_j - \sum\limits_{j \in L_0} x_j \right| \leq \varepsilon \text{\quad et \quad}
+\left| \sum\limits_{j \in J} y_j - \sum\limits_{j \in L_0} y_j \right| \leq \varepsilon\]
+Naturellement, cela s'étend à $\Gamma$ familles sommables.
+\end{itemize}
+\end{corollaire}
+
+\subsection{Propriétés}
+\begin{proposition}
+Soit $x, y \in l^1(J; \mathbb{C})$ \\
+On a:
+\begin{itemize}
+\item \uline{Restriction}: Si $K \subseteq J$, $(x_k)_{k \in K}$ est sommable.
+\item \uline{Linéarité}: Pour toute $\lambda \in \mathbb{C}$, $(x_j + \lambda y_j)_{j \in J} \in l^1(J; \mathbb{C})$ et $\sum\limits_{j \in J} (x_j + \lambda y_j) = \sum\limits_{j \in J} + \sum\limits_{j \in J} y_j$
+\item \uline{Croissance}: Si $x, y$ sont à valeurs réelles et que $\forall j \in J$, $x_j \leq y_j$, alors $\sum\limits_{j \in J} \leq \sum\limits_{j \in J} y_j$
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Inégalité triangulaire]
+Soit $x \in l^1(J; \mathbb{C})$ \\
+On a
+\[ \left| \sum\limits_{j \in J} x_j \right| \leq \sum\limits_{j \in J} \left| x_j \right|\]
+\end{proposition}
+
+\subsection{Commutativité}
+\begin{proposition}
+Soit $x \in l^1(J; \mathbb{C})$
+\begin{itemize}
+\item Si $\sigma: I \to J$ est une bijection, $(x_{\sigma(i)})_{i \in I}$ est sommable et $\sum\limits_{i \in I} x_{\sigma(i)} = \sum\limits_{j \in J} x_j$
+\item En particulier, si $\sigma: J \to J$, $(x_{\sigma(j)})_{j \in J}$ est sommable et $\sum\limits_{j \in J} x_{\sigma(j)} = \sum\limits_{j \in J} x_j$
+\end{itemize}
+\end{proposition}
+\begin{corollaire}[sur les séries]
+Si $\sum\limits_n x_n$ est une série absolument convergente et que $\sigma: \mathbb{N} \to \mathbb{N}$ est une bijection, alors $\sum\limits_n x_{\sigma(n)}$ est encore absolument convergente et $\sum\limits_{n = 0}^{+\infty} = \sum\limits_{n = 0}^{+\infty} x_{\sigma(n)}$
+\end{corollaire}
+
+\subsection{Sommation par paquets}
+\begin{theorem}
+Soit $(x_j)_{j \in J} \in \mathbb{C}^J$ et on considère un recouvrement disjoint $J = \bigsqcup\limits_{\lambda \in \Lambda}$ \\
+Alors $(x_j)_{j \in J}$ est sommable ssi, pour tout $\lambda \in \Lambda$, $(x_j)_{j \in J_\lambda}$ est sommable et que $(\sum\limits_{j \in J_\lambda})_{\lambda \in \Lambda}$ est sommable. \\
+Et, si c'est le cas, on a
+\[ \sum_{j \in J} x_j = \sum_{\lambda \in \Lambda} \sum_{j \in J_\lambda} x_j\]
+\end{theorem}
+\begin{corollaire}[Théorème de Fubini]
+Soit $(x_{i, j})_{i, j} \in I \times J \in \mathbb{C}^{I \times J}$ \\
+Alors $(x_{i, j})_{(i, j) \in I \times J}$ est sommable ssi les familles $(x_{i, j})_{j \in J} \, (i \in I)$ le sont et que $(\sum\limits_{j \in J} x_{i, j})_{i \in I}$ soit sommable. \\
+Si c'est la cas, on a
+\[\sum_{(i, j) \in I \times J} x_{i, j} = \sum_{i \in I} \sum_{j \in J} x_{i, j}\]
+En particulier, si $x$ est sommable
+\[ \sum_{i \in I} \sum_{j \in J} x_{i, j} = \sum_{j \in J} \sum_{i \in I} x_{i, j}\]
+\end{corollaire}
 \end{document}

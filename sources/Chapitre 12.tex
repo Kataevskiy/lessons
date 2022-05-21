@@ -1,0 +1,157 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 12. Suites réelles et complexes}}
+\end{center}
+
+\section{Convergence}
+\subsection{Définition}
+\begin{definition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ une suite réelle.
+\begin{itemize}
+\item Soit $l \in \mathbb{R}$. On dit que $u$ \uline{converge} (ou \uline{tend}) vers $l$ si $\forall \varepsilon > 0$, $\exists N \in \mathbb{N}: \forall n \geq N$, $\left| u_n - l \right| \leq \varepsilon$  \\
+Dans ce cas, on note $u_n \xrightarrow[n \to +\infty]{} l$ ou $u \to l$ ou $\lim\limits_{n \to +\infty} u_n = l$
+\item On dit que $u$ \uline{diverge} si elle ne converge vers aucun $l \in \mathbb{R}$
+\end{itemize}
+\end{definition}
+
+\subsection{Premières propriétés}
+\begin{proposition}[Unicité de la limite]
+Soit $u \in \mathbb{R}^\mathbb{N}$. Soit $l, l' \in \mathbb{R}$ tels que $\begin{cases}
+u_n \xrightarrow[n \to +\infty]{} l \\ u_n \xrightarrow[n \to +\infty]{} l'
+\end{cases}$ \\
+Alors $l = l'$
+\end{proposition}
+\begin{proposition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ et $l \in \mathbb{R}$ \\
+On a $u_n \xrightarrow[n \to +\infty]{} l \iff |u_n - l| \xrightarrow[n \to \infty]{} 0$
+\end{proposition}
+\begin{proposition}
+Toute suite convergente est bornée.
+\end{proposition}
+\begin{lemme}
+Toute suite bornée \uline{à partir d'un certain rang} (àpcr) est bornée.
+\end{lemme}
+\begin{proposition}[Caractère asymptotique de la limite]
+\hfill \\
+La convergence d'une suite ne dépend pas de ses premiers termes. \\
+Plus précisément, soit $u, v \in \mathbb{R}^\mathbb{N}$ égales àpcr. \\
+Alors $u$ converge si et seulement si $v$ converge. Si c'est le cas, $\lim\limits_{n \to +\infty} u_n = \lim\limits_{n \to +\infty} v_n$
+\end{proposition}
+
+\subsection{Limites et inégalités}
+\begin{theorem}[Passage à la limite dans les inégalités larges]
+\hfill \\
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ et $l, l' \in \mathbb{R}$ tels que $u_n \xrightarrow[n \to +\infty]{} l$ et $v_n \xrightarrow[n \to +\infty]{} l'$. On suppose $\forall n \in \mathbb{N}$, $u_n \leq v_n$ \\
+Alors $l \leq l'$
+\end{theorem}
+\begin{theorem}[$\mathbb{R}_+^*$ est ouvert]
+Soit $u \in \mathbb{R}^\mathbb{N}$ telle que $u_n \xrightarrow[n \to +\infty]{} l > 0$ \\
+Alors $u$ est strictement positive àpcr, càd $\exists N \in \mathbb{N}: \forall n \geq N$, $u_n > 0$
+\end{theorem}
+
+\subsection{Limite infinie}
+\begin{definition}
+Soit $u \in \mathbb{R}^\mathbb{N}$
+\begin{itemize}
+\item On dit que $u$ \uline{tend} (ou \uline{diverge}) vers $+\infty$ si $\forall A \in \mathbb{R}$, $\exists N \in \mathbb{N}: \forall n \geq N$, $u_n \geq A$ \\
+Dans ce cas, on note $u_n \xrightarrow[n \to +\infty]{} +\infty$ ou $u \to +\infty$ ou $\lim\limits_{n \to +\infty} u_n = +\infty$
+\item On dit que $u$ \uline{tend} (ou \uline{diverge}) vers $-\infty$ si $\forall A \in \mathbb{R}$, $\exists N \in \mathbb{N}: \forall n \geq N$, $u_n \leq A$
+\end{itemize}
+\end{definition}
+\begin{definition}
+La \uline{droite numérique achevée} est l'ensemble $\overline{\mathbb{R}} = \mathbb{R} \cup \left\{ -\infty; +\infty \right\}$
+\end{definition}
+\begin{proposition}[Unicité de la limite dans $\overline{\mathbb{R}}$]
+Soit $n \in \mathbb{R}^\mathbb{N}$ et $l, l' \in \overline{\mathbb{R}}$ tels que $u_n \xrightarrow[n \to +\infty]{} l$ et $u_n \xrightarrow[n \to +\infty]{} l'$ \\
+Alors $l = l'$
+\end{proposition}
+
+\section{Théorèmes de convergence}
+\subsection{Opérations}
+On munit $\overline{\mathbb{R}}$ d'une addition et d'une multiplication "partielles", càd qu'elles ne sont pas définies pour tous les couples d'éléments de $\overline{\mathbb{R}}$
+\begin{center}
+\begin{tabular}{ M{5em} | M{5em} | M{5em} | M{5em} }
+$+$ & $-\infty$ & $b \in \mathbb{R}$ & $+\infty$ \\
+\hline
+$-\infty$ & $-\infty$ & $-\infty$ & X\\
+\hline
+$a \in \mathbb{R}$ & $-\infty$ & $a + b$ & $+\infty$ \\
+\hline
+$+\infty$ & X & $+\infty$ & $+\infty$
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{ M{5em} | M{5em} | M{5em} | M{5em} | M{5em} | M{5em}}
+$\times$ & $-\infty$ & $b \in \mathbb{R}_-^*$ & $0$ & $b \in \mathbb{R}_+^*$ & $+\infty$ \\
+\hline
+$-\infty$ & $+\infty$ & $+\infty$ & X & $-\infty$ & $-\infty$ \\
+\hline
+$a \in \mathbb{R}_-^*$ & $+\infty$ & $a b$ & $0$ & $a b$ & $-\infty$ \\
+\hline
+$0$ & X & $0$ & $0$ & $0$ & X \\
+\hline
+$a \in \mathbb{R}_+^*$ & $-\infty$ & $a b$ & $0$ & $a b$ & $+\infty$ \\
+\hline
+$+\infty$ & $-\infty$ & $-\infty$ & X & $+\infty$ & $+\infty$
+\end{tabular}
+\end{center}
+\begin{theorem}
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ telles que $\begin{cases} u_n \to l_1 \in \overline{\mathbb{R}} \\ v_n \to l_2 \in \overline{\mathbb{R}} \end{cases}$ et $\lambda \in \mathbb{R}$
+\begin{itemize}
+\item On a $|u_n| \xrightarrow[n \to +\infty]{} |l_1|$
+\item Si $\lambda \in \mathbb{R}^*$, $\lambda u_n \xrightarrow[n \to +\infty]{} \lambda l_1$
+\item Si $l_1 + l_2$ est bien définie, $u_n + v_n \xrightarrow[n \to +\infty]{} l_1 + l_2$
+\item Si $l_1 l_2$ est bien définie, $u_n v_n \xrightarrow[n \to +\infty]{} l_1 l_2$
+\end{itemize}
+\end{theorem}
+\begin{lemme}
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ telles que $\begin{cases}
+u \text{ bornée} \\ v_n \xrightarrow[n \to +\infty]{} +\infty \end{cases}$ \\
+Alors $u_n + v_n \xrightarrow[n \to +\infty]{} +\infty$
+\end{lemme}
+\begin{lemme}
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ telles que $\begin{cases}
+u \text{ bornée} \\ v_n \xrightarrow[x \to +\infty]{} 0 \end{cases}$ \\
+Alors $u_n v_n \xrightarrow[n \to +\infty]{} 0$
+\end{lemme}
+\begin{theorem}
+Soit $u \in \mathbb{R}^\mathbb{N}$ qui ne s'annule pas.
+\begin{itemize}
+\item Si $u_n \xrightarrow[n \to +\infty]{} l \in \mathbb{R}^*$, alors $\frac{1}{u_n} \xrightarrow[n \to +\infty]{} \frac{1}{l}$
+\item Si $u_n \xrightarrow[n \to +\infty]{} \pm\infty$, alors $\frac{1}{u_n} \xrightarrow[n \to +\infty]{} 0$
+\item Si $u_n \xrightarrow[n \to +\infty]{} 0$ et que $\forall n \in \mathbb{N}$, $u_n > 0$, alors $\frac{1}{u_n} \xrightarrow[n \to +\infty]{} +\infty$
+\end{itemize}
+\end{theorem}
+
+\subsection{Théorème de la limite monotone}
+\end{document}

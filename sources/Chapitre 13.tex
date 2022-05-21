@@ -83,6 +83,8 @@ Soit $a \in I$ \\
 Si $f$ admet une limite (dans $\overline{\mathbb{R}}$) en $a$, cette limite est nécessairement $f(a)$
 \end{proposition}
 
+\pagebreak
+
 \subsection{Variantes}
 \begin{definition}
 Soit $f: I \to \mathbb{R}$, $J$ une partie de $I$ et $a \in \overline{I} \cup \{ \pm\infty \}$. On suppose que $a$ est arbitrairement proche d'éléments de $J$ ( càd $a \in \overline{J}$ ou ($a = +\infty$ et $J$ n'est pas majoré) ou ($a = -\infty$ et $J$ n'est pas minoré) ) \\
@@ -147,4 +149,142 @@ Soit $f: I \to \mathbb{R}$ une fonction monotone.
 
 \section{Continuité}
 \subsection{Continuité en un point}
+Cadre: $f: I \to \mathbb{R}$ et $a \in I$
+\begin{definition}
+$f$ est \uline{continue en $a$} si $\forall \varepsilon > 0$, $\exists \delta > 0: \forall x \in I$, $|x - a| \leq \delta \implies |f(x) - f(a)| \leq \varepsilon$
+\end{definition}
+\begin{proposition}[Caractère local de la continuité]
+Soit $f, g: I \to \mathbb{R}$ deux fonctions. \\
+Si $f$ et $g$ coïncident au voisinage de $a$, alors $f$ est continue en $a$ ssi $g$ l'est.
+\end{proposition}
+\begin{definition}
+$f: I \to \mathbb{R}$ est \uline{continue à gauche} (resp. \uline{à droite}) et $a$ si $f(x) \xrightarrow[\substack{x \to a \\ x \leq a}]{} f(a)$ (resp. $f(x) \xrightarrow[\substack{x \to a \\ x \geq a}]{} f(a)$
+\end{definition}
+
+\subsection{Continuité globale}
+\begin{definition}
+Une fonction $f: I \to \mathbb{R}$ est continue si elle est continue en tout point de $I$ \\
+On note $C^0(I) = C^0(I; \mathbb{R})$ l'ensemble des fonctions $f: I \to \mathbb{R}$ continues.
+\end{definition}
+
+\subsection{Opérations}
+\begin{theorem}
+Soit $f, g: I \to \mathbb{R}$ et $\lambda \in \mathbb{R}$
+\begin{itemize}
+\item Soit $a \in I$. Si $f$ et $g$ sont continues en $a$, alors $\lambda f$, $|f|$, $\max(f, g)$, $f + g$, $f g$ sont continues en $a$.
+\item Si $f, g \in C^0(I)$, alors $\lambda f$, $|f|$, $\max(f, g)$, $f + g$, $f g \in C^0(I)$
+\end{itemize}
+\end{theorem}
+\begin{theorem}
+Soit $I, J \subseteq \mathbb{R}$ et $f: I \to J$, $g: J \to \mathbb{R}$
+\begin{itemize}
+\item Soit $a \in I$. Si $f$ est continue en $a$ et que $g$ est continue en $f(a)$, alors $g \circ f$ est continue en $a$.
+\item Si $f$ et $g$ sont continues, $g \circ f$ l'est aussi.
+\end{itemize}
+\end{theorem}
+\begin{theorem}["Théorème"]
+Les fonctions usuelles vues au chapitre $5$ (exponentielle, logarithme, fonctions trigonométriques, trigonométriques réciproques, trigonométriques hyperboliques) sont continues.
+\end{theorem}
+
+\subsection{Prolongement par continuité}
+\begin{theorem}
+Soit $I \subseteq R$, $a \in I$ tel que $a \in \overline{I \setminus \{ a \}}$ et $f: I \setminus \{ a \} \to \mathbb{R}$ une fonction continue. \\
+Alors il existe un prolongement continu $\tilde{f}:I \to \mathbb{R}$ de $f$ si et seulement si $f$ admet une limite finie en $a$. \\
+Dans ce cas, un tel prolongement est unique, c'est
+\[\tilde{f}:\begin{cases}
+I \to \mathbb{R} \\ x \mapsto \begin{cases}
+f(x) \text{ si } x \neq a \\ \lim\limits_{x \to a} f(x) \text{ si } x = a
+\end{cases}
+\end{cases}\]
+\end{theorem}
+
+\subsection{Prolongement des identités}
+\begin{theorem}[Prolongement des identités, version continue]
+Soit $f, g: I \to \mathbb{R}$ continues et $A \subseteq I$
+\begin{itemize}
+\item Si $f$ et $g$ coïncident en $A$, alors elles coïncident sur $\overline{A} \cap I$
+\item En particulier, si $f$ et $g$ coïncident sur $A$ et que $A$ est dense dans $I$, alors $f = g$
+\end{itemize}
+\end{theorem}
+
+\section{Fonctions continues sur un intervalle: propriétés globales}
+Dans toute cette section, $I$ est un intervalle.
+\subsection{Théorème des valeurs intermédiaires}
+\begin{theorem}
+Soit $I$ un intervalle et $f \in C^0(I)$. Soit $a < b \in I$. \\
+Soit $y \in \mathbb{R}$ compris entre $f(a)$ et $f(b)$ (càd $y \in \left[f(a), f(b)\right]$ ou $y \in \left[f(b), f(a)\right]$) \\
+Alors il existe $c \in [a, b]$ tel que $y = f(c)$
+\end{theorem}
+\begin{corollaire}
+Soit $f \in C^0(I)$ et $J \subseteq I$ un intervalle. \\
+Alors $f[J]$ est un intervalle. \\
+"L'image continu d'un intervalle est un intervalle."
+\end{corollaire}
+\begin{corollaire}
+Soit $I$ un intervalle et $f \in C^0(I)$. On suppose que $f$ ne s'annule pas. \\
+Alors $f$ est de signe constant. On a $f > 0$ ou $f < 0$
+\end{corollaire}
+\begin{corollaire}[TVI généralisé]
+Soit $f:]a, b[ \to \mathbb{R}$ continue et $y$ strictement compris entre $\lim\limits_{x \to a} f(x)$ et $\lim\limits_{x \to b} f(x)$ (dont on suppose qu'elles existent). \\
+Alors il existe $c \in ]a, b[$ tel que $f(c) = y$
+\end{corollaire}
+
+\subsection{Fonctions continues bijectives}
+\begin{theorem}[de la bijection monotone]
+Soit $a < b$ deux réels et $f \in C^0([a ,b])$ strictement monotone. \\
+Alors $f$ induit une bijection entre $[a, b]$ et le segment joignant $f(a)$ et $f(b)$
+\end{theorem}
+\begin{theorem}
+Soit $I$ et $J$ deux intervalles et $f: I \to J$ une bijection continue.
+Alors:
+\begin{itemize}
+\item $f$ est strictement monotone.
+\item $f^{-1}:J \to I$ est encore continue.
+\end{itemize}
+\end{theorem}
+\begin{proposition}
+Soit $I$ un intervalle et $f: I \to \mathbb{R}$ continue et injective. \\
+Alors $f$ est strictement monotone.
+\end{proposition}
+\begin{lemme}
+Soit $g: J \to I$ une application bijective strictement monotone entre intervalles. \\
+Alors $g$ est continue.
+\end{lemme}
+
+\subsection{Théorème des bornes atteintes}
+\begin{theorem}[de bornes atteintes]
+Soit $f: [a, b] \to \mathbb{R}$ une fonction continue sur un \uline{segment}. \\
+Alors il existe $\sigma, \tau \in [a, b]$ tels que $\forall x \in [a, b]$, $f(\sigma) \leq f(x) \leq f(\tau)$ \\
+"Une fonction continue sur un segment est bornée et atteint ses bornes."
+\end{theorem}
+\begin{corollaire}
+"L'image continue d'un segment est un segment" \\
+Plus précisément, soit $f: [a, b] \to \mathbb{R}$ continue. \\
+Alors $f[[a, b]]$ est un segment.
+\end{corollaire}
+
+\subsection{Uniforme continuité}
+\begin{definition}
+$f: I \to \mathbb{R}$ est \uline{uniformément continue} si \\
+$\forall \varepsilon > 0$, $\exists \delta > 0 : \forall x, y \in I$, $|x - y| \leq \delta \implies |f(x) - f(y)| \leq \varepsilon$
+\end{definition}
+\begin{theorem}[Heine]
+Soit $f: [a, b] \to \mathbb{R}$ une fonction continue sur un segment. \\
+Alors $f$ est uniformément continue.
+\end{theorem}
+
+\section{Brève extension aux fonctions à valeurs complexes}
+On considère des fonction $I \to \mathbb{C}$ où $I$ est une partie de $\mathbb{R}$ (le plus souvent un intervalle). Comme dans le cas des suites, on définit $f(x) \xrightarrow[x \to a]{} l \in \mathbb{C}$ soit avec la définition usuelle (interprétée avec des modules) soit avec
+\[\begin{cases}
+\re(f(x)) \xrightarrow[x \to a]{} \re(l) \\ \im(f(x)) \xrightarrow[x \to a]{} \im(l)
+\end{cases}\]
+En particulier, si $a \in I$, $f$ est continue en $a$ (ce qui signifie $\forall \varepsilon > 0$, $\exists \delta > 0: \forall x \in I$, $|x - a| \leq \delta \implies |f(x) - f(a)| \leq \varepsilon$) ssi $\re f$ et $\im f: I \to \mathbb{R}$ sont continues. \\
+On abandonne: les fonctions tendant vers $\pm\infty$, gendarmes et compagnie, limite monotone, le TVI, les bijections monotones. \\
+On garde: les théorèmes d'opération, la caractérisation séquentielle, le continuité uniforme et le théorème de Heine. \\
+Pour le théorème de bornes atteintes, on peut appliques la version réelle à $|f|$.
+\begin{theorem}
+Soit $f \in C^0([a, b]; \mathbb{C})$ une fonction continue sur un segment. \\
+Alors $f$ est bornée. \\
+Plus précisément, on peut trouver $\tau \in [a, b]$ tel que $\forall x \in [a, b]$, $|f(x)| \leq |f(\tau)|$
+\end{theorem}
 \end{document}

@@ -23,6 +23,9 @@
 \newtheorem{lemme}[proposition]{Lemme}
 \newtheorem{definition}[proposition]{Définition}
 
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
 \usepackage{array}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 
@@ -154,4 +157,291 @@ Soit $u \in \mathbb{R}^\mathbb{N}$ qui ne s'annule pas.
 \end{theorem}
 
 \subsection{Théorème de la limite monotone}
+\begin{theorem}
+Soit $u \in \mathbb{R}^\mathbb{N}$ croissante.
+\begin{itemize}
+\item Si $u$ est majorée, elle converge: on peut trouver $l \in \mathbb{R}$ tel que $\begin{cases}\forall n \in \mathbb{N}, \, u_n \leq l \\ u_n \xrightarrow[n \to +\infty]{} l \end{cases}$
+\item Si $u$ n'est pas majorée, alors $u_n \xrightarrow[n \to +\infty]{} +\infty$
+\end{itemize}
+Soit $u \in \mathbb{R}^\mathbb{N}$ décroissante.
+\begin{itemize}
+\item Si $u$ est minorée, il existe $l \in \mathbb{R}$ tel que $\begin{cases} \forall n \in \mathbb{N}, \, u_n \geq l \\ u_n \xrightarrow[n \to +\infty]{} l \end{cases}$
+\item Si $u$ n'est pas minorée, alors $u_n \xrightarrow[n \to +\infty]{} -\infty$
+\end{itemize}
+\end{theorem}
+\begin{definition}[Suites adjacentes]
+Soit $u, v \in \mathbb{R}^\mathbb{N}$. On dit que $u$ et $v$ sont \uline{adjacents} si:
+\begin{itemize}
+\item $u$ croît et $v$ décroît.
+\item $v_n - u_n \xrightarrow[n \to +\infty]{} 0$
+\end{itemize}
+\end{definition}
+\begin{theorem}[des suites adjacentes]
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ deux suites adjacentes. \\
+Alors $u$ et $v$ convergent (et leurs limites sont égales).
+\end{theorem}
+\begin{corollaire}[Théorème des segments emboîtés]
+Soit $\left([a_n, b_n]\right)_{n \in \mathbb{N}}$ une suite de segments (non vides) \\
+emboîtés, càd telle que $\forall n \in \mathbb{N}$, $[a_{n + 1}, b_{n + 1}] \subseteq [a_n, b_n]$. On suppose en outre $b_n - a_n \xrightarrow[n \to +\infty]{} 0$ \\
+Alors $\bigcap\limits_{n \in \mathbb{N}} [a_n, b_n]$ est un singleton.
+\end{corollaire}
+
+\subsection{Théorèmes de minoration, de majoration, d'encadrement}
+\begin{theorem}[d'encadrement / des gendarmes]
+Soit $u, v, w \in \mathbb{R}^\mathbb{N}$, $l \in \mathbb{R}$ telles que \[\begin{cases} \forall n \in \mathbb{N}, \, u_n \leq v_n \leq w_n \\ u_n \xrightarrow[n \to +\infty]{} l, \, w_n \xrightarrow[n \to +\infty]{} l\end{cases}\]
+Alors $v_n \xrightarrow[n \to +\infty]{} l$
+\end{theorem}
+\begin{corollaire}
+Soit $u, h \in \mathbb{R}^\mathbb{N}$, $l \in \mathbb{R}$ telles que:
+\[\begin{cases}
+\forall n \in \mathbb{N},\, |u_n - l| \leq h_n \\
+h_n \xrightarrow[n \to +\infty]{} 0
+\end{cases}\]
+Alors $u_n \xrightarrow[n \to +\infty]{} l$
+\end{corollaire}
+\begin{theorem}[de minoration]
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ telles que $\forall n \in \mathbb{N}$, $u_n \leq v_n$ et $u_n \xrightarrow[n \to +\infty]{} +\infty$ \\
+Alors $v_n \xrightarrow[n \to +\infty]{} +\infty$
+\end{theorem}
+\begin{theorem}[de majoration]
+Soit $u, v \in \mathbb{R}^\mathbb{N}$ telles que $\forall n \in \mathbb{N}$, $u_n \leq v_n$ et $v_n \xrightarrow[n \to +\infty]{} -\infty$ \\
+Alors $u_n \xrightarrow[n \to +\infty]{} -\infty$
+\end{theorem}
+
+\subsection{Théorème de Cesàro}
+\begin{theorem}
+Soit $u \in \mathbb{R}^\mathbb{N}$ et $l \in \mathbb{R}$ tels que $u_n \xrightarrow[n \to +\infty]{} l$ \\
+Soit $(c_n)_{n \in \mathbb{N}} = \left( \frac{1}{n + 1} \sum\limits_{k = 0}^n u_k \right)_{n \in \mathbb{N}}$ Alors $c_n \xrightarrow[n \to +\infty]{} l$
+\end{theorem}
+\begin{corollaire}[Lemme de l'escalier]
+Soit $u \in \mathbb{R}^\mathbb{N}$ telle que $u_{n + 1} - u_n \xrightarrow[n \to +\infty]{} l \in \mathbb{R}$ \\
+Alors $\frac{u_n}{n} \xrightarrow[n \to +\infty]{} l$
+\end{corollaire}
+
+\section{Suites extraites}
+\subsection{Définitions et premières propriétés}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une \uline{extractrice} est une fonction $\varphi: \mathbb{N} \to \mathbb{N}$ strictement croissante.
+\item Soit $u \in \mathbb{R}^\mathbb{N}$. Une suite extrictrice (ou une sous-suite) de $u$ est une suite de la forme $\left(u_{\varphi(k)}\right)_{k \in \mathbb{N}}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ et $l \in \overline{\mathbb{R}}$ tels que $u_n \xrightarrow[n \to +\infty]{} l$. Soit $\varphi$ une extractrice. \\
+Alors $u_{\varphi(k)} \xrightarrow[k \to +\infty]{} l$
+\end{proposition}
+\begin{lemme}
+$\forall k \in \mathbb{N}$, $\varphi(k) \geq k$
+\end{lemme}
+\begin{proposition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ et $l \in \overline{\mathbb{R}}$ tels que $u_{2k} \xrightarrow[k \to +\infty]{} l$ et $u_{2k + 1} \xrightarrow[k \to +\infty]{} l$ \\
+Alors $u_n \xrightarrow[n \to +\infty]{} l$
+\end{proposition}
+
+\subsection{Construction de sous-suites particulières}
+\begin{proposition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ une suite non majorée. \\
+Alors il existe une extractrice $\varphi$ telle que $u_{\varphi(k)} \xrightarrow[k \to +\infty]{} +\infty$
+\end{proposition}
+\begin{proposition}
+Soit $u \in \mathbb{R}^\mathbb{N}$, $\left(\varepsilon_k\right)_{k \in \mathbb{N}} \in \left(\mathbb{R}_+^*\right)^\mathbb{N}$ et $l \in \mathbb{R}$ tels que $u_n \xrightarrow[n \to +\infty]{} l$ \\
+Alors il existe une extractrice $\varphi$ telle que $\forall k \in \mathbb{N}$, $\left| u_{\varphi(k)} - l \right| \leq \varepsilon_k$
+\end{proposition}
+
+\subsection{Théorème de Bolzano-Weierstrass}
+\begin{theorem}[Bolzano-Weierstrass]
+Toute suite réelle bornée admet une sous-suite convergente.
+\end{theorem}
+
+\subsection{Valeurs d'adhérence}
+\begin{definition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ \\
+Un réel $l \in \mathbb{R}$ est une \uline{valeur d'adhérence} de $u$ s'il existe une extractrice $\varphi$ telle que $u_{\varphi(k)} \xrightarrow[k \to +\infty]{} l$
+\end{definition}
+\begin{proposition}
+Une suite bornée possédant une unique valeur d'adhérence converge.
+\end{proposition}
+\begin{definition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ bornée. On définit:
+\begin{itemize}
+\item La \uline{limite supérieure} de $u$, notée $\lim \sup(u)$ (ou $\lim\limits_{n \to +\infty} \sup u_n$ ou $\overline{\lim\limits_{n \to +\infty}} u_n$)
+\[\lim \sup(u) = \lim\limits_{n \to +\infty} \sup\limits_{p \geq n} u_p = \sup \{u_p \mid p \geq n\} \quad (= \inf\limits_{n \in \mathbb{N}} \sup\limits_{p \geq n} u_n)\]
+\item La \uline{limite inférieure} de $u$, notée $\lim \inf(u)$ (ou $\lim\limits_{n \to +\infty} \inf u_n$ ou $\underline{\lim\limits_{n \to +\infty}} u_n$)
+\[\lim \inf(u) = \lim\limits_{n \to +\infty} \inf\limits_{p \geq n} u_p = \inf \{u_p \mid p \geq n\} \quad (= \sup\limits_{n \in \mathbb{N}} \inf\limits_{p \geq n} u_p)\]
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $u \in \mathbb{R}^\mathbb{N}$ bornée.
+\begin{itemize}
+\item $\lim \sup(u)$ est la plus grande valeur d'adhérence de $u$
+\item $\lim \inf(u)$ est la plus petite valeur d'adhérence de $u$
+\item La suite $u$ converge si et seulement si $\lim \sup(u) = \lim \inf(u)$
+\end{itemize}
+\end{proposition}
+
+\section{Caractérisation séquentielle}
+\subsection{Caractérisation séquentielle de l'adhérence}
+\begin{proposition}
+Soit $A \subseteq \mathbb{R}$ et $x \in \mathbb{R}$ \\
+Alors $x \in \overline{A}$ si et seulement s'il existe une suite $(a_n)_{n \in \mathbb{N}} \in A^\mathbb{N}$ telle que $a_n \xrightarrow[n \to +\infty]{} x$
+\end{proposition}
+\begin{corollaire}
+Soit $A \subseteq \mathbb{R}$ non vide et majorée et $S \in \mathbb{R}$ \\
+Alors $S = \sup(A)$ ssi $S$ majore $A$ et il existe $(a_n)_{n \in \mathbb{N}} \in A^\mathbb{N}$ telle que $a_n \xrightarrow[n \to +\infty]{} S$
+\end{corollaire}
+
+\subsection{Caractérisation séquentielle de la densité}
+On sait déjà qu'une partie $A \subseteq \mathbb{R}$ est \uline{dense} ssi $\overline{A} = \mathbb{R}$. On obtient la caractérisation suivante:
+\begin{proposition}
+Soit $A \subseteq \mathbb{R}$. \\
+$A$ est dense dans $\mathbb{R}$ ssi $\forall x \in \mathbb{R}$, $\exists (a_n)_{n \in \mathbb{N}} \in A^\mathbb{N}: a_n \xrightarrow[n \to +\infty]{} x$
+\end{proposition}
+
+\section{Extension aux suites complexes}
+\subsection{Généralités}
+\begin{definition}
+Soit $u \in \mathbb{C}^\mathbb{N}$ et $l \in \mathbb{C}$ \\
+On dit que $u$ \uline{converge vers $l$} si $\forall \varepsilon > 0$, $\exists N \in \mathbb{N}: \forall n \geq N$, $\left| u_n - l \right| \leq \varepsilon$
+\end{definition}
+\begin{proposition}
+Soit $u \in \mathbb{C}^\mathbb{N}$ et $l \in \mathbb{C}$ \\
+On a $u_n \xrightarrow[n \to +\infty]{} l \iff \left| u_n - l \right| \xrightarrow[n \to +\infty]{} 0$
+\end{proposition}
+\begin{definition}
+Une suite $u \in \mathbb{C}^\mathbb{N}$ est \uline{bornée} si $\forall C \in \mathbb{R}_+: \forall n \in \mathbb{N}$, $|u_n| \leq C$
+\end{definition}
+\begin{proposition}
+Toute suite complexe convergente est bornée.
+\end{proposition}
+\begin{definition}
+Soit $u \in \mathbb{C}^\mathbb{N}$ \\
+On dit que \uline{$u$ tend vers l'infini} si $|u_n| \xrightarrow[n \to +\infty]{} +\infty$
+\end{definition}
+
+\subsection{Lien avec le cas réel}
+\begin{theorem}
+Soit $u \in \mathbb{C}^\mathbb{N}$ et $l \in \mathbb{C}$ \\
+Alors
+\[ u_n \xrightarrow[n \to +\infty]{} l \iff \begin{cases}
+\re u_n \xrightarrow[n \to +\infty]{} \re l \\
+\im u_n \xrightarrow[n \to +\infty]{} \im l
+\end{cases}\]
+\end{theorem}
+\begin{theorem}[Bolzano-Weierstrass, cas complexe]
+\hfill \\
+Toute suite complexe bornée possède une sous-suite convergente.
+\end{theorem}
+
+\subsection{Suite géométrique}
+\begin{theorem}
+Soit $a \in \mathbb{C}$ \\
+Alors $(a^n)_{n \in \mathbb{N}}$ converge ssi $|a| < 1$ (auquel cas $a^n \xrightarrow[n \to +\infty]{} 0$) ou $a = 1$ (auquel cas $a^n \xrightarrow[n \to +\infty]{} 1$) \\
+et $(a^n)_{n \in \mathbb{N}}$ tend vers l'infini ssi $|a| > 1$
+\end{theorem}
+
+\pagebreak
+
+\section{Suites récurrentes}
+On étudie des suites récurrentes (d'ordre $1$), càd des suites $u \in \mathbb{R}^\mathbb{N}$ vérifiant $\forall n \in \mathbb{N}$, $u_{n + 1} = f(u_n)$, où $f: I \to \mathbb{R}$ est une certaine fonction, que l'on appelle \uline{itératrice}
+
+\subsection{Itératrice croissante: un exemple}
+\noindent Étudions la suite $(u_n)_{n \in \mathbb{N}}$ définie par $\begin{cases}
+u_n = 3 \\ \forall n \in \mathbb{N},\, u_{n + 1} = \sqrt{2 + u_n}
+\end{cases}$ \\
+On observe que $\left[-2, +\infty\right]$ est un intervalle stable donc la suite est bien définie. \medskip
+
+1) La suite décroit.\\
+Pour tout $n \in \mathbb{N}$ notons $P(n): "n_{n + 1} \leq u_n"$ \\
+\uline{Initialisation}: On a $u_1 = f(3) \leq 3 = u_0$ \\
+\uline{Hérédité}: Soit $n \in \mathbb{N}$ tel que $P(n)$ \\
+On a donc $u_{n + 1} \leq u_n$ \\
+Par croissance de $f$, $f(u_{n + 1} \leq f(u_n)$, càd $u_{n + 2} \leq u_{n + 1}$, d'où $P(n + 1)$, ce qui clôt la récurrence. $\qed$ \medskip
+
+2) $u$ est minorée. \\
+En effet, $\left[-2, +\infty\right[$ est stable donc $\forall n \in \mathbb{N}$, $u_n \in [-2, +\infty[$ (récurrence immédiate) \\
+D'après le théorème de la limite monotone, on peut don trouver $l \in \mathbb{R}$ tel que $u_n \xrightarrow[ n \to +\infty]{} l$ \\
+Par passage à la limite dans les inégalités larges, $l \geq 2$ (càd $l \in [-2, +\infty[$) \medskip
+
+3) Montrons que $l$ est nécessairement un point fixe de $f$, càd $f(l) = l$. \\
+On a $(u_{n + 1})_{n \in \mathbb{N}} = (f(u_n))_{n \in \mathbb{N}}$ \\
+Par extraction, $u_{n + 1} \xrightarrow[n \to +\infty]{} l$ \\
+Par continuité de $f$, $f(u_n) \xrightarrow[n \to +\infty]{} f(l)$ \\
+Par unicité de la limite, $f(l) = l$\\
+Puisque $2$ est le seul point fixe de $f$, on a $u_n \xrightarrow[n \to +\infty]{} 2$ \medskip
+
+\noindent \uline{Variante}: Cas de la suite $(v_n)_{n \in \mathbb{N}}$ définie par $\begin{cases}
+v_0 = 1 \\ \forall n \in \mathbb{N},\, v_{n + 1} = f(v_n)
+\end{cases}$ \\
+Comme dans (1): \medskip
+
+1)' La suite $v$ est monotone car $f$ est croissante. \\
+Comme $v_1 \geq v_0$, cette fois \uline{$v$ croît}. \medskip
+
+2)' On doit trouver un intervalle stable plus petit. \\
+Ici, $[-2, 2]$ est stable et contient $v_0$ donc $v$ est à valeurs dans $[-2, 2]$, donc majorée. \medskip
+
+3)' La suite converge nécessairement vers un point fixe. \\
+$v_n \xrightarrow[n \to +\infty]{} 2$
+
+\pagebreak
+
+\subsection{Itératrice décroissante: un exemple}
+\noindent Étudions la suite $u$ définie par $\begin{cases}
+u_0 = 1 \\ \forall n \in \mathbb{N},\, u_{n + 1} = \frac{1}{2 + u_n}
+\end{cases}$ \\
+Posons $f: \begin{cases}
+\mathbb{R} \setminus \{ 2 \} \to \mathbb{R} \\ x \mapsto \frac{1}{2 + x}
+\end{cases}$ \\
+Le segment $[0, 1]$ est stable et inclus dans le domaine de $f$. On en déduit que la suite $u$ est bien définie et à valeurs dans $[0, 1]$ \medskip
+
+1) Les sous-suites $(u_{2k})_{k \in \mathbb{N}}$ et $(u_{2k + 1})_{k \in \mathbb{N}}$ sont monotones, de monotonies opposées. \\
+En effet, $\forall k \in \mathbb{N}; \begin{cases}
+u_{2(k + 1)} = (f \circ f)(u_{2k}) \\ u_{2(k + 1) + 1} = (f \circ f)(u_{2k + 1})
+\end{cases}$ \\
+Comme $f \circ f$ croît (par opération), les sous-suites sont monotones. \\
+Comme $u_0 = 1, u_1 = \frac{1}{3}$ et $u_2 = \frac{3}{7}$, on a $u_2 \leq u_0$, donc $(u_{2k})_{k \in \mathbb{N}}$ décroît d'où $u_3 \geq u_1$ (en appliquant $f$), ce que donne $(u_{2k + 1})_{k \in \mathbb{N}}$ croît.\medskip
+
+2)Les deux sous-suites sont à valeurs dans $[0, 1]$ donc bornées. \\
+D'après le théorème de la limite monotone \\
+$u_{2k} \xrightarrow[k \to +\infty]{} l_0 \in [0, 1]$ \\
+$u_{2k + 1} \xrightarrow[k \to +\infty]{} l_1 \in [0, 1]$ \medskip
+
+3)On a $\underbrace{u_{2k + 1}}_{\xrightarrow[k \to +\infty]{} l_1} = \underbrace{f(u_{2k})}_{\xrightarrow[k \to +\infty]{} f(l_0)}$ (par continuité de $f$)\\
+Donc $f(l_0) = l_1$ par unicité de la limité. \\
+$\underbrace{u_{2k + 2}}_{\xrightarrow[k \to +\infty]{} l_0} = \underbrace{f(u_{2k+1})}_{\xrightarrow[k \to +\infty]{} f(l_1)}$ \\
+Donc $f(l_1) = l_0$ par unicité de la limite. \\
+On obtient alors que $\begin{cases}
+f(f(l_0)) = l_0 \\ f(f(l_1)) = l_1
+\end{cases}$ \\
+\uline{Déterminons les points fixes de $f$}: \\
+Soit $x \in \mathbb{R} \setminus \{ 2 \}$. On a:
+\begin{align*}
+f(x) = x &\iff \frac{1}{2 + x} = x \\
+&\iff 1 = 2x + x^2 \\
+&\iff (x + 1)^2 = 2 \\
+&\iff x = -1 \pm \sqrt{2}
+\end{align*} \\
+\uline{Déterminons les points fixes de $f \circ f$}: \\
+Soit $x \in \mathbb{R}$ tel que $f(f(x))$ sont bien définit.
+\begin{align*}
+f(f(x)) = x &\iff \frac{1}{2 + \frac{1}{2 + x}} = x \\
+&\iff \frac{x + 2}{2x + 5} = x \\
+&\iff 2x^2 + 4x - 1 = 0 \\
+&\iff x^2 + 2x - 1 = 0 \\
+&\iff x = -1 \pm \sqrt{2}
+\end{align*} \\
+Comme $l_0, l_1 \in [0, 1]$, on a $l_0 = l_1 = \sqrt{2} - 1$ \\
+Donc $\begin{cases}
+u_{2k} \xrightarrow[k \to +\infty]{} \sqrt{2} - 1 \\ u_{2k + 1} \xrightarrow[k \to +\infty]{} \sqrt{2} - 1\end{cases}$\\
+Ainsi, $u_n \xrightarrow[n \to +\infty]{} \sqrt{2} - 1$
+
+\subsection{Résumé des résultats utiles}
+\noindent Soit $u \in \mathbb{R}^\mathbb{N}$ telle que $\forall n \in \mathbb{N}$, $u_{n + 1} = f(u_n)$ où $f: I \to \mathbb{R}$
+\begin{itemize}
+\item Si $S \subseteq I$ est stable et $u_0 \in S$, alors $u$ (est bien définie et) à valeurs dans $S$.
+\item Si l'itératrice $f$ est croissante, $u$ est monotone.
+\item Si l'itératrice $f$ est décroissante, $(u_{2k})_{k \in \mathbb{N}}$ et $(u_{2k + 1})_{k \in \mathbb{N}}$ sont monotones, de monotonies opposées.
+\item Si $u$ converge vers $l$ et que $f$ est continue (en $l$), alors $f(l) = l$.
+\end{itemize}
 \end{document}

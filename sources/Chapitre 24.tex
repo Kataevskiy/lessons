@@ -14,6 +14,7 @@
 \usepackage{dsfont}
 \usepackage{mathpazo}
 
+
 \onehalfspacing
 
 \theoremstyle{definition}
@@ -149,5 +150,21 @@ Si c'est la cas, on a
 \[\sum_{(i, j) \in I \times J} x_{i, j} = \sum_{i \in I} \sum_{j \in J} x_{i, j}\]
 En particulier, si $x$ est sommable
 \[ \sum_{i \in I} \sum_{j \in J} x_{i, j} = \sum_{j \in J} \sum_{i \in I} x_{i, j}\]
+\end{corollaire}
+
+\subsection{Produit}
+\begin{theorem}
+Soit $a \in l^1(I; \mathbb{C})$ et $b \in l^1(J; \mathbb{C})$ \\
+Alors la famille $(a_i b_j)_{(i, j) \in I \times J}$ est sommable et
+\[\sum_{(i, j) \in I \times J} a_i b_j = \left(\sum_{i \in \mathbb{N}} a_i \right) \left(\sum_{j \in J} b_j\right)\]
+\end{theorem}
+\begin{definition}
+Soit $\sum\limits_n a_n$ et $\sum\limits_n b_n$ deux suites (à valeurs complexes). \\
+Leur \uline{produit de Cauchy} est la série $\sum\limits_n c_n$ où, pour tout $t \in \mathbb{N}$, $c_n = \sum\limits_{\substack{i, j \in \mathbb{N} \\ i + j = n}} a_i b_j = \sum\limits_{k = 0}^n a_k b_{n - k}$
+\end{definition}
+\begin{corollaire}
+Soit $\sum\limits_n a_n$ et $\sum\limits_n b_n$ deux séries absolument convergentes. \\
+Alors leur produit de Cauchy $\sum\limits_n c_n$ est une série absolument convergente et
+\[\sum_{n = 0}^{+\infty} c_n = \left( \sum_{n = 0}^{+\infty} a_n \right) \left( \sum_{n = 0}^{+\infty} b_n \right)\]
 \end{corollaire}
 \end{document}

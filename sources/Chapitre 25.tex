@@ -1,0 +1,99 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\supp}{Supp}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 25: Déterminants}}
+\end{center}
+
+\section{Groupe symétrique}
+\subsection{Généralités}
+\begin{definition}
+On appelle \uline{groupe symétrique sur $n \geq 1$ "lettres"} le groupe $\gamma(n)$ des bijections $\llbracket 1, n \rrbracket \to \llbracket 1, n \rrbracket$
+\end{definition}
+\begin{definition}
+Soit $\sigma \in \gamma(n)$
+\begin{itemize}
+\item Un élément $i \in \llbracket 1, n \rrbracket$ est un \uline{point fixe} de $\sigma$ si $\sigma(i) = i$
+\item Le \uline{support} de $\sigma$ est $\supp(\sigma) = \left\{ i \in \llbracket 1, n \rrbracket \mid \sigma(i) \neq i \right\}$
+\end{itemize}
+\end{definition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une transposition est une permutation $\tau \in \gamma(n)$ dont le support est une paire $\{ i, j \}$ \\
+(et qui échange $i$ et $j$). On la note $\tau = (i \, j)$ \\
+On a $(i \, j) = (j \, i)$
+\item Plus généralement, si $i_1, ...\, , i_r \in \llbracket 1, n \rrbracket$ sont tous différents, on note $(i_1 \, i_2 \, i_3 \, ... \, i_r)$ \\
+la permutation $\sigma$ telle que
+\[\begin{cases}
+\forall k \in \llbracket 1, r - 1 \rrbracket,\, \sigma(i_k) = i_{k + 1} \\
+\sigma(i_r) = i_1, \text{ et } \forall j \notin \{ i_1, ...\, , i_r\},\, \sigma(j) \neq j
+\end{cases}\]
+Une telle permutation est appelée un $r$-cycle.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Le groupe $\gamma(n)$ est engendré par les transpositions.
+\end{theorem}
+
+\subsection{Décomposition en cycles disjoints}
+\begin{theorem}
+Soit $\sigma \in \gamma(n)$ \\
+Il existe un entier $r \geq 0$ et des cycles $\gamma_1, ...\, \gamma_r$ à supports disjoints tels que $\sigma = \gamma_r \circ ... \circ \gamma_1$ \\
+En outre, cette décomposition est unique à l'ordre des facteurs près.
+\end{theorem}
+
+\subsection{Signature d'une permutation}
+\begin{theorem}
+Il existe un unique morphisme de groupes $\varepsilon: (\gamma(n), \circ) \to (\{ \pm 1 \}, \times)$ tel que, pour toute \uline{transposition} $\tau \in \gamma(n)$, $\varepsilon(\tau) = -1$ \\
+(ce morphisme s'appelle la \uline{signature})
+\end{theorem}
+\begin{lemme}
+\[\varepsilon(\sigma) = \prod_{\{i, j\} \in \mathcal{P}_2(\llbracket 1, n \rrbracket)} \frac{\sigma(j) - \sigma(i)}{j - i}\]
+\end{lemme}
+\begin{proposition}
+Soit $r \in \llbracket 2, n \rrbracket$ et $\sigma \in \gamma(n)$ un $r$-cycle. \\
+Alors $\varepsilon(\sigma) = (-1)^{r + 1}$
+\end{proposition}
+\begin{definition}
+On appelle \uline{groupe alterné} $a(n)$ le noyau de la signature $a(n) = \left\{ \sigma \in \gamma(n) \mid \varepsilon(\sigma) = 1 \right\}$
+\end{definition}
+
+\pagebreak
+
+\section{Déterminant}
+Soit $K$ un corps.
+\subsection{Déterminant d'une matrice carrée}
+\begin{definition}
+Soit $A \in M_n(K)$ \\
+On définit son \uline{déterminant}:
+\[ \det(A) = \sum_{\sigma \in \gamma(n)} \varepsilon(\sigma) \prod_{j = 1}^n [A]_{\sigma(j) \, j}\]
+\end{definition}
+\end{document}

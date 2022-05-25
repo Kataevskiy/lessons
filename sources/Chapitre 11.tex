@@ -1,0 +1,172 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 11. Compléments sur les nombres réels}}
+\end{center}
+
+\section{Partie entière}
+\subsection{Caractère archimédien des réels et définitions}
+\begin{proposition}[Caractère archimédien de $\mathbb{R}$]
+On a $\forall x \in \mathbb{R}$, $\exists n \in \mathbb{Z} : n > x$
+\end{proposition}
+\begin{proposition}
+Soit $x \in \mathbb{R}$ \\
+Alors il existe un unique entier $n \in \mathbb{Z}$ tel que $n \leq x < n + 1$ \\
+Cet entier $n$ est appelé \uline{partie entière (inférieure) de $x$} et noté $\lfloor x \rfloor$
+\end{proposition}
+\begin{corollaire}[du caractère archimédien]
+\hfill
+\begin{itemize}
+\item On a $\forall \varepsilon > 0$, $\exists n \in \mathbb{N}^* : \frac{1}{n} < \varepsilon$
+\item (Propriété d'Archimède): $\forall x, y \in \mathbb{R}_+^*$, $\exists n \in \mathbb{N}: nx > y$
+\end{itemize}
+\end{corollaire}
+
+\subsection{Premières propriétés}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item On a $\forall x \in \mathbb{R}$, $\lfloor x \rfloor \leq x < \lfloor x \rfloor + 1 \text{ et } x - 1 < \lfloor x \rfloor \leq x$
+\item $\forall n \in \mathbb{Z}$, $\forall x \in \mathbb{R}$, $\lfloor x + n \rfloor = \lfloor x \rfloor + n$
+\item $\forall x \in \mathbb{R}$, $\forall n \in \mathbb{Z}$, $n \leq x \iff n \leq \lfloor x \rfloor$
+\item La fonction $\lfloor \cdot \rfloor$ croît: $\forall x, y \in \mathbb{R}$, $x \leq y \implies \lfloor x \rfloor \leq \lfloor y \rfloor$
+\end{itemize}
+\end{proposition}
+
+\subsection{Division euclidienne dans $\mathbb{R}$}
+\begin{theorem}
+Soit $x \in \mathbb{R}$ et $T \in \mathbb{R}_+^*$ \\
+Il existe un unique couple $(q, r) \in \mathbb{Z} \times \left[0, T\right[$ tel que $x = qT + r$
+\end{theorem}
+
+\section{Vocabulaire de la proximité}
+\subsection{Points $\delta$-proches}
+\begin{proposition}
+Soit $x, y \in \mathbb{R}$ et $\delta \geq 0$ \\
+LASSÉ:
+\begin{enumerate}
+\item $\left| x - y \right| \leq \delta$
+\item $x - \delta \leq y \leq x + \delta$
+\item $y \in \left[ x - \delta, x + \delta \right]$
+\item $y - \delta \leq x \leq y + \delta$
+\item $x \in \left[ y - \delta, y + \delta \right]$
+\end{enumerate}
+Si ces assertions sont vraies, on dit que $x$ et $y$ sont \uline{$\delta$-proches}.
+\end{proposition}
+\begin{proposition}[Inégalité triangulaire]
+Soit $x, y, z \in \mathbb{R}$ et $\delta, \eta \geq 0$ \\
+Alors, si $x$ et $y$ sont $\delta$-proches et que $y$ et $z$ sont $\eta$-proches alors $x$ et $z$ sont $(\delta + \eta)$-proches.
+\end{proposition}
+
+\subsection{Points adhérents à une partie}
+\begin{definition}
+Soit $A \subseteq \mathbb{R}$ et $x \in \mathbb{R}$ \\
+On dit que $x$ est \uline{adhérent} à $A$ si $\forall \delta > 0$, $\exists a \in A: \left| x - a \right| \leq \delta$ \\
+On note $\overline{A}$ ou $\text{Adh}(A)$ et on appelle \uline{adhérence} de $A$ l'ensemble des points adhérents à $A$.
+\end{definition}
+
+\subsection{Densité}
+\begin{proposition}
+Soit $A \subseteq \mathbb{R}$ \\
+LASSÉ:
+\begin{enumerate}
+\item Tout intervalle ouvert non vide rencontre $A$ (a une intersection non vide avec $A$)
+\item $\forall x \in \mathbb{R}$, $\forall \delta > 0$, $\exists a \in A: \left| x - a \right| \leq \delta$
+\item $\overline{A} = \mathbb{R}$
+\end{enumerate}
+Quand ces assertions sont vraies, on dit que $A$ est \uline{dense} (dans $\mathbb{R}$)
+\end{proposition}
+\begin{proposition}
+$\mathbb{Q}$ est dense dans $\mathbb{R}$
+\end{proposition}
+\begin{corollaire}
+$\mathbb{R} \setminus \mathbb{Q}$ est dense dans $\mathbb{R}$
+\end{corollaire}
+
+\section{Bornes supérieures et inférieures}
+\subsection{Définition et existence}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Soit $A \subseteq \mathbb{R}$ une partie non vide et majorée. \\
+La \uline{borne supérieure} de $A$ (si elle existe) est le plus petit des majorants de $A$. \\
+On la note $\sup(A)$
+\item De même, si $A \subseteq \mathbb{R}$ est non vide et minorée, \\
+On appelle \uline{borne inférieure} de $A$ le plus grand des minorants de $A$. \\
+On la note $\inf(A)$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Propriété de la borne supérieure]
+\hfill \\
+Toute partie non vide et majorée de $\mathbb{R}$ possède une borne supérieure.
+\end{theorem}
+\begin{proposition}
+Si $A \subseteq \mathbb{R}$ admet un maximum, alors $\sup(A) = \max(A)$
+\end{proposition}
+\begin{corollaire}
+Soit $A \subseteq \mathbb{R}$ non vide et majorée. \\
+Si $\sup(A) \notin A$, alors $A$ n'a pas de maximum.
+\end{corollaire}
+
+\subsection{Caractérisation et utilisation pratique}
+\begin{proposition}
+Soit $A \subseteq \mathbb{R}$ non vide et majorée et $S \in \mathbb{R}$ \\
+LASSÉ:
+\begin{enumerate}
+\item $S = \sup(A)$
+\item (caractérisation epsilonesque): $S$ majore $A$ et $\forall \varepsilon > 0$, $\exists a \in A: a \geq S - \varepsilon$
+\item $S$ majore $A$ et $S \in \overline{A}$
+\item (caractérisation sequentielle): $S$ majore $A$ et il existe une suite $(a_n)_{n \in \mathbb{N}} \in A^\mathbb{N}$ telle que $a_n \xrightarrow[n \to +\infty]{} S$
+\end{enumerate}
+\end{proposition}
+\begin{proposition}[Passage à la borne supérieure des inégalités larges]
+\hfill \\
+Soit $A \subseteq \mathbb{R}$ non vide et majorée et $M \in \mathbb{R}$ \\
+Alors $\sup(A) \leq M \iff M$ majore $A$
+\end{proposition}
+
+\pagebreak
+
+\section{Compléments}
+\subsection{Sous-groupes de $\mathbb{R}$}
+\begin{theorem}
+Tout sous-groupe de $(\mathbb{R}, +)$ est monogène ou dense.
+\end{theorem}
+
+\subsection{Retour sur le caractère archimédien}
+\noindent \uline{Rémarque}: la propriété de la borne supérieure entraîne le caractère archimédien de $\mathbb{R}$, càd \\
+$\forall x \in \mathbb{R}$, $\exists n \in \mathbb{Z}: n > x$
+
+\subsection{Classification des intervalles}
+\begin{theorem}
+Soit $I \subseteq \mathbb{R}$ un intervalle. \\
+Alors il existe $a, b \in \mathbb{R}$ tel que
+\[ I \in \{ \emptyset,\, \{ a \},\, [a, b],\, [a, b[ ,\, ]a, b],\, ]a ,b[,\, [a, +\infty[,\, ]a, +\infty[,\, \left]-\infty, b\right],\, \left]-\infty, b\right[,\, \mathbb{R} \}\]
+\end{theorem}
+\end{document}

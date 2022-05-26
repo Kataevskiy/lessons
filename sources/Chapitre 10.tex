@@ -1,0 +1,305 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\coeff}{coeff}
+\DeclareMathOperator{\ev}{ev}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 10. Polynômes}}
+\end{center}
+Dans tout ce chapitre, on fixe un corps $K$. Les éléments de $K$ sont appelés des \uline{scalaires}.
+
+\section{Généralités}
+\subsection{Idée}
+\noindent Un \uline{polynôme à coefficients dans $K$} est une expression de la forme $\sum\limits_{k = 0}^d a_k X^k$ où $a_0, ...\,, a_d \in K$ \\
+On dit que $X$ est \uline{l'indéterminée}. \\
+L'ensemble de ces polynômes est noté $K[X]$
+
+\subsection{Définition formelle}
+On va "encoder" un polynôme par la "liste" de ses coefficients.
+\begin{definition}
+Une suite $(a_n)_{n \in \mathbb{N}} \in K^\mathbb{N}$ est dite \uline{presque nulle} si $\exists d \in \mathbb{N}: \forall n > d$, $a_n = 0$ \\
+On note $K^{(\mathbb{N})}$ l'ensemble des suites presque nulles.
+\end{definition}
+\begin{definition}
+Un polynôme à coefficients dans $K$ est une suite presque nulle $(a_n)_{n \in \mathbb{N}} \in K^{(\mathbb{N})}$
+\end{definition}
+\noindent \uline{Notation}: On note: \\
+$1 = 1_{K[X]} = X^0 = (1, 0, 0, 0, ...)$ \\
+$X = (0, 1, 0, 0, ...)$ et pour tout $k \in \mathbb{N}$, $X^k = (0, 0, ...\,, 0, 1, 0, 0, ...)$ (position numéro $k$) \\
+Plus précisément, $X^k = (\delta_{n,\,k})_{n \in \mathbb{N}}$ \\
+On peut maintenant écrire $\sum\limits_{k = 0}^d a_k X^k$ le polynôme $(a_0, a_1, a_2, ...\,, a_d, 0, 0, ...)$ \\
+On note $K[X]$ l'ensemble de tous les polynômes à coefficients dans $K$ \\
+On note $\coeff_k: K[X] \to K$ la fonction qui associe à tout polynôme $P = (a_n)_{n \in \mathbb{N}}$ son coefficient $a_k$ \\
+(le coefficient devant $X^k$)
+
+\subsection{Opérations algébriques}
+\begin{definition}
+Soit $P, Q \in K[X]$ \\
+On définit $P + Q$ et $PQ \in K[X]$ par l'assertion suivante:
+\[ \forall n \in \mathbb{N},\, \begin{cases}
+\coeff_n(P + Q) = \coeff_n(P) + \coeff_n(Q) \\
+\coeff_n(PQ) = \sum\limits_{k = 0}^n \coeff_k(P) \coeff_{n - k}(Q)
+\end{cases}\]
+\end{definition}
+\begin{theorem}
+Muni de ces deux opérations, $K[X]$ est un anneau commutatif.
+
+\subsection{Évaluation, fonction polynômiale}
+\begin{definition}
+Soit $P \in K[X]$ et $z \in K$ \\
+On définit \uline{l'évaluation de $P$ en $z$}: $\ev_z(P) = P(z) = \sum\limits_{k = 0}^d a_k z^k$ \\
+où l'on a noté $P = \sum\limits_{k = 0}^d a_k X^k$
+\end{definition}
+\end{theorem}
+\begin{proposition}
+Soit $z \in K$ \\
+Alors $\ev_z: K[X] \to K$ est un morphisme d'anneaux.
+\end{proposition}
+\begin{definition}
+La fonction polynômiale associée à $P$ est $\widehat{P}: \begin{cases}
+K \to K \\
+z \mapsto P(z)
+\end{cases}$
+\end{definition}
+
+\subsection{Composition}
+\begin{definition}
+Soit $P = \sum\limits_{k = 0}^d a_k X^k$ et $Q \in K[X]$ \\
+On définit \uline{la composée} $P \circ Q = P(Q) = \sum\limits_{k = 0}^d a_k Q^k \in K[X]$
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item La composition est associative.
+\item On a $\forall P, Q, R \in K[X],\, \begin{cases}
+(P + Q) \circ R = P \circ R + Q \circ R \\
+(PQ) \circ R = (P \circ R)(Q \circ R)
+\end{cases}$
+\end{itemize}
+\end{proposition}
+
+\subsection{Degré}
+\begin{definition}
+Soit $P \in K[X]$ un polynôme non nul.
+\begin{itemize}
+\item Le \uline{degré} de $P$ est $\deg P = \max\{ n \in \mathbb{N} \mid \coeff_n(P) \neq 0\}$
+\item Le \uline{coefficient dominant} de $P$ est $\coeff_{\deg P}(P)$
+\item Le \uline{terme dominant} de $P$ est $\coeff_{\deg P}(P) X^{\deg P}$
+\item $P$ est dit \uline{unitaire} si son coefficient dominant vaut $1$.
+\item On étend cette définition en posant $\deg(0) = -\infty$ \\
+Le polynôme nul n'a ni coefficient dominant, ni terme dominant. Il n'est pas unitaire.
+\end{itemize}
+\end{definition}
+\begin{definition}
+Pour tout $n \in \mathbb{N}$, on note
+\[ K_n[X] = \left\{ P \in K[X] \mid \deg P \leq n \right\} = \left\{ \sum_{k = 0}^n a_k X^k \mid a_0, ...\,, a_n \in K \right\} \]
+\end{definition}
+\begin{theorem}[Degré d'une somme]
+Soit $P, Q \in K[X]$
+\begin{itemize}
+\item On a $\deg(P + Q) \leq \max(\deg P, \deg Q)$
+\item Si $\deg P \neq \deg Q$, on a $\deg(P + Q) = \max(\deg P, \deg Q)$
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Pour tout $n \in \mathbb{N}$, $K_n[X]$ est stable par somme.
+\end{corollaire}
+\begin{corollaire}
+Soit $r \in \mathbb{N}^*$ et $P_1, ...\,, P_r \in K[X]$ de degrés tous différents. \\
+Alors $\deg(\sum\limits_{i = 1}^r P_i) = \max(\deg P_1, ...\,, \deg P_r)$
+\end{corollaire}
+\begin{theorem}[Degré d'un produit]
+Soit $P, Q \in K[X]$ \\
+On a $\deg(PQ) = \deg(P) + \deg(Q)$
+\end{theorem}
+\begin{corollaire}
+Soit $P \in K[X]$ et $\lambda \in K$ \\
+On a $\deg(\lambda P) = \begin{cases}
+-\infty	\text{ si } \lambda = 0 \\
+\deg P \text{ si } \lambda \neq 0
+\end{cases}$
+\end{corollaire}
+\begin{corollaire}[du corollaire]
+$K_n[X]$ est stable par multiplication par un scalaire, en plus d'être stable par somme. $K_n[X]$ est donc stable par combinaison linéaire.
+\end{corollaire}
+\begin{corollaire}
+L'anneau $K[X]$ est intègre.
+\end{corollaire}
+\begin{corollaire}
+$K[X]^\times = \{ P \in K[X] \mid \deg P = 0 \}$ est l'ensemble des polynômes constants non nuls.
+\end{corollaire}
+\begin{theorem}[Degré d'une composition]
+Soit $P, Q \in K[X]$ \\
+On suppose $Q$ non constant, càd $\deg Q \geq 1$ \\
+Alors $\deg(P \circ Q) = \deg(P) \deg(Q)$
+\end{theorem}
+
+\subsection{Division euclidienne}
+\begin{theorem}
+Soit $A, B \in K[X]$ \\
+On suppose $B \neq 0$ \\
+Il existe un unique couple $(Q, R) \in K[X]^2$ tel que $A = BQ + R$ et $\deg R < \deg B$
+\end{theorem}
+
+\section{Racines}
+\subsection{Définition}
+\begin{definition}
+Soit $P \in K[X]$ et $z \in K$ \\
+On dit que $z$ est racine de $P$ si $P(z) = 0$
+\end{definition}
+\begin{theorem}
+Soit $P \in \mathbb{R}[X]$. Soit $z \in \mathbb{C}$ une racine complexe de $P$ \\
+Alors $\bar{z}$ est une racine de $P$
+\end{theorem}
+
+\subsection{Racines et factorisation}
+\begin{theorem}
+Soit $P \in K[X]$ et $z \in K$
+\begin{itemize}
+\item Alors $\exists Q \in K[X]: P = (X - z)Q + P(z)$
+\item (théorème de factorisation): si $z$ est racine de $P$, $\exists Q \in K[X]: P = (X - z)Q$
+\end{itemize}
+\end{theorem}
+
+\subsection{Nombre de racines, critère radical de nullité}
+\begin{proposition}
+Soit $P \in K[X]$. Soit $z_1, ...\,, z_r \in K$ des racines distincts. \\
+Alors $\exists Q \in K[X]: P = (X - z_1) ... (X - z_r) Q$
+\end{proposition}
+\begin{theorem}[Critère radical de nullité]
+\hfill
+\begin{itemize}
+\item Si un polynôme $P \in K[X]$ possède $r$ racines distincts et que $r > \deg P$, alors $P = 0$
+\item Si $P \in K_n[X]$ possède (au moins) $n + 1$ racines, alors $P = 0$
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Si $P \in K[X]$ possède une infinité de racines, alors $P = 0$
+\end{corollaire}
+\begin{corollaire}[Rigidité des polynômes]
+\hfill
+\begin{itemize}
+\item Soit $P, Q \in K_n[X]$ \\
+Si $P$ et $Q$ coïncident en $n + 1$ points, alors $P = Q$
+\item Soit $P, Q \in K[X]$ \\
+Si $P$ et $Q$ coïncident sur un ensemble infini, alors $P = Q$
+\end{itemize}
+\end{corollaire}
+\begin{corollaire}[Identification polynômes / fonction polynomiales]
+Supposons le corps $K$ infini. \\
+Si $P$ et $Q \in K[X]$ définissent la même fonction polynomiale $K \to K$, alors $P = Q$
+\end{corollaire}
+
+\section{Dérivation}
+\subsection{Définition}
+\begin{definition}
+Soit $P = \sum\limits_{k = 0}^n a_k X^k \in K[X]$ \\
+On définit son \uline{polynôme dérivé}: $P' = \sum\limits_{k = 1}^n k a_k X^{k - 1}$
+\end{definition}
+
+\subsection{Premières propriétés}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item On a $\forall P \in K[X]$, $\deg P' \leq \deg P - 1$
+\item On suppose que $K$ est de caractéristique nulle. \\
+Alors $\forall P \in K[X]$, $\deg P' = \begin{cases}
+\deg P - 1 \text{ si } \deg P \geq 1 \\
+-\infty \text{ si } \deg P \leq 0
+\end{cases}$
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+Supposons $K$ de caractéristique nulle. Soit $P \in K[X]$ \\
+Alors $P' = 0$ ssi $P$ est constant.
+\end{corollaire}
+\begin{proposition}
+Soit $P, Q \in K[X]$, $\lambda \in K$ \\
+On a:
+\begin{itemize}
+\item $(P + Q)' = P' + Q'$
+\item $(\lambda P)' = \lambda P'$
+\item $(PQ)' = P'Q + PQ'$
+\item $(P \circ Q)' = (P' \circ Q) Q'$
+\end{itemize}
+\end{proposition}
+
+\subsection{Dérivées supérieures}
+\begin{definition}
+Soit $P \in K[X]$ \\
+On définit \uline{la dérivée $r$-ième} $p^{(r)}$ pour tout $r \in \mathbb{N}$ par récurrence:
+\begin{itemize}
+\item $p^{(0)} = p$
+\item Pour tout $l \in \mathbb{N}$, $p^{(l + 1)} = (p')^{(l)}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $P \in K[X]$ et $r \in \mathbb{N}$
+\begin{itemize}
+\item On a $\deg(P^{(r)}) \leq \deg P - r$
+\item Si $K$ est de caractéristique nulle: \\
+$\deg(p^{(r)}) = \begin{cases}
+\deg P - r \text{ si } \deg P \geq r \\
+-\infty \text{ si } \deg P < r
+\end{cases}$
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+Si $K$ est de caractéristique nulle, $\forall P \in K[X]$, $p^{(r)} = 0 \iff \deg P < r$
+\end{corollaire}
+\begin{theorem}[Formule de Leibniz]
+Soit $P, Q \in K[X]$ et $r \in \mathbb{N}$ \\
+On a $(PQ)^{(r)} = \sum\limits_{j = 0}^r \binom{r}{j} P^{(j)} Q^{(r - j)}$
+\end{theorem}
+\begin{theorem}[Formule de Taylor pour les polynômes]
+\hfill \\
+Supposons $K$ de caractéristique nulle. Soit $P \in K_n[X]$. Soit $z \in K$ \\
+On a
+\[ P(X) = \sum_{k = 0}^n \frac{P^{(k)}(z)}{k!} (X - z)^k \]
+\end{theorem}
+
+\pagebreak
+
+\subsection{Polynômes à dérivées prescrites}
+\begin{theorem}
+On suppose $K$ de caractéristique nulle. \\
+Soit $z \in K$ et $b_0, b_1, ...\,, b_n \in K$ \\
+Alors il existe un unique $P \in K_n[X]$ tel que $\forall j \in \llbracket 0, n \rrbracket$, $P^{(j)}(z) = b_j$ \\
+Il s'agit de
+\[ P = \sum_{k = 0}^n \frac{b_k}{k!} (X - z)^k \]
+\end{theorem}
+
+\subsection{Interpolation de Lagrange}
+\begin{theorem}
+Soit $n \in \mathbb{N}$, $a_0, a_1, ...\,, a_n \in K$ tous distincts, $b_0, b_1, ...\,, b_n \in K$ \\
+Alors il existe un unique $P \in K_n[X]$ tel que $\forall j \in \llbracket 0, n \rrbracket$, $P(a_j) = b_j$ \\
+Il s'agit de
+\[ P = \sum_{j = 0}^n b_j \frac{\prod\limits_{\substack{0 \leq k \leq n \\ k \neq j}} (X - a_k)}{\prod\limits_{\substack{0 \leq k \leq n \\ k \neq j}} (a_j - a_k)} \]
+\end{theorem}
+\end{document}

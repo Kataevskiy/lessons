@@ -1,0 +1,293 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\pgcd}{pgcd}
+\DeclareMathOperator{\ppcm}{ppcm}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 9. Arithmétique}}
+\end{center}
+
+\section{Divisibilité}
+\begin{definition}
+Soit $a, b \in \mathbb{Z}$ \\
+On dit que \uline{$a$ divise $b$} (ou que $b$ est un \uline{multiple} de $a$) et on note $a \mid b$ si $\exists q \in \mathbb{Z} : b = a q$ \\
+On note $D(b)$ (resp. $D^+(b)$) l'ensemble des diviseurs (resp. de diviseurs $ \geq 0$) de $b$.
+\end{definition}
+\begin{proposition}
+Soit $a, b, c, d \in \mathbb{Z}$
+\begin{itemize}
+\item Si $d$ divise $a$ et $b$ alors $d$ divise toute \uline{combinaison $\mathbb{Z}$-linéaire} de $a$ et $b$, càd $\forall u, v \in \mathbb{Z}$, $d \mid a u + b v$
+\item Règle des $2$ parmi $3$: \\
+Si $a + b = c$ et que $d$ divise deux de ces trois nombres, il divise le $3^\text{è}$
+\item Si $a$ divise $b$ et que $b \neq 0$, alors $|a| \leq |b|$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $a, b \in \mathbb{Z}$ \\
+LASSÉ:
+\begin{enumerate}
+\item $a \mid b$ et $b \mid a$
+\item $\exists u \in \mathbb{Z}^\times : b = a u$
+\item $b = \pm a$
+\end{enumerate}
+Quand ces assertions sont vraies, on dit que $a$ et $b$ sont associés.
+\end{proposition}
+
+\subsection{Division euclidienne dans $\mathbb{Z}$}
+\begin{theorem}
+Soit $a \in \mathbb{Z}$ et $b \in \mathbb{N}^*$ \\
+Alors il existe un unique couple $(q, r) \in \mathbb{Z} \times \llbracket 0, b - 1 \rrbracket$ tel que $a = bq + r$ \\
+$q$ est le \uline{quotient} de $a$ par $b$ \\
+$r$ est le \uline{reste} dans la division de $a$ par $b$
+\end{theorem}
+
+\subsection{PGCD}
+\begin{definition}
+Soit $a, b \in \mathbb{Z}$ non tous les deux nuls. \\
+On définit $\pgcd(a, b) = a \wedge b = \max\left(D(a) \cap D(b)\right)$ le plus grand diviseur commun de $a$ et $b$
+\end{definition}
+\begin{theorem}
+Soit $a, b \in \mathbb{Z}$ non tous les deux nuls. \\
+On a $\left<a ,b\right> = (a \wedge b)\mathbb{Z}$ \\
+(où $\left<a, b\right> = \mathbb{Z}a + \mathbb{Z}b = \{ ua + vb \mid u, v \in \mathbb{Z} \}$)
+\end{theorem}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item La preuve montre que le PGCD de $a$ et $b$ est le plus grand diviseur commun de $a$ et $b$ \uline{au sens de la divisibilité}: $a \wedge b$ est un \uline{multiple} de tout diviseur commun de $a$ et $b$
+\item On a en particulier $a \wedge b \in \left< a, b \right>$, càd l'existence de $u, v \in \mathbb{Z}$ tels que $a \wedge b = au + bv$ (relation de Bézout)
+\end{itemize}
+\end{corollaire}
+\noindent \uline{Rappels}: Algorithme d'Euclide et d'Euclide étendu: \\
+Si $a$ et $b$ sont deux entiers (tous les deux $> 0$ pour fixer les idées) et que la division euclidienne est $a = bq + r$ alors $D(a) \cap D(b) = D(b) \cap D(r)$ : tout diviseur commun à $a$ et $b$ est un diviseur commun à $b$ et $r$ \\
+(car $r = a - bq$ est une $CL_\mathbb{Z}$ de $a$ et $b$) et réciproquement (car $a = bq + r$ est une $CL_\mathbb{Z}$ de $b$ et $r$). \\
+En particulier, $a \wedge b = \max\left( D(a) \cap D(b)\right) = \max\left(D(b) \cap D(r)\right) = b \wedge r$ \\
+L'algorithme d'Euclide exploite cette relation pour calculer rapidement $a \wedge b$
+\begin{definition}
+Soit $a_1, ...\,, a_n \in \mathbb{Z}$ non tous nuls. \\
+On définit leur \uline{PGCD}: $\pgcd(a_1, ...\,, a_n) = a_1 \wedge ...\, \wedge a_n = \max\left( D(a_1) \cap ... \cap D(a_n)\right)$
+\end{definition}
+
+\subsection{Entiers premiers entre eux}
+\begin{definition}
+Soit $a, b \in \mathbb{Z}$ non tous deux nuls. \\
+On dit que $a$ et $b$ sont \uline{premiers entre eux} si $a \wedge b = 1$ \\
+On dit aussi (rarement) que $a$ et $b$ sont étrangers et on note (encore plus rarement) $a \perp b$
+\end{definition}
+\begin{theorem}[Lemme de Gauss]
+Soit $a, b, c \in \mathbb{Z}$ \\
+On suppose $a \mid bc$ et $a \perp b$. Alors $a \mid c$
+\end{theorem}
+\begin{corollaire}
+Soit $a, b, c \in \mathbb{Z}$ tels que $\begin{cases}
+a \perp b \\
+a, b \mid c
+\end{cases}$ \\
+Alors $ab \mid c$
+\end{corollaire}
+\begin{proposition}
+Soit $a, b \in \mathbb{Z}$ non tous deux nuls.
+\begin{itemize}
+\item Pour tout $k \in \mathbb{Z}^*$, $(ka) \wedge (kb) = k(a \wedge b)$
+\item En particulier, on peut trouver $\alpha, \beta$ premiers entre eux tels que: \\
+$\begin{cases}
+a = (a \wedge b) \alpha \\
+b = (a \wedge b) \beta
+\end{cases}$
+\end{itemize}
+\end{proposition}
+\begin{lemme}
+Soit $x, y \in \mathbb{Z}$ et $k \in \mathbb{Z} \setminus \{ 0 \}$ \\
+Alors $x \mid y \iff kx \mid ky$
+\end{lemme}
+\begin{definition}
+Soit $a_1, ...\,, a_r \in \mathbb{Z}$ tous non nuls. On dit
+\begin{itemize}
+\item que $a_1, ...\,, a_r$ sont \uline{deux à deux premiers entre eux} si $\forall i, j \in \llbracket 1, r \rrbracket$, $i \neq j \implies a_i \perp a_j$
+\item que $a_1, ...\,, a_r$ sont \uline{premiers entre eux dans leur ensemble} si $a_1 \wedge ...\, \wedge a_r = 1$
+\end{itemize}
+Par exemple, $6, 10, 15$ sont premiers entre eux dans leur ensemble, mais pas deux à deux.
+\end{definition}
+
+\subsection{PPCM}
+\begin{definition}
+Soit $a, b \in \mathbb{Z} \setminus \{ 0 \}$ \\
+On définit le \uline{PPCM de $a$ et $b$} comme le plus petit entier $\geq 1$ qui soit à la fois multiple de $a$ et $b$ \\
+On le note $\ppcm(a, b)$ ou $a \vee b$
+\end{definition}
+\begin{proposition}
+Soit $a, b \in \mathbb{Z} \setminus \{ 0 \}$ \\
+Les multiples communs à $a$ et $b$ sont les multiples de $a \vee b$
+\end{proposition}
+
+\section{Nombres premiers}
+\subsection{Généralités}
+\begin{definition}
+Soit $n \geq 2$ un entier. \\
+On dit que $n$ est \uline{premier} si $\forall a, b \in \mathbb{Z}$, $n = ab \implies (|a| = 1 \text{ ou } |b| = 1)$ \\
+On dit que $n$ est \uline{composé} s'il n'est pas premier.
+\end{definition}
+\begin{proposition}
+Soit $p$ un nombre premier et $n \in \mathbb{Z}$ \\
+On a $n \perp p \iff p \nmid n$
+\end{proposition}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item $p$ est premier avec tous les éléments de $\llbracket 1, p - 1 \rrbracket$
+\item $p$ est premier avec les nombres premiers $l \neq p$
+\end{itemize}
+\end{corollaire}
+\begin{theorem}[Lemme d'Euclide]
+Soit $p$ premier et $a_1, ...\,, a_r \in \mathbb{Z}$ \\
+Alors $p \mid a_1, ...\,, a_r$ si et seulement si ($p \mid a_1$ ou ... ou $p \mid a_r$)
+\end{theorem}
+
+\subsection{Valuation $p$-adique}
+\begin{definition}
+Soit $p$ un nombre premier. \\
+On définit la \uline{valuation $p$-adique}
+\[ v_p: \begin{cases}
+\mathbb{Z} \to \mathbb{N} \cup \{ +\infty \} \\
+n \mapsto \begin{cases}
+\max \{ k \in \mathbb{N} \mid p^k \mid n \} \text{ si } n \neq 0 \\
++\infty \text{ si } n = 0
+\end{cases}
+\end{cases}\]
+\end{definition}
+\begin{lemme}
+Soit $n \in \mathbb{Z} \setminus \{ 0 \}$ et $p$ un nombre premier. Soit $k \in \mathbb{N}$ \\
+Alors $v_p(n) = k$ si et seulement s'il existe $n_0 \in \mathbb{Z}$ tel que $\begin{cases}
+n = p^k n_0 \\
+p \nmid n_0
+\end{cases}$
+\end{lemme}
+\begin{theorem}
+Soit $p$ un nombre premier, et $a, b \in \mathbb{Z}$
+\begin{itemize}
+\item On a $v_p(ab) = v_p(a) + v_p(b)$
+\item On a $v_p(a + b) \geq \min(v_p(a), v_p(b))$
+\item Si, en outre, $v_p(a) \neq v_p(b)$, alors $v_p(a + b) = \min(v_p(a), v_p(b))$
+\end{itemize}
+\end{theorem}
+
+\subsection{Décomposition en facteurs premiers}
+\begin{theorem}
+Soit $n \in \mathbb{Z} \setminus \{ 0 \}$ \\
+Alors il existe $\varepsilon \in \{ -1, 1 \}$, $r \in \mathbb{N}$, $p_1 < p_2 < ... < p_r$ des nombres premiers et $\alpha_1, ...\,, \alpha_r \in \mathbb{N}^*$ tels que
+\[n = \varepsilon p_1^{\alpha_1} ... p_r^{\alpha_r} = \varepsilon \prod_{i = 1}^r p_i^{\alpha_i}\]
+Cette décomposition est unique.
+\end{theorem}
+\begin{corollaire}
+Tout entier $n \geq 2$ possède un diviseur premier.
+\end{corollaire}
+\begin{corollaire}
+Soit $n, m \in \mathbb{Z} \setminus \{ 0 \}$ \\
+On a $(n \wedge m)(n \vee m) = |n| \cdot |m|$
+\end{corollaire}
+
+\subsection{Infinitude des nombres premiers}
+\begin{theorem}
+Il existe une infinité de nombres premiers.
+\end{theorem}
+
+\section{Arithmétique et algèbre}
+\subsection{Indicatrice d'Euler}
+\begin{theorem}
+Soit $n \in \mathbb{N}^*$ et $k \in \mathbb{Z}$ \\
+LASSÉ:
+\begin{enumerate}
+\item $k \perp n$
+\item $[k]_n$ est un inversible de l'anneau $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$
+\item $[k]_n$ est un générateur de $(\mathbb{Z}/n\mathbb{Z}, +)$
+\end{enumerate}
+\end{theorem}
+
+\pagebreak
+
+\begin{definition}
+On appelle \uline{fonction indicatrice d'Euler} la fonction
+\[ \varphi : \begin{cases}
+\mathbb{N}^* \to \mathbb{N} \\
+n \mapsto \left| \{ k \in \llbracket 1, n \rrbracket \mid k \perp n \} \right|
+\end{cases}\]
+D'après le théorème $\varphi(n)$ est aussi le nombre d'inversibles de $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$ ou le nombre de générateurs de $(\mathbb{Z}/n\mathbb{Z}, +)$
+\end{definition}
+
+\subsection{Petit théorème de Fermat}
+\begin{theorem}
+Soit $p$ un nombre premier. \\
+Alors pour tout $a \in \mathbb{Z}$:
+\begin{itemize}
+\item Si $p \nmid a$, on a $a^{p - 1} \equiv 1 \text{ (mod $p$) }$
+\item En général, $a^p \equiv a \text{ (mod $p$) }$
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Fermat - Euler]
+Soit $n \geq 2$ et $a \in \mathbb{Z}$ tel que $a \perp n$ \\
+Alors $a^{\varphi(n)} \equiv 1 \text{ (mod $n$) }$
+\end{theorem}
+
+\subsection{Lemme chinois}
+\begin{theorem}[Lemme chinois / théorème des restes chinois]
+Soit $n; m \in \mathbb{N}^*$ premiers entre eux. \\
+On a alors un isomorphisme d'anneaux
+\[ \varphi: \begin{cases}
+\mathbb{Z}/n\mathbb{Z} \to \mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z} \\
+[k]_{nm} \mapsto ([k]_n, [k]_m)
+\end{cases}\]
+\end{theorem}
+\begin{corollaire}[additif]
+Soit $n, m \in \mathbb{N}^*$ premiers entre eux. \\
+Alors le groupe $\mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$ est cyclique.
+\end{corollaire}
+\begin{corollaire}[multiplicatif]
+Soit $n, m \in \mathbb{N}^*$ premiers entre eux. \\
+On a un isomorphisme de groupes multiplicatifs $(\mathbb{Z}/nm\mathbb{Z})^\times \to (\mathbb{Z}/n\mathbb{Z})^\times \times (\mathbb{Z}/n\mathbb{Z})^\times$ \\
+En particulier, $\varphi(nm) = \varphi(n) \varphi(m)$ (indicatrice d'Euler) \\
+On dit que $\varphi$ est \uline{multiplicative} (on a que pour tous $n, m$ \uline{premiers entre eux}, $\varphi(nm) = \varphi(n) \varphi(m)$)
+\end{corollaire}
+\begin{corollaire}
+Soit $n \in \mathbb{N}^*$ et $n = \prod\limits_{i = 1}^r p_i^{\alpha_i}$ sa décomposition en facteurs premiers. \\
+Alors
+\begin{align*}
+\varphi(n) = \prod_{i = 1}^r \varphi(p_i^{\alpha_i}) &= \prod_{i = 1}^r(p_i - 1) p_i^{\alpha_i - 1} \\
+&= \prod_{i = 1}^r \left( \left(1 - \frac{1}{p_i}\right) p_i^{\alpha_i} \right) \\
+&= n \prod_{i = 1}^r \left( 1 - \frac{1}{p_i} \right)
+\end{align*}
+\end{corollaire}
+\begin{lemme}
+Soit $A$ et $B$ deux anneaux. \\
+Si les anneaux $A$ et $B$ sont isomorphes, les groupes multiplicatifs $A^\times$ et $B^\times$ sont isomorphes.
+\end{lemme}
+\begin{lemme}
+Soit $R$ et $S$ deux anneaux. \\
+On a $(R \times S)^\times = R^\times \times S^\times$
+\end{lemme}
+\end{document}

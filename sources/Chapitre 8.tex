@@ -1,0 +1,166 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\pgcd}{pgcd}
+\DeclareMathOperator{\ppcm}{ppcm}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\car}{car}
+\DeclareMathOperator{\Frac}{Frac}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 8. Anneaux et corps}}
+\end{center}
+
+\section{Anneaux}
+\subsection{Généralités}
+\begin{definition}
+Un \uline{anneau} est un ensemble $A$ muni de deux lois de composition interne $+$ et $\cdot$ tels que:
+\begin{itemize}
+\item $(A, +)$ est un groupe abélien, noté additivement (en particulier, son élément neutre est noté $0_A$)
+\item La loi $\cdot$ est associative et possède un élément neutre $1_A$
+\item La loi $\cdot$ \uline{distribue sur l'addition}: $\forall x, y, z \in A: \begin{cases}
+x(y + z) = xy + xz \\
+(y + z)x = yx + zx
+\end{cases}$
+\end{itemize}
+Un anneau est dit \uline{commutatif} si sa multiplication est commutative.
+\end{definition}
+
+\subsection{Règles de calcul}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $0_A$ est \uline{absorbant}: $\forall a \in A$, $0_A \cdot a = a \cdot 0_A = 0_A$
+\item (règle de signes): $\forall a, b \in A$, $(-a)b = -(ab) = a \cdot (-b)$ \quad (où $(-a)$ est l'opposé de $a$ pour la loi $+$)
+\end{itemize}
+\end{proposition}
+\begin{theorem}
+Soit $A$ un anneau et $a, b \in A$ tels que $ab = ba$ ($a, b$ commutent) \\
+Alors
+\[\forall n \in \mathbb{N}: \begin{cases}
+(a + b)^n = \sum\limits_{k = 0}^n \binom{n}{k} a^k b^{n - k} \text{ \quad (Binôme de Newton) } \\
+a^{n + 1} - b^{n + 1} = (a - b) \sum\limits_{k = 0}^n a^k b^{n - k}
+\end{cases}\]
+\end{theorem}
+
+\subsection{Groupe des inversibles}
+\begin{definition}
+Soit $A$ un anneau. \\
+Le \uline{groupe des inversibles (ou des unités) de $A$} est $A^\times = \left\{ x \in A \mid \exists y \in A: xy = yx = 1_A \right\}$ \\
+Comme son nom l'indique, $(A^\times, \cdot)$ est un groupe.
+\end{definition}
+
+\subsection{Sous-anneaux}
+\begin{definition}
+Soit $A$ un anneau. \\
+Un \uline{sous-anneau de $A$} est une partie $B$ de $A$ telle que:
+\begin{itemize}
+\item $B$ soit un sous-groupe de $(A, +)$
+\item $B$ soit stable par $\cdot$ et $1_A \in B$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $A$ un anneau et $B \subseteq A$ \\
+Pour que $B$ soit un sous-anneau de $A$, il faut et il suffit que:
+\begin{itemize}
+\item $1_A \in B$
+\item $\forall x, y \in B$, $x - y \in B$
+\item $\forall x, y \in B$, $xy \in B$
+\end{itemize}
+\end{proposition}
+
+\subsection{Morphismes d'anneaux}
+\begin{definition}
+Soit $A, B$ deux anneaux. \\
+Un morphisme (d'anneaux) $f: A \to B$ est une application telle que:
+\begin{itemize}
+\item $\forall x, y \in A$, $f(x + y) = f(x) + f(y)$ \quad ($f$ morphisme de groupes additifs)
+\item $f(1_A) = 1_B$
+\item $\forall x, y \in A$, $f(xy) = f(x) f(y)$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $f: A \to B$ un morphisme d'anneaux. \\
+Alors $\im(f)$ est un sous-anneau de $B$
+\end{proposition}
+
+\section{Corps}
+\subsection{Anneau intègre}
+\begin{definition}
+Un anneau $A$ est dit \uline{intègre} s'il est commutatif, non nul (différent de l'anneau nul: $0_A \neq 1_A$) et que $\forall x, y \in A$, $xy = 0_A \implies (x = 0_A \text{ ou } y = 0_A)$
+\end{definition}
+\begin{proposition}
+Soit $n \in \mathbb{N}^*$ \\
+Alors $\mathbb{Z}/n\mathbb{Z}$ est intègre ssi $n$ est premier.
+\end{proposition}
+
+\section{Corps: généralités}
+\begin{definition}
+Un \uline{corps} est un anneau commutatif, non nul, et dans lequel tout élément non nul est inversible.
+\end{definition}
+\begin{proposition}
+Tout anneau intègre fini est un corps.
+\end{proposition}
+\begin{definition}
+Soit $L$ un corps. \\
+Un \uline{sous-corps} de $L$ est un sous-anneau $K$ de $L$ tel que $\forall x \in K \setminus \{ 0 \}$, $x^{-1} \in K$ \\
+On dit aussi que $L$ est un \uline{sur-corps} de $K$ ou que $L/K$ est une \uline{extension de corps}.
+\end{definition}
+\begin{definition}
+Soit $K_1, K_2$ deux corps. \\
+Un \uline{morphisme de corps} $K_1 \to K_2$ est un morphisme d'anneaux $K_1 \to K_2$
+\end{definition}
+\begin{proposition}
+Tout morphisme de corps est injectif.
+\end{proposition}
+
+\subsection{Caractéristique d'un corps}
+\begin{definition}
+La \uline{caractéristique} $\car(K)$ d'un corps $K$ est l'ordre de $1_K$ dans le groupe additif $(K, +)$ s'il est fini, et $0$ sinon.
+\end{definition}
+\begin{theorem}
+Soit $K$ un corps.
+\begin{itemize}
+\item Si $K$ est de caractéristique non nulle, alors sa caractéristique est un nombre premier, et $K$ continent un sous-corps isomorphe à $\mathbb{F}_p$
+\item Si $K$ est de caractéristique nulle, il contient un sous-corps isomorphe à $\mathbb{Q}$
+\end{itemize}
+\end{theorem}
+
+\subsection{Corps des fractions d'un anneau intègre}
+\noindent On va construire un \uline{corps de fractions} $\Frac(A)$ "contenant $A$". \\
+L'ensemble $\Frac(A)$ est le quotient de $A \times (A \setminus \{ 0 \})$ par la relation $\sim$ définie par \\
+$\forall (a_1, b_1),(a_2, b_2) \in A \times (A \setminus \{ 0 \})$, $(a_1, b_1) \sim (a_2, b_2) \iff a_1 b_2 = a_2 b_1$ \\
+dont on vérifie que c'est une relation d'équivalence. \\
+On note simplement $\frac{a}{b}$ le classe d'équivalence de $(a, b) \in A \times (A \setminus \{ 0 \})$ \\
+On munit alors $K = \Frac(A)$ de deux lois:
+\begin{align*}
+\frac{a_1}{b_1} + \frac{a_2}{b_2} &= \frac{a_1 b_2 + a_2 b_1}{b_1 b_2} \\
+\frac{a_1}{b_1} \cdot \frac{a_2}{b_2} &= \frac{a_1 a_2}{b_1 b_2}
+\end{align*}
+(avec $b_1 b_2 \neq 0_A$)
+\end{document}

@@ -1,0 +1,315 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\im}{im}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 7. Groupes}}
+\end{center}
+\section{Magmas et monoïdes}
+\subsection{Magmas}
+\begin{definition}
+Une \uline{loi de composition interne} sur un ensemble $E$ est une application
+\[ *: \begin{cases}
+E \times E \to E \\
+(x, y) \mapsto x * y
+\end{cases} \]
+Un \uline{magma} est un ensemble muni d'une composition interne.
+\end{definition}
+\begin{definition}
+Soit $(M, *)$ un magma. \\
+Un \uline{sous-magma} de $M$ est une partie $N$ de $M$ telle que $\forall x, y \in N$, $x * y \in N$
+\end{definition}
+\begin{definition}
+Soit $(M, *)$ et $(N, \circ)$ deux magmas. \\
+Un \uline{morphisme de magmas} de $M$ dans $N$ est une application $f: M \to N$ telle que \\
+$\forall x, y \in M$, $f(x * y) = f(x) \circ f(y)$
+\end{definition}
+
+\subsection{Monoïdes}
+\begin{definition}
+Soit $(M, *)$ un magma.
+\begin{itemize}
+\item On dit que $*$ est \uline{associative} si \\
+$\forall x, y, z \in M$, $x * (y * z) = (x * y) * z$
+\item On dit que $e \in M$ est \uline{élément neutre pour $*$} si \\
+$\forall x \in M$, $e * x = x * e = x$
+\end{itemize}
+\end{definition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Un \uline{monoïde} est un ensemble $M$ muni d'une loi de composition interne $*$ \\
+associative et possédant un élément neutre.
+\item Le monoïde $(M, *)$ est dit \uline{commutatif} si \\
+$\forall x, y \in M$, $x * y = y * x$
+\end{itemize}
+\end{definition}
+\begin{proposition}[Unicité de l'élément neutre]
+Soit $(M, *)$ un monoïde.
+\begin{itemize}
+\item L'élément neutre de $M$ est unique.
+\item Plus précisément, si $e_1, e_2 \in M$ vérifient \\
+$\forall x \in M$, $e_1 * x = x$ (neutre à gauche) et $\forall x \in M$, $x * e_2 = x$ (neutre à droite) \\
+Alors $e_1 = e_2$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $(M, \cdot)$ un monoïde et $x \in M$ \\
+On dit que $M$ est \uline{inversible} si $\exists y \in M$, $xy = yx = 1_M$
+\end{definition}
+\begin{proposition}
+Soit $(M, \cdot)$ un monoïde et $x \in M$
+\begin{itemize}
+\item Si $x$ est inversible, l'inverse de $x$ est unique.
+\item Mieux: si $y_1, y_2 \in M$ vérifient $y_1 x = x y_2 = 1_M$ (càd: $y_1$ inverse à gauche, $y_2$ à droite) \\
+Alors $y_1 = y_2$
+\end{itemize}
+\end{proposition}
+
+\pagebreak
+
+\begin{definition}
+Soit $(M, \cdot)$ un monoïde et $x \in M$
+\begin{itemize}
+\item Pour tout $n \in \mathbb{N}$, on définit $x^n = \begin{cases}
+1_M \text{ si } n = 0 \\
+x \cdot x \cdot x \cdot ... \cdot x \text{ si } n > 0 \text{ \quad (}n\text{ facteurs) }
+\end{cases}$
+\item Si $x$ est inversible, on note également, pour tout $n \in \mathbb{Z}_-$ \\
+$x^n =(x^{-1})^{|n|} = \begin{cases}
+1_M \text{ si } n = 0 \\
+x^{-1} \cdot x^{-1} \cdot ... \cdot x^{-1} \text{ si } n < 0 \text{ \quad (}|n|\text{ facteurs) }
+\end{cases}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $(M, \cdot)$ un monoïde.
+\begin{itemize}
+\item On a $\forall \in M$, $\forall n, m \in \mathbb{N} \begin{cases}
+x^{n + m} = x^n x^m \\
+(x^n)^m = x^{n m }
+\end{cases}$
+\item Ces propriétés s'étendent aux exposants négatifs si $x$ est inversible.
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $(M, \cdot)$ un monoïde. \\
+Un \uline{sous-monoïde} de $M$ est une partie $N$ de $M$ telle que:
+\begin{itemize}
+\item $\forall x, y \in N$, $x y \in N$ ($N$ stable sous $\cdot$)
+\item $1_M \in \mathbb{N}$
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $(M, \cdot)$ et $(N, *)$ deux monoïdes. \\
+Un \uline{morphisme de monoïdes} de $M$ dans $N$ est une application $f: M \to N$ telle que:
+\begin{itemize}
+\item $\forall x, y \in M$, $f(x \cdot y) = f(x) * f(y)$
+\item $f(1_M) = 1_N$
+\end{itemize}
+\end{definition}
+
+\section{Groupes: généralités}
+\subsection{Définition}
+\begin{definition}
+Un \uline{groupe} est un ensemble $G$ muni d'une loi $\cdot$ telle que:
+\begin{itemize}
+\item La loi $\cdot$ est associative.
+\item Il existe un élément neutre $1_G$ pour $\cdot$
+\item Tout élément de $G$ est inversible: \\
+$\forall x \in G$, $\exists y \in G: xy = yx = 1_G$
+\end{itemize}
+Un groupe est dit (\uline{commutatif}) ou \uline{abélien} si la loi est commutative.
+\end{definition}
+
+\subsection{Sous-groupes}
+\begin{definition}
+Soit $(G, \cdot)$ un groupe. \\
+Un \uline{sous-groupe} de $G$ est une partie $H$ de $G$ telle que:
+\begin{itemize}
+\item $\forall x, y \in H$, $xy \in H$ \quad ($H$ stable sous $\cdot$)
+\item $1_G \in H$
+\item $\forall x \in H$, $x^{-1} \in H$ \quad ($H$ est stable par inverse)
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $(G, \cdot)$ un groupe et $H \subseteq G$ \\
+Alors $H$ est sous-groupe de $G$ ssi $H$ est non vide  et stable sous $(x, y) \mapsto x y^{-1}$
+\end{proposition}
+\begin{proposition}
+Soit $G$ un groupe et $(H_i)_{i \in I}$ une famille de sous-groupes de $G$ \\
+Alors $\bigcap\limits_{i \in I} H_i$ est un sous-groupe de $G$
+\end{proposition}
+\begin{theorem}[Classification des sous-groupes de $\mathbb{Z}$]
+Soit $H$ un sous-groupe de $(\mathbb{Z}, +)$ \\
+Alors il existe $n \in \mathbb{N}$ tel que $H = n\mathbb{Z} = \{kn \mid k \in \mathbb{Z} \}$
+\end{theorem}
+
+\subsection{Morphismes}
+\begin{definition}
+Soit $(G_1, \cdot)$ et $(G_2, \times)$ deux groupes. \\
+Un \uline{morphisme} (ou \uline{homomorphisme}) de groupes de $G_1$ dans $G_2$ est une application $f: G_1 \to G_2$ telle que \\
+$\forall g, g' \in G_1$, $f(g \cdot g') = f(g) * f(g')$ \\
+Un \uline{endomorphisme} de $G$ est un morphisme $G \to G$ \\
+Un \uline{isomorphisme} $G_1 \to G_2$ est un morphisme bijectif. \\
+Un \uline{automorphisme} de $G$ est un isomorphisme $G \to G$ \\
+On note parfois $\Hom(G_1, G_2)$ l'ensemble des morphismes $G_1 \to G_2$
+\end{definition}
+\begin{proposition}[Stabilité par composition]
+Soit $(G_1, \cdot), (G_2, \cdot), (G_3, \cdot)$ trois groupes et \\
+$f \in \Hom(G_1, G_2)$, $g \in \Hom(G_2, G_3)$ \\
+Alors $g \circ f \in \Hom(G_1, G_3)$
+\end{proposition}
+\begin{proposition}
+Soit $f: G_1 \to G_2$ un isomorphisme de groupes. \\
+Alors $f^{-1}: G_2 \to G_1$ est aussi un isomorphisme.
+\end{proposition}
+\begin{proposition}
+Soit $f: G_1 \to G_2$ un morphisme.
+\begin{itemize}
+\item Soit $H_1$ un sous-groupe de $G_1$ \\
+Alors $f[H_1]$ est un sous-groupe de $G_2$ \\
+En particulier, $\im(f)$ est un sous-groupe de $G_2$
+\item Soit $H_2$ un sous-groupe de $G_2$ \\
+Alors $f^{-1}[H_2]$ est un sous-groupe de $G_1$ \\
+En particulier, $\ker(f)$ est un sous-groupe de $G_1$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $f: G_1 \to G_2$ un morphisme de groupes. \\
+Alors $f$ est surjective ssi $\im f = G_2$ \\
+Et $f$ est injective ssi $\ker f = \{ 1_{G_1} \}$
+\end{proposition}
+\begin{definition}
+Soit $G$ un groupe. \\
+Deux éléments $g_1$ et $g_2$ sont \uline{conjugués} si $\exists h \in G: g_2 = h g_1 h^{-1}$
+\end{definition}
+\begin{proposition}
+La relation "être conjugué" est une relation d'équivalence.
+\end{proposition}
+
+\subsection{Ordre d'un élément}
+\begin{definition}
+Soit $G$ un groupe et $g \in G$
+\begin{itemize}
+\item On dit que $g$ est \uline{d'ordre fini} si $\exists n \in \mathbb{N}^*: g^n = 1_G$ \\
+Dans ce cas son \uline{ordre} est le plus petit entier $n \in \mathbb{N}^*$ tel que $g^n = 1_G$
+\item On dit que $g$ est \uline{d'ordre infini} s'il n'est pas d'ordre fini.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $G$ un groupe et $g \in G$ un élément d'ordre $n \in \mathbb{N}^*$ \\
+Alors $\forall k \in \mathbb{Z}$, $g^k = 1_G \iff n \mid k$
+\end{theorem}
+
+\section{Parties génératrices}
+\subsection{Sous-groupe engendré par une partie}
+\begin{definition}
+Soit $G$ un groupe et $A \subseteq G$ \\
+On appelle \uline{sous-groupe (de $G$) engendré par $A$} l'intersection de tous les sous-groupes de $G$ contenant $A$ \\
+Autrement dit 
+\[\left<A\right> = \bigcap\limits_{\substack{H \text{ sous-groupe de } G \\ A \subseteq H}} H\]
+\end{definition}
+\begin{definition}
+Soit $G$ un groupe et $A \subseteq G$ \\
+On dit que $A$ \uline{engendre} $G$ (ou est \uline{génératrice} de $G$) si $\left<A\right> = G$
+\end{definition}
+\begin{theorem}[Prolongement des identités, version groupes]
+\hfill \\
+Soit $G_1, G_2$ deux groupes et $\varphi, \psi : G_1 \to G_2$ deux morphismes. \\
+Soit $A \subseteq G_1$ génératrice de $G_1$ \\
+Alors si $\varphi$ et $\psi$ coïncident sur $A$ (càd si $\forall a \in A$, $\varphi(a) = \psi(a)$), on a $\varphi = \psi$
+\end{theorem}
+
+\subsection{Groupes monogènes et cycliques}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Un groupe $G$ est dit \uline{monogène} s'il est engendré par un de ses éléments.
+\item Un groupe est dit \uline{cyclique} s'il est monogène et fini.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $G$ un groupe monogène et $x \in G$ tel que $G = \left<x\right>$
+Alors:
+\begin{itemize}
+\item (Cas infini): Si l'ordre de $x$ est infini, on a un isomorphisme $\varphi: \begin{cases}
+\mathbb{Z} \to G \\
+k \mapsto x^k
+\end{cases}$
+\item (Cas cyclique): Si l'ordre de $x$ est fini et noté $n \in \mathbb{N}^*$, on a un isomorphisme $\varphi: \begin{cases}
+\mathbb{Z}/n\mathbb{Z} \to G \\
+[k]_n \mapsto x^k
+\end{cases}$
+\end{itemize}
+\end{theorem}
+
+\section{Théorème de Lagrange}
+\subsection{Énoncé}
+\begin{definition}
+Soit $G$ un groupe fini. \\
+L'\uline{ordre} de $G$ est son cardinal $|G|$
+\end{definition}
+\begin{theorem}[Théorème de Lagrange]
+Soit $G$ un groupe fini et $H$ un sous-groupe de $G$ \\
+Alors $|H|$ divise $|G|$
+\end{theorem}
+\begin{corollaire}
+Soit $G$ un groupe fini et $x \in G$ \\
+Alors $x$ est d'ordre fini et l'ordre de $x$ divise $|G|$
+\end{corollaire}
+
+\subsection{Démonstration: Classes à gauche modulo un sous-groupe}
+\begin{definition}
+Soit $G$ un sous-groupe et $H$ un sous-groupe de $G$ \\
+Une \uline{classe à gauche modulo $H$} est un ensemble de la forme $g H = \{ g h \mid h \in H \}$ où $g$ est un élément de $G$
+\end{definition}
+\begin{proposition}
+\begin{itemize}
+\item Soit $g_1, g_2 \in G$ \\
+Alors on a $g_1 H = g_2 H \iff g_2^{-1} g_1 \in H$
+\item La relation $\mathcal{R}$ définie sur $G$ par \\
+$\forall g_1, g_2 \in G$, $g_1 \mathcal{R} g_2 \iff g_1 H = g_2 H$ \\
+est une relation d'équivalence.
+\end{itemize}
+\end{proposition}
+\begin{definition}
+L'ensemble des classes à gauche (qui est donc l'ensemble des classe de cette relation d'équivalence) est noté $G / H$
+\end{definition}
+\begin{proposition}
+Toutes les classes à gauche modulo $H$ sont en bijection avec $H$
+\end{proposition}
+
+\subsection{Cas d'un morphisme de groupes}
+\begin{proposition}
+Soit $G_1, G_2$ deux groupes finis et $f: G_1 \to G_2$ un morphisme de groupe. \\
+Alors $\left|G_1\right| = \left|\ker f\right| \times \left|\im f\right|$
+\end{proposition}
+\end{document}

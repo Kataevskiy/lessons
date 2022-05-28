@@ -95,5 +95,42 @@ Soit $K$ un corps.
 Soit $A \in M_n(K)$ \\
 On définit son \uline{déterminant}:
 \[ \det(A) = \sum_{\sigma \in \gamma(n)} \varepsilon(\sigma) \prod_{j = 1}^n [A]_{\sigma(j) \, j}\]
+On note aussi
+\[ \det A = \begin{vmatrix}
+[A]_{1, 1} & \cdots & [A]_{1, n} \\
+\vdots & & \vdots \\
+[A]_{n, 1} & \cdots & [A]_{n ,n}
+\end{vmatrix}\]
 \end{definition}
+
+\subsection{Formes $n$-linéaires alternés}
+\begin{definition}
+Une \uline{forme $n$-linéaire} sur un espace vectoriel $E$ est une application $f: E^n \to K$ linéaire en chacune de ses variables, càd telle que pour tous $x_1, ...\,, x_n \in E$ et $i \in \llbracket 1, n \rrbracket$ l'application 
+\[\begin{cases}
+E \to K \\
+y \mapsto f(x_1, ...\,, x_{i - 1}, y, x_{i + 1}, ...\,, x_n)
+\end{cases}\]
+soit linéaire.
+\end{definition}
+\begin{definition}
+Une forme \uline{$n$-linéaire} $f: E^n \to K$ est dite alternée si $f(x_1, ...\,, x_n) = 0$ dès que deux (au moins) des vecteurs $x_1, ...\,, x_n$ sont égaux.
+\end{definition}
+\begin{proposition}
+Une forme $n$-linéaire alternée est antisymétrique: \\
+Si $(y_1, ...\,, y_n)$ est obtenu à partir de $(x_1, ...\,, x_n)$ et échangeant $x_i$ et $x_j$ pour $i \neq j$, alors $f(y_1, ...\,, y_n) = f(x_1, ...\,, x_n)$
+\end{proposition}
+\noindent \uline{Changement de point de vue}: On peut considérer le déterminant comme un application
+\[ \begin{cases}
+K^n \times ... \times K^n \to K \text{ \quad ($n$ fois) } \\
+(c_1, ...\,, c_n) \mapsto \det(c_1, ...\,, c_n) = \det(c_1 \mid ... \mid c_n)
+\end{cases}\]
+\begin{theorem}
+Le déterminant est une forme $n$-linéaire alternée sur $K^n$
+\end{theorem}
+\begin{corollaire}
+Si $A \in M_n(K)$ n'est pas inversible, alors $\det(A) = 0$
+\end{corollaire}
+\begin{theorem}
+Toute forme $n$-linéaire alternée sur $K^n$ est proportionnelle au déterminant.
+\end{theorem}
 \end{document}

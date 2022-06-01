@@ -25,6 +25,8 @@
 \newtheorem{definition}[proposition]{Définition}
 
 \DeclareMathOperator{\supp}{Supp}
+\DeclareMathOperator{\mat}{Mat}
+\DeclareMathOperator{\com}{com}
 
 \begin{document}
 \renewcommand{\labelitemi}{$*$}
@@ -121,7 +123,7 @@ Si $(y_1, ...\,, y_n)$ est obtenu à partir de $(x_1, ...\,, x_n)$ et échangean
 \end{proposition}
 \noindent \uline{Changement de point de vue}: On peut considérer le déterminant comme un application
 \[ \begin{cases}
-K^n \times ... \times K^n \to K \text{ \quad ($n$ fois) } \\
+K^n \times ... \times K^n \to K \text{ \quad (n fois) } \\
 (c_1, ...\,, c_n) \mapsto \det(c_1, ...\,, c_n) = \det(c_1 \mid ... \mid c_n)
 \end{cases}\]
 \begin{theorem}
@@ -133,4 +135,148 @@ Si $A \in M_n(K)$ n'est pas inversible, alors $\det(A) = 0$
 \begin{theorem}
 Toute forme $n$-linéaire alternée sur $K^n$ est proportionnelle au déterminant.
 \end{theorem}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item Toute application $f: M_n(K) \to K$ "$n$-linéaire alternée par rapport aux colonnes" \\
+s'écrit $\lambda \det$, où $\lambda = f(I_n)$
+\item La même chose est vraie pour les application "$n$-linéaires alternées par rapport aux lignes".
+\end{itemize}
+\end{corollaire}
+\begin{definition}
+Étant donné un ev $E$ de dimension $n$ et $\mathcal{B}$ une base de $E$, on associe à toute famille $(v_1, ...\,, v_n)$ de vecteurs de $E$ le déterminant $\det_\mathcal{B} (v_1, ...\,, v_n) = \det \mat_\mathcal{B} (v_1, ...\,, v_n)$
+\end{definition}
+
+\pagebreak
+
+\begin{corollaire}
+Soit $E$ un ev de dimension $n$ et $\mathcal{B}$ une base de $E$
+\begin{itemize}
+\item Le déterminant
+\[\textstyle{\det_\mathcal{B}} : \begin{cases}
+E^n \to K \\
+(v_1, ...\,, v_n) \mapsto \det_\mathcal{B} (v_1, ...\,, v_n)
+\end{cases}\]
+est une forme $n$-linéaire alternée sur $E$
+\item Toute forme $n$-linéaire alternée sur $E$ est de la forme $\lambda \det_\mathcal{B}$ pour un certain $\lambda \in K$
+\end{itemize}
+\end{corollaire}
+
+\subsection{Multiplicativité du déterminant}
+\begin{theorem}
+On a $\forall A, B \in M_n(K)$, $\det(AB) = \det(A) \det(B)$
+\end{theorem}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item On a $\forall A \in M_n(K)$, $\det(A) \neq 0 \implies A \in GL_n(K)$
+\item Le déterminant induit un morphisme de groupes multiplicatifs \\
+$\det: GL_n(K) \to K^*$
+\end{itemize}
+\end{corollaire}
+\begin{definition}
+On appelle \uline{groupe spécial linéaire} le noyau
+\[ SL_n(K) = \ker(\det: GL_n(K) \to K^*) = \left\{ A \in M_n(K) \mid \det(A) = 1 \right\}\]
+\end{definition}
+\begin{corollaire}
+Soit $E$ un espace vectoriel de dimension $n$ et $\mathcal{B}$ une base de $E$ \\
+Soit $(v_1, ...\,, v_n)$ une famille de vecteurs de $E$ \\
+Alors $\det_\mathcal{B}(v_1, ...\,, v_n) \neq 0 \iff (v_1, ...\,, v_n)$ base de $E$
+\end{corollaire}
+
+\subsection{Déterminant d'un endomorphisme}
+\begin{proposition}
+Deux matrices semblables ont le même déterminant.
+\end{proposition}
+\begin{definition}
+Soit $E$ un ev de dimension $n$ et $f \in \mathcal{L}(E)$ \\
+On définit le déterminant de $f$, noté $\det f$, comme le déterminant de $\mat_\mathcal{B}(f)$, pour une base $\mathcal{B}$ de $E$
+\end{definition}
+\begin{proposition}
+Avec les mêmes notations, $\det f \neq 0$ si et seulement si $f$ est un automorphisme.
+\end{proposition}
+\begin{proposition}
+Soit $E$ un espace vectoriel de dim $n$ muni d'une base $\mathcal{B}$, $v_1, ...\,, v_n \in E$ et $f \in \mathcal{L}(E)$ \\
+Alors $\det_\mathcal{B}(f(v_1), ...\,, f(v_n)) = \det(f) \det_\mathcal{B}(v_1, ...\,, v_n)$
+\end{proposition}
+
+\section{Calculs}
+\subsection{Opérations élémentaires}
+\begin{proposition}
+Soit $A \in M_n(K)$ \\
+La matrice $A'$ obtenue à partir de $A$ en effectuant:
+\begin{itemize}
+\item Un échange $[L_i \leftrightarrow L_j]$ ou $[C_i \leftrightarrow C_j]$ vérifie $\det A' = -\det A$
+\item Une dilatation $[L_i \leftarrow \lambda L_i]$ ou $[C_i \leftarrow \lambda C_i]$ vérifie $\det A' = \lambda \det A$
+\item Une transvection $[L_i \leftarrow L_i + \lambda L_j]$ ou $[C_i \leftarrow C_i + \lambda C_j]$ vérifie $\det A' = \det A$
+\end{itemize}
+\end{proposition}
+
+\pagebreak
+
+\subsection{Développement par rapport à une ligne ou une colonne}
+\begin{definition}
+Soit $A \in M_n(K)$ et $(i, j) \in \llbracket , n \rrbracket^2$ \\
+On définit:
+\begin{itemize}
+\item Le \uline{mineur} $(i, j)$: $\Delta_{i, j}$ qui est le déterminant de la matrice obtenue en supprimant \\
+la $i$-ème ligne et la $j$-ème colonne de $A$
+\item Le \uline{cofacteur} $(i, j)$ est $(-1)^{i + j} \Delta_{i, j}$
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+On a pour tout $i \in \llbracket 1, n \rrbracket$
+\[ \det A = \sum_{j = 1}^n (-1)^{i + j} \Delta_{i, j} [A]_{i, j} \]
+(développement par rapport à la $i$-ème ligne) \\
+Et pour tout $j \in \llbracket 1, n \rrbracket$
+\[ \det A = \sum_{i = 1}^n (-1)^{i + j} \Delta_{i, j} [A]_{i, j} \]
+(développement par rapport à la $j$-ème colonne)
+\end{theorem}
+\begin{theorem}
+Le déterminant d'une matrice triangulaire est le produit de ses coefficients diagonaux.
+\end{theorem}
+\begin{corollaire}
+Une matrice triangulaire est inversible ssi aucun de ses coefficients diagonaux n'est nul.
+\end{corollaire}
+\begin{theorem}
+On considère une matrice "triangulaire par blocs" 
+\[M = \left(\begin{array}{c | c}
+A & B \\
+\hline
+0 & C \\
+\end{array}\right) \in M_{n + p}(K) \text{ où } \begin{cases}
+A \in M_n(K) \\ C \in M_p(K) \\ B \in M_{np}(K)
+\end{cases}\]
+Alors $\det M = \det A \cdot \det C$
+\end{theorem}
+
+\subsection{Déterminant de Vandermonde}
+\begin{theorem}
+Soit $a_0, a_1, ...\,, a_{n - 1} \in K$ \\
+Alors
+\[ \begin{vmatrix}
+1 & 1 & 1 & \cdots & 1 \\
+a_0 & a_1 & a_2 & \cdots & a_{n - 1} \\
+a_0^2 & a_1^2 & a_2^2 & \cdots & a_{n - 1}^2 \\
+\vdots & \vdots & \vdots & & \vdots \\
+a_0^{n - 1} & a_1^{n - 1} & a_2^{n - 1} & \cdots & a_{n - 1}^{n - 1}
+\end{vmatrix} = \prod_{0 \leq i < j \leq n - 1} (a_j - a_i)\]
+Ce déterminant est le \uline{déterminant de Vandermonde} $V(a_0, ...\,, a_{n - 1})$
+\end{theorem}
+
+\subsection{Comatrice}
+\begin{definition}
+Soit $A \in M_n(K)$ \\
+La \uline{comatrice} de $A$ est la matrice
+\[\com(A) = \left((-1)^{i + j} \Delta_{i, j}\right)_{1 \leq i, j \leq n}\]
+des cofacteurs de $A$
+\end{definition}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+On a $A \com(A)^T = \com(A)^T A = \det(A) I_n$
+\end{theorem}
+\begin{corollaire}
+Si $A \in M_n(K)$, on a $A^{-1} = \frac{1}{\det A} \com(A)^T$
+\end{corollaire}
 \end{document}

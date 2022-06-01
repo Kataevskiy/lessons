@@ -1,0 +1,75 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\newcommand{\vp}[2]{\left< #1 \mid #2 \right>}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 26: Espaces euclidiens}}
+\end{center}
+Dans tout le chapitre, le corps des scalaires est $\mathbb{R}$
+
+\section{Généralités}
+\subsection{Produit scalaire}
+\begin{definition}
+Soit $E$ un espace vectoriel (réel). \\
+Un \uline{produit scalaire} sur $E$ est une application
+\[ \vp{\cdot}{\cdot} : \begin{cases}
+E^2 \to \mathbb{R} \\
+(u, v) \to \vp{u}{v}
+\end{cases}\]
+\begin{itemize}
+\item \uline{linéaire}
+\item \uline{symétrique} (càd $\forall u, v \in E$, $\vp{u}{v} = \vp{v}{u}$)
+\item et \uline{définie positive} (càd $\forall u \in E, \vp{u}{u} \geq 0$ et $\forall u \in E$, $\vp{u}{u} = 0 \implies u = 0_E$)
+\end{itemize}
+Un \uline{espace préhibertien} (réel) est la donnée d'une ev E et d'un produit scalaire sur $E$ \\
+Un \uline{espace euclidien} est un espace préhibertien de dimension finie.
+\end{definition}
+
+\subsection{Norme euclidienne}
+\begin{definition}
+Soit $E$ un espace préhibertien.
+\begin{itemize}
+\item La \uline{norme (euclidienne)} de $u \in E$ est $\lVert u \rVert = \sqrt{\vp{u}{v}}$
+\item Le \uline{distance} de $u$ à $v \in E$ est $\text{d}(u, v) = \lVert v - u \rVert$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Inégalité de Cauchy-Schwarz]
+Soit $E$ un espace préhibertien et $u, v \in E$ \\
+On a
+\[\vp{u}{v} \leq \left| \vp{u}{v} \right| \leq \lVert u \rVert \cdot \lVert v \rVert\]
+"Le produit scalaire est inférieur au produit des normes"
+\end{theorem}
+\begin{theorem}
+La norme $\lVert \cdot \rVert$ est une \uline{norme}, càd qu'on a: \\
+\uline{Positivité}: $\forall u \in E$, $\lVert u \rVert \geq 0$ \\
+\uline{Séparation}: $\forall u \in E$, $\lVert u \rVert = 0 \implies u = 0_E$ \\
+\uline{Homogénéité}: $\forall u \in E$, $\forall \lambda \in \mathbb{R}$, $\lVert \lambda u \rVert = |\lambda| \cdot \lVert u \rVert$ \\
+\uline{Inégalité triangulaire}: $\forall u, v \in E$, $\lVert u + v \rVert \leq \lVert u \rVert + \lVert v \rVert$ \\
+\end{theorem}
+\end{document}

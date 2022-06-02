@@ -1,0 +1,172 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 6: Relations}}
+\end{center}
+
+\begin{definition}
+Une \uline{relation} (binaire) sur un ensemble est une partie $\mathrel{\mathcal{R}}$ de $E \times E$ \\
+Étant donné $x, y \in E$, on notera $x \mathrel{\mathcal{R}} y$ si $(x, y)$ est élément de $\mathrel{\mathcal{R}}$ et $x \not\mathrel{\mathcal{R}} u$ sinon.
+\end{definition}
+
+\section{Relation d'ordre}
+\subsection{Généralités}
+\begin{definition}
+Soit $E$ un ensemble. \\
+Une \uline{relation d'ordre} sur $E$ est une relation $\mathrel{\mathcal{R}}$:
+\begin{itemize}
+\item  \uline{Réflexive}: $\forall x \in E$, $x \mathrel\mathcal{R} x$
+\item \uline{Antisymétrique}: $\forall x, y \in E$, $(x \mathrel\mathcal{R} y \text{ et } y \mathrel\mathcal{R} x) \implies x = y$
+\item \uline{Transitive}: $\forall x, y, z \in E$, $(x \mathrel\mathcal{R} y \text{ et } y \mathrel\mathcal{R} z) \implies x \mathrel\mathcal{R} z$
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $(E, \preccurlyeq)$ un ensemble ordonné. \\
+On dit que l'ordre $\preccurlyeq$ est \uline{total} si $\forall x, y \in E$, $(x \preccurlyeq y \text{ ou } y \preccurlyeq x)$
+\end{definition}
+\begin{definition}
+Soit $(E, \preccurlyeq)$ un ensemble ordonné.
+\begin{itemize}
+\item Deux éléments $x, y \in E$ sont dits \uline{comparables} si $x \preccurlyeq y$ ou $y \preccurlyeq x$
+\item Une partie $A \subseteq E$ est une \uline{chaîne} si deux éléments quelconques de A sont toujours comparables.
+\item Une partie $A \subseteq E$ est une \uline{antichaîne} si deux éléments quelconques de $A$ ne sont jamais comparables.
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $(E, \preccurlyeq)$ et $(F, \sqsubseteq)$ deux ensembles ordonnées. \\
+Une application $f: E \to F$ est dite \uline{croissante} si $\forall x_1, x_2 \in E$, $x_1 \preccurlyeq x_2 \implies f(x_1) \sqsubseteq f(x_2)$
+\end{definition}
+
+\subsection{Éléments particuliers}
+\begin{definition}
+Soit $(E, \preccurlyeq)$ un ensemble ordonné. \\
+Soit $A \subseteq E$. On dit que:
+\begin{itemize}
+\item $A$ est \uline{majoré} s'il existe $M \in E$ tel que $\forall a \in A$, $a \preccurlyeq M$
+\item $A$ est \uline{minoré} s'il existe $m \in E$ tel que $\forall a \in A$, $m \preccurlyeq a$
+\item $A$ \uline{admet un maximum} s'il existe $M \in A$ tel que $\forall a \in A$, $a \preccurlyeq M$
+\item $A$ \uline{admet un minimum} s'il existe $m \in A$ tel que $\forall a \in A$, $m \preccurlyeq a$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $(E, \preccurlyeq)$ un ensemble ordonné et $A \subseteq E$ \\
+S'il existe, le maximum (resp. le minimum de $A$) est unique. \\
+On le note $\max(A)$ (resp. $\min(A)$).
+\end{proposition}
+\begin{definition}
+Soit $(E, \preccurlyeq)$ un ensemble ordonné et $A \subseteq E$ \\
+Un élément $a \in A$ est dit:
+\begin{itemize}
+\item \uline{Maximal}, s'il n'y a pas d'élément de $A$ qui lui est strictement supérieur, càd si \\
+$\forall a' \in A$, $a \preccurlyeq a' \implies a = a'$
+\item \uline{Minimal}, si $\forall a' \in A$, $a' \preccurlyeq a \implies a' = a$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $(E, \preccurlyeq)$ un ensemble ordonné et $A \subseteq E$ \\
+Alors, si $A$ admet un maximum, $\max(A)$ est l'unique élément maximal de $A$
+\end{proposition}
+
+\pagebreak
+
+\section{Relation d'équivalence}
+\subsection{Généralités}
+\begin{definition}
+Une relation $\mathrel\mathcal{R}$ sur $E$ est une relation d'équivalence si elle est:
+\begin{itemize}
+\item \uline{Réflexive}: $\forall x \in E$, $x \mathrel\mathcal{R} x$
+\item \uline{Symétrique}: $\forall x, y \in E$, $x \mathrel\mathcal{R} y \implies y \mathrel\mathcal{R} x$
+\item \uline{Transitive}: $\forall x, y, z \in E$, $(x \mathrel\mathcal{R} y \text{ et } y \mathrel\mathcal{R} z) \implies x \mathrel\mathcal{R} z$
+\end{itemize}
+\end{definition}
+
+\subsection{Classes d'équivalence}
+\begin{definition}
+Soit $E$ un ensemble muni d'une relation d'équivalence $\sim$ et $x \in E$ \\
+On définit la \uline{classe d'équivalence de $x$}
+\[ \left[x\right]_\sim = d(x) = \bar{x} = \dot{x} = \left\{ y \in E \mid x \sim y \right\} \]
+\end{definition}
+\begin{definition}
+Soit $E$ un ensemble. \\
+Une famille $(A_i)_{i \in I}$ de parties de $E$ est une \uline{partition de $E$} si:
+\begin{itemize}
+\item $\forall i \in I$, $A_i \neq \emptyset$
+\item Les ensembles sont ($2$ à $2$) disjoints: $\forall i, j \in I$, $i \neq j \implies A_i \cap A_j \neq \emptyset$
+\item Les ensembles recouvrent $E$, càd $\bigcup\limits_{i \in I} A_i = E$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $E$ un ensemble et $\sim$ une relation d'équivalence sur $E$ \\
+Les classes de $\sim$ forment une partition de $E$
+\end{proposition}
+\begin{lemme}
+Soit $x, y \in E$ tels que $x \sim y$ \\
+Alors $\left[ x \right] = \left[ y \right]$
+\end{lemme}
+
+\subsection{Ensemble quotient}
+\begin{definition}
+Soit $\sim$ une relation d'équivalence sur un ensemble $E$
+\begin{itemize}
+\item On appelle \uline{ensemble quotient} l'ensemble $E/\sim$ des classes d'équivalence de $\sim$
+\item L'application $\begin{cases}
+E \to E / \sim \\
+x \mapsto \left[ x \right]_\sim
+\end{cases}$ est appelée la \uline{surjection canonique}.
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $E$ un ensemble muni d'une relation d'équivalence. Soit $f: E \to F$ une application. \\
+Notons $\pi: E \to E / \sim$ la surjection canonique. \\
+On dit que $f$ \uline{passe} (ou \uline{descend}) au quotient si $\forall x_1, x_2 \in E$, $x_1 \sim x_2 \implies f(x_1) = f(x_2)$ \\
+Dans ce cas, il existe une unique application $\bar{f}: E / \sim \to F$ telle que $\bar{f} \circ \pi = f$
+\end{definition}
+
+\pagebreak
+
+\subsection{Deux quotients importants}
+\noindent \uline{"Construction" de $\mathbb{Q}$ à partir de $\mathbb{N}$ et $\mathbb{Z}$} \\
+On munit l'ensemble $\mathbb{Z} \times \mathbb{N}^*$ de la relation $\sim$ définie par: \\
+\[ \forall (a_1, b_1), (a_2, b_2) \in \mathbb{Z} \times \mathbb{N}^*,\, (a_1, b_1) \sim (a_2, b_2) \iff a_1 b_2 = a_2 b_1 \]
+On "définit" $\mathbb{Q}$ comme l'ensemble quotient $\mathbb{Z} \times \mathbb{N}^* / \sim$ \\
+On définit alors 2 lois:
+\[ + : \begin{cases}
+(\mathbb{Z} \times \mathbb{N}^*) / \sim \times (\mathbb{Z} \times \mathbb{N}^*) / \sim \to (\mathbb{Z} \times \mathbb{N}^*) / \sim \\
+(\left[(a_1, b_1)\right]_\sim , \left[(a_2, b_2)\right]_\sim) \mapsto \left[(a_1 b_2 + a_2 + b_1, b_1 b_2)\right]_\sim
+\end{cases}\]
+\[\cdot: \begin{cases}
+(\mathbb{Z} \times \mathbb{N}^*) / \sim \times (\mathbb{Z} \times \mathbb{N}^*) / \sim \to (\mathbb{Z} \times \mathbb{N}^*) / \sim \\
+(\left[(a_1, b_1)\right]_\sim , \left[(a_2, b_2)\right]_\sim) \mapsto \left[(a_1 a_2, b_1 b_2)\right]_\sim
+\end{cases}\] \medskip
+
+\noindent \uline{"Construction" de $\mathbb{Z} / n\mathbb{Z}$} \\
+Soit $n \in \mathbb{N}^*$ \\
+On sait que la congruence modulo $n$ est une relation d'équivalence sur $\mathbb{Z}$ \\
+On note $\left[ x \right]_n$ la classe d'équivalence de $x$ par cette relation et $\mathbb{Z} / n\mathbb{Z}$ l'ensemble quotient.
+\end{document}

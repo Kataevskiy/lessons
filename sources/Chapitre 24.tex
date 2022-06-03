@@ -114,8 +114,8 @@ Soit $x, y \in l^1(J; \mathbb{C})$ \\
 On a:
 \begin{itemize}
 \item \uline{Restriction}: Si $K \subseteq J$, $(x_k)_{k \in K}$ est sommable.
-\item \uline{Linéarité}: Pour toute $\lambda \in \mathbb{C}$, $(x_j + \lambda y_j)_{j \in J} \in l^1(J; \mathbb{C})$ et $\sum\limits_{j \in J} (x_j + \lambda y_j) = \sum\limits_{j \in J} + \sum\limits_{j \in J} y_j$
-\item \uline{Croissance}: Si $x, y$ sont à valeurs réelles et que $\forall j \in J$, $x_j \leq y_j$, alors $\sum\limits_{j \in J} \leq \sum\limits_{j \in J} y_j$
+\item \uline{Linéarité}: Pour toute $\lambda \in \mathbb{C}$, $(x_j + \lambda y_j)_{j \in J} \in l^1(J; \mathbb{C})$ et $\sum\limits_{j \in J} (x_j + \lambda y_j) = \sum\limits_{j \in J} x_j + \sum\limits_{j \in J} y_j$
+\item \uline{Croissance}: Si $x, y$ sont à valeurs réelles et que $\forall j \in J$, $x_j \leq y_j$, alors $\sum\limits_{j \in J} x_j \leq \sum\limits_{j \in J} y_j$
 \end{itemize}
 \end{proposition}
 \begin{proposition}[Inégalité triangulaire]
@@ -133,19 +133,19 @@ Soit $x \in l^1(J; \mathbb{C})$
 \end{itemize}
 \end{proposition}
 \begin{corollaire}[sur les séries]
-Si $\sum\limits_n x_n$ est une série absolument convergente et que $\sigma: \mathbb{N} \to \mathbb{N}$ est une bijection, alors $\sum\limits_n x_{\sigma(n)}$ est encore absolument convergente et $\sum\limits_{n = 0}^{+\infty} = \sum\limits_{n = 0}^{+\infty} x_{\sigma(n)}$
+Si $\sum\limits_n x_n$ est une série absolument convergente et que $\sigma: \mathbb{N} \to \mathbb{N}$ est une bijection, alors $\sum\limits_n x_{\sigma(n)}$ est encore absolument convergente et $\sum\limits_{n = 0}^{+\infty} x_n = \sum\limits_{n = 0}^{+\infty} x_{\sigma(n)}$
 \end{corollaire}
 
 \subsection{Sommation par paquets}
 \begin{theorem}
 Soit $(x_j)_{j \in J} \in \mathbb{C}^J$ et on considère un recouvrement disjoint $J = \bigsqcup\limits_{\lambda \in \Lambda}$ \\
-Alors $(x_j)_{j \in J}$ est sommable ssi, pour tout $\lambda \in \Lambda$, $(x_j)_{j \in J_\lambda}$ est sommable et que $(\sum\limits_{j \in J_\lambda})_{\lambda \in \Lambda}$ est sommable. \\
+Alors $(x_j)_{j \in J}$ est sommable ssi, pour tout $\lambda \in \Lambda$, $(x_j)_{j \in J_\lambda}$ est sommable et que $(\sum\limits_{j \in J_\lambda} \left| x_j \right|)_{\lambda \in \Lambda}$ est sommable. \\
 Et, si c'est le cas, on a
 \[ \sum_{j \in J} x_j = \sum_{\lambda \in \Lambda} \sum_{j \in J_\lambda} x_j\]
 \end{theorem}
 \begin{corollaire}[Théorème de Fubini]
 Soit $(x_{i, j})_{i, j} \in I \times J \in \mathbb{C}^{I \times J}$ \\
-Alors $(x_{i, j})_{(i, j) \in I \times J}$ est sommable ssi les familles $(x_{i, j})_{j \in J} \, (i \in I)$ le sont et que $(\sum\limits_{j \in J} x_{i, j})_{i \in I}$ soit sommable. \\
+Alors $(x_{i, j})_{(i, j) \in I \times J}$ est sommable ssi les familles $(x_{i, j})_{j \in J} \, (i \in I)$ le sont et que $(\sum\limits_{j \in J} \left| x_{i, j} \right|)_{i \in I}$ soit sommable. \\
 Si c'est la cas, on a
 \[\sum_{(i, j) \in I \times J} x_{i, j} = \sum_{i \in I} \sum_{j \in J} x_{i, j}\]
 En particulier, si $x$ est sommable

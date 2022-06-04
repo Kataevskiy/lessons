@@ -1,0 +1,709 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 5: Fonctions réelles}}
+\end{center}
+
+\section{Intervalles}
+\subsection{Segments}
+\begin{definition}
+Soit $a \leq b \in \mathbb{R}$ \\
+On définit le \uline{segment} $[a, b] = \left\{ x \in \mathbb{R} \mid a \leq x \leq b \right\}$
+\end{definition}
+\begin{proposition}
+Soit $a \leq b \in \mathbb{R}$ \\
+On a $[a, b] = \left\{ (1 - \lambda) a + \lambda b \mid \lambda \in [0, 1] \right\}$
+\end{proposition}
+
+\subsection{Intervalles}
+\begin{definition}
+Une partie $I \subseteq \mathbb{R}$ est un \uline{intervalle} si $\forall x, y \in I$, $x \leq y \implies [x, y] \subseteq I$
+\end{definition}
+
+\section{Généralités sur les fonctions réelles}
+\begin{definition}
+Soit $D \subseteq \mathbb{R}$, $f, g: D \to \mathbb{R}$ et $\lambda \in \mathbb{R}$ \\
+On définit:
+\begin{itemize}
+\item Le produit $\lambda f: \begin{cases}
+D \to \mathbb{R} \\
+x \mapsto \lambda f(x)
+\end{cases}$
+\item La somme $f + g: \begin{cases}
+D \to \mathbb{R} \\
+x \mapsto f(x) + g(x)
+\end{cases}$
+\item Le produit $f g: \begin{cases}
+D \to \mathbb{R} \\
+x \mapsto f(x) g(x)
+\end{cases}$
+\end{itemize}
+\end{definition}
+
+\subsection{Symétrie}
+\begin{definition}
+Soit $T > 0$
+\begin{itemize}
+\item On appelle \uline{domaine $T$-périodique} une partie $D \subseteq \mathbb{R}$ telle que $\forall x \in D$, $(x + T \in D \text{ et } x - T \in D)$
+\item Soit $D$ un domaine $T$-périodique. \\
+Une fonction $f: D \to \mathbb{R}$ est dite $T$-périodique si $\forall x \in D$, $f(x + T) = f(x)$
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+Soit $T > 0$
+\begin{itemize}
+\item Une partie $D \subseteq \mathbb{R}$ est $T$-périodique si et seulement si $\forall x_0 \in D$, $\forall x_1 \in \mathbb{R}$, $x_0 \equiv x_1 (\text{mod }T) \implies x_1 \in D$
+\item Soit $D$ un domaine $T$-périodique et $f: D \to \mathbb{R}$ \\
+Alors $f$ est $T$-périodique si et seulement si $\forall x_0, x_1 \in D$, $x_0 \equiv x_1 (\text{ mod}T) \implies f(x_0) = f(x_1)$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $T > 0$
+\begin{itemize}
+\item La somme et le produit de deux fonctions $T$-périodiques est $T$-périodique.
+\item Si $f$ est $T$-périodique, toute composée $g \circ f$ est également $T$-périodique.
+\end{itemize}
+\end{proposition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une partie $D \subseteq \mathbb{R}$ est dite \uline{symétrique} (par rapport à $0$) si $\forall x \in D$, $-x \in D$
+\item Soit $D \subseteq \mathbb{R}$ symétrique et $f: D \to \mathbb{R}$ \\
+On dit que $f$ est:
+\begin{itemize}
+\item \uline{paire} si $\forall x \in D$, $f(-x) = f(x)$
+\item \uline{impaire} si $\forall x \in D$, $f(-x) = -f(x)$
+\end{itemize}
+\end{itemize}
+\end{definition}
+
+\pagebreak
+
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item La somme de deux fonctions $\begin{cases}
+\text{ paires } \\
+\text{ impaires }
+\end{cases}$ est $\begin{cases}
+\text{ paire } \\
+\text{ impaire }
+\end{cases}$
+\item Le produit de deux fonctions $\begin{cases}
+\text{paires} \\
+\text{impaires}
+\end{cases}$ est paire.
+\item Le produit d'une fonction paire et d'une impaire est impaire.
+\item Une composée $g \circ f$ où $f$ est paire est paire.
+\item Si les deux fonctions sont paires ou impaires, $g \circ f$ a la parité suivante:
+\begin{center}
+\begin{tabular}{M{3em} | M{3em} | M{3em}}
+$f$ \textbackslash  $\,\,g$ & p & i \\
+\hline
+p & p & p \\
+\hline
+i & p & i
+\end{tabular}
+\end{center}
+\end{itemize}
+\end{proposition}
+
+\subsection{Monotonie}
+\begin{definition}
+Soit $D \subseteq \mathbb{R}$ et $f: D \to \mathbb{R}$ \\
+On dit que:
+\begin{itemize}
+\item $f$ est \uline{croissante} si $\forall x, y \in D$, $x \leq y \implies f(x) \leq f(y)$
+\item $f$ est \uline{strictement croissante} si $\forall x, y \in D$, $x < y \implies f(x) < f(y)$
+\item $f$ est \uline{décroissante} si $\forall x, y \in D$, $x \leq y \implies f(x) \geq f(y)$
+\item $f$ est \uline{strictement décroissante} si $\forall x, y \in D$, $x < y \implies f(x) > f(y)$
+\item $f$ est \uline{(strictement) monotone} si elle est (strictement) croissante ou (strictement) décroissante.
+\end{itemize}
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item La somme de deux fonctions $\begin{cases}
+\text{ croissantes } \\
+\text{ décroissantes }
+\end{cases}$ est $\begin{cases}
+\text{ croissante } \\
+\text{ décroissante }
+\end{cases}$
+\item La somme d'une fonction $\begin{cases}
+\text{ croissante } \\
+\text{ décroissante }
+\end{cases}$ est d'une fonction $\begin{cases}
+\text{ croissante } \\
+\text{ décroissante }
+\end{cases}$ \\ 
+est strictement $\begin{cases}
+\text{ croissante } \\
+\text{ décroissante }
+\end{cases}$
+\item La composée de deux fonctions (strictement) monotones est (strictement) monotone, et la monotonie de $g \circ f$ est donnée par:
+\begin{center}
+\begin{tabular}{M{3em} | M{3em} | M{3em}}
+$f$ \textbackslash  $\,\,g$ & $\nearrow$ & $\searrow$ \\
+\hline
+$\nearrow$ & $\nearrow$ & $\searrow$ \\
+\hline
+$\searrow$ & $\searrow$ & $\nearrow$
+\end{tabular}
+\end{center}
+\end{itemize}
+\end{proposition}[Injectivité des fonctions strictement monotones]
+Soit $D \subseteq \mathbb{R}$ est $f: D \to \mathbb{R}$
+\begin{itemize}
+\item Si $f$ croît strictement, alors: $\forall x, y \in D$, $f(x) \leq f(y) \implies x \leq y$
+\item Si $f$ décroît strictement, alors: $\forall x, y \in D$, $f(x) \leq f(y) \implies x \geq y$
+\item Dans les deux cas, $f$ est injective.
+\end{itemize}
+\begin{proposition}
+Soit $D, E \subseteq \mathbb{R}$ et $f: D \to E$
+\begin{itemize}
+\item Si $f$ est bijective et croissante, alors $f$ est strictement croissante et $f^{-1}: E \to D$ aussi.
+\item Si $f$ est bijective et décroissante, alors $f$ est strictement décroissante et $f^{-1} : E \to D$ aussi.
+\end{itemize}
+\end{proposition}
+
+\pagebreak
+
+\subsection{Bornes et extrema}
+\begin{definition}
+Soit $D \subseteq \mathbb{R}$ et $f: D \to \mathbb{R}$ \\
+On dit que $f$:
+\begin{itemize}
+\item Est \uline{majorée} si $\exists M \in \mathbb{R}: \forall x \in D$, $f(x) \leq M$
+\item Est \uline{minorée} si $\exists m \in \mathbb{R}: \forall x \in D$, $f(x) \geq m$
+\item Est \uline{bornée} si elle est minorée est majorée.
+\item \uline{Admet un maximum} si $\exists c \in D: \forall x \in D$, $f(x) \leq f(c)$
+\item \uline{Admet un minimum} si $\exists d \in D: \forall x \in D$, $f(x) \geq f(d)$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $D \subseteq \mathbb{R}$ et $f: D \to \mathbb{R}$ \\
+Alors $f$ est bornée si et seulement si $\exists c \in \mathbb{R}_+: \forall x \in D$, $\left| f(x) \right| \leq c$
+\end{proposition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item La somme de deux fonctions $\begin{cases}
+\text{ minorées } \\
+\text{ majorées }
+\end{cases}$ est $\begin{cases}
+\text{ minorée } \\
+\text{ majorée }
+\end{cases}$
+\item La somme et le produit de deux fonctions bornées sont bornés.
+\item Si $g$ est $\begin{cases}
+\text{ minorée } \\
+\text{ majorée } \\
+\text{ bornée }
+\end{cases}$ alors toute composée de la forme $g \circ f$ est $\begin{cases}
+\text{ minorée } \\
+\text{ majorée } \\
+\text{ bornée}
+\end{cases}$
+\end{itemize}
+\end{proposition}
+
+\subsection{Transformations d'un graphe}
+\noindent Étant donné $f: D \to \mathbb{R}$
+\begin{itemize}
+\item Pour $a \in \mathbb{R}$, le graphe de $f + a: \begin{cases}
+D \to \mathbb{R} \\
+x \mapsto f(x) + a
+\end{cases}$ \\
+est l'image de $\gr(f)$ par la translation de vecteur $\begin{pmatrix}
+0 \\
+a
+\end{pmatrix}$
+\item Pour $a \in \mathbb{R}$, le graphe de $f( \cdot + a) : \begin{cases}
+D - a \to \mathbb{R} \\
+x \mapsto f(x + a)
+\end{cases}$ \\
+est l'image de $\gr(f)$ par la translation de vecteur $\begin{pmatrix}
+-a \\
+0
+\end{pmatrix}$
+\item Pour $a \in \mathbb{R}$, le graphe de $f(a - \cdot) : \begin{cases}
+D' \to \mathbb{R} \\
+x \mapsto f(a - x)
+\end{cases}$ où $D' = \left\{ x \in \mathbb{R} \mid a - x \in D \right\}$ \\
+est l'image de $\gr(f)$ par la réflexion d'axe, la droite d'équation $x = \frac{a}{2}$
+\item Pour $\lambda \neq 0$, le graphe de $\lambda f: \begin{cases}
+D \to \mathbb{R} \\
+x \mapsto \lambda f(x)
+\end{cases}$ \\
+est l'image de $\gr(f)$ par $\begin{pmatrix}
+x \\
+y
+\end{pmatrix} \mapsto \begin{pmatrix}
+x \\
+\lambda y
+\end{pmatrix}$
+\item Pour $\lambda \neq 0$, le graphe de $f( \lambda \cdot): \begin{cases}
+D' \to \mathbb{R} \\
+x \mapsto f( \lambda x)
+\end{cases}$ où $D' = \left\{ x \in \mathbb{R} \mid \lambda x \in D \right\}$ \\
+est l'image de $\gr(f)$ par $\begin{pmatrix}
+x \\
+y
+\end{pmatrix} \mapsto \begin{pmatrix}
+\frac{x}{\lambda} \\
+y
+\end{pmatrix}$
+\end{itemize}
+
+\pagebreak
+
+\subsection{Limites}
+À partir de maintenant, $I$ est un intervalle non trivial et $x_0$ est un élément ou une borne de $I$
+\begin{definition}
+Soit $l \in \mathbb{R}$ \\
+On dit que $f$ \uline{converge (ou tend)} vers $l$ en $x_0$ et on note $f(x) \xrightarrow[x \to x_0]{} l$ si \\
+$\forall \varepsilon > 0$, $\exists \delta > 0: \forall x \in I$, $\left| x - x_0 \right| \leq \delta \implies \left| f(x) - l \right| \leq \varepsilon$
+\end{definition}
+
+\subsection{Continuité}
+Ici, $I$ est un intervalle ,$x_0 \in I$ et $f: I \to \mathbb{R}$
+\begin{definition}
+\hfill
+\begin{itemize}
+\item La fonction $f$ est \uline{continue en $x_0$} si $f(x) \xrightarrow[x \to x_0]{} f(x_0)$
+\item La fonction $f$ est \uline{continue} si elle est continue en tout point de $I$
+\end{itemize}
+On note $C^0(I) = C^0(I; \mathbb{R})$ l'ensemble des fonctions $I \to \mathbb{R}$ continues.
+\end{definition}
+\begin{theorem}
+L'ensemble des fonctions continues est stable par somme, par produit, par quotient (si le dénominateur ne s'annule pas), par composition...
+\end{theorem}
+
+\subsection{Dérivabilité}
+Ici, $I$ est un intervalle, $x_0 \in I$, $f: I \to \mathbb{R}$
+\begin{definition}
+\hfill
+\begin{itemize}
+\item On appelle le \uline{taux d'accroissement de $f$ en $x_0$} la fonction
+\[\tau_{\left[f, x_0\right]}: \begin{cases}
+I \setminus \{ x_0 \} \to \mathbb{R} \\
+x \mapsto \frac{f(x) - f(x_0)}{x - x_0}
+\end{cases}\]
+\item On dit que $f$ est \uline{dérivable en $x_0$} si $\tau_{\left[f, x_0 \right]}$ admet une limite finie en $x_0$
+\item Si c'est le cas, on note
+\[f'(x_0) = \lim\limits_{x \to x_0} \tau_{ \left[ f, x_0 \right] }(x) = \lim\limits_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0}\]
+le \uline{nombre dérivé de $f$ en $x_0$}
+\item On dit que $f$ est \uline{dérivable} si elle est dérivable en tout point de $I$
+\item Si c'est le cas, on note
+\[f': \begin{cases}
+I \to \mathbb{R} \\
+x \mapsto f'(x)
+\end{cases}\]
+\end{itemize}
+\end{definition}
+\begin{definition}
+Si $f: I \to \mathbb{R}$ est dérivable en $x_0$, la tangente à $\gr(f)$ en $x_0$ est la droite passant par $\begin{pmatrix}
+x_0 \\
+f(x_0)
+\end{pmatrix}$ et de pente $f'(x_0)$, càd la droite d'équation $y = f'(x_0)(x - x_0) + f(x_0)$
+\end{definition}
+\begin{proposition}
+Si $f$ est dérivable en $x_0$, elle est continue en $x_0$ \\
+On note $D^1(I) = D^1(I; \mathbb{R})$ l'ensemble des fonctions dérivables sur $I$ \\
+D'après la proposition précédente, $D^1(I) \subseteq C^0(I)$
+\end{proposition}
+\begin{theorem}
+L'ensemble des fonctions dérivables est stable par somme, produit, quotient (si le dénominateur ne s'annule pas).
+\end{theorem}
+\begin{theorem}
+Soit $I$ et $J$ deux intervalles de $\mathbb{R}$ et $f:I \to J$ et $g: J \to \mathbb{R}$ deux fonctions dérivables. \\
+Alors $g \circ f$ est dérivable et $(g \circ f)' = (g' \circ f) \times f'$
+\end{theorem}
+
+\subsection{Tableau de variations}
+Dans toute la section, $I \subseteq \mathbb{R}$ est un intervalle non trivial et $f: I \to \mathbb{R}$
+\begin{theorem}
+Supposons $f: I \to \mathbb{R}$ dérivable.
+\begin{itemize}
+\item La fonction $f$ est constante ssi $\forall x \in I$, $f'(x) = 0$
+\item La fonction $f$ est croissante ssi $\forall x \in I$, $f'(x) \geq 0$
+\item Si $f'$ est $> 0$ sur $I$, à l'exception éventuelle d'un nombre fini de points, alors $f$ est strictement croissante.
+\end{itemize}
+\end{theorem}
+\begin{theorem}[des valeurs intermédiaires]
+Soit $a \leq b$ deux éléments de $I$ \\
+Notons $J$ le segment joignant $f(a)$ et $f(b)$ (donc $\left[ f(a), f(b) \right]$ ou $\left[ f(b), f(a) \right]$ suivant le cas) \\
+Supposons $f$ continue. \\
+Alors $\forall y \in J$, $\exists x \in \left[ a, b \right]: f(x) = y$
+\end{theorem}
+\begin{theorem}[de bijection monotone, version segments]
+Soit $a \leq b$ deux éléments de $I$
+\begin{itemize}
+\item On suppose $f$ dérivable et $\forall x \in \left] a, b \right[$, $f'(x) > 0$ \\
+Alors $f$ induit une bijection strictement croissante $[a, b] \to \left[f(a), f(b)\right]$
+\item On suppose $f$ dérivable et $\forall x \in \left] a, b \right[$, $f'(x) < 0$ \\
+Alors $f$ induit une bijection strictement décroissante $\left[ a, b \right] \to \left[ f(a), f(b) \right]$
+\end{itemize}
+\end{theorem}
+\begin{theorem}
+Soit $a \leq b$ deux éléments de $I$. \\
+On suppose $f: I \to \mathbb{R}$ continue et strictement monotone sur $[a, b]$ \\
+Alors $f$ induit une bijection $[a, b] \to \begin{cases}
+\left[ f(a), f(b) \right] \\
+\left[ f(b), f(a) \right]
+\end{cases}$ suivant les cas.
+\end{theorem}
+\begin{theorem}[de la bijection monotone, version intervalles ouverts]
+\hfill \\
+Soit $a < b$ deux réels et $f: \left] a, b \right[ \to \mathbb{R}$ une fonction dérivable, de dérivée $> 0$ \\
+Alors $f$ admet des limites en $a$ et $b$ et induit une bijection strictement croissante $\left] a, b \right[ \to \left] \lim\limits_a f, \lim\limits_b f \right[$
+\end{theorem}
+
+\subsection{Fonctions réciproques}
+Ici, $I$ et $J$ sont deux intervalles de $\mathbb{R}$ et $f: I \to J$ est une bijection. \medskip
+
+Graphiquement, $\gr(f)$ et $\gr(f^{-1})$ sont symétriques par rapport à la droite d'équation $y = x$
+\begin{theorem}[Continuité de la réciproque]
+\hfill \\
+Si $f: I \to J$ est bijective et continue, alors $f^{-1}: J \to I$ est continue.
+\end{theorem}
+\begin{theorem}[Critère de dérivabilité des réciproques]
+\hfill \\
+Supposons $f: I \to J$ bijective et dérivable. Soit $x_0 \in I$ et $y_0 =f(x_0) \in J$ \\
+Alors $f^{-1}$ est dérivable en $y_0$ si et seulement si $f'(x_0) \neq 0$ \\
+Si c'est la cas,
+\[ \left(f^{-1}\right)'(y_0) = \frac{1}{f'(x_0)	} = \frac{1}{f'(f^{-1}(y_0))}\]
+\end{theorem}
+
+\pagebreak
+
+\subsection{Étude d'une fonction: le plan}
+\noindent Étant donné une fonction, on peut l'étudier en six (ou sept) étapes. \medskip
+
+\noindent (0. Si sule une expression est donnée, on détermine un domaine de définition. \\
+On a alors une fonction $f: D \to \mathbb{R}$) \\
+1. On examine les propriétés de symétrie de la fonction. Si on peut, on l'étudie sur un domaine plus petit. \\
+2. On examine la régularité de la fonction: continuité, dérivabilité? \\
+3. Là où c'est possible, on calcule la dérivée (en cherchant la forme la plus "multiplicative" possible) \\
+4. Tableau de variations. \\
+5. Limites. \\
+6. Esquisse de graphe.
+\begin{proposition}
+On a $\forall x \in \left] -1, +\infty \right[$, $\ln( 1 + x ) \leq x$
+\end{proposition}
+
+\section{Fonctions usuelles}
+\subsection{Exponentielle}
+On a vu que $\forall z \in \mathbb{C}$, $\exp(\bar{z}) = \overline{\exp(z)}$. En particulier, $\forall x \in \mathbb{R}$, $\exp(x) \in \mathbb{R}$
+\begin{definition}
+On appelle \uline{exponentielle (réelle)} la fonction $\exp: \mathbb{R} \to \mathbb{R}$ induite par l'exponentielle complexe.
+\end{definition}
+\begin{proposition}
+L'exponentielle $\mathbb{R} \to \mathbb{R}$
+\begin{itemize}
+\item Est strictement positive: $\forall x \in \mathbb{R}$, $\exp(x) > 0$
+\item Est dérivable et $\exp' = \exp$
+\item Admet des limites $\begin{cases}
+\exp(x) \xrightarrow[x \to -\infty]{} 0 \\
+\exp(x) \xrightarrow[x \to +\infty]{} +\infty
+\end{cases}$
+\item Vérifie la propriété fondamentale: $\forall x, y \in \mathbb{R}: \exp(x + y) = \exp(x) \exp(y)$
+\end{itemize}
+\end{proposition}
+\begin{lemme}
+On a $\forall x \in \mathbb{R}$, $\exp(x) \geq x + 1$
+\end{lemme}
+\begin{corollaire}
+$\exp$ induit une bijection $\mathbb{R} \to \mathbb{R}_+^*$
+\end{corollaire}
+
+\subsection{Logarithme}
+\begin{definition}
+On note $\ln: \mathbb{R}_+^* \to \mathbb{R}$ la réciproque de $\exp$
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $\ln$ est une bijection strictement croissante $\mathbb{R}_+^* \to \mathbb{R}$
+\item $\ln$ est dérivable et $\forall y \in \mathbb{R}_+^*$, $\ln'(y) = \frac{1}{y}$
+\item On a $\ln(y) \xrightarrow[y \to 0]{} -\infty$ et $\ln(y) \xrightarrow[y \to +\infty]{} +\infty$
+\item On a $\forall y_1, y_2 \in \mathbb{R}_+^*$, $\ln(y_1 y_2) = \ln(y_1) + \ln(y_2)$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+$\forall x \in \left] -1, +\infty \right[$, $\ln(1 + x) \leq x$
+\end{proposition}
+
+\pagebreak
+
+\subsection{Puissances}
+\begin{definition}
+Soit $r \in \mathbb{R}_+^*$ et $a \in \mathbb{R}$ \\
+On définit $r^a$ = $\exp(a \ln(r))$
+\end{definition}
+\begin{proposition}
+Soit $r, s \in \mathbb{R}_+^*$ et $a, b \in \mathbb{R}$ \\
+On a:
+\begin{itemize}
+\item $r^{a + b} = r^a r^b$
+\item $\left(r^a\right)^b = r^{a^b}$
+\item $\left(rs\right)^q = r^q s^q$
+\end{itemize}
+Soit $r \in \mathbb{R}_+^*$: L'exponentielle de base $r$: $x \mapsto r^x$ \\
+Elle est:
+\begin{itemize}
+\item Strictement décroissante si $r < 1$
+\item Constante (égale à 1) si $r = 1$
+\item Strictement croissante si $r > 1$
+\end{itemize}
+La fonction "puissance $a$-ième": $x \mapsto x^a$ est:
+\begin{itemize}
+\item Strictement décroissante si $a < 0$
+\item Constante (égale à 1) si $a = 0$
+\item Strictement croissante si $a > 0$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $r \in \left] 0, 1 \right[ \cup \left] 1, +\infty \right[$ \\
+On définit le logarithme en base $r$: $\log_r : \mathbb{R}_+^* \to \mathbb{R}$ comme la réciproque de $\begin{cases}
+\mathbb{R} \to \mathbb{R}_+^* \\
+x \mapsto r^x
+\end{cases}$
+\end{definition}
+\begin{proposition}
+Soit $r \in \left] 0, 1 \right[ \cup \left] 1, +\infty \right[$ et $x \in \mathbb{R}_+^*$ \\
+On a
+\[ \log_r(x) = \frac{\ln(x)}{\ln(r)} \]
+\end{proposition}
+
+\subsection{Croissances comparées}
+\begin{theorem}
+La fonction $x \mapsto x$ est \uline{négligeable devant $\exp$ au voisinage de $+\infty$}:
+\[ \forall \varepsilon, A > 0,\quad \frac{x^A}{\exp(x)^\varepsilon} \xrightarrow[x \to +\infty]{} 0 \]
+\[ \forall \varepsilon, A > 0,\quad \frac{\ln(x)^A}{x^\varepsilon} \xrightarrow[x \to +\infty]{} 0 \]
+\[ \forall \varepsilon, A > 0,\quad \frac{\left| \ln(x) \right|^A}{\left(\frac{1}{x}\right)^\varepsilon} = x^\varepsilon \left| \ln(x) \right|^A \xrightarrow[x \to 0]{} 0\]
+\end{theorem}
+
+\subsection{Trigonométrie hyperbolique}
+\begin{definition}
+On définit les fonctions \uline{(co)sinus hyperbolique}:
+\begin{align*}
+&\cosh: \begin{cases}
+\mathbb{R} \to \mathbb{R} \\
+x \mapsto \frac{e^x + e^{-x}}{2} 
+\end{cases} &\sinh: \begin{cases}
+\mathbb{R} \to \mathbb{R} \\
+x \mapsto \frac{e^x - e^{-x}}{2}
+\end{cases}
+\end{align*}
+\end{definition}
+
+\pagebreak
+
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $\cosh$ est paire, dérivable, de dérivée
+\[\cosh' = \sinh\]
+ et possède les limites $\cosh(x) \xrightarrow[x \to \pm\infty]{} +\infty$
+\item $\sinh$ est impaire, dérivable, de dérivée
+\[\sinh' = \cosh\]
+et $\sinh(x) \xrightarrow[x \to -\infty]{} -\infty$ et $\sinh(x) \xrightarrow[x \to +\infty]{} +\infty$
+\item On a $\cosh^2 - \sinh^2 = 1$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+On définit la fonction tangente hyperbolique:
+\[ \tanh: \begin{cases}
+\mathbb{R} \to \mathbb{R} \\
+x \mapsto \frac{\sinh(x)}{\cosh(x)}
+\end{cases} \]
+\end{definition}
+\begin{proposition}
+La fonction $\tanh$ est impaire, dérivable, de dérivée
+\[\tanh' = 1 - \tanh^2 = \frac{1}{\cosh^2}\]
+et vérifie $\tanh(x) \xrightarrow[x \to \pm\infty]{} \pm1$
+\end{proposition}
+
+\subsection{Fonctions trigonométriques réciproques}
+\begin{definition}
+On appelle \uline{arc cosinus} $\arccos: [-1, 1] \to [0, \pi]$ la réciproque de la bijection induite $\cos_{|[0, \pi]}^{|[-1, 1]}$ \\
+On appelle \uline{arc sinus} $\arcsin : [-1, 1] \to [-\frac{\pi}{2}, \frac{\pi}{2}]$ la réciproque de la bijection induite $\sin_{|[-\frac{\pi}{2}]}^{|[-1, 1]}$
+\end{definition}
+\begin{proposition}
+On a $\forall y \in [-1, 1]$, $\cos(\arcsin(y)) = \sin(\arccos(y)) = \sqrt{1 - y^2}$
+\end{proposition}
+\begin{proposition}
+$\arccos$ et $\arcsin$ sont non dérivables en $-1$ et $1$, mais dérivables en tout $y \in \left] -1, 1 \right[$ et \\
+$\forall y \in \left] -1, 1 \right[$:
+\begin{align*}
+&\arcsin'(y) = \frac{1}{\sqrt{1 - y^2}} &\arccos'(y) = \frac{-1}{\sqrt{1 - y^2}}
+\end{align*}
+\end{proposition}
+
+\subsection{Tangente}
+\begin{definition}
+On note $D_\text{tan} = \left\{ x \in \mathbb{R} \mid x \not\equiv \frac{\pi}{2} (\text{mod } \pi) \right\} = \cos^{-1}[\mathbb{R}^*]$ \\
+On définit la fonction \uline{tangente}
+\[\tan: \begin{cases}
+D_\text{tan} \to \mathbb{R} \\
+x \mapsto \frac{\sin(x)}{\cos(x)}
+\end{cases}\]
+\end{definition}
+\begin{proposition}
+$\tan$ est impaire, $\pi$-périodique, dérivable de dérivée
+\[\tan' = 1 + \tan^2 = \frac{1}{\cos^2}\]
+et on a $\tan(x) \xrightarrow[\substack{x \to \frac{\pi}{2} \\ x < \frac{\pi}{2}}]{} + \infty$ et $\tan(x) \xrightarrow[\substack{x \to \frac{\pi}{2} \\ x > \frac{\pi}{2}}]{} -\infty$
+\end{proposition}
+
+\pagebreak
+
+\begin{proposition}
+Soit $x, y \in D_\text{tan}$
+\begin{itemize}
+\item Si $x + y \in D_\text{tan}$, on a
+\[\tan(x + y) = \frac{\tan(x) + \tan(y)}{1 - \tan(x) \tan(y)}\]
+\item Si $x - y \in D_\text{tan}$, on a
+\[tan(x - y) = \frac{\tan(x) - \tan(y)}{1 + \tan(x) \tan(y)}\]
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $x \in \mathbb{R}$ tel que $x \not\equiv \pi (\text{mod } 2\pi)$ \\
+On peut exprimer $\cos(x)$ et $\sin(x)$ en fonction de $t = \tan(\frac{x}{2})$
+\begin{align*}
+&\cos(x) = \frac{1 - t^2}{1 + t^2} &\sin(x) = \frac{2t}{1 + t^2}
+\end{align*}
+\end{proposition}
+
+\subsection{Arc tangente}
+Par le théorème de la bijection monotone, $\tan$ induit une bijection $\left] -\frac{\pi}{2}, \frac{\pi}{2} \right[ \to \mathbb{R}$
+\begin{definition}
+On appelle arc tangente la fonction $\arctan: \mathbb{R} \to \left] -\frac{\pi}{2}, \frac{\pi}{2} \right[$, \\
+réciproque de la bijection induite $\tan_{|\left] - \frac{\pi}{2}, \frac{\pi}{2} \right[}$
+\end{definition}
+\begin{proposition}
+$\arctan$ est une fonction impaire, dérivable, de dérivée
+\[\arctan': y \mapsto \frac{1}{1 + y^2}\]
+et telle que $\arctan(x) \xrightarrow[x \to \pm\infty]{} \pm \frac{\pi}{2}$
+\end{proposition}
+\begin{proposition}
+Soit $z = a + ib \in \mathbb{C}^*$ que l'on écrit $z = re^{i \theta}$, où $r > 0$, $\theta \in \mathbb{R}$ \\
+On a $\begin{cases}
+a = \re(z) = r \cos(\theta) \\
+b = \im(z) = r \sin(\theta)
+\end{cases}$ \\
+Supposons $a \neq 0$ (càd $z \not\in i \mathbb{R}$) \\
+On a alors
+\[\frac{b}{a} = \frac{r \cos(\theta)}{r \sin(\theta)} = \tan(\theta)\]
+Donc $\theta$ est un antécédent de $\frac{b}{a}$ par $\tan$
+\[\theta \equiv \arctan \left(\frac{b}{a}\right) (\text{mod } \pi)\]
+\end{proposition}
+\begin{proposition}
+On a $\forall x \in \mathbb{R}^*$
+\[\arctan(x) + \arctan \left( \frac{1}{x} \right) = \sgn(x) \frac{\pi}{2} \]
+\end{proposition}
+
+\section{Brève extension aux fonctions à valeurs complexes}
+Soit $I \subseteq \mathbb{R}$ un intervalle.
+\begin{definition}
+Soit $f: I \to \mathbb{C}$ \\
+On dit que $f$ est dérivable si les fonctions $\begin{cases}
+\re(f): I \to \mathbb{R} \\
+\im(f): I \to \mathbb{R}
+\end{cases}$ sont dérivables. \\
+Si c'est la cas, on définit la dérivée de $f$
+\[f' = \re(f)' + i \im(f)'\]
+\end{definition}
+
+\pagebreak
+
+\begin{proposition}
+Soit $f, g: I \to \mathbb{C}$ dérivables et $\lambda \in \mathbb{C}$ \\
+Alors:
+\begin{itemize}
+\item $\lambda f$ est dérivable et $(\lambda f)' = \lambda f'$
+\item $f + g$ est dérivable et $(f + g)' = f' + g'$
+\item $fg$ est dérivable et $(fg)' = f'g + fg'$
+\item Si $g$ ne s'annule pas, $\frac{f}{g}$ est dérivable et $\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^2}$
+\item $\exp \circ f$ est dérivable et $(\exp \circ f)' = f' \cdot (\exp \circ f)$
+\end{itemize}
+\end{proposition}
+
+\section{Dérivée d'ordre supérieur}
+Ici, $I$ est un intervalle de $\mathbb{R}$ non trivial.
+\subsection{Définition}
+\begin{definition}
+Soit $f: I \to \mathbb{R}$
+\begin{itemize}
+\item On dit que $f$ est \uline{deux fois dérivable} si $f$ est dérivable et que $f'$ est dérivable. \\
+On note alors $f'' = (f')'$
+\item Par récurrence, pour tout $n \geq 2$, \uline{$f$ est $n$ fois dérivable} si $f$ est $(n - 1)$ fois dérivable et que $f^{(n -1)}$ est dérivable. \\
+On note alors $f^{(n)} = \left( f^{(n - 1)} \right)'$ la dérivée $n$-ième.
+\item On note $D^n(I) = D^n(I; \mathbb{R})$ l'ensemble des fonctions $n$ fois dérivables.
+\item On dit que $f$ est \uline{lisse} ou \uline{de classe $C^\infty$} si elle est $n$ fois dérivable pour tout $n \in \mathbb{N}$ \\
+On note $C^\infty(I) = C^\infty(I; \mathbb{R})$ l'ensemble des fonctions lisses.
+\end{itemize} \medskip
+
+\noindent \uline{Convention}: Toute fonction est "$0$ fois dérivable" et $f^{(0)} = f$
+\end{definition}
+
+\subsection{Propriétés de stabilité}
+\begin{proposition}
+Soit $f, g: I \to \mathbb{R}$ $n$ fois dérivable et $\lambda \in \mathbb{R}$ \\
+Alors $\lambda f$ est $n$ fois dérivable et $(\lambda f)^{(n)} = \lambda f^{(n)}$ \\
+Et $f + g$ est $n$ fois dérivable et $(f + g)^{(n)} = f^{(n)} + g^{(n)}$
+\end{proposition}
+\begin{corollaire}
+Toute combinaison linéaire de fonctions lisses est lisse.
+\end{corollaire}
+\begin{theorem}[Formule de Leibniz]
+Soit $f, g: I \to \mathbb{R}$ $n$ fois dérivables. \\
+Alors $fg$ est $n$ fois dérivable et
+\[ (fg)^{(n)} = \sum_{k = 0}^n \binom{n}{k} f^{(k)} g^{(n - k)} \]
+\end{theorem}
+\begin{corollaire}
+Le produit de deux fonctions lisses est lisse.
+\end{corollaire}
+\begin{theorem}
+La composée de deux fonctions $n$ fois dérivables est $n$ fois dérivables.
+\begin{corollaire}
+La composée de deux fonctions lisses est lisse.
+\end{corollaire}
+\end{theorem}
+\end{document}

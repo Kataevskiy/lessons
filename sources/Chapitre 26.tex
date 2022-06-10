@@ -24,6 +24,8 @@
 \newtheorem{lemme}[proposition]{Lemme}
 \newtheorem{definition}[proposition]{Définition}
 
+\DeclareMathOperator{\vect}{Vect}
+
 \newcommand{\vp}[2]{\left< #1 \mid #2 \right>}
 
 \begin{document}
@@ -47,22 +49,22 @@ E^2 \to \mathbb{R} \\
 \item \uline{symétrique} (càd $\forall u, v \in E$, $\vp{u}{v} = \vp{v}{u}$)
 \item et \uline{définie positive} (càd $\forall u \in E, \vp{u}{u} \geq 0$ et $\forall u \in E$, $\vp{u}{u} = 0 \implies u = 0_E$)
 \end{itemize}
-Un \uline{espace préhibertien} (réel) est la donnée d'une ev E et d'un produit scalaire sur $E$ \\
-Un \uline{espace euclidien} est un espace préhibertien de dimension finie.
+Un \uline{espace préhilbertien} (réel) est la donnée d'une ev E et d'un produit scalaire sur $E$ \\
+Un \uline{espace euclidien} est un espace préhilbertien de dimension finie.
 \end{definition}
 
 \subsection{Norme euclidienne}
 \begin{definition}
-Soit $E$ un espace préhibertien.
+Soit $E$ un espace préhilbertien.
 \begin{itemize}
 \item La \uline{norme (euclidienne)} de $u \in E$ est $\lVert u \rVert = \sqrt{\vp{u}{v}}$
 \item Le \uline{distance} de $u$ à $v \in E$ est $\text{d}(u, v) = \lVert v - u \rVert$
 \end{itemize}
 \end{definition}
 \begin{theorem}[Inégalité de Cauchy-Schwarz]
-Soit $E$ un espace préhibertien et $u, v \in E$ \\
+Soit $E$ un espace préhilbertien et $u, v \in E$ \\
 On a
-\[\vp{u}{v} \leq \left| \vp{u}{v} \right| \leq \lVert u \rVert \cdot \lVert v \rVert\]
+\[ \vp{u}{v} \leq \left| \vp{u}{v} \right| \leq \lVert u \rVert \cdot \lVert v \rVert \]
 "Le produit scalaire est inférieur au produit des normes"
 \end{theorem}
 \begin{theorem}
@@ -70,6 +72,125 @@ La norme $\lVert \cdot \rVert$ est une \uline{norme}, càd qu'on a: \\
 \uline{Positivité}: $\forall u \in E$, $\lVert u \rVert \geq 0$ \\
 \uline{Séparation}: $\forall u \in E$, $\lVert u \rVert = 0 \implies u = 0_E$ \\
 \uline{Homogénéité}: $\forall u \in E$, $\forall \lambda \in \mathbb{R}$, $\lVert \lambda u \rVert = |\lambda| \cdot \lVert u \rVert$ \\
-\uline{Inégalité triangulaire}: $\forall u, v \in E$, $\lVert u + v \rVert \leq \lVert u \rVert + \lVert v \rVert$ \\
+\uline{Inégalité triangulaire}: $\forall u, v \in E$, $\lVert u + v \rVert \leq \lVert u \rVert + \lVert v \rVert$
 \end{theorem}
+
+\section{Orthogonalité}
+\subsection{Définition}
+Dans toute cette section, $E$ est un espace préhilbertien.
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Deux vecteurs $u, v \in E$ sont dits \uline{orthogonaux} ( et on note $u \perp v$ ) si $\vp{u}{v} = 0$
+\item Un vecteur $u \in E$ est \uline{orthogonal} à une partie $X$ de $E$ ( et on note $u \perp X$ ) si $\forall v \in X$, $u \perp v$
+\item Deux parties $X$ et $Y$ de $E$ sont \uline{orthogonales} ( et on note $X \perp Y$ ) si $\forall u \in X$, $\forall v \in Y$, $u \perp v$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Pythagore]
+Soit $u, v \in E$ \\
+Alors $u \perp v$ ssi $\lVert u + v \rVert^2 = \lVert u \rVert^2 + \lVert v \rVert^2$
+\begin{definition}
+Soit $X$ une partie de $E$ \\
+On définit \uline{l'orthogonal de $X$}
+\[ X^\perp = \left\{ u \in E \mid u \perp X \right\} = \left\{ u \in E \mid \forall v \in X,\, \vp{u}{v} = 0 \right\} \]
+\end{definition}
+\end{theorem}
+\begin{proposition}
+Soit $X$ une partie de $E$ \\
+On a:
+\begin{itemize}
+\item $X^\perp$ est une sev de $E$
+\item $X^\perp = \vect(X)^\perp$
+\end{itemize}
+\end{proposition}
+\begin{theorem}[de représentation de Riesz]
+Soit $E$ un espace \uline{euclidien} et $\varphi \in E^*$ \\
+Alors il existe $u \in E$ tel que $\varphi: \begin{cases}
+E \to \mathbb{R} \\
+v \mapsto \vp{u}{v}
+\end{cases}$
+\end{theorem}
+
+\subsection{Familles et bases orthonormées}
+\begin{definition}
+Soit $E$ un espace préhilbertien.
+\begin{itemize}
+\item Une famille $(x_i)_{i \in I}$ de vecteurs de $E$ est dite \uline{orthogonale} si $\forall i \neq j \in I$, $\vp{x_i}{x_j} = 0$
+\item La famille $(x_i)_{i \in I}$ est dite \uline{orthonormée} (ou \uline{orthonormale}) si les vecteurs sont en outre de norme $1$, càd $\forall i, j \in I$, $\vp{x_i}{x_j} = \delta_{ij}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Toute famille orthogonale de vecteurs non nuls (en particulier, toute famille orthonormée) \\
+est libre.
+\end{proposition}
+\begin{definition}
+Une \uline{base orthogonale} (resp. \uline{orthonormée}) (BON) d'un espace préhilbertien $E$ est une base de $E$ qui est également une famille orthogonale (resp. orthonormée).
+\end{definition}
+\begin{theorem}
+Tout espace euclidien $E$ possède une base orthonormée.
+\end{theorem}
+\noindent \uline{Remarque}: On utilise l'algorithme d'orthonormalisation: \\
+Pour $k \in \llbracket 1, n \rrbracket$ on remplace $v_k$ par 
+\[ \frac{v_k - \sum\limits_{j = 1}^{k - 1} \vp{v_k}{e_j} e_j}{\lVert v_k - \sum\limits_{j = 1}^{k - 1} \vp{v_k}{e_j} e_j \rVert} \]
+\begin{corollaire}[Théorème de la base orthonormée incomplète]
+\hfill \\
+Soit $E$ un espace euclidien et $(e_1, ...\,, e_r)$ une famille orthonormée. \\
+Alors il existe $(e_{r + 1}, ...\,, e_n)$ telle que $(e_1, ...\,, e_n)$ soit une base orthonormée de $E$
+\end{corollaire}
+\begin{proposition}
+Soit $E$ un espace euclidien et $(e_1, ...\,, e_n)$ une BON de $E$ \\
+Alors, pour tous $x, y \in E$ on a:
+\begin{itemize}
+\item $x = \sum\limits_{i = 1}^n \vp{x}{e_i} e_i$
+\item $\vp{x}{y} = \sum\limits_{i = 1}^n \vp{x}{e_i} \vp{y}{e_i}$
+\item $\lVert x \rVert^2 = \sum\limits_{i = 1}^n \vp{x}{e_i}^2$
+\end{itemize}
+Autrement dit, dans une BON, tous les calculs se font comme dans $\mathbb{R}^n$ muni du produit scalaire canonique. \\
+Plus conceptuellement, tout espace euclidien de dimension $n$ est isomorphe (en tant qu'espace euclidien) à $\mathbb{R}^n$
+\end{proposition}
+
+\section{Projection orthogonale}
+Dans toute la section, $E$ est un espace préhilbertien et $F$ un sev \uline{de dimension finie} de $E$
+\subsection{Définition}
+\begin{proposition}
+Avec ces notations ($F$ de dimension finie!) on a:
+\begin{itemize}
+\item $E = F \oplus F^\perp$
+\item $\left(F^\perp\right)^\perp = F$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+On note $p_F$ et on appelle \uline{projection orthogonale sur $F$} le projecteur sur $F$ parallèlement à $F^\perp$
+\end{definition}
+\begin{proposition}
+Si $F$ possède une base orthonormée $(e_1, ...\,, e_r)$, on a 
+\[\forall x \in E ,\, p_f(x) = \sum\limits_{i = 1}^r \vp{x}{e_i} e_i \]
+\end{proposition}
+\begin{proposition}
+Soit $x \in E$
+\begin{itemize}
+\item Le projeté $p_F(x)$ est l'unique vecteur de $F$ tel que $\forall y \in F$, $\vp{p_F(x)}{y} = \vp{x}{y}$
+\item Si $F$ possède une base (pas nécessairement ON) $(v_1, ...\, v_r)$, cette condition équivaut à \\
+$\forall j \in \llbracket 1, n \rrbracket$, $\vp{p_F(x)}{e_j} = \vp{x}{e_j}$
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Inégalité de Bessel]
+On a $\forall x \in E$, $\lVert p_F(x) \rVert \leq \lVert x \rVert$
+\end{proposition}
+
+\subsection{Distance à un sev de dimension finie}
+\begin{proposition}
+Soit $E$ un espace préhilbertien et $F$ un sev de dimension finie de $E$. Soit $x \in E$ \\
+On a $\forall y \in F$, $\lVert x - y \rVert \geq \lVert x - p_F(x) \rVert$ avec égalité ssi $y = p_F(x)$
+\end{proposition}
+\begin{definition}
+Avec les mêmes notations, $\lVert x - p_F(x) \rVert$ est la \uline{distance de $x$ à $F$}, notée $d(x, F)$
+\end{definition}
+
+\subsection{Cas d'un hyperplan}
+Dans cette section, $E$ est un espace euclidien et $F$ est in hyperplan de $E$. On fixe un vecteur normal $n$ de $F$ (càd $F$ = $\vect(n)^\perp$)
+\begin{proposition}
+On a:
+\[ p_F(x) = x - \frac{\vp{x}{n}}{\lVert n \rVert^2} n \text{\quad \quad et \quad \quad} d(x, F) = \frac{\left| \vp{x}{n} \right|}{\lVert n \rVert} \]
+\end{proposition}
 \end{document}

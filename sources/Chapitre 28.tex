@@ -1,0 +1,194 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\card}{Card}
+\DeclareMathOperator{\im}{im}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 28: Probabilités}}
+\end{center}
+
+\section{Événements et variables aléatoires}
+\subsection{Généralités}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Un \uline{univers} (fini) est un ensemble fini non vide $\Omega$
+\item Un \uline{événement} est une partie $A \subseteq \Omega$
+\item Une \uline{variable aléatoire} (VA) est une application $X: \Omega \to E$ vers un ensemble $E$
+\end{itemize}
+\end{definition}
+
+\subsection{Opérations}
+\noindent \uline{Image d'une VA par une application} \\
+Étant donné une VA $X : \Omega \to E$ est une application $f: E \to F$, on définit la \uline{VA image de $X$ par $f$}, \\
+$f(x)$ comme la composition $f \circ X: \Omega \to F$ \medskip
+
+\noindent \uline{Événements définis par une VA} \\
+Soit $X: \Omega \to E$ \\
+Pour toute partie $S \subseteq E$, on définit l'événement
+\[ (X \in S) = \left\{ X \in S \right\} = \left\{ \omega \in \Omega \mid X(\omega) \in S \right\} = X^{-1}[S] \] \medskip
+
+\noindent \uline{Indicatrice d'un élément} \\
+Tout événement $A \subseteq \Omega$ définit une VA
+\[ \mathds{1}_A : \begin{cases}
+\Omega \to \left\{ 0, 1 \right\} \\
+\omega \mapsto \begin{cases}
+1 \text{ si } \omega \in A \\
+0 \text{ si } \omega \not\in A
+\end{cases}
+\end{cases} \]
+
+\subsection{Expériences aléatoires}
+\noindent Considérons un exemple d'expérience aléatoire. On joue à pile ou face $n$ fois de suite. \medskip
+
+\noindent \uline{UNIVERS}: On considère $\Omega = \left\{ 0, 1 \right\}$ \\
+Une \uline{issue} est un résultat possible, càd ici une suite de $n$ lancers. \medskip
+
+\noindent \uline{ÉVÉNEMENTS}: L'événement (au sens usuel) "le $i$-ème lancer donne pile" correspond à l'événement \\
+(au sens mathématique) $\pi_i = \left\{(b_1, ...\,, b_n) \in \Omega \mid b_i = 1 \right\}$ (ensemble à $2^{n - 1}$ événements)\\
+"Obtenir que des 'face' " $F = \left\{ (0, 0, ...\,, 0) \right\}$ (est élémentaire = singleton) \\
+"Obtenir un nombre impair de 'pile' " $I = \left\{ (b_1, ...\,, b_n) \in \Omega \mid b_1 + ... + b_n \equiv 1 (\text{mod } 2) \right\}$ \medskip
+
+\noindent \uline{VARIABLES ALÉATOIRES}:
+\begin{itemize}
+\item $L_i : \begin{cases}
+\Omega \to \{ 0, 1 \} \\
+(b_1, ...\,, b_n) \mapsto b_i
+\end{cases}$ "est le résultat du $i$-ème lancer"
+\item $N : \begin{cases}
+\Omega \to \llbracket 0, n \rrbracket \\
+(b_1, ...\,, b_n) \mapsto b_1, ...\,, b_n
+\end{cases}$ est le nombre de "pile" obtenus
+\item $P: \begin{cases}
+\Omega \to \llbracket 1, n \rrbracket \cup \{ +\infty \} \\
+(b_1, ...\,, b_n) \mapsto \min\left\{ i \in \llbracket 1, n \rrbracket \mid b_i = 1 \right\}
+\end{cases}$ est le rang de premier "pile" \\
+(avec la convention $\min \emptyset = +\infty$)
+\item $R: \begin{cases}
+\Omega \to P(\llbracket 1, n \rrbracket) \\
+(b_1, ...\,, b_n) \mapsto \left\{ i \in \llbracket 1, n \rrbracket \mid b_i = 1 \right\}
+\end{cases}$ est l'ensemble des rangs où l'on a obtenu pile
+\end{itemize} \medskip
+
+\noindent \uline{Lien entre ces objets}:
+\begin{itemize}
+\item "Obtenir un nombre impair de 'pile' " et "Obtenir que 'face' " sont incompatibles: $I \cap F = \emptyset$
+\item $F = \pi_1 \cup \pi_2 \cup ... \cup \pi_n = \overline{\pi_1} \cap ... \cap \overline{\pi_n}$
+\item Si $n = 3$, $I = (\pi_1 \cap \overline{\pi_2} \cap \overline{\pi_3}) \cup (\overline{\pi_1} \cap \pi_2 \cap \overline{\pi_3}) \cup (\overline{\pi_1} \cap \overline{\pi_2} \cap \pi_3) \cup (\pi_1 \cap \pi_2 \cap \pi_3)$
+\item On a $N = L_1 + L_2 + ... + L_n$
+\item On a $N = \left| R \right|$ \\
+Formellement, $N = \card \circ R$, où $\card: \begin{cases}
+P(\llbracket 1, n \rrbracket) \to \llbracket 0, n \rrbracket \\
+T \mapsto \left| T \right|
+\end{cases}$ \\
+On a en fait utilisé la notation $f(x)$ des VA images (càd qu'on a noté $\card(R)$ plutôt que $\card \circ R$)
+\item On a $L_1 + L_2 \leq N$ (en supposant $n \geq 2$)
+\item $P = \min(R)$
+\item $(N = 0) = F$
+\item $(N \equiv 1 (\text{mod }2)) = (N \text{ impair}) = I$
+\item $\pi_1 \cap ... \cap \pi_n = (N = n)$
+\item $(L_i = 1) = \pi_i$: en fait, $L_i = \mathds{1}_{\pi_i}$
+\item $\overline{\pi_1} = (p \geq 2)$
+\item $(p = n) = \overline{\pi_1} \cap \overline{\pi_2} \cap ... \cap \overline{\pi_{n - 1}} \cap \pi_n = (R = \{ n \}) = (N = 1, L_n = 1)$
+\end{itemize}
+
+\section{Espaces probabilisés finis}
+\subsection{Généralités}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Une \uline{mesure de probabilités} sur un univers $\Omega$ est une application $P: \mathcal{P}(\Omega) \to [0, 1]$ telle que:
+\begin{itemize}
+\item $P(\Omega) = 1$
+\item Pour tous $A, B \in \mathcal{P}(\Omega)$ disjoints, $P(A \sqcup B) = P(A) + P(B)$
+\end{itemize}
+\item On appelle \uline{espace probabilisé (fini)} tout couple $(\Omega, P)$, où $\Omega$ est un univers et $P$ une mesure de \\
+probabilités du $\Omega$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $(\Omega, P)$ un espace probabilisé fini (epf). \\
+On a:
+\begin{itemize}
+\item $P(\emptyset) = 0$
+\item \uline{Croissance}: pour tous $A, B \in \mathcal{P}(\Omega)$, $A \subseteq B \implies P(A) \leq P(B)$
+\item $\forall A \in \mathcal{P}(\Omega)$, $P(\overline{A}) = 1 - P(\overline{A})$
+\item Pour tous $A_1, ...\,, A_r \in \mathcal{P}(\Omega)$ disjoints, \[P\left( \bigsqcup\limits_{i = 1}^r A_i \right) = \sum\limits_{i = 1}^r P(A_i)\]
+\item $\forall A, B \in \mathcal{P}(\Omega)$, $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+\end{itemize}
+\end{proposition}
+
+\subsection{Formule des probabilités globales}
+\begin{definition}
+Soit $(\Omega, P)$ un epf.
+Un \uline{système complet d'événements} (scé) est une famille $(C_i)_{i = 1}^r$ qui forme un recouvrement disjoint de $\Omega$, càd telle que:
+\begin{itemize}
+\item Les $C_i$ sont (deux à deux) disjoints: $\forall i, j \in \llbracket 1, r \rrbracket$, $i \neq j \implies C_i \cap C_j = \emptyset$
+\item $\bigcup\limits_{i = 1} C_i = \Omega$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Formule des probabilités totales]
+Soit $(\Omega, P)$ un epf et $(C_i)_{i = 1}^r$ un scé. \\
+Alors $\forall A \in \mathcal{P}(\Omega)$, $P(A) = \sum\limits_{i = 1}^r P(A \cap C_i)$
+\end{theorem}
+
+\subsection{Loi d'une VA}
+\begin{definition}
+Soit $(\Omega, P)$ un epf et $X: \Omega \to E$ une VA. \\
+La loi de $X$ est la donnée pour tout $S \subseteq E$ de la probabilité $P(X \in S) = P( (X \in S) )$
+\end{definition}
+\begin{proposition}
+Soit $(\Omega, P)$ un epf et $X: \Omega \to E$ une VA. \\
+La loi de $X$ est déterminée par les probabilités $P(X = x)$, pour $x$ décrivant $\im X$ \\
+Plus précisément, pour tout $S \subseteq E$
+\[P(X \in S) = \sum\limits_{x \in S \, \cap \, \im X} P(X = x)\]
+\end{proposition}
+\begin{definition}
+Soit $(\Omega, P)$ un epf et $E$ un ensemble fini non vide. \\
+Une VA $X: \Omega \to E$ \uline{suit la loi uniforme sur $E$} si $\forall S \in \mathcal{P}(E)$, $P(X \in S) = \frac{\left| S \right|}{\left| E \right|}$ \\
+On note alors $X \sim U(E)$
+\end{definition}
+\begin{definition}
+Soit $(\Omega, P)$ un epf. \\
+Une VA $X: \Omega \to \{ 0, 1 \}$ suit le \uline{loi de Bernoulli} de paramètre $p \in \llbracket 0, 1 \rrbracket$ si $P(X = 1) = p$ \\
+On note alors $X \sim B(p)$
+\end{definition}
+\noindent \uline{Remarque importante}: Si $A \subseteq \Omega$ est un événement, alors $\mathds{1}_A \sim B(p)$, où $p = P(A)$
+
+\subsection{Couples de VA}
+\begin{definition}
+Soit un epf et $X_1: \Omega \to E_1$ et $X_2: \Omega \to E_2$ deux VA. \\
+Le \uline{loi conjointe} de $X_1$ et $X_2$ est la loi de la VA
+\[ (X_1, X_2) : \begin{cases}
+\Omega \to E_1 \times E_2 \\
+\omega \to \left(X_1(\omega), X_2(\omega) \right)
+\end{cases} \]
+Les lois de $X_1$ et $X_2$ sont appelées \uline{lois marginales de loi conjointe}.
+\end{definition}
+\end{document}

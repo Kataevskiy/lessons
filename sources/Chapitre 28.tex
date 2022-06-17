@@ -14,7 +14,6 @@
 \usepackage{dsfont}
 \usepackage{mathpazo}
 
-
 \onehalfspacing
 
 \theoremstyle{definition}
@@ -24,8 +23,12 @@
 \newtheorem{lemme}[proposition]{Lemme}
 \newtheorem{definition}[proposition]{Définition}
 
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
 \DeclareMathOperator{\card}{Card}
 \DeclareMathOperator{\im}{im}
+\newcommand{\indep}{\mathrel{\perp \!\!\! \perp}}
 
 \begin{document}
 \renewcommand{\labelitemi}{$*$}
@@ -189,6 +192,150 @@ Le \uline{loi conjointe} de $X_1$ et $X_2$ est la loi de la VA
 \Omega \to E_1 \times E_2 \\
 \omega \to \left(X_1(\omega), X_2(\omega) \right)
 \end{cases} \]
-Les lois de $X_1$ et $X_2$ sont appelées \uline{lois marginales de loi conjointe}.
+Les lois de $X_1$ et $X_2$ sont appelées \uline{lois marginales} de loi conjointe.
 \end{definition}
+\begin{proposition}[Calcul des marginales]
+Avec les notations de la définition:
+\[ \forall x_1 \in E_1 ,\, P(X_1 = x_1) = \sum_{x_2 \in \, \im X_2} P(X_1 = x_1, X_2 = x_2) \]
+\end{proposition}
+\noindent \uline{Remarque important}: \\
+La loi conjointe détermine les lois marginales, la réciproque est fausse: il y a plusieurs manières de \uline{coupler} des lois. \\
+Notamment, pour tout $p \in \left[ 0, \frac{1}{2} \right]$ on a
+\begin{center}
+\begin{tabular}{M{3em} | M{3em} | M{3em}}
+$k$ \textbackslash $\,\, l$ & $0$ & $1$ \\
+\hline
+$0$ & $p$ & $\frac{1}{2} - p$ \\
+\hline
+$1$ & $\frac{1}{2} - p$ & $p$
+\end{tabular}
+\end{center}
+qui constitue un couplage de $B\left(\frac{1}{2} \right)$ avec elle-même. \\
+\uline{Trois cas particuliers}: \medskip
+
+$p = \frac{1}{2}$ \quad
+\begin{tabular}{M{3em} | M{3em}}
+$\frac{1}{2}$ & $0$ \\
+\hline
+$0$ & $\frac{1}{2}$ \\
+\end{tabular} \\
+On a $P(X_1 = X_2) = 1$ \\
+$X_1$ et $X_2$ sont égales (presque sûrement). \medskip
+
+$p = 0$ \quad
+\begin{tabular}{M{3em} | M{3em}}
+$0$ & $\frac{1}{2}$ \\
+\hline
+$\frac{1}{2}$ & $0$ \\
+\end{tabular} \\
+$X_1 + X_2 = 1$ presque sûrement. \medskip
+
+$p = \frac{1}{4}$ \quad
+\begin{tabular}{M{3em} | M{3em}}
+$\frac{1}{4}$ & $\frac{1}{4}$ \\
+\hline
+$\frac{1}{4}$ & $\frac{1}{4}$ \\
+\end{tabular} \\
+$P(X_1 = X_2) = \frac{1}{2}$ \\
+Connaître le résultat de $X_1$ ne donne aucune information sur celui de $X_2$ \\
+On dira que $X_1$ et $X_2$ sont indépendantes.
+
+\subsection{Construction d'espaces probabilisés finis}
+\begin{definition}
+Une \uline{distribution de probabilités} sur un univers fini $\Omega$ est une famille $(p_\omega)_{\omega \in \Omega}$ de réels $\geq 0$ tels que $\sum\limits_{\omega \in \Omega} p_\omega = 1$
+\end{definition}
+\begin{proposition}
+Soit $(p_\omega)_{\omega \in \Omega}$ une distribution de probabilités sur un univers fini $\Omega$ \\
+Alors il existe une unique mesure de probabilités $P$ sur $\Omega$ telle que $\forall \omega \in \Omega$, $P(\{ \omega \}) = p_\omega$
+\end{proposition}
+
+\subsection{Modélisation(s) d'expériences aléatoires}
+\noindent Imaginons qu'on veuille modéliser l'expérience constituant à tirer aléatoirement une carte dans un jeu de $52$ cartes. \medskip
+
+\noindent \uline{Modélisation 1 (normale)}: On prend $\Omega = \left\{ 2, 3, ...\,, V, D, R, A \right\} \times \left\{ P, C, K, T \right\}$ l'ensemble des 52 cartes, muni de la probabilité uniforme. \\
+L'événement (au sens usuel) "tirer un coeur" correspond à l'événement $\heartsuit = \left\{ (2, C), ...\,, (A, C) \right\}$ \\
+donc $P(\heartsuit) = \frac{\left| \heartsuit \right|}{\left| \Omega \right|} = \frac{13}{52} = \frac{1}{4}$ \medskip
+
+\noindent \uline{Modélisation 2 (un peu tordue)}: On commence par mélanger le jeu. On va poser $J = \left\{ 2, ...\,, R, A \right\} \times \left\{ P, C, K, T \right\}$ puis on pose $\Omega$ l'ensemble des permutations de $J$ (càd une $52$-liste sans répétition de $J$), muni de la mesure de probabilités uniforme. \\
+L'événement (au sens usuel) "tirer un coeur" correspond à l'événement \\
+$\heartsuit' = \left\{ (C_1, C_2, ...\,, C_{52}) \in \Omega' \mid C_1 \in \left\{ (2, C), ...\,, (A, C) \right\} \right\}$ \\
+On a $\left| \Omega' \right| = 52!$ Calculons $\left| \heartsuit' \right|$ \\
+Pour construire un élément de $\heartsuit'$:
+\begin{itemize}
+\item On choisit une première carte (un coeur): $13$ possibilités.
+\item \rule{5em}{1pt} $2$è carte (différente de la $1$ère): $51$ possibilité.
+\item \rule{5em}{1pt} $3$è carte (différente des précédentes): $50$ possibilités.
+\end{itemize}
+Par principe de multiplication, $\left| \heartsuit' \right| = 13 \times 51 \times 50 \times ... \times 1 = 13 \times 51!$ \\
+Donc $P(\heartsuit') = \frac{13 \times 51!}{52!} = \frac{13}{52} = \frac{1}{4}$ \\
+En théorie des possibilités, l'epf joue un rôle de seconde plan: dans l'exemple précédent, les détails de $\Omega$ n'importent pas. Ce qui compte est qu'il existe une VA donnant le résultat du tirage. Que l'on prenne
+\[ X: \begin{cases}
+\Omega \to J \\
+C \mapsto C
+\end{cases} \text{\quad ou \quad}
+X': \begin{cases}
+\Omega' \to J \\
+(C_1, ...\,, C_{52} \mapsto C_1
+\end{cases}\]
+On a une VA $X$ ou $X' \sim U(J)$ et c'est ce qui compte.
+
+\subsection{Vers les espaces probabilisés généraux}
+\begin{definition}
+Une \uline{tribu} (ou une \uline{$\sigma$-algèbre}) sur une ensemble $\Omega$ est une partie $a \in \mathcal{P}(\Omega)$ contenant $\Omega$ ($\Omega \in a$) stable par passage au complémentaire (si $A \in a$, $\overline{A} \in a$) et union dénombrable (si $A_0, A_1, ... \in a$, $\bigcup\limits_{n \in \mathbb{N}} A_n \in a$)
+\end{definition}
+\begin{definition}
+Un espace probabilisé est un triplet ($\Omega$, $a$, $P$) où:
+\begin{itemize}
+\item \uline{L'univers} $\Omega$ est un ensemble non vide.
+\item $a$ est une tribu sur $\Omega$
+\item \uline{La mesure de probabilités} $P: a \to [0, 1]$ vérifie:
+\begin{itemize}
+\item $P(\Omega) = 1$
+\item Si $(A_n)_{n \in \mathbb{N}}$ est une suite d'éléments de $a$, deux à deux disjoints, alors $P\left( \bigsqcup\limits_{n \in \mathbb{N}} A_n \right) = \sum\limits_{n \in \mathbb{N}} P(A_n)$ ($\sigma$-additivité)
+\end{itemize}
+\end{itemize}
+\end{definition}
+\begin{theorem}[culturel]
+Il existe un espace probabilisé $([0, 1], B, \lambda)$ où:
+\begin{itemize}
+\item $B$ est une tribu sur $[0, 1]$ (tribu des boréliens) contenant les intervalles.
+\item $\lambda: B \to [0, 1]$ est une mesure de probabilités telle que $\forall 0 \leq a < b \leq 1$, $\lambda(\left] a, b \right[) = b - a$ \\
+appelée \uline{mesure de Lebesgue}.
+\end{itemize}
+\end{theorem}
+
+\section{Indépendance}
+Dans cette section, $(\Omega, P)$ est un épf.
+
+\subsection{Deux événements}
+\begin{definition}
+Soit $A, B \in \mathcal{P}(\Omega)$ deux événements. \\
+On dit que $A$ et $B$ sont \uline{indépendants} si $P(A \cap B) = P(A) P(B)$
+\end{definition}
+\begin{proposition}
+Soit $A, B \in \mathcal{P}(\Omega)$ indépendants. \\
+Alors $\overline{A}$ et $B$ sont indépendants.
+\end{proposition}
+
+\subsection{Variables aléatoires}
+\begin{definition}
+Soit $X_1: \Omega \to E_1$ et $X_2: \Omega \to E_2$ \\
+On dit que $X_1$ et $X_2$ sont \uline{indépendantes} (et on note $X_1 \indep X_2$) si $\forall S_1 \in \mathcal{P}(E_1)$, $\forall S_2 \in \mathcal{P}(E_2)$
+\[ P(X_1 \in S_1, X_2 \in S_2) = P(X_1 \in S_1) P(X_2 \in S_2) \]
+Plus généralement, soit $X_i: \Omega \to E_i$ des VA ($i \in \llbracket 1, n \rrbracket$). \\
+On dit qu'elles sont \uline{indépendantes} si $\forall S_1 \in \mathcal{P}(E_1), ...\,, \forall S_n \in \mathcal{P}(E_n)$
+\[ P(X_1 \in S_1, ...\,, X_n \in S_n) = P(X_1 \in S_1) ... P(X_n \in S_n) \]
+\end{definition}
+\noindent \uline{Remarque}: Si $n$ VA sont indépendantes (ou, pour insister \uline{mutuellement} indépendantes), elles sont \uline{indépendantes deux à deux}, càd $\forall i \neq j \in \llbracket 1, n \rrbracket$, $X_i \indep X_j$
+\begin{theorem}
+Soit $X_1: \Omega \to E_1, ...\,, X_n: \Omega \to E_n$ des VA. \\
+Alors $X_1, ...\,, X_n$ sont indépendantes ssi
+\[ \forall x_1 \in E_1, ...\,, \forall x_n \in E_n,\, P(X_1 = x_1, ...\,, X_n = x_n) = P(X_1 = x_1) ... P(X_n = x_n) \]
+\end{theorem}
+\begin{proposition}
+Soit $A, B \in \mathcal{P}(\Omega)$ \\
+Alors $A$ et $B$ sont indépendants ssi $\mathds{1}_A \indep \mathds{1}_B$
+\end{proposition}
+
+\subsection{Plusieurs événements}
 \end{document}

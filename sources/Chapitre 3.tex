@@ -1,0 +1,641 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\sgn}{sgn}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 3: Nombres complexes}}
+\end{center}
+
+\section{Généralités et rappels}
+\subsection{Définition}
+\begin{definition}
+On définit (provisoirement) l'ensemble des nombres complexes comme
+\[ \left\{ \begin{pmatrix}
+a & -b \\
+b & a
+\end{pmatrix} \,\middle|\, a, b \in \mathbb{R} \right\}\]
+On identifie tout réel à un "nombre complexe" $aI_2 = \begin{pmatrix}
+a & 0 \\
+0 & a
+\end{pmatrix}$ et on définit $i = \begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}$ de telle sorte que tout nombre complexe s'écrit de manière unique sous la forme $a + ib$, pour un couple $(a, b) \in \mathbb{R}^2$
+\end{definition}
+\begin{proposition}
+Soit $z_1, z_2, z_3 \in \mathbb{C}$
+\begin{itemize}
+\item L'addition est \uline{commutative}: $z_1 + z_2 = z_2 + z_1$
+\item L'addition est \uline{associative}: $z_1 + (z_2 + z_3) = (z_1 + z_2) + z_3$
+\item La multiplication est commutative: $z_1 z_2 = z_2 z_1$
+\item La multiplication est associative: $z_1 (z_2 z_3) = (z_1 z_2) z_3$
+\item La multiplication \uline{distribue sur l'addition}: $z_1 (z_2 + z_3) = z_1 z_2 + z_1 z_3$
+\end{itemize}
+\end{proposition}
+
+\subsection{Conjugaison}
+\begin{definition}
+Soit $z = a + ib$ un nombre complexe sous forme algébrique. \\
+On définit:
+\begin{itemize}
+\item Son \uline{conjugué}: $\overline{z} = a - ib \in \mathbb{C}$
+\item Sa \uline{partie réelle}: $\re(z) = a \in \mathbb{R}$
+\item Sa \uline{partie imaginaire}: $\im(z) = b \in \mathbb{R}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $z_1, z_2 \in \mathbb{C}$ et $n \in \mathbb{N}$ \\
+On a:
+\begin{itemize}
+\item $\overline{z_1 + z_2} = \overline{z_1} + \overline{z_2}$
+\item $\overline{z_1 z_2} = \overline{z_1} \times \overline{z_2}$
+\item $\overline{\overline{z}} = z$
+\item $\overline{z^n} = \overline{z}^n$
+\item On a $z_1 \in \mathbb{R} \iff z_1 = \overline{z_1}$
+\item On a
+\[\re(z_1) = \frac{z_1 + \overline{z_1}}{2} \quad \text{ et } \quad \im(z_1) = \frac{z_1 - \overline{z_1}}{2i} \]
+\item On a
+\[\begin{cases}
+\re(z_1 + z_2) = \re(z_1) + \re(z_2) \\
+\forall t \in \mathbb{R},\, \re(t z_1) = t \re(z_1)
+\end{cases}\]
+\item Et
+\[\begin{cases}
+\im(z_1 + z_2) = \im(z_1) + \im(z_2) \\
+\forall t \in \mathbb{R},\, \im(t z_1) = t \im(z_1)
+\end{cases}\] ($\mathbb{R}$-linéarité de $\re$ et $\im$)
+\end{itemize}
+\end{proposition}
+
+\pagebreak
+
+\begin{proposition}
+Soit $z \in \mathbb{C}$ \\
+LASSÉ (Les assertions suivantes sont équivalentes):
+\begin{enumerate}
+\item $\exists b \in \mathbb{R}: z = ib$
+\item $\overline{z} = -z$
+\item $\re(z) = 0$
+\end{enumerate}
+Quand elles sont vraies, on dit que $z$ est \uline{imaginaire pur}.
+\end{proposition}
+
+\subsection{Module}
+\begin{proposition}
+Soit $z \in \mathbb{C}$ \\
+Alors $z \overline{z} \in \mathbb{R}_+$ et on a $z \overline{z} = 0$ si et seulement si $z = 0$
+\end{proposition}
+\begin{corollaire}
+Tout nombre complexe non nul a un inverse: \\
+$\forall z \in \mathbb{C}^*$, $\exists w \in \mathbb{C}: zw = 0$
+\end{corollaire}
+\begin{corollaire}
+On a la règle du produit nul: \\
+$\forall z_1, z_2 \in \mathbb{C}$, $z_1 z_2 = 0 \iff (z_1 = 0 \text{ ou } z_2 = 0)$ \\
+On dit aussi que $\mathbb{C}$ est \uline{intègre}.
+\end{corollaire}
+\begin{proposition}
+Soit $z_1 \in \mathbb{C}$ et $z_2 \in \mathbb{C}^*$ \\
+Alors le conjugué de $\frac{z_1}{z_2}$ est $\frac{\overline{z_1}}{\overline{z_2}}$
+\end{proposition}
+\begin{definition}
+Soit $z \in \mathbb{C}$ \\
+Le module de $z$ est $\left| z \right| = \sqrt{z \overline{z}}$
+\end{definition}
+\begin{definition}
+On note $\mathbb{U} = \left\{ z \in \mathbb{C} \mid \left|z\right| = 1 \right\}$ le \uline{cercle unité} (ou \uline{trigonométrique})
+\end{definition}
+\begin{proposition}
+Soit $z_1 \in \mathbb{C}$ et $z_2 \in \mathbb{C}$ \\
+On a $\left| z_1 z_2 \right| = |z_1| \cdot |z_2|$ et si $z_2 \neq 0$, $\left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}$
+\end{proposition}
+
+\subsection{Inégalité triangulaire}
+\begin{proposition}
+Soit $z, w \in \mathbb{C}$ \\
+LASSÉ:
+\begin{enumerate}
+\item $\overline{z} w \in \mathbb{R}_+$
+\item $z = 0$ ou $(z \neq 0 \text{ et } \frac{w}{z} \in \mathbb{R}_+)$
+\item $\exists u \in \mathbb{C}$, $\exists \lambda, \mu \in \mathbb{R}_+: \begin{cases}
+z = \lambda u \\
+w = \mu u
+\end{cases}$
+\end{enumerate}
+Si ces assertions sont vraies, on dit que $z$ et $w$ sont \uline{positivement colinéaires}.
+\end{proposition}
+\noindent \uline{Remarque}: Si $z = a + ib$ et $w = c + id$, $\re(\overline{z}w) = ac + bd$ est le produit scalaire de $\begin{pmatrix}
+a \\
+b
+\end{pmatrix}$ et $\begin{pmatrix}
+c \\
+d
+\end{pmatrix}$
+\begin{theorem}
+Soit $z, w \in \mathbb{C}$
+\begin{itemize}
+\item On a $\re(z) \leq |z|$ \\
+Il y a égalité si et seulement si $z \in \mathbb{R}_+$
+\item \uline{Inégalité de Cauchy-Schwarz}: On a $\re(\overline{z} w) \leq |z| \cdot |w|$ \\
+"Le produit scalaire est inférieure au produit des normes".
+\item \uline{Inégalité triangulaire}: $\left| z + w \right| \leq |z| + |w|$ \\
+Dans les deux derniers cas, il y a égalité si et seulement si $z$ et $w$ sont positivement colinéaires.
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Pour tous $z_1, ...\,, z_n \in \mathbb{C}$, on a:
+\[\left|z_1 + ... + z_n\right| \leq |z_1| + ... + |z_n|\]
+\end{corollaire}
+\begin{corollaire}[Inégalité triangulaire "à l'envers"]
+Pour tous $z, w \in \mathbb{C}$, on a:
+\[ \left|z + w\right| \geq |z| - |w| \]
+Encore mieux: $\left| z + w \right| \geq \left| |z| - |w| \right|$
+\end{corollaire}
+
+\subsection{Distance}
+\noindent Si $A$ et $B$ sont deux points d'affixes $z_A$ et $z_B$, la distance entre $A$ et $B$ est $d(A, B) = \lVert \vec{AB} \rVert = \left| z_B - z_A \right|$ \\
+On la notera aussi $d(z_A, z_B)$
+\begin{proposition}[Inégalité triangulaire]
+Soit $z_1, z_2, z_3 \in \mathbb{C}$ \\
+Alors $d(z_1, z_3) \leq d(z_1, z_2) + d(z_2, z_3)$
+\end{proposition}
+\begin{definition}
+Soit $z \in \mathbb{C}$ est $r \in \mathbb{R}_+^*$. \\
+On définit:
+\begin{itemize}
+\item Le \uline{cercle} de centre $z$ et de rayon $r$: \\
+$\Gamma(z, r) = \left\{ w \in \mathbb{C} \mid \left| z - w \right| = r \right\} =\left\{ w \in \mathbb{C} \mid \left| z - w \right|^2 = r^2 \right\}$
+\item Le \uline{disque} (fermé) de centre $z$ et de rayon $r$: \\
+$\Delta(z, r) = \left\{ w \in \mathbb{C} \mid \left| z - w \right| \leq r \right\} = \left\{ w \in \mathbb{C} \mid \left| z - w \right|^2 \leq r^2 \right\}$
+\end{itemize}
+\end{definition}
+
+\section{Équation du second degré}
+\subsection{Racines carrés d'un nombre complexe: résultat théorique}
+\begin{theorem}[provisoirement admis]
+Soit $\Delta \in \mathbb{C}^*$ \\
+Alors il existe deux \uline{racines carrés} de $\Delta$, càd deux nombres complexes dont le carré vaut $\Delta$. \\
+Ces deux carrés sont opposés l'une de l'autre.
+\end{theorem}
+
+\subsection{Racines carrés d'un nombre complexe: calcul en forme algébrique}
+\begin{definition}
+On définit la fonction signe
+\[ \sgn: \begin{cases}
+\mathbb{R} \to \mathbb{R} \\
+x \mapsto \begin{cases}
+1 \text{ si } x > 0 \\
+0 \text{ si } x = 0 \\
+-1 \text{ si } x < 0
+\end{cases}
+\end{cases} \]
+\end{definition}
+
+\pagebreak
+
+\begin{theorem}
+Soit $\Delta \in \mathbb{C}$ et $z = x + iy$ un nombre complexe sous forme algébrique. \\
+On a alors:
+\begin{align*}
+z^2 = \Delta &\iff \begin{cases}
+\re(z^2) = \re(\Delta) \\
+|z^2| = |\Delta| \\
+\sgn(\im(z^2)) = \sgn(\im(\Delta))
+\end{cases} \\
+&\iff \begin{cases}
+x^2 - y^2 = \re(\Delta) \\
+x^2 + y^2 = |\Delta| \\
+\sgn(xy) = \sgn(\im(\Delta))
+\end{cases}
+\end{align*}
+\end{theorem}
+
+\subsection{Résolution de l'équation générale}
+\begin{theorem}
+Soit $a \in \mathbb{C}^*$, $b, c \in \mathbb{C}$ \\
+On considère l'équation $az^2 + bz + c = 0$ (E) \\
+Soit $\Delta = b^2 - 4ac$ le \uline{discriminant} de (E)
+\begin{itemize}
+\item \uline{Si $\Delta = 0$}: (E) a une unique solution:
+\[-\frac{b}{2a}\]
+\item \uline{Si $\Delta \neq 0$}: (E) a deux solutions:
+\[ \frac{-b -\delta}{2a} \quad \text{ et } \quad \frac{-b +\delta}{2a} \]
+où $\delta$ est \uline{une} racine de $\Delta$
+\end{itemize}
+\end{theorem}
+
+\subsection{Relation coefficient-racines}
+\begin{theorem}
+Soit $a \in \mathbb{C}^*$, $b, c \in \mathbb{C}$. On note $z_1$ et $z_2$ les solutions de $ax^2 + bx + c = 0$ \\
+(s'il n'y en a qu'une, notée $\zeta$, on pose $z_1 = z_2 = \zeta$)
+\begin{itemize}
+\item On a $\forall z \in \mathbb{C}$
+\[az^2 + bz + c = a(z - z_1)(z - z_2)\]
+\item Relation coefficients-racines (formules de Viète)
+\[z_1 + z_2 = -\frac{b}{a} \quad \text{ et } \quad z_1 z_2 = \frac{c}{a}\]
+\end{itemize}
+\end{theorem}
+
+\subsection{Système somme-produit}
+\begin{theorem}
+Soit $S, P \in \mathbb{C}$ \\
+On considère le système $(\Sigma): \begin{cases}
+x + y = S \\
+xy = P
+\end{cases}$ d'inconnue $(x, y) \in \mathbb{C}^2$ \\
+On considère \uline{l'équation associée} $z^2 - Sz + P = 0$ (ÉA), d'inconnue $z \in \mathbb{C}$ \\
+On note $z_1$ et $z_2$ les solutions de (ÉA) (en posant $z_1 = z_2 = \zeta$ s'il n'y en a qu'une). \\
+Alors les solutions de $(\Sigma)$ sont $(z_1, z_2)$ et $(z_2, z_1)$
+\end{theorem}
+
+\section{Exponentielle complexe}
+\subsection{Préliminaires: congruence modulo $T$}
+\begin{definition}
+Soit $T \in \mathbb{C}^*$ \\
+On dit que $z_1$ et $z_2 \in \mathbb{C}$ sont \uline{congrus modulo $T$} si $\exists k \in \mathbb{Z}: z_2 - z_1 = kT$ \\
+Si c'est la cas, on note $z_1 \equiv z_2 \quad (\text{mod }T)$
+\end{definition}
+\begin{proposition}
+Soit $T \in \mathbb{C}^*$ \\
+La congruence modulo $T$ est une \uline{relation d'équivalence}.
+\begin{itemize}
+\item Elle est \uline{réflexive}: $\forall z \in \mathbb{C}$, $z \equiv z \quad (\text{mod }T)$
+\item Elle est \uline{symétrique}: $\forall z, z' \in \mathbb{C}$, $z \equiv z' (\text{mod }T) \implies z' \equiv z (\text{mod }T)$
+\item Elle est \uline{transitive}: $\forall z, z', z'' \in \mathbb{C}$, $\left(z \equiv z' (\text{mod }T) \text{ et } z' \equiv z'' (\text{mod }T)\right) \implies z \equiv z'' (\text{mod }T)$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $T \in \mathbb{C}^*$
+\begin{itemize}
+\item Soit $z_1, z_2, z_3 \in \mathbb{C}$ \\
+Si $\begin{cases}
+z_1 \equiv z_2 (\text{mod }T) \\
+z_3 \equiv z_4 (\text{mod }T)
+\end{cases}$ on a $z_1 + z_3 \equiv z_2 + z_4 (\text{mod }T)$
+\item Soit $z_1, z_2 \in \mathbb{C}$ et $\lambda \in \mathbb{C}^*$ \\
+Si $z_1 \equiv z_2 (\text{mod }T)$ alors $\lambda z_1 \equiv \lambda z_2 (\text{mod }\lambda T)$
+\end{itemize}
+\end{proposition}
+
+\subsection{Exponentielle complexe}
+\begin{theorem}[provisoirement admis]
+Il existe une fonction $\exp: \mathbb{C} \to \mathbb{C}$ vérifiant:
+\begin{enumerate}
+\item $\exp(0) = 1$
+\item Propriété fondamentale: $\forall x, y \in \mathbb{C}$, $\exp(x + y) = \exp(x) \exp(y)$
+\item On a $\forall z \in \mathbb{C}$, $\exp(\overline{z}) = \overline{\exp(z)}$
+\item $\forall z \in \mathbb{C}$, $\frac{\exp(tz) - 1}{t} \xrightarrow[t \to 0]{} z$
+\item Tout $w \in \mathbb{C}^*$ s'écrit $w = \exp(z)$ pour un certain $z \in \mathbb{C}$
+\item Pour tous $z, z' \in \mathbb{C}$, on a $\exp(z) = \exp(z') \iff z \equiv z' (\text{mod }2i\pi)$
+\end{enumerate}
+\end{theorem}
+\noindent \uline{Remarque}: À la fin de l'année, on définira l'exponentielle de $z$ comme
+\[ \exp(z) = \lim_{n \to +\infty} \sum_{k = 0}^n \frac{z^k}{k!} \]
+\begin{definition}
+On définit les fonctions
+\begin{align*}
+&\cos : \begin{cases}
+\mathbb{R} \to \mathbb{R} \\
+\theta \mapsto \re(e^{i\theta})
+\end{cases}
+&\sin : \begin{cases}
+\mathbb{R} \to \mathbb{R} \\
+\theta \mapsto \im(e^{i\theta})
+\end{cases}
+\end{align*}
+\end{definition}
+\begin{proposition}
+Soit $z \in \mathbb{C}$ \\
+On a: $|e^z| = e^{\re(z)}$
+\end{proposition}
+
+\subsection{$\mathbb{U}$ et exponentielle}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Pour tout $\theta \in \mathbb{R}$, on a $e^{i\theta} \in \mathbb{U}$
+\item Pour tout $z \in \mathbb{U}$, on peut trouver $\theta \in \mathbb{R}$ tel que $z = e^{i\theta}$
+\item Pour tout $\theta, \theta' \in \mathbb{R}$, on a $e^{i\theta} = e^{i\theta'} \iff \theta \equiv \theta' \quad (\text{mod }2\pi)$
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Formules d'Euler]
+Soit $\theta \in \mathbb{R}$ \\
+On a
+\[ \cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2} \quad \text{ et } \quad \sin(\theta) = \frac{e^{i\theta} - e^{-i\theta}}{2i} \]
+\end{theorem}
+\begin{proposition}[Formules de De Moivre]
+Soit $\theta \in \mathbb{R}$ et $n \in \mathbb{Z}$ \\
+On a 
+\[ (\cos(\theta) + i\sin(\theta))^n = \cos(n\theta) + i\sin(n\theta) \]
+\end{proposition}
+\begin{proposition}[Factorisation par l'arc moitié]
+Soit $\alpha, \beta \in \mathbb{R}$ \\
+On a
+\[ e^{i\alpha} + e^{i\beta} = e^{i \frac{\alpha + \beta}{2}} \left( e^{i \frac{\alpha - \beta}{2}} + e^{i \frac{\beta - \alpha}{2}} \right) = 2\cos\left(\frac{\alpha - \beta}{2}\right) e^{i \frac{\alpha + \beta}{2}} \]
+Et 
+\[ e^{i\alpha} - e^{i\beta} = e^{i \frac{\alpha + \beta}{2}} \left( e^{i \frac{\alpha - \beta}{2}} - e^{i \frac{\beta - \alpha}{2}} \right) = 2i\sin\left(\frac{\alpha - \beta}{2}\right) e^{i \frac{\alpha + \beta}{2}} \]
+\end{proposition}
+
+\subsection{Arguments d'un nombre complexe}
+\begin{proposition}
+\hfill 
+\begin{itemize}
+\item Soit $z \in \mathbb{C}$ \\
+On peut trouver $\theta \in \mathbb{R}$ tel que $z = |z|e^{i\theta}$
+\item Pour tous $r, r' \in \mathbb{R}_+^*$ et tous $\theta, \theta' \in \mathbb{R}$, on a $re^{i\theta} = r'e^{i\theta'} \iff \begin{cases}
+r = r' \\
+\theta \equiv \theta' (\text{mod }2\pi)
+\end{cases}$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $z \in \mathbb{C}^*$
+\begin{itemize}
+\item Tout nombre $\theta \in \mathbb{R}$ tel que $z = |z|e^{i\theta}$ est \uline{un} argument de $z$
+\item On appelle \uline{argument principal} de $z$ et on note $\arg(z)$ l'unique argument de $z$ qui appartient à $\left] -\pi, \pi \right[$
+\item On appelle \uline{forme exponentielle} de $z$ toute écriture de la forme $z = |z|e^{i\theta}$, où $\theta$ est un argument de $z$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $z_1, z_2 \in \mathbb{C}^*$ \\
+On a:
+\begin{itemize}
+\item $\arg(z_1 z_2) \equiv \arg(z_1) + \arg(z_2) \quad (\text{mod }2\pi)$
+\item $\forall n \in \mathbb{Z}$, $\arg(z_1^n) \equiv n \arg(z_1) \quad (\text{mod }2\pi)$
+\item $\arg\left(\frac{z_1}{z_2}\right) \equiv \arg(z_1) - \arg(z_2) \quad (\text{mod }2\pi)$
+\end{itemize}
+\end{proposition}
+
+\section{Compléments de trigonométrie}
+\subsection{Valeurs}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $\theta \in \mathbb{R}$ \\
+On a
+\[\cos^2(\theta) + \sin^2(\theta) = 1\]
+\item Soit $a, b \in \mathbb{R}$ tels que $a^2 + b^2 = 1$ \\
+Alors on peut trouver $\theta \in \mathbb{R}$ tel que $\begin{cases}
+a = \cos(\theta) \\
+b = \sin(\theta)
+\end{cases}$
+\end{itemize}
+\end{proposition}
+
+\subsection{Périodicité et (im)parité}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $\cos$ est $2\pi$-périodique et paire.
+\item $\sin$ est $2\pi$-périodique et impaire.
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $\theta_1, \theta_2 \in \mathbb{R}$ tels que $\begin{cases}
+\cos(\theta_1) = \cos(\theta_2) \\
+\sin(\theta_1) = \sin(\theta_2)
+\end{cases}$ \\
+Alors $\theta_1 \equiv \theta_2 \quad (\text{mod }2\pi)$
+\end{proposition}
+
+\subsection{Formules d'addition}
+\begin{proposition}
+Soit $\alpha, \beta \in \mathbb{R}$ \\
+On a:
+\begin{align*}
+\cos(\alpha + \beta) &= \cos\alpha \cos\beta - \sin\alpha \sin\beta \\
+\sin(\alpha + \beta) &= \cos\alpha \sin\beta + \sin\alpha \cos\beta \\
+\cos(\alpha - \beta) &= \cos\alpha \cos\beta + \sin\alpha \sin\beta \\
+\sin(\alpha - \beta) &= -\cos\alpha \sin\beta + \sin\alpha \cos\beta
+\end{align*}
+\end{proposition}
+\begin{corollaire}
+Soit $\theta \in \mathbb{R}$ \\
+On a:
+\begin{align*}
+\cos(\theta + \pi) &= -\cos(\theta) & \sin(\theta + \pi) &= -\sin(\theta) \\
+\cos(\pi - \theta) &= -\cos(\theta) & \sin(\pi - \theta) &= \sin(\theta) \\
+\cos\left(\theta + \frac{\pi}{2}\right) &= -\sin(\theta) & \sin\left(\theta + \frac{\pi}{2}\right) &= \cos(\theta) \\
+\cos\left(\frac{\pi}{2} - \theta\right) &= \sin(\theta) & \sin\left(\frac{\pi}{2} - \theta\right) &= \cos(\theta)
+\end{align*}
+\end{corollaire}
+\begin{proposition}
+Soit $\theta_1, \theta_2 \in \mathbb{R}$ \\
+On a:
+\begin{align*}
+\cos(\theta_1) = \cos(\theta_2) \iff \theta_1 &\equiv \theta_2 (\text{mod }2\pi) \text{ ou } \theta_1 \equiv -\theta_2 (\text{mod }2\pi) \\
+\sin(\theta_1) = \sin(\theta_2) \iff \theta_1 &\equiv \theta_2 (\text{mod }2\pi) \text{ ou } \theta_1 \equiv \pi - \theta_2 (\text{mod }2\pi)
+\end{align*}
+\end{proposition}
+\begin{corollaire}[de formules d'addition]
+Soit $\theta \in \mathbb{R}$ \\
+On a:
+\begin{align*}
+cos(2\theta) &= \cos^2(\theta) - \sin^2(\theta) \\
+&= 2\cos^2(\theta) - 1 \\
+&= 1 - 2\sin^2(\theta) \\
+\sin(2\theta) &= 2\cos(\theta)\sin(\theta)
+\end{align*}
+\end{corollaire}
+
+\subsection{Transformation produit $\rightarrow$ somme (linéarisation)}
+\begin{proposition}
+Soit $\alpha, \beta \in \mathbb{R}$ \\
+On a:
+\begin{align*}
+\cos(\alpha)\cos(\beta) &= \frac{1}{2}(\cos(\alpha + \beta) + \cos(\alpha - \beta)) \\
+\sin(\alpha)\sin(\beta) &= \frac{1}{2}(\cos(\alpha - \beta) - \cos(\alpha + \beta)) \\
+\sin(\alpha)\cos(\beta) &= \frac{1}{2}(\sin(\alpha + \beta) + \sin(\alpha - \beta))
+\end{align*}
+\end{proposition}
+\noindent \uline{Remarque}: On peut vouloir "délinéariser" une expression. \\
+La clef est la formule de De Moivre. \\
+Par exemple, $\cos(3t) + i\sin(3t) = (\cos(t) + i\sin(t))^3$\\
+On développe l'expression et on prend partie réelle / imaginaire.
+
+\subsection{Transformation somme $\rightarrow$ produit (factorisation)}
+\begin{proposition}
+Soit $p, q \in \mathbb{R}$ \\
+On a:
+\begin{align*}
+\cos(p) + \cos(q) &= 2\cos\left(\frac{p - q}{2}\right) \cos\left(\frac{p + q}{2}\right) \\
+\sin(p) + \sin(q) &= 2\cos\left(\frac{p - q}{2}\right) \sin\left(\frac{p + q}{2}\right)
+\end{align*}
+\end{proposition}
+\noindent \uline{Exemple de calcul important}: Soit $t \in \mathbb{R}$ \\
+Calculons $\sum\limits_{k = 0}^n \cos(kt)$ et $\sum\limits_{k = 0}^n \sin(kt)$ \\
+Si $e^{it} = 1$, on a $\sum\limits_{k = 0}^n \cos(kt) = \sum\limits_{k = 0}^n 1 = n + 1$ et $\sum\limits_{k = 0}^n \sin(kt) = \sum\limits_{k = 0}^n 0 = 0$ \\
+Si $e^{it} \neq 1$ on va calculer
+\begin{align*}
+\sum_{k = 0}^n e^{ikt} &= \frac{e^{i(n + 1)t} - 1}{e^{it} - 1} \\
+&= \frac{e^{i \frac{n + 1}{2}t} \left( e^{i\frac{n + 1}{2}t} - e^{-i\frac{n + 1}{2} t}\right)}{e^{i\frac{t}{2}}\left(e^{i\frac{t}{2}} - e^{-i\frac{t}{2}}\right)} \\
+&= e^{i\frac{n}{2}t} \frac{2i\sin\left(\frac{n + 1}{2}t\right)}{2i\sin\left(\frac{t}{2}\right)} \\
+&= e^{i\frac{n}{2}t} \frac{\sin\left(\frac{n + 1}{2}t\right)}{\sin\left(\frac{t}{2}\right)}
+\end{align*}
+On a donc
+\[ \sum_{k = 0}^n \cos(kt) = \re\left(\sum_{k = 0}^n e^{ikt}\right) = \frac{\sin\left(\frac{n + 1}{2}t\right)}{\sin\left(\frac{t}{2}\right)} \cos\left(\frac{n}{2}t\right) \]
+Et
+\[ \sum_{k = 0}^n \sin(kt) = \im\left(\sum_{k = 0}^n e^{ikt}\right) = \frac{\sin\left(\frac{n + 1}{2}t\right)}{\sin\left(\frac{t}{2}\right)} \sin\left(\frac{n}{2}t\right) \]
+
+\subsection{Déphasage}
+\begin{proposition}
+Soit $u, v \in \mathbb{R}$ non tous les deux nuls (càd $(u, v) \neq (0, 0)$) \\
+On écrit le nombre complexe $u + iv$ sous forme exponentielle. \\
+On a $u + iv = Ae^{i\psi}$, où $A = \sqrt{u^2 + v^2}$ et $\psi \in \mathbb{R}$ est un argument de $u + iv$ \\
+On a alors $\forall x \in \mathbb{R}$, $u\cos(x) + v\sin(x) = A\cos(x - \psi)$
+\end{proposition}
+
+\section{Cyclotomie}
+\begin{definition}
+Soit $n \in \mathbb{N}$
+\begin{itemize}
+\item Un nombre $z \in \mathbb{C}$ est une racine $n$-ième de l'unité si $z^n = 1$
+\item L'ensemble des racines $n$-ièmes de l'unité est noté $\mathbb{U}_n$
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $n \in \mathbb{N}^*$
+On a
+\[ \mathbb{U}_n = \left\{ e^{i2\pi\frac{k}{n}} \mid k \in \mathbb{Z}\right\} = \left\{ e^{i2\pi\frac{k}{n}} \mid k \in \llbracket 0, n - 1 \rrbracket \right\} \]
+\end{theorem}
+
+\subsection{Équations $z^n = a$}
+\begin{theorem}
+Soit $a \in \mathbb{C}^*$, que l'on écrit sous forme exponentielle $a = |a|e^{i\theta}$
+\begin{itemize}
+\item Alors $\sqrt[n]{|a|}e^{i\frac{\theta}{n}}$ est \uline{une} solution de $z^n = a$
+\item Si $z_0$ est une solution de $z^n = a$, l'ensemble des solutions est
+\[ \left\{ z_0 \omega \mid \omega \in \mathbb{U}_n \right\} = \left\{ z_0 e^{i2\pi\frac{k}{n}} \mid k \in \llbracket 0, n - 1 \rrbracket \right\} \]
+\end{itemize}
+\end{theorem}
+
+\subsection{Somme}
+\begin{proposition}
+Soit $n \geq 2$ \\
+Alors la somme des racines $n$-ièmes de l'unité est nulle.
+\[ \sum_{\omega \in \mathbb{U}_n} \omega = 0 \]
+\end{proposition}
+
+\section{Géométrie plane}
+\subsection{Rappels sur les angles}
+\noindent Étant donné trois points $O, A, B$ du plan tels que $O \neq A$ et $O \neq B$, on dispose de l'angle géométrique $\widehat{AOB}$ entre les demi-droites $\left[ OA \right)$ et $\left[ OB \right)$. C'est un élément de $[0, \pi]$ \\
+Deux vecteurs non nuls $\vec{u}$ et $\vec{v}$ du plan définissent un angle oriente $(\vec{u}, \vec{v})$ \\
+Sa \uline{mesure principale} appartient à $\left] -\pi, \pi \right]$ \\
+On la notera simplement $(\vec{u}, \vec{v})$
+\begin{proposition}
+Soit $\vec{u}, \vec{v}, \vec{w}$ trois vecteurs non nuls du plan. \\
+On a:
+\begin{itemize}
+\item Antisymétrie: $(\vec{v}, \vec{u}) \equiv -(\vec{u}, \vec{v}) \quad (\text{mod }2\pi)$
+\item Relation de Chasles: $(\vec{u}, \vec{w}) \equiv (\vec{u}, \vec{v}) + (\vec{v}, \vec{w}) \quad (\text{mod }2\pi)$
+\end{itemize}
+\end{proposition}
+
+\subsection{Angles et arguments}
+\noindent Dans toute la suite, on notera $\vec{Z}, \vec{W}$, etc... les vecteurs d'affixe $z, w$, etc... \\
+On notera $\vec{H}$ le vecteur(horizontal) d'affixe $1$ \medskip
+
+\noindent \uline{Point-clef}: "L'angle" $(\vec{H}, \vec{Z})$ est "l'argument" de $z$ \\
+Plus précisement, toute mesure de $(\vec{H}, \vec{Z})$ est un argument de $z$
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $z, w \in \mathbb{C}^*$ \\
+On a $(\vec{Z}, \vec{W}) \equiv \arg\left(\frac{w}{z}\right) \quad (\text{mod }2\pi)$
+\item Soit $A, B, C$ trois points distincts, d'affixes $a, b, c$ \\
+Alors $(\vec{AB}, \vec{AC}) \equiv \arg\left(\frac{c - a}{b - a}\right) \quad (\text{mod }2\pi)$
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+Soit $z, w \in \mathbb{C}^*$
+\begin{itemize}
+\item Critère de colinéarité:
+\begin{itemize}
+\item On a $\vec{Z}$ et $\vec{W}$ colinéaires ssi $\frac{w}{z}$ est réel.
+\item Soit $A, B, C$ trois points distincts. \\
+Alors $A, B, C$ sont alignés ssi $\frac{c - a}{b - a}$ est un réel.
+\end{itemize}
+\item Critère d'orthogonalité: Soit $z, w \in \mathbb{C}^*$ \\
+Alors $\vec{Z}$ et $\vec{W}$ sont orthogonaux ssi $\frac{w}{z}$ est imaginaire pur.
+\end{itemize}
+\end{corollaire}
+
+\subsection{Similitudes directes: définition et classification}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item On appelle \uline{similitude directe} toute application de la forme
+\[f_{a, b}: \begin{cases}
+\mathbb{C} \to \mathbb{C} \\
+z \mapsto az + b
+\end{cases} \]
+où $a \in \mathbb{C}^*$ et $b \in \mathbb{C}$
+\item On dit que $a$ est le \uline{rapport} de la similitude $f_{a,b}$
+\item On note $sim_+(\mathbb{C})$ l'ensemble des similitudes directes.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $a \in \mathbb{C}^*$ que l'on écrit $a = |a|e^{i\theta}$ pour un certain $\theta \in \mathbb{R}$ et $b \in \mathbb{C}$
+\begin{itemize}
+\item Si $a = 1$, $f_{a, b}$ est la translation de vecteur $b$
+\item Si $a \neq b$, $f_{a, b}$ a un unique point fixe $w = \frac{b}{1 - a}$ et:
+\begin{itemize}
+\item $\forall z \in \mathbb{C}$, $f_{a, b}(z) - w = a(z - w)$
+\item On peut obtenir $f_{a, b}$ en composant l'homothétie de centre $w$ et de rapport $|a|$ et la rotation de centre $w$ et d'angle $\theta$
+\end{itemize}
+\end{itemize}
+\end{theorem}
+\noindent \uline{Remarque}: Si $a \in \mathbb{R} \setminus \{1\}$, on dit que $f_{a,b}$ est une \uline{homothétie} de centre $w$ et de rapport $a$ \medskip
+
+\noindent \uline{Remarque}: Deux similitudes de \uline{même centre $w$} commutent.
+\begin{proposition}
+Soit $a \in \mathbb{C}^*$ et $b \in \mathbb{C}$
+\begin{itemize}
+\item $f_{a, b}$ "dilate les distances d'un facteur $|a|$"
+\[ \forall z_1, z_2 \in \mathbb{C} ,\, \left| f_{a, b}(z_2) - f_{a, b}(z_1) \right| = |a| |z_2 - z_1| \]
+\item $f_{a, b}$ "préserve les angles": pour tous $z_1, z_2, z_3 \in \mathbb{C}$ distincts, on a
+\[ \arg\left(\frac{f_{a, b}(z_3) - f_{a, b}(z_1)}{f_{a, b}(z_2) - f_{a, b}(z_1)}\right) \equiv \arg\left(\frac{z_3 - z_1}{z_2 - z_1}\right) \quad (\text{mod }2\pi) \]
+\end{itemize}
+\end{proposition}
+
+\subsection{Structure de $sim_+(\mathbb{C})$}
+\begin{proposition}[$sim_+(\mathbb{C})$ est un groupe]
+\hfill
+\begin{itemize}
+\item $sim_+(\mathbb{C})$ est stable par composition: $\forall f, g \in sim_+(\mathbb{C})$, $g \circ f \in sim_+(\mathbb{C})$
+\item Tout $f \in sim_+(\mathbb{C})$ est bijectif, et on a $f^{-1} \in sim_+(\mathbb{C})$
+\end{itemize}
+\end{proposition}
+\begin{proposition}[$sim_+(\mathbb{C})$ agit exactement $2$-transitivement sur $\mathbb{C}$]
+Soit $z_1 \neq z_2$ et $w_1 \neq w_2 \in \mathbb{C}$ \\
+Alors il existe un unique $f \in sim_+(\mathbb{C})$ tel que $f(z_1) = w_1$ et $f(z_2) = w_2$
+\end{proposition}
+\end{document}

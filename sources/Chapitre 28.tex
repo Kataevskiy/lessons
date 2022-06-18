@@ -147,6 +147,8 @@ On a:
 \end{itemize}
 \end{proposition}
 
+\pagebreak
+
 \subsection{Formule des probabilités globales}
 \begin{definition}
 Soit $(\Omega, P)$ un epf.
@@ -338,4 +340,112 @@ Alors $A$ et $B$ sont indépendants ssi $\mathds{1}_A \indep \mathds{1}_B$
 \end{proposition}
 
 \subsection{Plusieurs événements}
+\begin{definition}
+Soit $A_1, ...\,, A_n \in \mathcal{P}(\Omega)$ \\
+Alors ils sont \uline{indépendants} si $\mathds{1}_{A_1}, ...\,, \mathds{1}_{A_n}$ sont indépendants.
+\end{definition}
+\begin{theorem}
+Soit $A_1, ...\,, A_n \in \mathcal{P}(\Omega)$ \\
+Alors $A_1, ...\,, A_n$ sont indépendants ssi
+\[\forall I \subseteq \llbracket 1, n \rrbracket,\, P\left( \bigcap\limits_{i \in I} A_i \right) = \prod\limits_{i \in I} P(A_i)\]
+\end{theorem}
+
+\subsection{Stabilité de l'indépendance}
+\begin{theorem}[Transfert de l'indépendance]
+\hfill \\
+Soit $X_1: \Omega \to E_1, ...\,, X_n: \Omega \to E_n$ des VA indépendantes. \\
+Soit $f_1: E_1 \to F_1, ...\,, f_n: E_n \to F_n$ des applications. \\
+Alors $f_1(X_1), ...\,, f_n(X_n)$ sont indépendantes.
+\end{theorem}
+\begin{corollaire}
+Si $X_1: \Omega \to E_1, ...\,, X_n: \Omega \to E_n$ sont indépendantes et que, pour tout $i \in \llbracket 1, n \rrbracket$, $A_i$ est un événement défini par $X_i$, alors $A_1, ...\,, A_n$ sont indépendants.
+\end{corollaire}
+\begin{theorem}[Lemme de coalitions]
+Soit $X_1: \Omega \to E_1, ...\,, X_n: \Omega \to E_n$ indépendantes et $r \in \llbracket 0, n \rrbracket$ \\
+Alors les VA
+\begin{align*}&Y: \begin{cases}
+\Omega \to E_1 \times ... \times E_r \\
+\omega \mapsto (X_1(\omega), ...\,, X_r(\omega))
+\end{cases} 
+&Z: \begin{cases}
+\Omega \to E_{r + 1} \times ... \times E_n \\
+\omega \mapsto (X_{r + 1}(\omega), ...\,, X_n(\omega))
+\end{cases}
+\end{align*}
+sont indépendantes.
+\end{theorem}
+
+\subsection{Indépendance et mesure uniforme}
+\begin{theorem}
+Soit $E_1, ...\,, E_n$ des ensembles finis non vides et on munit $\Omega = E_1 \times ... \times E_n$ de la probabilité uniforme. \\
+Alors
+\[ X_1: \begin{cases}
+\Omega \to E_1 \\
+(x_1, ...\,, x_n) \mapsto x_1
+\end{cases}
+, ...\,, \quad
+X_n: \begin{cases}
+\Omega \to E_n \\
+(x_1, ...\,, x_n) \mapsto x_n
+\end{cases} \]
+sont indépendantes.
+\end{theorem}
+
+\subsection{Loi binomiale}
+\begin{definition}
+Une VA $X: \Omega \to \llbracket 0, n \rrbracket$ \uline{suit la loi binomiale} de paramètre $n$ et $p \in [ 0, 1 ]$ ($X \sim B(n, p)$) \\
+si $\forall k \in \llbracket 0, n \rrbracket$
+\[P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}\]
+\end{definition}
+\begin{theorem}
+Soit $X_1, ...\,, X_n: \Omega \to \{ 0, 1 \}$ indépendantes suivant la loi de Bernoulli $B(p)$ (pour $p \in [0, 1]$) \\
+Alors $X_1 + ... + X_n \sim B(n, p)$
+\end{theorem}
+
+\pagebreak
+
+\section{Probabilités conditionnelles}
+On se place dans un espace probabilisé fini $(\Omega, P)$
+
+\subsection{Définition}
+\begin{definition}
+Soit $B \in \mathcal{P}(\Omega)$ un événement non négligeable (càd $P(B) > 0$). Soit $A \in \mathcal{P}(\Omega)$ \\
+On définit la probabilité conditionnelle de $A$ sachant $B$
+\[ P_B(A) = P(A \mid B) = \frac{P(A \cap B)}{P(B)} \]
+\end{definition}
+\begin{proposition}
+Soit $B \in \mathcal{P}(\Omega)$ tel que $P(B) > 0$ \\
+Alors $P_B$ est une mesure de probabilités sur $\Omega$ pour laquelle $B$ est presque sûr.
+\end{proposition}
+\noindent \uline{Attention!} La notation $(A \mid B)$ seule n'a aucun sens. \\
+Par exemple, la phrase française " Sachant que $X = Y$, '$X = 0$' équivaut à '$Y = 0$' " ne se traduit pas en $(X = 0 \mid X = Y) = (Y = 0)$ qui n'a \uline{aucun} sens. \\
+Elle ne se traduit pas non plus en $P(X = 0 \mid X = Y) = P(Y = 0)$ (qui a un sens mais qui est faux en général). \\
+La bonne traduction est $(X = Y, X = 0) = (X = Y, Y = 0)$
+\begin{proposition}
+Soit $A, B \in \mathcal{P}(\Omega)$ tels que $P(B) > 0$ \\
+Alors $A$ et $B$ sont indépendants ssi $P(A \mid B) = P(A)$
+\end{proposition}
+\begin{definition}
+Soit $X: \Omega \to E$ une VA et $A \in \mathcal{P}(\Omega)$ un événement non négligeable. \\
+La \uline{loi conditionnelle de $X$ sachant $A$} est la donnée, pour tout $S \subseteq E$ de $P(X \in S \mid A)$
+\end{definition}
+
+\subsection{Probabilités composées et probabilités totales}
+\begin{proposition}[Formule des probabilités composées]
+\hfill \\
+Soit $A_1, ...\,, A_n \in \mathcal{P}(\Omega)$ tels que $\bigcap\limits_{i = 1}^{n - 1} A_i$ soit non négligeable. \\
+On a 
+\[ P\left( \bigcap\limits_{i = 1}^n A_i \right) = P(A_1) P(A_2 \mid A_1) P(A_3 \mid A_2 \cap A_1) ... P\left( A_n \mid \bigcap\limits_{i = 1}^{n - 1} A_i \right) \]
+\end{proposition}
+\noindent \uline{Remarque}: Si $\bigcap\limits_{i = 1}^{n - 1} A_i$ est négligeable, la formule reste correcte si on pose la convention $0 \times $ inepte $= 0$
+\begin{proposition}[Formule des probabilités totales]
+Soit $A \in \mathcal{P}(\Omega)$ et $C_1, ...\,, C_n \in \mathcal{P}(\Omega)$ des événements \\
+(non négligeables) formant un système complet d'événements. \\
+Alors 
+\[ P(A) = \sum_{i = 1}^n P(A \cap C_i) = \sum_{i = 1}^n P(A \mid C_i) P(C_i) \]
+\end{proposition} 
+\begin{corollaire}
+Soit $A, B \in \mathcal{P}(\Omega)$ (tels que $P(B) \in \left] 0, 1 \right[$) \\
+Alors $P(A) = P(A \mid B) P(B) + P(A \mid \overline{B}) P(\overline{B})$
+\end{corollaire}
 \end{document}

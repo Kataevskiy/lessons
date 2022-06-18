@@ -1,0 +1,756 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 4: Matrices et systèmes linéaires}}
+\end{center}
+Dans tout le chapitre, "le corps des scalaires" $K$ est $\mathbb{R}$ ou $\mathbb{C}$ et $n, p, q, r$ sont des entiers $\geq 1$
+
+\section{Matrices}
+\subsection{Ensemble $M_{np}(K)$}
+\begin{definition}
+Une \uline{matrice $n \times p$} (ou: à $n$ lignes et $p$ colonnes) à coefficients dans $K$ est un tableau
+\[ A = \begin{pmatrix}
+a_{11} & \cdots & a_{1p} \\
+\vdots & & \vdots \\
+a_{n1} & \cdots & a_{np}
+\end{pmatrix} \text{ de taille }\]
+de taille $n \times p$ dont les \uline{coefficients} (ou: \uline{éléments}) $a_{11}, ...\,, a_{np}$ appartiennent à $K$ \\
+On note $M_{np}(K)$ l'ensemble de ces matrices.
+\end{definition}
+\begin{definition}
+Soit $A \in M_{np}(K)$ \\
+On définit:
+\begin{itemize}
+\item Pour tout $i \in \llbracket 1, n \rrbracket$, sa \uline{$i$-ème ligne}:
+\[L_i(A) = \begin{pmatrix}
+[A]_{i1} & [A]_{i2} & \cdots & [A]_{ip}
+\end{pmatrix} \in M_{ip}(K) \]
+\item Pour tout $j \in \llbracket 1, n \rrbracket$, sa \uline{$j$-ème colonne}:
+\[ C_j(A) = \begin{pmatrix}
+[A]_{1j} \\
+[A]_{2j} \\
+\vdots \\
+[A]_{nj}
+\end{pmatrix} \]
+\end{itemize}
+\end{definition}
+
+\subsection{Somme et produit}
+\begin{definition}
+Soit $A, B \in M_{np}(K)$ \\
+On définit la \uline{somme} coefficient par coefficient, càd:
+\[ A + B = \begin{pmatrix}
+[A]_{ij} + [B]_{ij}
+\end{pmatrix}_{\substack{1 \leq i \leq n \\ 1 \leq j \leq p}} \]
+La somme hérite des propriétés de la somme dans $K$
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item L'addition est associative: $\forall A, B, C \in M_{np}(K)$, $A + (B + C) = (A + B) + C$
+\item L'addition est commutative: $\forall A, B \in M_{np}(K)$, $A + B = B + A$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $A \in M_{np}(K)$ et $B \in M_{pq}(K)$ \\
+Le \uline{produit} $AB \in M_{np}(K)$ est défini par:
+\[ \forall i \in \llbracket 1, n \rrbracket ,\, \forall j \in \llbracket 1, q \rrbracket ,\, [AB]_{ij} = \sum_{k = 1}^p [A]_{ik} [B]_{kj} \]
+\end{definition}
+
+\pagebreak
+
+\begin{proposition}
+Soit $A, A' \in M_{np}(K)$, $B, B' \in M_{pq}(K)$, $C \in M_{qr}(K)$ et $\lambda \in K$
+On a:
+\begin{itemize}
+\item $(A + A') B = A B + A' B$
+\item $(\lambda A) = \lambda A B$
+\item $A (B + B') = A B + A B'$
+\item $A ( \lambda B) = \lambda (AB)$
+\item $A (BC) = (AB) C$
+\end{itemize}
+Le produit matriciel est \uline{bilinéaire} est associative.
+\end{proposition}
+\noindent \uline{Remarque capitale}:
+\begin{itemize}
+\item Le produit n'est pas commutatif.
+\item Il y a des \uline{diviseurs de $0$}: on peut obtenir $0$ en multipliant deux matrices non nulles.
+\end{itemize}
+
+\subsection{Transposée}
+\begin{definition}
+Soit $A \in M_{np}(K)$ \\
+On définit sa \uline{transposée} $A^T \in M_{pn}(K)$ par:
+\[ \forall i \in \llbracket 1,p \rrbracket ,\, \forall j \in \llbracket 1, n \rrbracket ,\, [A^T]_{ij} = [A]_{ji} \]
+\end{definition}
+\begin{proposition}
+Soit $A \in M_{np}(K)$ et $B \in M_{pq}(K)$ \\
+Alors $(AB)^T = B^T A^T$
+\end{proposition}
+
+\subsection{Matrices élémentaires}
+\begin{definition}
+On appelle matrice élémentaire et on note $E_{ij}^{(n, p)}$ ou $E_{ij}$ si le contexte est claire la matrice $n \times p$ dont l'unique coefficient non nul est en position $(i, j)$ et vaut $1$
+\end{definition}
+\begin{proposition}
+Soit $(i, j) \in \llbracket1, n \rrbracket \times \llbracket 1, p \rrbracket$ et $(k, l) \in \llbracket 1, p \rrbracket \times \llbracket 1, q \rrbracket$ \\
+Alors $E_{ij}^{(n, p)} E_{kl}^{(p, q)} = \begin{cases}
+E_{il}^{(n, p)} \text{ si } j = k \\
+0_{n \times q} \text{ si } j \neq k
+\end{cases} = \mathds{1}_{(j = k)} E_{il}^{(n, q)} = \delta_{jk} E_{il}^{(n, q)} $ \\
+où $\delta_{jk} = \mathds{1}_{(j = k)} = \begin{cases}
+1 \text{ si } j = k \\
+0 \text{ sinon}
+\end{cases}$ s'appelle "le symbole delta de Kronecker".
+\end{proposition}
+
+\section{Matrices carrée}
+\subsection{Généralités}
+\begin{definition}
+Une \uline{matrice carrée d'ordre $n$} est une matrice de taille $n \times n$ \\
+On note $M_n(K) = M_{nn}(K)$ l'ensemble de ces matrices.
+\end{definition}
+\begin{definition}
+On dit que $A, B \in M_n(K)$ \uline{commutent} si $AB = BA$
+\end{definition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item On appelle \uline{matrice identité (d'ordre $n$)} la matrice
+\[ I_n = \begin{pmatrix}
+1 & & (0) \\
+ & \ddots & \\
+(0) & & 1
+\end{pmatrix} = \left(\delta_{ij}\right)_{1 \leq i, j \leq n} \]
+\item On appelle \uline{matrice scalaire} toute matrice de la forme $\lambda I_n$, où $\lambda \in K$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $A \in M_{np}(K)$ \\
+On a: $A I_p = I_n A = A$ et $A (\lambda I_p) = (\lambda I_n) A = \lambda A$ \\
+En particulier, les matrices scalaires commutent à toutes les matrices carrées.
+\end{proposition}
+
+\subsection{Matrices inversibles}
+\begin{definition}
+Soit $A \in M_n(K)$
+\begin{itemize}
+\item On dit que $A$ est \uline{inversible} s'il existe $B \in M_n(K)$ tel que $AB = BA = I_n$
+\item Une telle matrice $B$, si elle existe, est unique: on l'appelle \uline{l'inverse} de $A$ et on la note $A^{-1}$
+\item L'ensemble des matrices $n \times n$ inversibles est appelé \uline{groupe (général) linéaire d'ordre $n$} et est noté $GL_n(K)$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $A, B \in GL_n(K)$ \\
+Alors $AB \in GL_n(K)$ et $(AB)^{-1} = B^{-1} A^{-1}$ (stabilité par produit)
+\item Soit $A \in GL_n(K)$ \\
+Alors $A^{-1} \in GL_n(K)$ et $\left(A^{-1}\right)^{-1} = A$
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Simplifiabilité / régularité des matrices inversibles]
+Soit $A \in GL_n(K)$
+\begin{itemize}
+\item On a $\forall B, C \in M_{np}(K)$, $AB = AC \implies B = C$
+\item On a $\forall B, C \in M_{pn}(K)$, $BA = CA \implies B = C$
+\end{itemize}
+\end{proposition}
+\noindent \uline{Remarque}: En général, si $A$ n'est pas inversible, l'égalité $AB = AC$ n'entraine pas $B = C$
+
+\subsection{Puissances}
+\begin{definition}
+Soit $A \in M_n(K)$
+\begin{itemize}
+\item Pour tout $k \in \mathbb{N}$, on définit $A^k = A A ... A$ ($k$ facteurs) \\
+En particulier, $A^0 = I_n$ et $A^1 = A$
+\item Si $A$ est inversible, on étend la définition aux exposants négatifs: $\forall k \in \mathbb{Z}$, $A^k = \begin{cases}
+A ... A \text{ si } k \geq 0 \\
+A^{-1} ... A^{-1} \text{ si } k \leq 0
+\end{cases}$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $A \in M_n(K)$ \\
+On a $\forall k, l \in \mathbb{N} : \begin{cases}
+A^{k + l} = A^k A^l \\
+A^{kl} = \left(A^k\right)^l
+\end{cases}$ \\
+L'énoncé se généralise aux exposants négatifs si $A$ est inversible.
+\end{proposition}
+\noindent \uline{Remarque}: En revanche, $(AB)^k$ n'est en général pas égal à $A^k B^k$ \\
+Par contre, cela devient vrai si $A$ et $B$ commutent.
+\begin{theorem}
+Soit $A, B \in M_n(K)$ tels que $AB = BA$ \\
+Alors
+\[ \forall n \in \mathbb{N},\, (A + B)^n = \sum_{k = 0}^n \binom{n}{k} A^k B^{n - k} \quad \text{ et } \quad \forall n \in \mathbb{N},\, A^n - B^n = (A - B) \sum_{k = 0}^{n-1} A^k B^{n - 1 - k}\]
+\end{theorem}
+\begin{proposition}
+Soit $A \in M_n(K)$ \\
+Alors $\forall n \in \mathbb{N}$, $\left(A^n\right)^T = \left(A^T\right)^n$ \\
+Cette formule s'étend aux exposants négatifs si $A \in GL_n(K)$
+\end{proposition}
+
+\subsection{Trace}
+\begin{definition}
+Soit $A \in M_n(K)$ \\
+On définit sa trace: 
+\[\tr(A) = \sum_{k = 1}^n [A]_{kk}\]
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Linéarité de la trace: \\
+$\forall A, B \in M_n(K)$, $\tr(A + B) = \tr(A) + \tr(B)$ \\
+$\forall \lambda \in K$, $\forall A \in M_n(K)$, $\tr(\lambda A) = \lambda \tr(A)$
+\item Cyclicité de la trace: \\
+$\forall A, B \in M_n(K)$, $\tr(AB) = \tr(BA)$
+\end{itemize}
+\end{proposition}
+
+\subsection{Parties remarquables de $M_n(K)$}
+\begin{definition}
+Soit $A \in M_n(K)$
+\begin{itemize}
+\item On dit que $A$ est \uline{diagonale} si $\forall i, j \in \llbracket 1, n \rrbracket$, $i \neq j \implies [A]_{ij} = 0 $ \\
+Dans ce cas, on note $A = \diag([A]_{11} \, [A]_{22} \, ... \, [A]_{nn})$
+\item On dit que $A$ est \uline{triangulaire supérieure} si $\forall i, j \in \llbracket 1, n \rrbracket$, $i > j \implies [A]_{ij} = 0$
+\item On dit que $A$ est \uline{triangulaire inférieure} si $\forall i, j \in \llbracket 1, n \rrbracket$, $i < j \implies [A]_{ij} = 0$ \\
+On note $T_n^+(K)$ (resp. $T_n^-(K)$) l'ensemble de ces matrices.
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Ces trois ensembles sont stables par somme et par produit. \\
+On a $\forall A, B \in D_n(K): \begin{cases}
+A + B \in D_n(K) \\
+AB \in D_n(K)
+\end{cases}$ et \uline{idem} pour $T_n^\pm(K)$ \\
+En outre, les coefficients diagonaux du produit quand $A, B \in D_n(K)$ (ou $T_n^+(K)$ ou $T_n^-(K)$) sont les produits des coefficients diagonaux de $A$ et $B$
+\end{theorem}
+\begin{proposition}
+Soit $A = \diag( \lambda_1, ...\,, \lambda_n) \in D_n(K)$ \\
+Alors $A$ est inversible si et seulement si tous ses coefficients diagonaux sont non nuls, càd ssi $\forall i \in \llbracket 1, n \rrbracket$, $\lambda_i \neq 0$ \\
+Si c'est la cas, $A^{-1} = \diag(\frac{1}{\lambda_1}, ...\,, \frac{1}{\lambda_n})$
+\end{proposition}
+\begin{definition}
+Soit $A \in M_n(K)$
+\begin{itemize}
+\item On dit que $A$ est \uline{symétrique} si $A = A^T$ \\
+On note $S_n(K)$ l'ensemble des matrices symétriques.
+\item On dit que $A$ est \uline{antisymétrique} si $A^T = -A$ \\
+On note $A_n(K)$ l'ensemble des matrices antisymétriques.
+\end{itemize}
+\end{definition}
+\begin{proposition}
+$S_n(K)$ et $A_n(K)$ sont stables par somme.
+\end{proposition}
+
+\section{Matrices et systèmes linéaires}
+\subsection{Définition et formulations équivalentes}
+\begin{definition}
+Un système d'équations linéaires à $n$ équations et $p$ inconnues est un système de la forme
+\[ \begin{cases}
+a_{11}x_1 + a_{12}x_2 + ... + a_{1p}x_p = b_1 \\
+a_{21}x_1 + a_{22}x_2 + ... + a_{2p}x_p = b_2 \\
+\vdots \\
+a_{n1}x_1 + a_{n2}x_2 + ... + a_{np}x_p = b_n
+\end{cases} \]
+La matrice $A = \left(a_{ij}\right)_{\substack{1 \leq i \leq n \\ 1 \leq j \leq p}}$ est la \uline{matrice} du système. \\
+Le vecteur $X = \begin{pmatrix}
+x_1 \\ \vdots \\ x_n
+\end{pmatrix} \in K^p$ est \uline{l'inconnu} et $B = \begin{pmatrix}
+b_1 \\ \vdots \\ b_n
+\end{pmatrix} \in K^n$ est le \uline{second membre} du système. \\
+Avec ces notations, le système se réécrit $AX = B$
+\end{definition}
+\begin{definition}
+\hfill
+\begin{itemize}
+\item Un système linéaire est \uline{homogène} si son second membre est nul.
+\item Le \uline{système linéaire homogène associé} à $AX = B$ est le système $AX = 0$
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $A \in M_{np}(K)$ \\
+Le \uline{noyau} de $A$ est l'ensemble des solutions du système linéaire homogène de matrice $A$, \\
+càd $\ker A = \left\{ X \in K^p \mid AX = 0_{K^n} \right\}$
+\end{definition}
+\begin{definition}
+Un système linéaire est dit \uline{compatible} s'il possède des solutions.
+\end{definition}
+
+\subsection{Principe de superposition}
+\begin{proposition}
+Soit $A \in M_{np}(K)$
+\begin{itemize}
+\item Si $X_1$ et $X_2 \in K^p$ sont solutions de $AX = 0$ alors $X_1 + X_2$ l'est aussi.
+\item Si $X_1 \in K^p$ est solution de $AX = 0$ et $\lambda \in K$, alors $\lambda X$ est aussi solution.
+\end{itemize}
+\end{proposition}
+\begin{corollaire}
+$\ker A$ est \uline{stable par combinaison linéaire}: \\
+Pour tous $X_1, ...\,, X_r \in \ker A$ et tous $\lambda_1, ...\,, \lambda_r \in K$ on a $\lambda_1 X_1 + ... + \lambda_r X_r \in \ker A$
+\end{corollaire}
+\begin{proposition}
+Soit $A \in M_{np}(K)$ et $B \in K^n$ \\
+Supposons le système $AX = B$ compatible, de telle sorte qu'il admette une solution (particulière) $X_0$ \\
+Alors l'ensemble des solutions de $AX = B$ est $\left\{ X_0 + X_n \mid X_n \in \ker A \right\}$
+\end{proposition}
+\begin{corollaire}
+Un système linéaire possède zéro, une ou infinité de solutions.
+\end{corollaire}
+
+\subsection{Opérations élémentaires}
+\begin{lemme}[Lemme fondamental]
+Soit $A \in M_{np}(K)$ et $B \in K^n$. Soit $U \in GL_n(K)$ \\
+Alors, $\forall X \in K^p$, $AX = B \iff UAX = UB$ \\
+On dit que les systèmes $AX = B$ et $UAX = UB$ sont \uline{équivalentes}.
+\end{lemme}
+
+\subsubsection{Première opération: l'échange}
+\begin{definition}
+Soit $i, j \in \llbracket 1, n \rrbracket$ différents. \\
+On définit la \uline{matrice d'échange}
+\[ P_{i, j} = \begin{pmatrix}
+1 & & & & & & \\
+& \ddots & & & & & \\
+& & 0 & & 1 & & \\
+& & & \ddots & & & \\
+& & 1 & & 0 & & \\
+& & & & & \ddots &\\
+& & & & & & 1 \\
+\end{pmatrix} = I_n - E_{ii} - E_{jj} + E_{ij} + E_{ji}\]
+$I_n$, après l'échange des lignes $i$ et $j$
+\end{definition}
+\begin{proposition}
+Soit $i, j \in \llbracket 1, n \rrbracket$ différents.
+\begin{itemize}
+\item On a $P_{i, j} \in GL_n(K)$
+\item Multiplier à gauche $A \in M_{np}(K)$ par $P_{ij}$ a pour effet d'échanger $L_i(A)$ et $L_j(A)$ \\
+On dit qu'on effectue $\left[ L_i \leftrightarrow L_j \right]$ sur $A$ 
+\end{itemize}
+\end{proposition}
+
+\subsubsection{Deuxième opération: la dilatation}
+\begin{definition}
+Soit $i \in \llbracket 1, n \rrbracket$ et $\lambda \in K^*$ \\
+On définit la \uline{matrice de dilatation}
+\[ D_i(\lambda) = \begin{pmatrix}
+1 & & & & & & \\
+& \ddots & & & & & \\
+& & 1 & & & & \\
+& & & \lambda & & & \\
+& & & & 1 & & \\
+& & & & & \ddots & \\
+& & & & & & 1 \\
+\end{pmatrix} = I_n + (\lambda - 1) E_{ii}\]
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $D_i(\lambda) \in GL_n(K)$
+\item Multiplier $A$ à gauche par $D_i(\lambda)$ a pour effet de remplacer $L_i(A)$ par $\lambda L_i(A)$ \\
+On note cette opération $\left[ L_i \leftarrow \lambda L_i \right]$
+\end{itemize}
+\end{proposition}
+
+\subsubsection{Troisième opération: la transvection}
+\begin{definition}
+Soit $i, j \in \llbracket 1, n \rrbracket$ différents et $\lambda \in K$ \\
+On définit la \uline{matrice de transvection}
+\[ T_{i, j}(\lambda) = \begin{pmatrix}
+1 & & & & & \\
+& 1 & & & & \\
+& & \ddots & & \lambda & \\
+& & & \ddots & & \\
+& & & & \ddots & \\
+& & & & & 1 \\
+\end{pmatrix} = I_n + \lambda E_{ij}\]
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $T_{ij}(\lambda) \in GL_n(K)$
+\item Multiplier $A$ à gauche par $T_{ij}(\lambda)$ a pour effet de remplacer $L_i(A)$ par $L_i(A) + \lambda L_j(a)$ \\
+On dit qu'on effectue l'opération $\left[ L_i \leftarrow L_i + \lambda L_j \right]$
+\end{itemize}
+\end{proposition}
+
+\section{Pivot de Gauss}
+\begin{definition}
+Soit $A \in M_{np}(K)$
+\begin{itemize}
+\item On appelle pivot d'une ligne de $A$ le premier coefficient non nul de la ligne, s'il existe.
+\item On dit qu'une matrice est \uline{échelonnée} si:
+\begin{itemize}
+\item Si une ligne de $A$ est nulle, les suivantes le sont aussi.
+\item Le pivot d'une ligne non nulle est strictement plus à gauche que le pivot des suivantes.
+\end{itemize}
+\item Une matrice échelonnée est dite réduite si:
+\begin{itemize}
+\item Tous ses pivots valent $1$
+\item Chaque pivot est le seul coefficient non nul de sa colonne.
+\end{itemize}
+\end{itemize}
+\end{definition}
+
+\pagebreak
+
+\begin{theorem}
+Soit $A \in M_{np}(K)$ \\
+Il existe une suite d'opérations élémentaires transformant $A$ en une matrice échelonnée réduite.
+\end{theorem}
+\noindent \uline{Remarque}: La matrice échelonnée réduite du théorème est en faite unique. \\
+Expliquons l'algorithme (du pivot de Gauss) qui transforme effectivement $A$ en une matrice \\
+échelonnée réduite. \\
+On parcourt la matrice $A$ colonne par colonne:
+\begin{itemize}
+\item S'il n'y a aucun coefficient non nul sur une ligne non encore utilisée, on passe à la colonne suivante.
+\item S'il y a un coefficient non nul sur une ligne non encore utilisée:
+\begin{itemize}
+\item On en choisit un.
+\item On le ramène (par un échange, s'il y a besoin) tout en haut des lignes non encore utilisés.
+\item On le ramène (par une dilatation) à $1$.
+\item Par des transvections, on rend nuls tous les autres coefficients de la colonne.
+\item On décrète utilisée la ligne.
+\end{itemize}
+\end{itemize}
+\begin{definition}
+Dans un système linéaire dont la matrice est échelonnée réduite:
+\begin{itemize}
+\item Les équations $0 = ...$ correspondant aux lignes nulles de la matrice s'appellent \\
+\uline{les équations de compatibilité}
+\item Les inconnus correspondant aux colonnes comportant un pivot sont dites \\
+\uline{principales} et les autres \uline{secondaires}
+\end{itemize}
+\uline{Pour résoudre} un tel système:
+\begin{itemize}
+\item Si toutes les équations de compatibilité sont $0 = 0$, le système est compatible et on obtient l'ensemble des solutions par paramétrage, en utilisant les inconnues secondaires comme paramètre.
+\item Si au moins une des équations de compatibilité est $0 = a$ le système est incompatible: \\ l'ensemble des solutions est vide.
+\end{itemize}
+\end{definition}
+
+\section{Conséquences sur l'inversibilité}
+\subsection{Critère "nucléaire" d'inversibilité}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+Alors $A$ est inversible si et seulement si $\ker A = \{ 0 \}$
+\end{theorem}
+\begin{lemme}
+Soit $S \in M_n(K)$ une matrice échelonnée réduite et telle que $\ker S = \{ 0 \}$ \\
+Alors $S = I_n$
+\end{lemme}
+
+\subsection{Inversibilité à gauche et à droite}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+LASSÉ:
+\begin{enumerate}
+\item $A$ est inversible.
+\item $A$ est \uline{inversible à gauche}: $\exists B \in M_n(K): BA = I_n$
+\item $A$ est \uline{inversible à droite}: $\exists B \in M_n(K): AB = I_n$
+\end{enumerate}
+En outre, si $B \in M_n(K)$ vérifie $AB = I_n$ ou $BA = I_n$, alors $B$ est l'inverse de $A$.
+\end{theorem}
+
+\pagebreak
+
+\subsection{Systèmes de Cramer et première méthode de calcul de l'inverse}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+LASSÉ:
+\begin{enumerate}
+\item $A \in GL_n(K)$
+\item Quelque soit $B \in K^n$, le système $AX = B$ a une unique solution
+\end{enumerate}
+En outre, si $A \in GL_n(K)$, l'unique solution de $AX = B$ est $X = A^{-1}B$
+\end{theorem}
+
+\subsection{Génération de $GL_n(K)$}
+\begin{theorem}
+Soit $A \in GL_n(K)$ \\
+Alors il existe une liste de matrices d'opérations élémentaires $\Omega_1, ...\,, \Omega_m$ telles que $A = \Omega_m ...\, \Omega_1$ \\
+On dit que les matrices d'opérations élémentaires \uline{engendrent} $GL_n(K)$
+\end{theorem}
+\begin{lemme}
+Soit $S \in M_n(K)$ une matrice échelonnée réduite inversible. \\
+Alors $S = I_n$
+\end{lemme}
+
+\subsection{Calcul de l'inverse par les opérations élémentaires}
+\noindent \uline{Exemple}: On échelonne:
+\begin{align*}
+\begin{pmatrix}
+1 & 1 \\
+1 & -1
+\end{pmatrix} &\rightarrow \begin{pmatrix}
+1 & 1 \\
+0 & -2
+\end{pmatrix} \quad [L_2 \leftarrow L_2 - L_1] \\
+&\rightarrow \begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix} \quad \quad [L_2 \leftarrow -\frac{1}{2}L_2] \\
+&\rightarrow \begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix} \quad \quad [L_1 \leftarrow L_1 - L_2]
+\end{align*}
+Matriciellement: $I_2 = T_{12}(-1) D_2(-\frac{1}{2}) T_{21}(-1)I_2$ \\
+On en déduit que $A$ est inversible, d'inverse $A^{-1} = T_{12}(-1) D_2(-\frac{1}{2}) T_{21}(-1)$ \medskip
+
+\noindent En pratique, on présente le calcul avec des "bimatrices"
+\begin{align*}
+\left(\begin{array}{cc|cc}
+1 & 1 & 1 & 0 \\
+1 & -1 & 0 & 1
+\end{array}\right) &\rightarrow
+\left(\begin{array}{cc|cc}
+1 & 1 & 1 & 0 \\
+0 & -2 & -1 & 1
+\end{array}\right) \quad [L_2 \leftarrow L_2 - L_1] \\
+&\rightarrow
+\left(\begin{array}{cc|cc}
+1 & 1 & 1 & 0 \\
+0 & 1 & \frac{1}{2} & -\frac{1}{2}
+\end{array}\right) \quad \quad [L_2 \leftarrow -\frac{1}{2}L_2] \\
+&\rightarrow
+\left(\begin{array}{cc|cc}
+1 & 0 & \frac{1}{2} & \frac{1}{2} \\
+0 & 1 & \frac{1}{2} & -\frac{1}{2}
+\end{array}\right) \quad \quad [L_1 \leftarrow L_1 - L_2]
+\end{align*}
+Donc $A$ est inversible, d'inverse
+\[ A^{-1} = \begin{pmatrix}
+\frac{1}{2} & \frac{1}{2} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{pmatrix} \]
+
+\section{Réduction des matrices $2 \times 2$}
+\subsection{Déterminant}
+\begin{definition}
+Soit $A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} \in M_2(K)$ \\
+On définit son déterminant
+\[ \det(A) = \begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix} = ad - bc \]
+\end{definition}
+\begin{theorem}
+\hfill \begin{itemize}
+\item Le déterminant est multiplicatif: \\
+$\forall A, B \in M_2(K)$, $\det(AB) = \det(A) \det(B)$
+\item Pour tout $A \in M_2(K)$, $A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$ on a:
+\begin{itemize}
+\item $A \in GL_n(K)$ si et seulement si $\det(A) \neq 0$
+\item Si $\det(A) \neq 0$, $A^{-1} = \frac{1}{\det(A)} \begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix}$
+\end{itemize}
+\end{itemize}
+\end{theorem}
+
+\subsection{Valeurs propres, vecteurs propres}
+\begin{definition}
+Soit $A \in M_2(K)$. Soit $X = \begin{pmatrix}
+x \\
+y
+\end{pmatrix} \in K^2$ et $\lambda \in K$ \\
+On dit que $X$ est un \uline{vecteur propre} pour $A$ \uline{associé à la valeur propre $\lambda$} si $X \neq \begin{pmatrix}
+0 \\
+0
+\end{pmatrix}$ et $AX = \lambda X$ \\
+On définit le \uline{spectre} de $A$ comme l'ensemble $S_{p_K}(A)$ des valeurs propres de $A$
+\end{definition}
+\begin{definition}
+Soit $A \in M_2(K)$ \\
+On définit \uline{le polynôme caractéristique de $A$}:
+\[ \mathcal{X}_A = X^2 - \tr(A)X + \det(A) \]
+\end{definition}
+\begin{proposition}
+Soit $A \in M_2(K)$ et $\lambda \in K$ \\
+Alors $\lambda$ est une valeur propre de $A$ ssi $\lambda$ est racine  de $\mathcal{X}_A$
+\end{proposition}
+\begin{proposition}[Non-colinéarité des vecteurs propres]
+Soit $A \in M_2(K)$ et $X_1 = \begin{pmatrix}
+x_1 \\
+y_1
+\end{pmatrix}$ et $X_2 = \begin{pmatrix}
+x_2 \\
+y_2
+\end{pmatrix}$ deux vecteurs propres de $A$ associés à des valeurs propres $\lambda_1 \neq \lambda_2$. Alors $\begin{vmatrix}
+x_1 & x_2 \\
+y_1 & y_2
+\end{vmatrix} \neq 0$
+\end{proposition}
+
+\subsection{Similitude}
+\begin{definition}
+Soit $A, B \in M_2(K)$ \\
+On dit que $A$ et $B$ sont \uline{semblables} et on note $A \sim B$ si $\exists P \in GL_2(K): B = P^{-1}AP$
+\end{definition}
+\begin{proposition}
+$\sim$ est une relation d'équivalence. Elle est: \\
+\uline{Réflexive}: $\forall A \in M_2(K)$, $A \sim A$ \\
+\uline{Symétrique}: $\forall A, B \in M_2(K)$, $A \sim B \implies B \sim A$ \\
+\uline{Transitive}: $\forall A, B, C \in M_2(K)$, $(A \sim B \text{ et } B \sim C) \implies A \sim C$
+\end{proposition}
+\begin{proposition}
+Deux matrices de $M_2(K)$ semblables ont la même trace, même déterminant, même polynôme caractéristique et même spectre.
+\end{proposition}
+\begin{definition}
+Une matrice de $M_2(K)$ est dite:
+\begin{itemize}
+\item \uline{diagonalisable}: si elle est semblable à une matrice diagonale.
+\item \uline{trigonalisable}: si elle est semblable à une matrice triangulaire.
+\end{itemize}
+\end{definition}
+
+\subsection{Théorème de classification}
+\begin{theorem}
+Soit $A \in M_2(K)$
+\begin{itemize}
+\item Si $A$ possède deux valeurs propres $\lambda_0 \neq \lambda_1 \in K$, alors $A \sim \diag(\lambda_0, \lambda_1)$ \\
+(On dit que $A$ est \uline{diagonalisable à spectre simple})
+\item Si $A$ possède une valeur propre double $\lambda \in K$, alors:
+\begin{itemize}
+\item Ou bien $A = \lambda I_2$
+\item Ou bien $A \sim \begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix}$ ("bloc de Jordan")
+\end{itemize}
+\item Si $K = \mathbb{R}$ et que $A$ possède deux valeurs propres conjuguées $a \pm ib$ (où $a \in \mathbb{R}$ et $b \in \mathbb{R}^*$), alors \\
+$A \sim \begin{pmatrix}
+a & -b \\
+b & a
+\end{pmatrix}$
+\end{itemize}
+\end{theorem}
+\begin{lemme}["de descente" pour la similitude]
+Soit $A, B \in M_2(\mathbb{R})$ \\
+Si $A \underset{\mathbb{C}}{\sim} B$, alors $A \underset{\mathbb{R}}{\sim} B$
+\end{lemme}
+
+\section{Suites récurrentes linéaires}
+\subsection{Suites arithmético-géométriques}
+\begin{definition}
+Une \uline{suite arithmético-géométrique} est une suite $(u_n)_{n \in \mathbb{N}}$ à valeurs dans $K$ telle qu'il existe $\alpha, \beta \in K$ tels que $\forall n \in \mathbb{N}$
+\[u_{n + 1} = \alpha u_n + \beta\]
+\end{definition}
+\begin{proposition}
+Soit $(u_n)_{n \in \mathbb{N}} \in K^{\mathbb{N}}$ telle que $\forall n \in \mathbb{N}$, $u_{n + 1} = \alpha u_n + \beta$, où $\alpha, \beta \in K$ et $\alpha \neq 1$ \\
+Alors $\forall n \in \mathbb{N}$
+\[u_n = \alpha^n \left( u_0 - \frac{\beta}{1 - \alpha} \right) + \frac{\beta}{1 - \alpha}\]
+\end{proposition}
+
+\subsection{Suites récurrentes linéaires homogènes d'ordre $2$}
+\noindent Dans cette section, on fixe $\alpha, \beta \in K$ et on considère les suites récurrentes $(u_n)_{n \in \mathbb{N}} \in K^\mathbb{N}$ vérifiant la relation de récurrence $\forall n \in \mathbb{N}$
+\[u_{n + 2} + \alpha u_{n + 1} + \beta u_{n} = 0 \quad \text{(RR)}\]
+Cela se réécrit matriciellement
+\[ \forall n \in \mathbb{N},\, \begin{pmatrix}
+u_{n + 1} \\
+u_{n + 2}
+\end{pmatrix} = \begin{pmatrix}
+0 & 1 \\
+-\beta & -\alpha
+\end{pmatrix} \begin{pmatrix}
+u_n \\
+u_{n + 1}
+\end{pmatrix} \]
+Notons $A = \begin{pmatrix}
+0 & 1 \\
+-\beta & -\alpha
+\end{pmatrix}$ \\
+Son polynôme caractéristique $\mathcal{X}_A = X^2 + \alpha X + \beta$ est appelé \uline{polynôme caractéristique} de (RR) \\
+On va réduire $A$, càd trouver:
+\begin{itemize}
+\item Une matrice "simple" $S \in M_2(K)$
+\item Une matrice $P \in GL_2(K)$
+\end{itemize}
+telles que $A = PSP^{-1}$ \\
+On aura alors, pour tout $n \in \mathbb{N}$
+\[ \begin{pmatrix}
+u_n \\
+u_{n + 1}
+\end{pmatrix} = A^n \begin{pmatrix}
+u_0 \\
+u_1
+\end{pmatrix} \]
+En notant
+\[ S^n = \begin{pmatrix}
+a_n & b_n \\
+c_n & d_n
+\end{pmatrix}, P = \begin{pmatrix}
+r & s \\
+t & u
+\end{pmatrix} \text{ et } P^{-1} \begin{pmatrix}
+u_0 \\
+u_1
+\end{pmatrix} = \begin{pmatrix}
+v \\
+w
+\end{pmatrix} \]
+On obtient
+\[ \begin{pmatrix}
+u_n \\
+u_{n + 1}
+\end{pmatrix} = \begin{pmatrix}
+r & s \\
+t & u
+\end{pmatrix} \begin{pmatrix}
+a_n & b_n \\
+c_n & d_n
+\end{pmatrix} \begin{pmatrix}
+v \\
+w
+\end{pmatrix} \]
+donc
+\[u_n = rv a_n + rw b_n + sv c_n + sw d_n\]
+Autrement dit, $(u_n)_{n \in \mathbb{N}}$ est une combinaison linéaire de quatre suites $(a_n)_{n \in \mathbb{N}}, (b_n)_{n \in \mathbb{N}}, (c_n)_{n \in \mathbb{N}}, (d_n)_{n \in \mathbb{N}}$
+\begin{theorem}
+Soit $(u_n)_{n \in \mathbb{N}} \in K^\mathbb{N}$ vérifiant (RR) \\
+Notons $\mathcal{X} = X^2 + \alpha X + \beta$
+\begin{itemize}
+\item si $\mathcal{X}$ a deux racines simples $\lambda_0, \lambda_1 \in K$, alors il existent $a, b \in K$ tels que  $(u_n)_{n \in \mathbb{N}} = (a \lambda_0^n + b \lambda_1^n)_{n \in \mathbb{N}}$
+\item Si $\mathcal{X}$ a une racine double $\lambda \in K^*$, alors il existent $a, b \in K$ tels que $(u_n)_{n \in \mathbb{N}} = (a \lambda^n + b n \lambda^n)_{n \in \mathbb{N}}$
+\item Si $K = \mathbb{R}$ et que $\mathcal{X}$ a deux racines complexes conjuguées $re^{i\theta}$ et $re^{-i\theta}$ (ou $r \in \mathbb{R}_+^*$ et $\theta \in \left] 0, \pi \right[$) alors il existent $a, b \in \mathbb{R}$ tels que $(u_n)_{n \in \mathbb{N}} = \left(ar^n \cos(n\theta) + br^n \sin(n\theta)\right)_{n \in \mathbb{N}}$
+\end{itemize}
+\end{theorem}
+\end{document}

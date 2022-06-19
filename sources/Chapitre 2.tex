@@ -1,0 +1,217 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 2: Sommes et produits}}
+\end{center}
+
+\section{Notation $\Sigma$}
+\subsection{Définition et premières propriétés}
+\begin{definition}
+Soit $(a_i)_{i \in I}$ une famille de nombres réels indexée par un ensemble fini $I$ \\
+On note $\sum\limits_{i \in I} a_i$ la somme des éléments de la famille. \\
+Dans le cas où $I = \llbracket p, q \rrbracket$ on notera
+\[ \sum_{i = p}^q a_i = \sum_{i \in \llbracket p, q \rrbracket} a_i = a_p + a_{p + 1} + ... + a_q \]
+\end{definition}
+\begin{proposition}
+Soit $I$ un ensemble fini, $(a_i)_{i \in I}$ et $(b_i)_{i \in I} \in \mathbb{R}^I$ et $\lambda \in \mathbb{R}$ \\
+On a: \\
+\uline{Linéarité}: On a $\sum\limits_{i \in I} (a_i + b_i) = \sum\limits_{i \in I} a_i + \sum\limits_{i \in I} b_i$ \\
+\uline{Linéarité}: On a $\sum\limits_{i \in I} (\lambda a_i) = \lambda \sum\limits_{i \in I} a_i$ \\
+\uline{Positivité}: Si $\forall i \in I$, $a_i \leq b_i$, alors $\sum\limits_{i \in I} a_i \leq \sum\limits_{i \in I} b_i$
+\end{proposition}
+\begin{proposition}[Encadrement grossier d'une somme]
+Soit $I$ un ensemble fini non vide et $(a_i)_{i \in I} \in \mathbb{R}^I$ \\
+Alors
+\[ |I| \times \min\{ a_i \mid i \in I \} \leq \sum_{i \in I} a_i \leq |I| \times \max\{ a_i \mid i \in I \} \]
+\end{proposition}
+\begin{proposition}
+Soit $a, b \in \mathbb{R}$ et $n \in \mathbb{N}$ \\
+Alors 
+\[ b + (a + b) + (2a + b) + ... + (na + b) = \sum_{k = 0}^n (ka + b) = (n + 1) \frac{na + 2b}{2} \]
+"La moyenne des termes d'une suite arithmétique est la moyenne des termes extrêmes". \\
+"La somme des termes d'une suite arithmétique vaut le nombre de termes fois la moyenne des termes dans la suite arithmétique".
+\end{proposition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $p \leq a < r$ trois entiers et $(a_i)_{i = p}^r$ une famille de nombres réels. \\
+Alors
+\[ \sum_{i = p}^r a_i = \sum_{i = p}^q a_i + \sum_{i = q + 1}^r a_i \]
+(Relation de Chasles)
+\item Soit $(J_1, ...\,, J_s)$ un recouvrement disjoint d'un ensemble $I$ et $(a_i)_{i \in I} \in \mathbb{R}^I$ \\
+Alors
+\[\sum_{i \in I} a_i = \sum_{i \in J_1} a_i + \sum_{ i \in J_2} a_i + ... + \sum_{i \in J_s} = \sum_{k = 1}^s \sum_{i \in J_k} a_i \]
+\end{itemize}
+\end{proposition}
+\noindent \uline{Remarque cruciale}: L'addition est commutative. \\
+En particulier, si deux familles $(a_i)_{i \in I}$ et $(b_j)_{j \in J}$ prennent les mêmes valeurs, le même nombre de fois, alors
+\[ \sum_{i \in I} a_i = \sum_{j \in J} b_j \]
+Notamment, si $(a_i)_{i = p}^q$ est une famille de réels:
+\[ \sum_{i = p}^q a_i = \sum_{j = 0}^{q - p} a_{j + p} = \sum_{k = 0}^{q - p} a_{q - k} \]
+on vient d'effectuer \uline{un changement d'indice}.
+\begin{proposition}[Télescopage]
+Soit $(a_i)_{i = p}^{q + 1}$ une famille de réels. \\
+Alors
+\[ \sum_{i = p}^q (a_{i + 1} - q_i) = a_{q + 1} - a_p \]
+\end{proposition}
+\noindent \uline{Exemples importants}:
+\[ \sum_{k = 1}^n \frac{1}{k(k + 1)} = \sum_{k = 1}^n \left(\frac{1}{k} - \frac{1}{k + 1}\right) = \frac{n}{n + 1} \]
+\[ \sum_{k = 0}^n [(k + 1)^3 - k^3] = (n + 1)^3 \quad \text{ et } \quad \sum_{k = 0}^n [(k + 1)^3 - k^3] = 3\sum_{k = 0}^n k^2 + 3\sum_{k = 0}^n k + \sum_{k = 0}^n 1 \]
+D'où
+\[ \sum_{k = 0}^n k^2 = \frac{n(n+1)(2n + 1)}{6} \]
+
+\section{Produits}
+\begin{definition}
+Si $(a_i)_{i \in I}$ est une famille de réels indexée par un ensemble fini $I$, \\
+on note $\prod\limits_{i \in I} a_i$ le produit des éléments de cette famille.
+\end{definition}
+\begin{proposition}
+Soit $(a_i)_{i \in I}$ et $(b_i)_{i \in I}$ deux familles indexées par le même ensemble fini $I$
+\begin{itemize}
+\item On a
+\[\prod\limits_{i \in I}(a_i b_i) = \prod\limits_{i \in I} a_i \prod\limits_{i \in I} b_i\]
+\item On a, pour tout $n \in \mathbb{N}$
+\[\prod\limits_{i \in I}(a_i^n) = \left(\prod\limits_{i \in I} a_i \right)^n\]
+\item Règle du produit nul: $\prod\limits_{i \in I} a_i = 0 \iff \exists i \in I: a_i = 0$
+\item Si $\forall i \in I$, $a_i \geq 0$, alors $\prod\limits_{i \in I} a_i \geq 0$
+\item Si $\forall i \in I$, $0 \leq a_i \leq b_i$, on a $\prod\limits_{i \in I} a_i \leq \prod\limits_{i \in I} b_i$
+\item Si $(J_1, ...\,, J_s)$ est un recouvrement disjoint de $I$, alors
+\[\prod_{i \in I} a_i = \left( \prod_{i \in J_1} a_i \right) ... \left( \prod_{i \in J_s} a_i \right) = \prod_{k = 1} \prod_{i \in J_k} a_i \]
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $n \in \mathbb{N}$ \\
+On définit \uline{factorielle $n$}
+\[ n! = \prod_{i = 1}^n i \]
+\end{definition}
+\begin{proposition}
+Soit $(a_i)_{i = k}^{q + 1}$ une famille de réels \uline{non nuls}. \\
+Alors
+\[ \prod_{i = p}^q \frac{a_{i + 1}}{a_i} = \frac{a_{q + 1}}{a_p} \]
+\end{proposition}
+
+\section{Somme géométrique}
+\subsection{Formule de base}
+\begin{theorem}
+Soit $q \in \mathbb{R}$ et $n \in \mathbb{N}$ \\
+On a
+\[ (q - 1)(q^n + q^{n - 1} + ... + q + 1) = (q - 1)\sum_{k = 0}^n q^k = q^{n + 1} - 1 \]
+En particulier, si $q \neq 1$
+\[ \sum_{k = 0}^n q^k = \frac{q^{n + 1} - 1}{q - 1} \]
+\end{theorem}
+\noindent \uline{Remarque}: De même, si $q \neq 1$
+\[ \sum_{k = a}^b q^k  = \frac{q^{b + 1} - q^a}{q - 1} \]
+\[\frac{\text{après-dernier terme } - \text{ premier terme}}{q - 1}\]
+
+\subsection{Variants}
+\begin{proposition}
+Soit $a, b \in \mathbb{R}$ et $n \in \mathbb{N}^*$ \\
+On a
+\begin{align*}
+a^n - b^n &= (a - b)(a^{n - 1} + a^{n - 2}b + ... + ab^{n - 2} + b^{n - 1})\\
+&= (a - b)\left( \sum_{k = 0}^{n - 1} a^k b^{n - 1 -k} \right)
+\end{align*}
+Si $n$ est impair
+\begin{align*}
+a^n + b^n &= (a + b)(a^{n - 1} - a^{n - 2}b + ... - ab^{n - 2} + b^{n - 1})\\
+&= (a + b)\left( \sum_{k = 0}^{n - 1} (-1)^k a^k b^{n - 1 -k} \right)
+\end{align*}
+\end{proposition}
+
+\section{Formule de binôme de Newton}
+\subsection{Coefficients binomiaux}
+\noindent On rappelle que pour tous $n, k \in \mathbb{N}$, $\binom{n}{k}$ est le cardinal de $\mathcal{P}(\llbracket 1, n \rrbracket)$ \\
+En particulier $\binom{n}{k} = 0$ dès que $k > n$ \\
+On étend la notion en posant $\binom{n}{k} = 0$ si $k < 0$ \\
+On obtient ainsi des coefficients binomiaux $\binom{n}{k}$ pour $k \in \mathbb{Z}$ et $n \in \mathbb{N}$
+\begin{proposition}[Formule de Pascal]
+Soit $n \in \mathbb{N}$ et $k \in \mathbb{Z}$ \\
+On a
+\[ \binom{n + 1}{k + 1} = \binom{n}{k} + \binom{n}{k + 1} \]
+\end{proposition}
+\begin{theorem}
+Soit $n \in \mathbb{N}$ et $k \in \mathbb{Z}$ \\
+On a
+\[\binom{n}{k} = \begin{cases}
+\frac{n!}{k!(n - k)!} = \frac{n(n - 1)...(n - k + 1)}{k} \text{ si } k \in \llbracket 0, n \rrbracket \\
+0 \text{ sinon }
+\end{cases} \]
+\end{theorem}
+\noindent \uline{Remarque}: Le théorème montre que $!k$ divise le produit de $k$ entiers consécutifs.
+\begin{proposition}[Symétrie des binomiaux]
+Soit $k \in \mathbb{Z}$ et $n \in \mathbb{N}$ \\
+On a
+\[ \binom{n}{k} = \binom{n}{n - k} \]
+\end{proposition}
+
+\subsection{Binôme de Newton}
+\begin{theorem}
+Soit $a, b \in \mathbb{R}$ et $n \in \mathbb{N}$ \\
+On a
+\[ (a + b)^n = \sum_{k = 0}^n \binom{n}{k} a^k b^{n - k} = \sum_{k = 0}^n \binom{n}{k} a^{n - k} b^k \]
+\end{theorem}
+\noindent \uline{Exemples importants}:
+\[ \sum_{k = 0}^n \binom{n}{k} = \sum_{k = 0}^n \binom{n}{k} 1^k 1^{n - k} = (1 + 1)^n = 2^n \]
+\[ \sum_{k = 0}^n (-1)^k \binom{n}{k} = \sum_{k = 0}^n \binom{n}{k} (-1)^k 1^{n - k} = (1 - 1)^n = 0^n = \begin{cases}
+1 \text{ si } n = 0 \\
+0 \text{ si } n > 0
+\end{cases} \]
+Donc si $n > 0$, on a
+\[ \sum_{\substack{k \in \llbracket 0, n \rrbracket \\ k \text{ paire }}} \binom{n}{k} - \sum_{\substack{k \in \llbracket 0, n \rrbracket \\ k \text{ impaire }}} \binom{n}{k} = 0 \]
+
+\section{Sommes doubles}
+\begin{proposition}
+Soit $(a_{i, j})_{(i, j) \in \llbracket p, q \rrbracket \times \llbracket r, s \rrbracket}$ une famille de nombres réels. \\
+Alors
+\[ \sum_{(i, j) \in \llbracket p, q \rrbracket \times \llbracket r, s \rrbracket} a_{i, j} = \sum_{i = p}^q \sum_{j = r}^s a_{i, j} = \sum_{j = r}^s \sum_{i = p}^q a_{i, j} \]
+\end{proposition}
+\begin{proposition}
+Soit $(a_i)_{i = p}^q$ et $(b_j)_{j = r}^s$ deux familles de réels. \\
+Alors
+\[ \left(\sum_{i = p}^q a_i\right) \left(\sum_{j = r}^s b_j\right) = \sum_{i = p}^q \sum_{j = r}^s a_i b_j = \sum_{j = r}^s \sum_{i = p}^q a_i b_j \]
+\end{proposition}
+\begin{corollaire}
+Soit $\left(a_i^{(1)}\right)_{i_1 \in I_1}, ...\,, \left( a_i^{(d)}\right)_{i_d \in I_d}$ $d$ familles de nombres réels indexées par des ensembles finis $I_1, ...\,, I_d$ \\
+Alors
+\[ \prod_{j = 1}^d \sum_{i_j \in I_j} a_{i_j}^{(j)} = \left(\sum_{i_1 \in I_1} a_{i_1}^{(1)} \right) ... \left( \sum_{i_d \in I_d} a_{i_d}^{(d)}\right) = \sum_{(i_1, ...\,, i_d) \in I_1 \times ... \times I_d} a_{i_1}^{(1)} ... a_{i_d}^{(d)}\]
+\end{corollaire}
+
+\subsection{Sommes triangulaires}
+\begin{proposition}
+Soit $(a_{i, j})_{1 \leq i \leq j \leq n}$ une famille indexée par $\left\{ (i, j) \in \llbracket 1, n \rrbracket^2 \mid i \leq j \right\}$ \\
+Alors
+\[ \sum_{1 \leq i \leq j \leq n} a_{i, j} = \sum_{i = 1}^n \sum_{j = i}^n a_{i, j} = \sum_{j = 1}^n \sum_{i = 1}^j a_{i, j} \]
+\end{proposition}
+
+\subsection{Carré d'une somme}
+\begin{proposition}
+Si $(a_i)_{i = 1}^n$ est une famille de nombres, on a
+\[ \left( \sum_{i = 1}^n a_i \right)^2 = \left(\sum_{i = 1}^n a_i \right) \left( \sum_{j = 1}^n a_j \right) = \sum_{1 \leq i, j \leq n} a_i a_j = \sum_{i = 1}^n a_i^2 + 2\sum_{1 \leq i < j \leq n} a_i a_j \]
+\end{proposition}
+\end{document}

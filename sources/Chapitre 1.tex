@@ -1,0 +1,510 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\card}{Card}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\begin{center}
+{\Large \textbf{Chapitre 1: Ensembles et applications}}
+\end{center}
+
+\section{Généralités}
+\subsection{Définition}
+\begin{definition}
+Un \uline{ensemble} est une collection d'objets mathématiques. \\
+Étant donné un objet $x$ et un ensemble $E$, soit $x$ \uline{appartient} à $E$ (ou \uline{est élément} de $E$) et on note $x \in E$, soit $x$ n'appartient pas à $E$ et on note $x \not\in E$
+\end{definition}
+
+\subsection{Modes de définition d'un ensemble}
+\subsubsection{"In extenso"}
+\noindent On peut définir un ensemble en listant ses éléments:
+\[ \{0, 1, 2\}, \{0, 1, 2, 3, ...\}, \{2, 3, 5, 7, 11, 13, 17, 19, ...\} \]
+\subsubsection{"En compréhension"}
+\noindent Étant donné un ensemble $X$ et une assertion $P(x)$ qui dépend de $x \in X$, on peut considérer
+\[ \{ x \in X \mid P(x) \} \]
+l'ensemble de $x \in X$ tels que $P(x)$ soit vraie.
+\subsubsection{"Par paramétrage"}
+\noindent On peut définit l'ensemble
+\[ \{ f(x) \mid x \in X \} \]
+des $f(x)$ quand $x$ décrit $X$
+
+\subsection{Inclusion}
+\begin{definition}
+Soit $X$ et $Y$ deux ensembles. \\
+On dit que $X$ est \uline{inclus} dans $Y$ (ou que c'est une \uline{partie} de $Y$) si $\forall n \in X$, $x \in Y$ \\
+Dans ce cas, on note $X \subseteq Y$
+\end{definition}
+\noindent \uline{Canevas}: \\
+\rule{10em}{0.5pt} \\
+\indent Montrons $X \subseteq Y$ \\
+\indent Soit $x \in X$ \\
+\indent $[...]$ donc $x \in Y$ \\
+\rule{10em}{0.5pt} \medskip
+
+\noindent \rule{20em}{0.5pt} \\
+\indent Montrons $X = Y$ par double inclusion. \\
+\indent Sens direct: soit $x \in X$ \\
+\indent $[...]$ donc $x \in Y$ \\
+\indent Sens réciproque: soit $y \in T$ \\
+\indent $[...]$ donc $y \in X$ \\
+\rule{20em}{0.5pt}
+\begin{definition}
+Soit $X$ un ensemble. \\
+On note $\mathcal{P}(X)$ l'ensemble des parties de $X$
+\end{definition}
+
+\section{Opérations sur les ensembles}
+\subsection{Opérations booléennes}
+\begin{definition}
+Soit $\Omega$ un ensemble et $A, B \subseteq \Omega$ \\
+On définit:
+\begin{itemize}
+\item \uline{L'union}: $A \cup B = \{ x \in \Omega \mid x \in A \text{ ou } x \in B \}$
+\item \uline{L'intersection}: $A \cap B = \{ x \in \Omega \mid x \in A \text{ et } x \in B \}$
+\item La \uline{différence} (ensembliste) "$A$ privé de $B$": $A \setminus B = \{ x \in \Omega \mid x \in A \text{ et } x \not\in B \} = \{ x \in A \mid x \not\in B \}$
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $A, B$ deux ensembles. \\
+On dit que $A$ et $B$ sont \uline{disjoints} si $A \cap B = \emptyset$
+\end{definition}
+\begin{proposition}
+Soit $A, B, C$ trois parties d'ensemble $\Omega$
+\begin{itemize}
+\item \uline{Lois de De Morgan}:
+\[ \Omega \setminus (A \cup B) = (\Omega \setminus A) \cap (\Omega \setminus B) \]
+\[ \Omega \setminus (A \cap B) = (\Omega \setminus A) \cup (\Omega \setminus B) \]
+\item \uline{Double distributivité}:
+\[ A \cap (B \cup C) = (A \cap B) \cup (A \cap C) \]
+\[ A \cup (B \cap C) = (A \cup B) \cap (A \cup C) \]
+\end{itemize}
+\end{proposition}
+
+\subsection{Familles d'ensembles}
+\begin{definition}
+Soit $E$ et $I$ deux ensembles. \\
+Une \uline{famille} $(a_i)_{i \in I}$ \uline{d'éléments de $E$ indexée par $I$} est la donnée, pour tout $i \in I$ d'un élément $a_i \in E$
+\end{definition}
+\begin{definition}
+Soit $\Omega$ et $I$ deux ensembles de $(A_i)_{i \in I}$ une famille de parties de $\Omega$ indexée par $I$ \\
+On définit
+\[ \bigcup_{i \in I} A_i = \left\{ x \in \Omega \mid \exists i \in I: x \in A_i \right\} \quad \text{ et } \quad \bigcap_{i \in I} A_i = \left\{ x \in \Omega \mid \forall i \in I: x \in A_i \right\} \]
+\end{definition}
+\begin{proposition}
+Soit $\Omega$ et $I$ deux ensembles, $(A_i)_{i \in I}$ une famille de parties de $\Omega$ indexée par $I$ et $B \in \mathcal{P}(\Omega)$
+\begin{itemize}
+\item \uline{Lois de De Morgan}:
+\[ \Omega \setminus \left( \bigcup_{i \in I} A_i \right) = \bigcap_{i \in I} \left( \Omega \setminus A_i \right) \]
+\[ \Omega \setminus \left( \bigcap_{i \in I} A_i \right) = \bigcup_{i \in I} \left( \Omega \setminus A_i \right) \]
+\item \uline{Double distributivité}:
+\[ \left( \bigcup_{i \in I} A_i \right) \cap B = \bigcup_{i \in I} \left(A_i \cap B \right) \]
+\[ \left( \bigcap_{i \in I} A_i \right) \cup B = \bigcap_{i \in I} \left(A_i \cup B \right) \]
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $\Omega$ et $I$ deux ensembles et $(A_i)_{i \in I}$ une famille de parties de $\Omega$ \\
+On dit que $(A_i)_{i \in I}$ est un \uline{recouvrement disjoint} de $\Omega$ si:
+\begin{itemize}
+\item $(A_i)_{i \in I}$ \uline{recouvre} $\Omega$: $\bigcup\limits_{i \in I} A_i = \Omega$
+\item $(A_i)_{i \in I}$ est une famille d'ensembles (deux à deux) disjoints: $\forall i, j \in I$, $i \neq j \implies A_i \cap A_j = \emptyset$
+\end{itemize}
+\end{definition}
+
+\subsection{Produit cartésien}
+\begin{definition}
+Soit $A$ et $B$ deux ensembles. \\
+On note
+\[ A \times B = \left\{(a, b) \mid a \in A, b \in B \right\} \]
+l'ensemble des couples dont la première coordonnée est élément de $A$ et la deuxième de $B$
+\end{definition}
+
+\section{Applications}
+\subsection{Définition}
+\begin{definition}
+Soit $E$ et $F$ deux ensembles. \\
+Une \uline{application} $f: E \to F$ est la donnée, pour tout $x \in E$ d'un élément $f(x) \in F$ \\
+On dit que $E$ est le \uline{domaine} (ou \uline{l'ensemble de départ}) de $f$ et $F$ est son \uline{codomaine} (ou \uline{l'ensemble d'arrivée}). \\
+L'ensemble des applications de $E$ dans $F$ est noté $\mathcal{F}(E, F)$ ou $F^E$
+\end{definition}
+
+\subsection{Graphe d'une application}
+\begin{definition}
+Soit $f: E \to F$ \\
+On définit son \uline{graphe}:
+\[ \gr(f) = \left\{ (x, y) \in E \times F \mid y = f(x) \right\} = \left\{ (x, f(x)) \mid x \in E \right\} \]
+\end{definition}
+
+\subsection{Composition}
+\begin{definition}
+Soit $f: E \to F$ et $g: G \to H$ deux applications telles que $F \subseteq G$ \\
+On définit leur \uline{composée}
+\[ g \circ f: \begin{cases}
+E \to H \\
+x \mapsto g(f(x))
+\end{cases} \]
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $f: E \to F$ une application. \\
+Alors $id_F \circ f = f \circ id_E = f$
+\item Soit $f_1: E_1 \to F_1, f_2: E_2 \to F_2$ et $f_3: E_3 \to F_3$ telles que $F_1 \subseteq F_2$ et $F_2 \subseteq F_3$ \\
+Alors $f_3 \circ (f_2 \circ f_1) = (f_3 \circ f_2) \circ f_1$ \\
+On dit que la composition est \uline{associative}.
+\end{itemize}
+\end{proposition}
+
+\subsection{Restriction, induction}
+\begin{definition}
+Soit $f: E \to F$ et $A \subseteq E$ \\
+On définit la \uline{restriction}
+\[ f_{|A}: \begin{cases}
+A \to F \\
+x \mapsto f(x)
+\end{cases} \]
+\end{definition}
+\begin{definition}
+Soit $f: E \to F$, $A \subseteq E$ et $B \subseteq F$ \\
+On dit que $f$ induit une application de $A$ vers $B$ si $\forall x \in A$, $f(x) \in B$ \\
+On note alors
+\[ f_{|A}^{|B}: \begin{cases}
+A \to B \\
+x \mapsto f(x)
+\end{cases} \]
+\uline{l'application induite}.
+\end{definition}
+\begin{definition}
+Soit $f: E \to E$ et $A \subseteq E$ \\
+On dit que $A$ est \uline{stable} sous $f$ si $\forall x \in A$, $f(x) \in A$
+\end{definition}
+
+\subsection{Injectivité, surjectivité, bijectivité}
+\begin{definition}
+Soit $f: E \to F$ \\
+On dit que:
+\begin{itemize}
+\item $f$ est \uline{injective} (one to one) si $\forall x_1, x_2 \in E$, $f(x_1) = f(x_2) \implies x_1 = x_2$
+\item $f$ est \uline{surjective} (onto) si $\forall y \in F$, $\exists x \in E: f(x) = y$
+\item $f$ est \uline{bijective} si elle est injective et surjective.
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $f: E \to F$ et $y \in F$ \\
+On appelle \uline{antécédent de $y$ par $f$} (ou \uline{$f$-antécédent de $y$}) tout élément $x \in E$ tel que $f(x) = y$
+\end{definition}
+\begin{proposition}
+Soit $f: E \to F$
+\begin{itemize}
+\item $f$ est injective ssi tout élément de $F$ a au plus un antécédent.
+\item $f$ est surjective ssi tout élément de $F$ a au moins un antécédent.
+\item $f$ est bijective ssi tout élément de $F$ a exactement un antécédent.
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item La composée de deux injections $f: E \to F$ et $g: G \to H$ (où $F \subseteq G$) est injective.
+\item La composée de deux surjections $f: E \to F$ et $g: F \to H$ est surjective.
+\item La composée de deux bijections $f: E \to F$ et $g: F \to H$ est bijective.
+\end{itemize}
+\end{proposition}
+\noindent \uline{Attention}: Pour les deux derniers points, il est capital que le codomaine de $f$ soit le domaine de $g$
+\begin{proposition}
+Soit $f: E \to F$ et $g: G \to H$, où $F \subseteq G$
+\begin{itemize}
+\item Si $g \circ f$ est injective, alors $f$ est injective.
+\item Si $g \circ f$ est surjective, alors $g$ est surjective.
+\end{itemize}
+\end{proposition}
+
+\subsection{Bijectivité et réciproque}
+\begin{theorem}
+Soit $f: E \to F$ \\
+Alors $f$ est bijective si et seulement si elle admet une réciproque, càd une application $g: F \to E$ telle que
+\[\begin{cases}
+g \circ f = id_E \\
+f \circ g = id_F
+\end{cases} \]
+Si c'est la cas, la réciproque est unique: on la note $f^{-1}$
+\end{theorem}
+\noindent \uline{Attention}: Ne pas utiliser la notation $f^{-1}$ avant de savoir que $f$ est bien bijective!
+\begin{proposition}[Chaussettes et chaussures]
+Soit $f: E \to F$ et $g: F \to G$ deux bijections. \\
+Alors $g \circ f$ est bijective et $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$
+\end{proposition}
+
+\subsection{Images directe et réciproque}
+\begin{definition}
+Soit $f: E \to F$
+\begin{itemize}
+\item Pour toute partie $A \subseteq E$, on définit \uline{l'image directe}
+\[ f(A) = f[A] = \{f(x) \mid x \in A \} \]
+\item Pour toute partie $B \subseteq F$, on définit \uline{l'image réciproque}
+\[ f^{-1}(B) = f^{-1}[B] = \{ x \in E \mid f(x) \in B \} \]
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $f: E \to F$
+\begin{itemize}
+\item Alors $f$ induit une application surjective $f_{|E}^{|f[E]}: E \to f[E]$
+\item Si $f$ est injective, l'application induite $f_{|E}^{|f[E]}$ est bijective.
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Propriétés de l'image directe]
+Soit $f: E \to F$
+\begin{itemize}
+\item Soit $A, A' \subseteq E$ \\
+Si $A \subseteq A'$, alors $f[A] \subseteq f[A']$
+\item Soit $(A_i)_{i \in I}$ une famille de parties de $E$ \\
+Alors
+\[ f\left[\bigcup\limits_{i \in I} A_i\right] = \bigcup\limits_{i \in I} f[A_i] \]
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Propriétés de l'image réciproque]
+Soit $f: E \to F$
+\begin{itemize}
+\item Soit $B, B' \subseteq F$ tels que $B \subseteq B'$ \\
+Alors $f^{-1}[B] \subseteq f^{-1}[B']$
+\item Soit $(B_i)_{i \in I}$ une famille de parties de $F$ \\
+Alors
+\[ f^{-1}\left[\bigcup_{i \in I} B_i\right] = \bigcup_{i \in I} f^{-1}[B_i] \quad \text{ et } \quad f^{-1}\left[\bigcap_{i \in I} B_i\right] = \bigcap_{i \in I}f^{-1}[B_i] \]
+\item Si $B \subseteq F$, on a $f^{-1}[F \setminus B] = E \setminus f^{-1}[B]$
+\end{itemize}
+\end{proposition}
+
+\subsection{Fonctions indicatrices}
+\begin{definition}
+Soit $\Omega$ un ensemble et $A \subseteq \Omega$ \\
+On définit \uline{la fonction indicatrice de $A$} (ou \uline{fonction caractéristique})
+\[ \mathds{1}_A: \begin{cases}
+\Omega \to \{0, 1\} \\
+x \mapsto \begin{cases}
+1 \text{ si } x \in A \\
+0 \text{ si } x \not\in A
+\end{cases}
+\end{cases} \]
+\end{definition}
+
+\section{Ensembles finis}
+\begin{definition}
+On dit que deux ensembles $E$ et $F$ sont en \uline{bijection} ou \uline{équipotents} s'il existe une bijection entre $E$ et $F$
+\end{definition}
+
+\subsection{Principe des tiroirs}
+\begin{theorem}[Principe des tiroirs / Principe de Dinichlet / Pigeonhole principle]
+Soit $n, m \in \mathbb{N}$ \\
+S'il existe une injection $\llbracket 1, n \rrbracket \to \llbracket 1, m \rrbracket$, alors $n \leq m$
+\end{theorem}
+\begin{corollaire}
+Soit $n, m \in \mathbb{N}$ \\
+Si $\llbracket 1, n \rrbracket$ et $\llbracket 1, m \rrbracket$ sont équipotents, alors $n = m$
+\end{corollaire}
+
+\subsection{Définitions}
+\begin{definition}
+Soit $E$ un ensemble.
+\begin{itemize}
+\item On dit que $E$ est \uline{fini} s'il existe un entier $n \in \mathbb{N}$ tel que $E$ et $\llbracket 1, n \rrbracket$ soient équipotents.
+\item Quand c'est le cas, on dit que \uline{$E$ a $n$ éléments} ou qu'il est \uline{de cardinal $n$} et on note
+\[ n = |E| = \card(E) = \#E \]
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $E$ et $F$ deux ensembles équipotents. \\
+Si $E$ est fini, alors $F$ aussi et $|E| = |F|$
+\end{proposition}
+\begin{definition}
+Soit $E$ un ensemble.
+\begin{itemize}
+\item Pour tout entier $k \in \mathbb{N}$, on note $\mathcal{P}_k(E)$ l'ensemble des parties finies de $E$ de cardinal $k$
+\item On note $\mathcal{P}_f$ l'ensemble des parties finies de $E$
+\end{itemize}
+\end{definition}
+
+\subsection{Parties d'un ensemble fini}
+\begin{proposition}
+Soit $E$ un ensemble fini et $F \subseteq E$ \\
+Alors $F$ est fini et $|F| \leq |E|$
+\end{proposition}
+\begin{lemme}
+Soit $A_0, A_1, B_0, B_1$ quatre ensembles tels que $A_0 \cap A_1 = B_0 \cap B_1 = \emptyset$ et deux bijections \\
+$f_0: A_0 \to B_0$ et $f_1: A_1 \to B_1$ \\
+Alors l'application
+\[ f: \begin{cases}
+A_0 \cup A_1 \to B_0 \cup B_1 \\
+i \mapsto \begin{cases}
+f_0(i) \text{ si } i \in A_0 \\
+f_1(i) \text{ si } i \in A_1
+\end{cases}
+\end{cases} \]
+est une bijection.
+\end{lemme}
+
+\subsection{Opérations sur les ensembles et les cardinaux}
+\subsubsection{Union}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Soit $E$ et $F$ deux ensembles disjoints finis. \\
+Alors $E \cup F$ est fini et $\left|E \cup F\right| = |E| + |F|$
+\item Soit $E_1, ...\,, E_r$ des ensembles finis disjoints (deux à deux). \\
+Alors $\bigcup\limits_{i = 1}^r E_i$ est fini et $\left| \bigcup\limits_{i = 1}^r E_i \right| = |E_1| + ... + |E_r|$
+\item Soit $E$ et $F$ deux ensembles finis. \\
+Alors $(E \cup F)$ est fini et $\left| E \cup F \right| = |E| + |F| - \left| E \cap F \right|$
+\end{itemize}
+\end{proposition}
+
+\subsubsection{Différence}
+\begin{proposition}
+Soit $E$ et $F$ deux ensembles tels que $F \subseteq E$ et $E$ soit fini.
+\begin{itemize}
+\item On a $\left| E \setminus F \right| = |E| - |F|$
+\item Si $|E| = |F|$, on a $E = F$
+\end{itemize}
+\end{proposition}
+
+\subsubsection{Produit cartésien}
+\begin{proposition}
+Soit $E$ et $F$ deux ensembles finis. \\
+Alors $E \times F$ est fini et $\left| E \times F \right| = |E| \times |F|$
+\end{proposition}
+\begin{corollaire}
+\hfill \begin{itemize}
+\item Si $E_1, ...\,, E_r$ sont des ensembles finis, $\left| E_1 \times ... \times E_r \right| = |E_1| \times ... \times |E_r|$
+\item Si $E$ est un ensemble fini, $|E^r| = \left|E\right|^r$
+\end{itemize}
+\end{corollaire}
+
+\subsubsection{Ensembles d'applications}
+\begin{proposition}
+Soit $E$ et $F$ deux ensembles finis. \\
+Alors $F^E$ est fini, de cardinal $|F^E| = \left|F\right|^{|E|}$
+\end{proposition}
+
+\subsubsection{Ensembles de parties}
+\begin{proposition}
+Soit $E$ un ensemble fini. \\
+Alors $\mathcal{P}(E)$ est fini de cardinal $\left|\mathcal{P}(E)\right| = 2^{|E|}$
+\end{proposition}
+\begin{proposition}
+Soit $k \in \mathbb{N}$ et $E$ un ensemble fini de cardinal $n$ \\
+Alors $\mathcal{P}_k(E)$ est fini et $\left|\mathcal{P}_k(E)\right| = \left|\mathcal{P}_k(\llbracket 1, n \rrbracket)\right|$
+\end{proposition}
+\begin{definition}
+Soit $k, n \in \mathbb{N}$ \\
+On appelle coefficient binomial le nombre $\binom{n}{k} = \left|\mathcal{P}_k(\llbracket 1, n \rrbracket)\right|$
+\end{definition}
+
+\subsection{Applications entre ensembles finis}
+\begin{theorem}
+Soit $E$ et $F$ deux ensembles finis et $f: E \to F$
+\begin{itemize}
+\item Si $f$ est injective, alors $|E| \leq |F|$
+\item Si $f$ est surjective, alors $|E| \geq |F|$
+\item Si $|E| = |F|$, alors les assertions suivantes sont équivalentes:
+\begin{enumerate}
+\item $f$ est injective.
+\item $f$ est surjective.
+\item $f$ est bijective.
+\end{enumerate}
+\end{itemize}
+\end{theorem}
+\begin{lemme}
+Soit $f: E \to F$ une application entre ensembles finis.
+\begin{itemize}
+\item On a $\left|f[E]\right| \leq |E|$
+\item On a $\left|f[E]\right| = |E|$ si et seulement si $f$ est injective.
+\end{itemize}
+\end{lemme}
+\begin{corollaire}
+Soit $E$ un ensemble fini et $f: E \to E$ \\
+Alors $f$ injective $\iff$ $f$ surjective $\iff$ $f$ bijective.
+\end{corollaire}
+
+\subsection{Parties finies de $\mathbb{R}$, minimum, maximum}
+\begin{theorem}
+Soit $E = \{ x_1, x_2, ...\,, x_n \}$ une partie finie non vide de $\mathbb{R}$ \\
+Alors $E$ possède un \uline{plus petit élément} / un \uline{minimum}
+\[ \min(E) = \min\{x_1, x_2, ...\,, x_n\} \]
+et un \uline{plus grand élément} / un \uline{maximum}
+\[ \max(E) = \max\{x_1, x_2, ...\,, x_n\} \]
+\end{theorem}
+\begin{definition}
+Soit $E \subseteq \mathbb{R}$ \\
+On dit que $E$:
+\begin{itemize}
+\item \uline{Admet un minimum} $m = \min(E)$ si $m \in E$ et $\forall x \in E$, $x \geq m$
+\item Est \uline{minoré} si on peut trouver $a \in \mathbb{R}$ tel que $\forall x \in E$, $x \geq a$
+\item \uline{Admet un maximum} $M = \max(E)$ si $M \in E$ et $\forall x \in E$, $x \leq M$
+\item Est \uline{majoré} si on peut trouver $b \in \mathbb{R}$ tel que $\forall x \in E$, $x \leq b$
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Toute partie non vide et majorée de $\mathbb{Z}$ admet un maximum.
+\end{theorem}
+\begin{corollaire}
+\hfill \begin{itemize}
+\item Toute partie non vide et minorée de $\mathbb{Z}$ a un minimum.
+\item En particulier, toute partie non vide de $\mathbb{N}$ a un minimum.
+\end{itemize}
+\end{corollaire}
+
+\subsection{Récurrences finies}
+\noindent On peut effectuer des récurrences sur un intervalle d'entiers: il y en a de deux types: montant et descendante. \medskip
+
+\noindent \uline{Exemple}: Soit $f: \llbracket 1, n \rrbracket \to \llbracket 1, n \rrbracket$ bijective telle que $\forall k \in \llbracket 1, n \rrbracket$, $f(k) \geq k$. Montrer $f = id_{\llbracket 1, n \rrbracket}$ \medskip
+
+\noindent Pour tout $k \in \llbracket 1, n \rrbracket$, notons $P(k)$ l'assertion $f(k) = k$ \\
+Montrons $\forall k \in \llbracket 1, n \rrbracket$, $P(k)$ par récurrence descendante forte. \medskip
+
+\noindent \uline{Initialisation}: On a $f(n) \in \llbracket 1, n \rrbracket$ et $f(n) \geq n$, d'où $f(n) = n$, ce que montre $P(n)$ \medskip
+
+\noindent \uline{Hérédité}: Soit $k \in \llbracket 2, n \rrbracket$ tel que $P(n)$ et $P(n - 1)$ et ... et $P(k)$. Montrons $P(k - 1)$ \\
+On a $f(k - 1) \geq k - 1$ par hypothèse et $f(k - 1) \in \llbracket 1, n \rrbracket$ \\
+Par injectivité, on a $\forall l \in \llbracket k, n \rrbracket$, $f(k - 1) \neq f(l)$ \\
+càd $\forall l \in \llbracket k, n \rrbracket$, $f(k - 1) \neq l$ \\
+donc $f(k - 1) \leq k - 1$ (d'après $P(n)$ et ... et $P(k)$) \\
+Cela montre $P(k - 1)$ et clôt la récurrence.
+
+\subsection{Premier contact avec les ensembles infinis}
+\begin{definition}
+Un ensemble $E$ est dit \uline{infini} ssi il n'est pas fini.
+\end{definition}
+\begin{proposition}[Principe des tiroirs, version infinie]
+\hfill \\
+Il n'existe pas d'injection $E \to F$, où $E$ est un ensemble infini et $F$ un ensemble fini.
+\end{proposition}
+\begin{theorem}
+Soit $E$ un ensemble. \\
+Alors $E$ est infini si et seulement s'il existe une injection $\mathbb{N} \to E$
+\end{theorem}
+\begin{theorem}[Cantor]
+Soit $E$ un ensemble. \\
+Il n'existe pas de surjection $E \to \mathcal{P}(E)$
+\end{theorem}
+\end{document}

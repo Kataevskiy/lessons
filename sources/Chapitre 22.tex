@@ -1,0 +1,224 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\vect}{Vect}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 22: Équations différentielles linéaires}}
+\end{center}
+
+\section{Généralités}
+\subsection{Définitions}
+\begin{definition}
+\hfill \begin{itemize}
+\item Soit $n \in \mathbb{N}^*$
+Une \uline{équation linéaire résolue d'ordre $n$} est une équation de la forme
+\[ y^{(n)} + a_{n - 1}(x)y^{(n - 1)} + ... + a_1(x)y' + a_0(x)y = b(x) \tag{É} \]
+où $a_0, a_1, ...\,, a_{n - 1}$ et $b: I \to \mathbb{C}$ sont des fonctions continues.
+\item Résoudre cette équation différentielle, c'est trouver toutes les fonctions $f \in D^n(I; \mathbb{C})$ telles que
+\[ \forall x \in I,\, f^{(n)}(x) + a_{n - 1}(x)f^{(n - 1)}(x) + ... + a_1(x)f'(x) + a_0(x)f(x) = b(x) \]
+L'équation différentielle (É) est dite \uline{homogène} si le second membre $b$ est nul.
+\item \uline{L'équation homogène associée à (É)} est
+\[ y^{(n)} + a_{n - 1}(x)y^{(n - 1)} + ... + a_1(x)y' + a_0(x)y = 0 \tag{ÉH} \]
+\end{itemize}
+\end{definition}
+\noindent \uline{Remarque}: L'équation (É) est dite linéaire car elle ne fait intervenir que des combinaisons linéaires des dérivées de $f$ et résolue car le terme faisant apparaître la plus grande dérivée de $y$ n'est pas multiplié par un coefficient.
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Toute solution $f: I \to \mathbb{C}$ de l'équation (É) est automatiquement de classe $C^n$
+\item Si les coefficients $a_0, a_1, ...\,, a_{n - 1}$ et le second membre $b$ sont des solution lisses, toute solution est automatiquement lisse.
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Principe de superposition]
+\hfill \\
+Soit $f, g \in D^n(I; \mathbb{C})$ deux solutions des équations différentielles
+\begin{align*}
+&y^{(n)} + a_{n - 1}(x)y^{(n - 1)} + ... + a_1(x)y' + a_0(x)y = b(x) \\
+\text{ et } \quad &y^{(n)} + a_{n - 1}(x)y^{(n - 1)} + ... + a_1(x)y' + a_0(x)y = c(x)
+\end{align*}
+respectivement. \\
+Soit $\lambda, \mu \in \mathbb{C}$. Alors $\lambda f + \mu g$ est une solution de l'équation différentielle
+\[ y^{(n)} + a_{n - 1}(x)y^{(n - 1)} + ... + a_1(x)y' + a_0(x)y = \lambda b(x) + \mu c(x) \]
+\end{proposition}
+\begin{corollaire}
+\hfill
+\begin{itemize}
+\item L'ensemble $\mathcal{S}_\text{hom}$ des solutions de (ÉH) est un sous-espace vectoriel de $D^n(I; \mathbb{C})$
+\item Si $f_0 \in D^n(I; \mathbb{C})$ est une solution de (É), alors l'ensemble des solution de (É) est
+\[ \mathcal{S} = \{ f_0 + h \mid h \in \mathcal{S}_\text{hom}\} \]
+c'est-à-dire un sous-espace affine de $D^n(I; \mathbb{C})$ de direction $\mathcal{S}_\text{hom}$ \\
+"Les solutions s'obtiennent comme somme d'une solution particulière et des solutions de l'équation homogène".
+\end{itemize}
+\end{corollaire}
+
+\subsection{Complément: théorème de Cauchy linéaire}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Quels que soient $x_0 \in I$ et les nombres complexe $s_0, ...\,, s_{n - 1} \in \mathbb{C}$, il existe une unique solution $f \in D^n(I; \mathbb{C})$ de (É) telle que
+\[ f(x_0) = s_0 \quad  \text{ et } \quad f'(x_0) = s_1 \quad \text{ et } \quad f''(x_0) = s_2 \quad ... \quad \text{ et } \quad f^{(n - 1)}(x_0) = s_{n - 1} \]
+\item Le sous-espace vectoriel $\mathcal{S}_\text{hom}$ des solutions de (ÉH) est de dimension $n$
+\item L'ensemble des solution $\mathcal{S}$ est donc
+\[ S = f_0 + \mathcal{S}_\text{hom} = \{ f_0 + \lambda_1 f_1 + ... + \lambda_n h_n \mid (\lambda_1, ...\,, \lambda_n) \in \mathbb{C}^n \} \]
+où $f_0$ est une solution de (É) et où $(h_1, ...\,, h_n)$ est une base de solutions de (ÉH).
+\end{itemize}
+\end{theorem}
+
+\section{Équation différentielles linéaires d'ordre $1$}
+\noindent Dans cette section, on considère une équation
+\[ y' + a(x)y = b(x) \tag{É} \]
+et son équation homogène associé
+\[ y' + a(x)y = 0 \tag{ÉH} \]
+par deux fonctions continues $a, b: I \to \mathbb{C}$
+
+\subsection{Équation homogène}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Soit $a: I \to \mathbb{C}$ une fonction continue. \\
+On note $A: I \to \mathbb{C}$ une primitive de $a$ et $h_0: \begin{cases}
+I \to \mathbb{C} \\
+x \mapsto e^{-A(x)}
+\end{cases}$ \\
+Alors les solutions de (ÉH) forment l'ensemble
+\[ \mathcal{S}_\text{hom} = \vect(h_0) = \{ \lambda h_0 \mid \lambda \in \mathbb{C} \} \]
+\item L'unique solution $f: I \to \mathbb{C}$ de (ÉH) valant $s_0$ en $x_0 \in I$ est la fonction
+\[ \begin{cases}
+I \to \mathbb{R} \\
+x \mapsto s_0 \exp\left( - \int_{x_0}^x a(t) \, dt \right)
+\end{cases} \]
+\end{itemize}
+\end{theorem}
+
+\subsection{Solution particulière: quelques heuristiques}
+\noindent Une fois l'équation homogène (ÉH) résolue, il s'agit de trouver une solution particulière à (É). \\
+On verra dans la section ultérieure une méthode générale, mais une première idée est de chercher des solutions "du même type" que le second membre $b$ de (É). \medskip
+
+\pagebreak
+
+\noindent \uline{Exemple important}:
+\[ y' + ay = Ae^{rx} \]
+avec $a, r \in \mathbb{R}$, dont les solutions homogènes sont les $x \mapsto e^{-ax}$ \\
+On peut avoir l'idée de chercher les solutions particulières sous la forme $Be^{rx}$. Cela marche presque tout le temps, mais on voit déjà que dans le cas $a = r = 0$, la solution particulière est linéaire. \\
+En faite, deux cas se présentent, suivant que $x \mapsto e^{rx}$ est ou non solution de l'équation homogène.
+\begin{itemize}
+\item Si $x \mapsto e^{rx}$ n'est pas solution de l'équation homogène, c'est-à-dire si $a + r \neq 0$, on peut trouver une solution de la forme $f: x \mapsto Be^{rx}$
+\item En revanche, si $a + r = 0$ (et que $A \neq 0$), on voit que la méthode ci-dessus échoue. On peut en revanche trouver une solution sous la forme $g: x \mapsto Cxe^{rx}$
+\end{itemize}
+Cette disjonction de cas correspond au phénomène de la \uline{résonance}.
+
+\subsection{Solution particulière: variation de la constante}
+\begin{theorem}
+Soit $A$ une primitive de $a$, de sorte que $\mathcal{S}_\text{hom} = \vect\left( x \mapsto e^{-A(x)} \right) = \left\{ x \mapsto \lambda e^{-A(x)} \, \middle| \, \lambda \in \mathbb{C} \right\}$ \\
+Alors l'équation $y' + a(x)y = b(x)$ a une solution particulière de la forme $x \mapsto \lambda(x)e^{-A(x)}$, pour une certaine fonction $x \mapsto \lambda(x)$ dérivable.
+\end{theorem}
+\begin{corollaire}
+Grâce à l'expression intégrale de la primitive, on trouve qu'une solution particulière de (É) est
+\[ x \mapsto \left(\int_{x_0}^x b(t)e^{A(t)} \, dt \right) e^{-A(x)} \]
+où $x_0 \in I$ est un point quelconque.
+\end{corollaire}
+
+\subsection{Résultat général}
+\begin{theorem}
+Les solutions de (É) sont les fonctions de la forme
+\[ x \mapsto \left( \int_{x_0}^x b(t) e^{A(t)} \, dt \right) e^{-A(x)} + \lambda e^{-A(x)} = \left( \lambda + \int_{x_0}^x b(t) e^{A(t)} \, dt \right) e^{-A(x)} \]
+où $\lambda$ décrit l'ensemble des nombres complexes.
+\end{theorem}
+\begin{corollaire}
+Soit $s_0 \in \mathbb{C}$. L'équation (É) a une unique solution valant $s_0$ et $x_0$
+\end{corollaire}
+
+\section{Équations différentielles linéaires à coefficients constants d'ordre $2$}
+\noindent Dans cette section, on considère une équation
+\[ y'' + \alpha y' + \beta y = b(x) \tag{É} \]
+où $\alpha, \beta$ et $b \in C^0(\mathbb{R}; \mathbb{C})$. Il s'agit donc d'une équation différentielle linéaire à coefficients constants.
+
+\pagebreak
+
+\subsection{Équation homogène}
+\noindent Intéressons-nous d'abord à l'équation homogène associée.
+\[ y'' + \alpha y' + \beta y = 0 \tag{Éh} \]
+Le théorème de Cauchy linéaire entraîne que l'ensemble $\mathcal{S}_\text{hom}$ de ses solutions est un sous-espace vectoriel possédant une base à deux éléments de $D^2(\mathbb{R}; \mathbb{C})$ - et même de $C^\infty(\mathbb{R}; \mathbb{C})$, comme les coefficients sont (constants donc) lisses. \medskip
+
+\noindent Comme dans le cas des suites récurrentes, le comportement dépend des solutions du \uline{polynôme caractéristique} $P = X^2 + \alpha X + \beta$
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Si le polynôme caractéristique $P$ possède deux racines simples $\rho$ et $\sigma \in \mathbb{C}$, alors
+\[ \mathcal{S}_\text{hom} = \{ x \mapsto \lambda e^{\rho x} + \mu e^{\sigma x} \mid (\lambda, \mu) \in \mathbb{C}^2 \} = \vect( x \mapsto e^{\rho x}, x \mapsto e^{\sigma x}) \]
+\item Si le polynôme caractéristique $P$ possède une racine double $\rho \in \mathbb{C}$, alors
+\[ \mathcal{S}_\text{hom} = \{ x \mapsto (\lambda + \mu x) e^{\rho x} \mid (\lambda, \mu) \in \mathbb{C}^2 \} = \vect( x \mapsto e^{\rho x}, x \mapsto x e^{\rho x}) \]
+\end{itemize}
+\end{theorem}
+\begin{lemme}
+Soit $\alpha, \beta, \tau \in \mathbb{C}$ et $f \in D^2(\mathbb{R}; \mathbb{C})$ \\
+Alors $f$ est solution de (ÉH) si et seulement si $g: x \mapsto e^{\tau x}f(x)$ est solution de
+\[ y'' + (\alpha - 2\tau)y' + (\beta - \alpha \tau + \tau^2)y = 0 \tag{ÉH$_\tau$} \]
+\end{lemme}
+\begin{corollaire}
+Soit $s_0, s_1 \in \mathbb{C}$ et $x_0 \in \mathbb{R}$ \\
+Il existe une unique solution $f$ de (ÉH) telle que $f(x_0) = s_0$ et $f'(x_0) = s_1$
+\end{corollaire}
+\begin{theorem}
+On suppose ici les coefficients $\alpha, \beta$ réels. Les solutions de l'équation différentielle sont
+\begin{itemize}
+\item Si $P$ a deux racines réelles $\rho \neq \sigma$:
+\[ \mathcal{S}_\text{hom} = \{ x \mapsto \lambda e^{\rho x} + \mu e^{\sigma x} \mid (\lambda, \mu) \in \mathbb{C}^2 \} = \vect(x \mapsto e^{\rho x}, x \mapsto e^{\sigma x}) \]
+\item Si $P$ a une racine double (nécessairement réelle) $\rho$:
+\[ \mathcal{S}_\text{hom} = \{ x \mapsto (\lambda x + \mu) e^{\rho x} \mid (\lambda, \mu) \in \mathbb{C}^2 \} = \vect(x \mapsto e^{\rho x}, x \mapsto x e^{\rho x}) \]
+\item Si $P$ a deux racines imaginaires conjuguées $r \pm is$, avec $r \in \mathbb{R}$ et $s \in \mathbb{R}_+^*$:
+\begin{align*}
+\mathcal{S}_\text{hom} &= \{ x \mapsto e^{r x}(\lambda \cos(sx) + \mu \sin(sx)) \mid (\lambda, \mu) \in \mathbb{C}^2 \} \\
+&= \vect( x \mapsto e^{r x} \cos(sx),\, x \mapsto e^{r x} \sin(sx))
+\end{align*}
+\end{itemize}
+\end{theorem}
+\begin{theorem}
+Les solutions \uline{à valeurs réelles} de (ÉH) sont les fonctions décrites par le théorème précédente, où le couple $(\lambda, \mu)$ appartient à $\mathbb{R}^2$
+\end{theorem}
+
+\pagebreak
+
+\subsection{Solution particulière: quelques heuristiques}
+\noindent Le principe de superposition entraîne que les solutions de (É) forment l'ensemble
+\[ \mathcal{S} = \{ f_0 + h \mid h \in \mathcal{S}_\text{hom} \} \]
+Pour résoudre complètement (É), il suffit donc maintenant d'en trouver une solution particulière. Deux cas sont au programme: celui d'un second membre exponentiel et celui d'un second membre sinusoïdal, qui s'y ramène.
+\begin{proposition}
+Considérons l'équation
+\[ y'' + \alpha y' + \beta y = Ae^{rx} \tag{É} \]
+où $A, r \in \mathbb{C}$, de polynôme caractéristique $P = X^2 + \alpha X + \beta$. Alors
+\begin{itemize}
+\item Si $r$ n'est pas racine de $P$, (É) a une solution particulière de la forme
+\[ x \mapsto Ce^{rx} \]
+\item Si $r$ est une racine simple de $P$, (É) a une solution simple de la forme
+\[ x \mapsto Cxe^{rx} \]
+\item Si $r$ est une racine double de $P$, (É) a une solution simple de la forme
+\[ x \mapsto Cx^2e^{rx} \]
+\end{itemize}
+\end{proposition}
+\end{document}

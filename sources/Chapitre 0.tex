@@ -1,0 +1,232 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\DeclareMathOperator{\non}{non}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 0: Logique}}
+\end{center}
+
+\section{Assertions}
+\begin{definition}
+Une \uline{assertion} est une phrase mathématique qui peut être vraie ou fausse.
+\end{definition}
+\subsection{Connecteurs logiques}
+\begin{definition}
+Soit $P$ et $Q$ deux assertions. \\
+On définit:
+\begin{itemize}
+\item La \uline{négation} $\non(P)$ ($\neg P$) qui est vraie si $P$ est fausse, et réciproquement.
+\item La \uline{conjonction} $P$ et $Q$ ($P \wedge Q$) qui est vraie uniquement si $P$ et $Q$ sont vraies.
+\item La \uline{disjonction} $P$ ou $Q$ ($P \vee Q$) qui est vraie si $P$ est vraie ou si $Q$ est vraie (ou les deux).
+\item \uline{L'implication} $P \implies Q$ qui est vraie si $P$ est fausse ou si $Q$ est vraie (ou les deux).
+\item \uline{L'équivalence} $P \iff Q$ qui est vraie si $P$ et $Q$ ont la même valeur de vérité.
+\end{itemize}
+On résume souvent ces définitions par des tables de vérité.
+\begin{center}
+\begin{tabular}{M{5em} | M{5em} | M{5em} | M{5em} | M{5em} | M{5em}}
+$P$ & $Q$ & $P$ et $Q$ & $P$ ou $Q$ & $P \implies Q$ & $P \iff Q$ \\
+\hline
+F & F & F & F & V & F \\
+\hline
+F & V & F & V & V & F \\
+\hline
+V & F & F & V & F & F \\
+\hline
+V & V & V & V & V & V 
+\end{tabular}
+\end{center}
+\end{definition}
+\begin{proposition}
+Soit $P, Q, R$ trois assertions. \\
+Alors:
+\begin{itemize}
+\item $P$ et ($Q$ ou $R$) équivaut à ($P$ et $Q$) ou ($P$ et $R$)
+\item $P$ ou ($Q$ et $R$) équivaut à ($P$ ou $Q$) et ($P$ ou $R$)
+\end{itemize}
+(on parle de double distributivité et / ou)
+\end{proposition}
+
+\subsection{Négation des connecteurs}
+\begin{proposition}
+Soit $P$ une assertion. \\
+Alors $\non(\non(P))$ équivaut à $P$
+\end{proposition}
+\begin{theorem}
+Soit $P$ et $Q$ deux assertions. On a: \\
+\uline{Lois de De Morgan}:
+\begin{itemize}
+\item non($P$ et $Q$) équivaut à non($P$) ou non($Q$)
+\item non($P$ ou $Q$) équivaut à non($P$) et non($Q$)  
+\end{itemize}
+$ \non(P \implies Q) $ équivaut à P et non(Q).
+\end{theorem}
+
+\subsection{Quantificateurs}
+\begin{definition}
+Soit $P(x)$ une assertion dépendant d'un objet $x \in X$ \\
+On définit:
+\begin{itemize}
+\item La \uline{$\forall$-assertion} $\forall x \in X$, $P(x)$ qui est vraie quand $P(x)$ est vraie quelque soit l'élément $x$ de $X$
+\item La \uline{$\exists$-assertion} $\exists x \in X: P(x)$ qui est vraie quand $P(x)$ est vraie pour au-moins un élément $x \in X$
+\end{itemize}
+\end{definition}
+\begin{theorem}
+Soit $P(x)$ une assertion dépendante d'un objet $x \in X$ \\
+Alors:
+\begin{itemize}
+\item $\non\left(\forall x \in X, P(x)\right)$ équivaut à $\exists x \in X: \non(P(x))$
+\item $\non\left(\exists \in X, P(x)\right)$ équivaut à $\forall n \in X: \non(P(x))$
+\end{itemize}
+\end{theorem}
+
+\section{Canevas de preuves}
+\subsection{Preuve d'un conjonction $P$ et $Q$}
+\noindent \uline{Principe}: Pour démontrer $P$ et $Q$ on démontre successivement $P$, puis $Q$ \\
+\rule{11em}{0.5pt} \\
+\indent Montrons $P$ et $Q$ \\
+\indent [arg / calc] donc $P$ \\
+\indent [arg / calc] donc $Q$ \\
+\rule{11em}{0.5pt}
+
+\subsection{Preuve d'une implication}
+\noindent \uline{Principe}: Pour montrer $P \implies Q$ on suppose $P$ et on montre $Q$ \\
+\rule{22em}{0.5pt} \\
+\indent Montrons $P \implies Q$ \\
+\indent Supposons $P$ \\
+\indent [arg / calc utilisant probablement $P$] donc $Q$ \\
+\rule{22em}{0.5pt}
+
+\subsection{Preuve d'une équivalence}
+\noindent \uline{Principe}: L'assertion $P \iff Q$ équivaut à $((P \implies Q) \text{ et } (Q \implies P))$ \\
+On dit qu'on procède \uline{par double implication}. \\
+\rule{22em}{0.5pt} \\
+\indent Montrons $P \iff Q$ par double implication \\
+\indent Sens direct: Supposons $P$ \\
+\indent [arg / calc utilisant probablement $P$] donc $Q$ \\
+\indent Sens réciproque: Supposons $Q$ \\
+\indent [arg / calc utilisant probablement $Q$] donc $P$ \\
+\rule{22em}{0.5pt}
+
+\subsection{Preuve d'une disjonction}
+\noindent \uline{Principe}: $P$ ou $Q$ équivaut à $(\non P) \implies Q$ \\
+\rule{24em}{0.5pt} \\
+\indent Montrons $P$ ou $Q$, ou plutôt $(\non P) \implies Q$ \\
+\indent Supposons $\non P$ \\
+\indent [arg / cal utilisant probablement $\non(P)$] donc $Q$ \\
+\rule{24em}{0.5pt}
+
+\subsection{Preuve d'une $\forall$-assertion}
+\noindent \uline{Principe}: Pour montrer $\forall x \in X$, $P(x)$, on "invoque" un $x \in X$ quelconque et on montre $P(x)$ \\
+\rule{13em}{0.5pt} \\
+\indent Montrons $\forall x \in X$, $P(x)$ \\
+\indent Soit $x \in X$ \\
+\indent [arg / calc] donc $P(x)$ \\
+\rule{13em}{0.5pt}
+
+\subsection{Preuve d'une $\exists$-assertion}
+\noindent \uline{Principe}: Pour montrer $\exists x \in X: P(x)$, on exhibe un élément bien choisi $x_0 \in X$ et on note $P(x_0)$ \\
+\rule{18em}{0.5pt} \\
+\indent Montrons $\exists x \in X: P(x)$ \\
+\indent Candidat: $x_0 =$ [choix intelligent] \\
+\indent [arg / calc] donc $x_0 \in X$ \\
+\indent [arg / calc] donc $P(x_0)$ \\
+\rule{18em}{0.5pt}
+
+\subsection{Utilisation d'un $\forall$-assertion}
+\noindent Pour \uline{utiliser} $\forall x \in X$, $P(x)$ on identifie un (ou plusieurs) élément(s) $x_0 \in X$: on sait alors que $P(x_0)$ est vrai.
+
+\subsection{Utilisation d'une $\exists$-assertion}
+\noindent Pour utiliser $\exists x \in X: P(x)$ il suffit d'écrire "on peut trouver $x_0 \in X$ tel que $P(x_0)$": on peut alors parler de $x_0$ dans la suite.
+
+\subsection{Exemples}
+Montrons que le carré d'un entier pair est pair, càd: $\forall n \in \mathbb{Z}$, $n$ pair $\implies n^2$ pair. \medskip
+
+\noindent Soit $n \in \mathbb{Z}$. Montrons $n$ pair $\implies n^2$ pair. \\
+Supposons $n$ pair, càd $\exists k \in \mathbb{Z}: n = 2k$ \\
+On peut donc trouver $k \in \mathbb{Z}$ tel que $n = 2k$ \\
+Montrons $n^2$ pair, càd $\exists l \in \mathbb{Z}: n^2 = 2l$ \\
+Candidat: $l = 2k^2$ \\
+On a bien $l \in \mathbb{Z}$ \\
+On a $n^2 = (2k)^2 = 4k^2 = 2l$, ce qui conclut.
+
+\section{Autres modes de raisonnement}
+\subsection{Contraposée}
+\noindent \uline{Principe}: $P \implies Q$ équivaut à $\non Q \implies \non P$
+
+\subsection{Raisonnement par l'absurde}
+\noindent \uline{Principe}: Pour montrer $P$, on peut \uline{supposer} $\non(P)$ et aboutir à une assertion fausse (une \uline{contradiction}).
+
+\subsection{Disjonction de cas}
+\noindent \uline{Principe}: On peut montrer $P$ en montrant: \\
+$H \implies P$, $H_2 \implies P$, $H_3 \implies P$, ...\,, $H_n \implies P$, ($H_1$ ou $H_2$ ou ... ou $H_n$)
+
+\subsection{Démonstration par chaîne d'équivalences}
+\noindent \uline{Principe}: Si $P_1 \iff P_2$, $P_2 \iff P_3$, ...\,, $P_{n - 1} \iff P_n$ \\
+donc $P_1 \iff P_n$
+
+\subsection{Raisonnement par analyse et synthèse}
+\noindent Pour identifier tous les objets vérifiant une certaine propriété:
+\begin{itemize}
+\item \uline{Analyse}: On considère un objet possédant cette propriété et on en tire des conséquences: on trouve de nouvelles propriétés.
+\item \uline{Synthèse}: Parmi des objets possédant ces nouvelles propriétés, on identifie ceux qui possédaient la propriété initiale.
+\end{itemize}
+
+\subsection{Preuve d'un résultat d'unicité}
+\noindent \uline{Principe}: Pour montrer qu'il existe au plus un objet $x \in X$ tel que $P(x)$, on montre \\
+$\forall x_1, x_2 \in X$, $(P(x_1) \text{ et } P(x_2)) \implies x_1 = x_2$ \\
+On invoque deux objets ayant la propriété et on montre qu'ils sont égaux.
+
+\section{La raisonnement par récurrence}
+\noindent Ce mode de raisonnement sert à démontrer des assertions de la forme $\forall n \geq n_0$, $P(n)$ où:
+\begin{itemize}
+\item $n_0 \in \mathbb{Z}$
+\item $P(n)$ est une assertion qui dépend de $n \geq n_0$ entier.
+\item $\forall n \geq n_0$ est une abréviation de $\forall n \in \mathbb{Z}$, $n \geq n_0 \implies P(n)$
+\end{itemize}
+
+\subsection{La récurrence simple}
+\noindent \uline{Principe}: Pour montrer $\forall n \geq n_0$, $P(n)$ il suffit de montrer $P(n_0)$ et $\forall n \geq n_0$, $P(n) \implies P(n + 1)$ \\
+\rule{27em}{0.5pt} \\
+\indent Notons, pour tout $n \geq n_0$, $P(n)$ l'assertion [...] \\
+\indent Montrons $\forall n \geq n_0$, $P(n)$ par récurrence. \\
+\indent \uline{Initialisation}: [arg / calc] donc $P(n_0)$ \\
+\indent \uline{Hérédité}: Soit $n \geq n_0$ tel que $P(n)$. Montrons $P(n + 1)$ \\
+\indent [arg / calc] donc $P(n + 1)$, ce qui clôt la récurrence. \\
+\rule{27em}{0.5pt}
+
+\subsection{La récurrence double}
+\noindent \uline{Principe}: Pour montrer $\forall n \geq n_0$, $P(n)$ il suffit de montrer $P(n_0)$ et $P(n_0 + 1)$ et \\
+$\forall n \geq n_0$, $(P(n) \text{ et } P(n + 1)) \implies P(n + 2)$
+
+\subsection{La récurrence forte}
+\noindent \uline{Principe}: Pour montrer $\forall n \geq n_0$, $P(n)$ il suffit de montrer $P(n_0)$ et  \\
+$\forall n \geq n_0$, $(P(n_0) \text{ et } ... \text{ et } P(n)) \implies P(n + 1)$
+\end{document}

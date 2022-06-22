@@ -28,6 +28,7 @@
 
 \DeclareMathOperator{\card}{Card}
 \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\cov}{cov}
 \newcommand{\indep}{\mathrel{\perp \!\!\! \perp}}
 
 \begin{document}
@@ -328,7 +329,8 @@ Plus généralement, soit $X_i: \Omega \to E_i$ des VA ($i \in \llbracket 1, n \
 On dit qu'elles sont \uline{indépendantes} si $\forall S_1 \in \mathcal{P}(E_1), ...\,, \forall S_n \in \mathcal{P}(E_n)$
 \[ P(X_1 \in S_1, ...\,, X_n \in S_n) = P(X_1 \in S_1) ... P(X_n \in S_n) \]
 \end{definition}
-\noindent \uline{Remarque}: Si $n$ VA sont indépendantes (ou, pour insister \uline{mutuellement} indépendantes), elles sont \uline{indépendantes deux à deux}, càd $\forall i \neq j \in \llbracket 1, n \rrbracket$, $X_i \indep X_j$
+\noindent \uline{Remarque}: Si $n$ VA sont indépendantes (ou, pour insister \uline{mutuellement} indépendantes), elles sont \\
+\uline{indépendantes deux à deux}, càd $\forall i \neq j \in \llbracket 1, n \rrbracket$, $X_i \indep X_j$
 \begin{theorem}
 Soit $X_1: \Omega \to E_1, ...\,, X_n: \Omega \to E_n$ des VA. \\
 Alors $X_1, ...\,, X_n$ sont indépendantes ssi
@@ -448,4 +450,154 @@ Alors
 Soit $A, B \in \mathcal{P}(\Omega)$ (tels que $P(B) \in \left] 0, 1 \right[$) \\
 Alors $P(A) = P(A \mid B) P(B) + P(A \mid \overline{B}) P(\overline{B})$
 \end{corollaire}
+
+\subsection{Formules de Bayes}
+\begin{proposition}
+Soit $A, B$ deux événements non négligeables. \\
+On a
+\[P(B \mid A) = \frac{P(A \mid B) P(B)}{P(A)}\]
+\end{proposition}
+\begin{proposition}
+Soit $A$ un événement et $(C_i)_{i = 1}^n$ un scé, tous non négligeables. \\
+Alors, pour tout $i \in \llbracket 1, n \rrbracket$
+\[P(C_i \mid A) = \frac{P(A \mid C_i)P(C_i)}{P(A)} = \frac{P(A \mid C_i)P(C_i)}{\sum\limits_{j = 1}^n P(A \mid C_j) P(C_j)} \]
+\end{proposition}
+
+\section{Espérance}
+Dans toute cette section, $X$ sera une variable aléatoire à valeurs réelle ou complexe, voire à valeurs dans un espace vectoriel réel.
+\begin{definition}
+Soit $X$ une VA complexe. \\
+On définit son \uline{espérance}: 
+\[E(X) = \sum\limits_{x \in \im(X)} P(X = x)x\]
+\end{definition}
+\noindent \uline{Remarque}: $E(X)$ ne dépend que de la loi de $X$: \\
+Si $X'$ est une VA de même loi que $X$ (ce que l'on note $X \sim X'$), alors $E(X) = E(X')$
+\begin{theorem}
+L'espérance possède les propriétés suivantes: \\
+\uline{Linéarité}: L'espérance est une forme linéaire $\mathbb{C}^\Omega \to \mathbb{C}$ (ou $\mathbb{R}^\Omega \to \mathbb{R}$) \\
+Concrètement, si $X, Y$ sont deux VA complexes et $\lambda \in \mathbb{C}$, alors $E(X + \lambda Y) = E(X) + \lambda E(Y)$ \\
+\uline{Positivité}: Si $X: \Omega \to \mathbb{R}_+$ est une VA positive, on a $E(X) \geq 0$ \\
+\uline{Croissante}: Si $X, Y: \Omega \to \mathbb{R}$ sont deux VA telles que $X \leq Y$ (càd $\forall \omega \in \Omega$, $X(\omega) \leq Y(\omega)$), alors $E(X) \leq E(Y)$ \\
+\uline{Inégalité triangulaire}: Si $X: \Omega \to \mathbb{C}$ est une VA complexe, $|E(X)| \leq E(|X|)$
+\end{theorem}
+\subsection{Définition}
+\begin{lemme}
+Si $X$ est une VA complexe, $E(X) = \sum\limits_{\omega \in \Omega} P(\{\omega\})X(\omega)$
+\end{lemme}
+\begin{proposition}
+Soit $X \sim B(n, p)$ \\
+Alors $E(X) = np$
+\end{proposition}
+\begin{theorem}[Formule de transfert]
+Soit $X: \Omega \to E$ et $f:E \to \mathbb{C}$ une application. \\
+Alors
+\[E(f(x)) = \sum\limits_{x \in \im(X)}P(X = x)f(x)\]
+\end{theorem}
+\begin{corollaire}[Formule de transfert bivariée]
+Soit $X: \Omega \to E$ et $Y: \Omega \to F$ deux VA et $f: E \times F \to \mathbb{C}$ \\
+Alors
+\[E(f(X, Y)) = \sum\limits_{\substack{x \in \im X \\ y \in \im Y}} P(X = x, Y = y)f(x, y) \]
+\end{corollaire}
+\begin{definition}
+Une VA $X: \Omega \to \mathbb{C}$ est \uline{centrée} si $E(X) = 0$
+\end{definition}
+
+\subsection{Applications}
+\begin{theorem}[Formule du crible ou d'inclusion-exclusion]
+Soit $A_1, ...\,, A_n \in \mathcal{P}(\Omega)$ \\
+On a
+\[ P\left(\bigcup_{i = 1}^n A_i \right) = \sum_{k = 1}^n (-1)^{k - 1} \sum_{1 \leq i_1 < ... < i_k \leq n} P\left(A_{i_1} \cap ... \cap A_{i_k}\right) \]
+\end{theorem}
+\begin{corollaire}
+Soit $\Omega$ un ensemble non vide et $A_1, ...\,, A_n \in \mathcal{P}(\Omega)$ \\
+Alors 
+\[ \left| \bigcup_{i = 1}^n A_i \right| = \sum_{k = 1}^n (-1)^{k - 1} \sum_{1 \leq i_1 < ... < i_k \leq n} \left| A_{i_1} \cap ... \cap A_{i_k} \right| \]
+\end{corollaire}
+
+\subsection{Indépendance}
+\begin{theorem}
+Soit $X, Y: \Omega \to \mathbb{C}$ deux VA indépendantes. \\
+Alors $E(XY) = E(X) E(Y)$ \\
+Évidemment, cela se généralise à $n$ VA.
+\end{theorem}
+
+\subsection{Espérance conditionnelle}
+\begin{definition}
+Soit $X: \Omega \to \mathbb{C}$ une VA et $B \in \mathcal{P}(\Omega)$ non négligeable. \\
+On définit l'espérance conditionnelle de $X$ sachant $B$:
+\[ E(X \mid B) = \sum_{i \in \im X} P(X = x \mid B) x \]
+\end{definition}
+\begin{theorem}[Formule des espérances totales]
+Soit $X: \Omega \to \mathbb{C}$ une VA et $(C_i)_{i = 1}^n$ un scé non négligeables. \\
+Alors
+\[ E(X) = \sum_{i = 1}^n E(X \mid C_i)P(C_i) \]
+\end{theorem}
+
+\section{Moments d'ordre deux}
+\noindent \uline{Remarque}: Pour $k \in \mathbb{N}$, l'espérance $E(X^k)$ s'appelle le \uline{$k$-ième moment} de $X$
+\subsection{Variance et écart-type}
+\begin{definition}
+Soit $X: \Omega \to \mathbb{R}$ une VA réelle. \\
+On définit sa \uline{variance}:
+\[ V(X) = E((X - E(X))^2) \]
+On définit \uline{l'écart-type}:
+\[ \sigma(X) = \sqrt{V(X)} \]
+\end{definition}
+\begin{proposition}[Formule de König-Huygens]
+Soit $X: \Omega \to \mathbb{R}$
+Alors
+\[ V(X) = E(X^2) - E(X)^2 \]
+\end{proposition}
+\noindent \uline{Exemple important}: Si $X \sim B(p)$, on a $E(X) = p$
+\begin{proposition}
+Soit $X: \Omega \to \mathbb{R}$ et $a, b \in \mathbb{R}$ \\
+On a $V(aX + b) = a^2 V(X)$
+\end{proposition}
+\begin{proposition}
+Soit $X: \Omega \to \mathbb{R}$ \\
+On a $V(X) = 0 \implies X$ est constante presque sûrement. \\
+(et signifie qu'il existe $c \in \mathbb{R}$ tel que $P(X = c) = 1$
+\end{proposition}
+
+\subsection{Covariance}
+\begin{definition}
+Soit $X, Y: \Omega \to \mathbb{R}$ \\
+On définit la \uline{covariance de $X$ et $Y$}: 
+\[ \cov(X, Y) = E\left((X - EX)(Y - EY)\right) \]
+\end{definition}
+\begin{proposition}
+On a
+\[ \cov(X, Y) = E(XE) - EX \cdot EY \]
+\end{proposition}
+\noindent \uline{Remarque}: Si $X \indep Y$, on a donc $\cov(X, Y) = 0$. On dit que $X$ et $Y$ sont \uline{décorrélées}. \\
+Si $\cov(X, Y) > 0$ (resp. $< 0$), on dit que $X$ et $Y$ sont \uline{positivement} (resp. \uline{négativement}) corrélées. \medskip
+
+\noindent \uline{Remarque}: La covariance est \uline{presque} un produit scalaire (il manque le caractère défini) \\
+On garde donc toutes les propriétés liées à la bilinéarité et au caractère positif, notamment:
+\begin{itemize}
+\item L'identité remarquable $V(X + Y) = V(X) + 2\cov(X, Y) + V(Y)$
+\item L'inégalité de Cauchy-Schwarz (sans le cas d'égalité)
+\end{itemize}
+\begin{theorem}
+Soit $X, Y: \Omega \to \mathbb{R}$ \\
+On a
+\[ \cov(X, Y) \leq |\cov(X, Y)| \leq \sqrt{V(X)} \sqrt{V(Y)} \]
+\end{theorem}
+\begin{theorem}
+Soit $X_1, ...\,, X_n: \Omega \to \mathbb{R}$ deux à deux décorrélées. \\
+Alors 
+\[ V(X_1 + ... + X_n) = V(X_1) + ... + V(X_n) \]
+\end{theorem}
+\begin{corollaire}
+Soit $X \sim B(n, p)$ \\
+Alors $V(X) = np(1-p)$
+\end{corollaire}
+
+\section{Inégalités de concentration}
+\subsection{Inégalité de Markov}
+\begin{theorem}
+Soit $X: \Omega \to \mathbb{R}_+$ (\uline{à valeurs positives}) \\
+Alors $\forall a > 0$
+\[ P(X \geq a) \leq \frac{E(X)}{a} \]
+\end{theorem}
 \end{document}

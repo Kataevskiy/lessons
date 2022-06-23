@@ -1,0 +1,167 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 27: Dénombrement}}
+\end{center}
+
+\section{Rappels sur les cardinaux et principes de dénombrement}
+\subsection{Principe de bijection}
+\begin{theorem}
+Deux ensembles finis en bijection ont le même cardinal.
+\end{theorem}
+\noindent \uline{Principe de bijection}: \\
+On peut compter des objets en les mettant en bijection avec d'autres objets.
+
+\subsection{Principe d'addition}
+\begin{proposition}
+Soit $\Omega$ un ensemble.
+\begin{itemize}
+\item Si $E$ et $F$ sont des parties disjointes et finies de $\Omega$, alors $E \cup F$ est finie et
+\[ |E \cup F| = |E| + |F| \]
+\item Si $E_1, ...\,, E_p$ sont des parties finie deux à deux disjointes, alors $\bigcup\limits_{k = 1}^p E_k$ est finie et
+\[ \left| \bigcup_{k = 1}^p E_k \right| = \sum_{k = 1}^p |E_k| \]
+\item De manière générale, si $E$ et $F$ sont des parties finies de $\Omega$, alors $E \cup F$ est finie et
+\[ |E \cup F| = |E| + |F| - |E \cap F| \]
+\end{itemize}
+\end{proposition}
+\noindent \uline{Principe d'addition}: \\
+Des objets que l'on souhaite compter se regroupent en un certain nombre de catégories \uline{mutuellement} \\ 
+\uline{exclusives}. Alors le nombre total d'objets est la somme du nombre d'objets de chaque catégorie.
+
+\subsection{Principe de soustraction}
+\begin{corollaire}
+Soit $E$ un ensemble fini et $F \subseteq E$ une partie. Alors
+\[ |E \setminus F| = |E| - |F| \]
+\end{corollaire}
+\noindent \uline{Principe de soustraction}: \\
+Si des objets peuvent ou non avoir une certaine propriété, le nombre d'objets ayant la propriété est égal à la différence entre le nombre total d'objets et le nombre d'objets n'ayant pas la propriété.
+
+\subsection{Principe de multiplication}
+\begin{proposition}
+Soit $E$ et $F$ deux ensemble finis. Alors $E \times F$ est fini et a pour cardinal $|E \times F| = |E| \times |F|$
+\end{proposition}
+\noindent \uline{Principe de multiplication}: \\
+S'il y a $n_1$ manières de faire une première opération, $n_2$ manières de faire une deuxième opération, et ainsi de suite jusqu'à $n_p$ manières de faire une dernière opération, il y a $n_1 n_2 ... n_p$ manières de faire ces $p$ opérations à la suite. \\
+C'est le genre de choses que l'on peut faire avec un arbre.
+
+\subsection{Principe de division - lemme des bergers}
+\begin{corollaire}[Lemme des bergers]
+\hfill \\
+Si un ensemble de cardinal $n$ est partitionné en $k$ classes de cardinal $d > 0$, alors $k = \frac{n}{d}$
+\end{corollaire}
+
+\section{Dénombrements basiques}
+\subsection{Listes (ou $n$-uplets, ou applications)}
+\begin{proposition}[Applications]
+Soit $E$ et $F$ deux ensembles finis. Alors $F^E$ est fini et
+\[ \left| F^E \right| = |F|^{|E|} \]
+\end{proposition}
+
+\subsection{Listes sans répétition (ou arrangements, ou applications injectives)}
+\begin{proposition}[Applications injectives]
+Soit $E$ et $F$ deux ensembles finis, de cardinaux respectifs $n$ et $m$ \\
+Le nombre d'applications injectives $E \to F$ est
+\[ \begin{cases}
+m(m - 1) ... (m - n + 1) = \frac{m!}{(m - n)!} \text{ si } n \leq m \\
+0 \text{ sinon }
+\end{cases} \]
+\end{proposition}
+
+\subsection{Permutations}
+\begin{proposition}
+Soit $E$ un ensemble fini de cardinal $n$. Alors $| \mathfrak{S}(n)| = n!$
+\end{proposition}
+
+\subsection{Parties (ou combinaisons)}
+\begin{proposition}
+Soit $E$ un ensemble fini. On a $|\mathcal{P}(E)| = 2^{|E|}$
+\end{proposition}
+\begin{proposition}
+Pour tout $n \in \mathbb{N}$ et tout $k \in \mathbb{Z}$, tous les ensembles de cardinal $n$ possèdent le même nombre de parties de cardinal $k$, à savoir
+\[ \binom{n}{k} = |\mathcal{P}_k(\llbracket 1, n \rrbracket)| = \begin{cases}
+\frac{n!}{k!(n - k)!} \text{ si } 0 \leq k \leq n\\
+0 \text{ sinon }
+\end{cases} \]
+\end{proposition}
+
+\subsection{Anagrammes}
+\noindent \uline{Remarque}: On dit \uline{une} anagramme.
+\begin{proposition}
+\hfill 
+\begin{itemize}
+\item Le mot $\underbrace{aa...a}_k \underbrace{bb...b}_{n - k}$ possède $\begin{pmatrix}
+n \\ k
+\end{pmatrix}$ anagrammes. \\
+Autrement dit, il y a $\begin{pmatrix}
+n \\ k
+\end{pmatrix}$ mots de longueur $n$ sur l'alphabet $\{ a, b \}$ avec $k$ occurrences de la lettre $a$
+\item Plus généralement, si $n = k_1 + ... + k_r$, le mot $\underbrace{a_1 a_1 ... a_1}_{k_1} \underbrace{a_2 a_2 ... a_2}_{k_2} ... \underbrace{a_r a_r ... a_r}_{k_r}$ possède
+\[ \binom{n}{k_1, k_2, ...\,, k_r} = \frac{n!}{k_1! k_2! ... k_r!} \]
+anagrammes. (coefficient multinomial)
+\end{itemize}
+\end{proposition}
+
+\subsection{Compositions (ou multiensembles, ou \textit{bars and stars})}
+\begin{proposition}
+Soit $r, n \in \mathbb{N}$. Il y a $\begin{pmatrix}
+n + r - 1 \\
+r - 1
+\end{pmatrix} = \begin{pmatrix}
+n + r - 1 \\
+n
+\end{pmatrix}$ listes $(w_1, ...\,, w_r) \in \mathbb{N}^r$ telles que $\sum\limits_{i = 1}^r w_i = n$
+\end{proposition}
+\begin{corollaire}
+Soit $r, n \in \mathbb{N}$. Il y a $\begin{pmatrix}
+n - 1 \\
+r - 1
+\end{pmatrix} = \begin{pmatrix}
+n - 1 \\
+n - r
+\end{pmatrix}$ listes $(w_1, ...\,, w_r) \in (\mathbb{N}^*)^r$ telles que $\sum\limits_{i = 1}^r w_i = n$
+\end{corollaire}
+
+\section{Compléments sur les coefficients binomiaux}
+\subsection{Formule d'absorption}
+\begin{proposition}
+Soit $0 \leq k \leq n$ deux entiers. On a
+\[ \binom{n + 1}{k + 1} = \frac{n + 1}{k + 1} \binom{n}{k} \]
+\end{proposition}
+
+\subsection{Formule de convolution de Vandermonde}
+\begin{proposition}
+Soit $k, p$ et $q$ trois nombres entiers tels que $0 \leq k \leq p + q$. On a
+\[ \binom{p + q}{k} = \sum_{i = 0}^k \binom{p}{i} \binom{q}{k - i} = \sum_{i + j = k} \binom{p}{i} \binom{q}{j} \]
+\end{proposition}
+
+\subsection{Formule de sommation de l'indice du haut}
+\begin{proposition}
+Soit $0 \leq k \leq n$ deux entiers. On a
+\[ \sum_{p = k}^n \binom{p}{k} = \binom{n + 1}{k + 1} \]
+\end{proposition}
+\end{document}

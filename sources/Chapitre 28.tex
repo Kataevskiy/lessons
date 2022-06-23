@@ -548,7 +548,8 @@ Soit $X: \Omega \to \mathbb{R}$
 Alors
 \[ V(X) = E(X^2) - E(X)^2 \]
 \end{proposition}
-\noindent \uline{Exemple important}: Si $X \sim B(p)$, on a $E(X) = p$
+\noindent \uline{Exemple important}: Si $X \sim B(p)$, on a $E(X) = p$ \\
+Donc $V(X) = p(1 - p)$
 \begin{proposition}
 Soit $X: \Omega \to \mathbb{R}$ et $a, b \in \mathbb{R}$ \\
 On a $V(aX + b) = a^2 V(X)$
@@ -599,5 +600,28 @@ Alors $V(X) = np(1-p)$
 Soit $X: \Omega \to \mathbb{R}_+$ (\uline{à valeurs positives}) \\
 Alors $\forall a > 0$
 \[ P(X \geq a) \leq \frac{E(X)}{a} \]
+\end{theorem}
+
+\subsection{Inégalité de Bienaymé-Tchebychev}
+\begin{theorem}
+Soit $X: \Omega \to \mathbb{R}$ \\
+Alors $\forall a > 0$
+\[ P(|X - EX| \geq a) \leq \frac{V(X)}{a^2} \]
+\end{theorem}
+
+\subsection{Loi faible des grands nombres}
+\begin{theorem}
+Soit $X_1, ...\,, X_n: \Omega_n \to \mathbb{R}$ indépendantes et de même loi. \\
+Notons $\mu$ leur espérance. \\
+On définit 
+\[S_n = \frac{X_1 + ... + X_n}{n}\]
+Alors $\forall \varepsilon > 0$
+\[ P(|S_n - \mu| \geq \varepsilon) \xrightarrow[n \to +\infty]{} 0 \]
+\end{theorem}
+
+\subsection{Théorème d'approximation de Weierstrass}
+\begin{theorem}
+Soit $f \in C^0([0, 1])$ \\
+Alors il existe une suite de fonctions polynomiales $(P_n)_{n \in \mathbb{N}^*}$ qui converge uniformément vers $f$
 \end{theorem}
 \end{document}

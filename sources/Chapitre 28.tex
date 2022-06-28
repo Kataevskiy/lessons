@@ -103,7 +103,7 @@ Une \uline{issue} est un résultat possible, càd ici une suite de $n$ lancers. 
 \noindent \uline{Lien entre ces objets}:
 \begin{itemize}
 \item "Obtenir un nombre impair de 'pile' " et "Obtenir que 'face' " sont incompatibles: $I \cap F = \emptyset$
-\item $F = \pi_1 \cup \pi_2 \cup ... \cup \pi_n = \overline{\pi_1} \cap ... \cap \overline{\pi_n}$
+\item $F = \overline{\pi_1 \cup \pi_2 \cup ... \cup \pi_n} = \overline{\pi_1} \cap ... \cap \overline{\pi_n}$
 \item Si $n = 3$, $I = (\pi_1 \cap \overline{\pi_2} \cap \overline{\pi_3}) \cup (\overline{\pi_1} \cap \pi_2 \cap \overline{\pi_3}) \cup (\overline{\pi_1} \cap \overline{\pi_2} \cap \pi_3) \cup (\pi_1 \cap \pi_2 \cap \pi_3)$
 \item On a $N = L_1 + L_2 + ... + L_n$
 \item On a $N = \left| R \right|$ \\
@@ -142,7 +142,7 @@ On a:
 \begin{itemize}
 \item $P(\emptyset) = 0$
 \item \uline{Croissance}: pour tous $A, B \in \mathcal{P}(\Omega)$, $A \subseteq B \implies P(A) \leq P(B)$
-\item $\forall A \in \mathcal{P}(\Omega)$, $P(\overline{A}) = 1 - P(\overline{A})$
+\item $\forall A \in \mathcal{P}(\Omega)$, $P(\overline{A}) = 1 - P(A)$
 \item Pour tous $A_1, ...\,, A_r \in \mathcal{P}(\Omega)$ disjoints, \[P\left( \bigsqcup\limits_{i = 1}^r A_i \right) = \sum\limits_{i = 1}^r P(A_i)\]
 \item $\forall A, B \in \mathcal{P}(\Omega)$, $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
 \end{itemize}
@@ -193,7 +193,7 @@ Soit un epf et $X_1: \Omega \to E_1$ et $X_2: \Omega \to E_2$ deux VA. \\
 Le \uline{loi conjointe} de $X_1$ et $X_2$ est la loi de la VA
 \[ (X_1, X_2) : \begin{cases}
 \Omega \to E_1 \times E_2 \\
-\omega \to \left(X_1(\omega), X_2(\omega) \right)
+\omega \mapsto \left(X_1(\omega), X_2(\omega) \right)
 \end{cases} \]
 Les lois de $X_1$ et $X_2$ sont appelées \uline{lois marginales} de loi conjointe.
 \end{definition}

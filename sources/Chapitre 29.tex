@@ -1,0 +1,241 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\DeclareMathOperator{\card}{Card}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\cov}{cov}
+\newcommand{\indep}{\mathrel{\perp \!\!\! \perp}}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 29: Fonctions de deux variables}}
+\end{center}
+
+\section{Fonction continues sur un ouvert de $\mathbb{R}^2$}
+\subsection{Ouverts de $\mathbb{R}^2$}
+Dans tout le chapitre, on munit $\mathbb{R}^2$ de sa norme euclidienne canonique.
+\begin{definition}
+Soit $p \in \mathbb{R}^2$ et $r > 0$ \\
+On appelle \uline{disque ouvert} de \uline{centre} $p$ et de \uline{rayon} $r$ la partie $D(p, r) = \{ z \in \mathbb{R}^2 \mid \| z - p \| < r \}$
+\end{definition}
+\begin{definition}
+Soit $U$ une partie de $\mathbb{R}^2$ \\
+On dit que $U$ est \uline{ouvert} de $\mathbb{R}^2$ si $\forall p \in U$, $\exists r > 0: D(p, r) \subseteq U$
+\end{definition}
+
+\subsection{Fonctions continues}
+Dans toute cette section, $U$ désigne un ouvert non vide de $\mathbb{R}^2$ \medskip
+
+\noindent Étant donné une fonction $f: U \to \mathbb{R}$ et un point $p = (a, b) \in U$, on notera indifféremment $f(p)$ ou $f(a, b)$ la valeur de $f$ en ce point. \medskip
+
+\noindent On peut représenter graphiquement une fonction $f: U \to \mathbb{R}$ par son \uline{graphe}:
+\[ \Gamma_f = \{ (x, y, f(x, y) \mid (x, y) \in U \} \]
+qui est une partie de $U \times \mathbb{R}$, et donc de $\mathbb{R}^3$
+\begin{definition}
+Soit $f: U \to \mathbb{R}$ une fonction. Soit $p \in U$
+\begin{itemize}
+\item On dit que la fonction $f$ est \uline{continue en $p$} si
+\[ \forall \varepsilon > 0, \exists \eta> 0: \forall z \in U\, \left( \| z - p \| \leq \eta \implies |f(z) - f(p)| \leq \varepsilon \right) \]
+\item On dit que $f$ est \uline{continue} si elle est continue en tout point de $U$
+\end{itemize}
+\end{definition}
+\begin{proposition}
+Soit $f: U \to \mathbb{R}$, $I$ un intervalle contenant $f(U)$ et $\theta: I \to \mathbb{R}$ \\
+Si $f$ est continue en $p \in U$ et que $\theta$ est continue en $f(p)$, alors la composée $\theta \circ f$ est continue en $p$
+\end{proposition}
+\begin{proposition}
+Soit $f: U \to \mathbb{R}$, $I$ un intervalle non trivial et $\gamma_1$ et $\gamma_2: I \to \mathbb{R}$ deux fonctions telles que la fonction $\gamma: t \mapsto \left(\gamma_1(t), \gamma_2(t)\right)$ soit à valeurs dans $U$ \\
+Si $\gamma_1$ et $\gamma_2$ sont continues en $a \in I$, et que $f$ est continue en $\gamma(a)$, alors $f \circ \gamma: t \mapsto f\left(\gamma_1(t), \gamma_2(t)\right)$ est continue en $a$
+\end{proposition}
+\begin{proposition}
+Soit $f: U \to \mathbb{R}$, $V$ un ouvert de $\mathbb{R}^2$ et $\varphi, \psi: V \to \mathbb{R}$ deux fonctions telles que \\
+$\Phi: z \mapsto \left(\varphi(z), \psi(z)\right)$ soit à valeurs dans $U$ \\
+Si $\varphi$ et $\psi$ sont continues en $p \in V$, et que $f$ est continue en $\left(\varphi(p), \psi(p)\right)$, alors $f \circ \Phi: z \mapsto f\left(\varphi(z), \psi(z)\right)$ est continue en $p$
+\end{proposition}
+
+\pagebreak
+
+\section{Fonctions de classe $C^1$}
+Dans toute cette section, $U$ désigne un ouvert non vide de $\mathbb{R}^2$ et $f$ une fonction de $U$ dans $\mathbb{R}$
+
+\subsection{Dérivées partielles}
+Étant donné un point $p = (a, b) \in U$, on considère les ensembles:
+\[ D_1 = \{x \in \mathbb{R} \mid (x, b) \in U\} \quad \text{ et } \quad D_2 = \{ y \in \mathbb{R} \mid (a, y) \in U\} \]
+et les \uline{applications partielles}:
+\[ \varphi_1: \begin{cases}
+D_1 \to \mathbb{R} \\
+x \mapsto f(x, b)
+\end{cases} \quad \text{ et } \quad
+\varphi_2: \begin{cases}
+D_2 \to \mathbb{R} \\
+y \mapsto f(a, y)
+\end{cases} \]
+Comme $U$ est ouvert, on peut trouver $r > 0$ tel que $D(p, r) \subseteq U$ \\
+On a alors les inclusions:
+\[ \left] a - r, a + r \right[ \subseteq D_1 \quad \text{ et } \quad \left] b - r, b + r \right[ \subseteq D_2 \]
+Notons que $D_1$ et $D_2$ peuvent ne pas être des intervalles, mais que cela n'a guère d'importance puisque la discussion est ici locale: seul ce qui se passe au voisinage de $a \in D_1$ et $b \in D_2$ nous intéresse.
+\begin{definition}
+Soit $p = (a, b) \in U$
+\begin{itemize}
+\item Si l'application partielle $\varphi_1$ est dérivable en $a$, on dit que $f$ admet une \uline{première dérivée partielle}
+\[ \partial_1 f(a, b) = \varphi_1'(a) \]
+\item Si l'application partielle $\varphi_2$ est dérivable en $b$, on dit que $f$ admet une \uline{deuxième dérivée partielle}
+\[ \partial_2 f(a, b) = \varphi_2'(b) \]
+\end{itemize}
+\end{definition}
+
+\noindent \uline{Remarque}: On utilise en pratique une notation plus parlante. \\
+Pour une fonction $f: (x, y) \mapsto f(x, y)$, on note plutôt:
+\[ \frac{\partial f}{\partial x} (a, b) = \partial_1 f(a, b) \quad \text{ et } \quad \frac{\partial f}{\partial y} (a, b) = \partial_2 f(a, b) \]
+en s'adaptant aux noms des variables apparaissant dans la définition de $f$. Par exemple, les dérivées partielles de la fonction $f: (r, \theta) \mapsto r \cos \theta$ sont données par:
+\[ \forall (s, \omega) \in \mathbb{R}^2,\, \frac{\partial f}{\partial r} (s, \omega) = \cos \omega \quad \text{ et } \quad \frac{\partial f}{\partial \theta} (s, \omega) = -s \sin \omega \]
+Cette notation est potentiellement ambigüe, car les variables apparaissant dans la définition de $f$ sont en fait des variables muettes, mais elle ne pose guère de problème à l'usage.
+\begin{proposition}
+Soit $f, g: U \to \mathbb{R}$ et $p \in U$
+\begin{itemize}
+\item Si $f$ et $g$ admettent des dérivées partielles en $p$, alors $f + g$ également, avec:
+\[ \frac{\partial (f + g)}{\partial x} (p) = \frac{\partial f}{\partial x} (p) + \frac{\partial g}{\partial x} (p) \quad \text{ et } \quad \frac{\partial (f + g)}{\partial y} (p) = \frac{\partial f}{\partial y} (p) + \frac{\partial g}{\partial y} (p) \]
+\item Si $f$ et $g$ admettent des dérivées partielles en $p$, alors $fg$ également, avec:
+\[ \frac{\partial (f g)}{\partial x} (p) = \frac{\partial f}{\partial x} (p) g(p) + f(p) \frac{\partial g}{\partial x} (p) \quad \text{ et } \quad \frac{\partial (f g)}{\partial y} (p) = \frac{\partial f}{\partial y} (p) g(p) + f(p) \frac{\partial g}{\partial y} (p) \]
+\end{itemize}
+\end{proposition}
+
+\noindent \uline{Remarque}: L'existence des dérivées partielles, même en tout point de $U$, n'entraîne pas la continuité de $f$
+
+\subsection{Fonctions de classe $C^1$}
+Si la fonction $f$ admet des dérivés partielles en tout point de $U$, on peut considérer $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$ comme des fonctions définies sur $U$
+\begin{definition}
+La fonction $f$ est dite \uline{de classe} $C^1$ si elle admet des dérivées partielles en tout point de $U$ et que les fonctions $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$ sont continues. \\
+On note $C^1(U; \mathbb{R})$ ou, plus simplement, $C^1(U)$ l'ensemble des fonctions de classe $C^1$ définies sur $U$
+\end{definition}
+\begin{theorem}[Développement limité à l'ordre 1]
+Soit $f \in C^1(U)$ et $p = (a, b) \in U$. Il existe alors une fonction $\varepsilon: U \to \mathbb{R}$ telle que $\varepsilon(z) \xrightarrow[z \to p]{} 0$ et pour tout $(x, y) \in U$:
+\[ f(x, y) = f(a, b) + (x - a) \frac{\partial f}{\partial x}(a, b) + (y - b) \frac{\partial f}{\partial y}(a, b) + \varepsilon(x, y) \left\| (x, y) - (a, b) \right\| \]
+\end{theorem}
+
+\noindent \uline{Remarque}: On peut écrire de manière plus condensée le résultat précédent sous la forme d'un développement limité à l'ordre 1:
+\[ f(a + h, b + k) = f(a, b) + h \frac{\partial f}{\partial x} (a, b) + k \frac{\partial f}{\partial y} (a, b) + o \left( \| (h, k) \| \right) \]
+\begin{corollaire}
+Soit $f \in C^1(U)$. Alors $f$ est continue.
+\end{corollaire}
+\begin{proposition}
+Soit $f, g \in C^1(U)$. Alors la somme $f + g$ et le produit $f g$ sont des fonctions de classe $C^1$
+\end{proposition}
+
+\subsection{Gradient}
+\begin{definition}
+Soit $f \in C^1(U)$. Le \uline{gradient} de $f$ est l'application
+\[ \nabla f: \begin{cases}
+U \to \mathbb{R}^2 \\
+(a, b) \mapsto \nabla f(a, b) = \left( \frac{\partial f}{\partial x}(a, b), \frac{\partial f}{\partial y}(a, b) \right) \end{cases} \]
+\end{definition}
+
+\noindent \uline{Remarque}: Soit $f \in C^1(U)$ et $p \in U$. \\
+Il existe alors une fonction $\varepsilon: U \to \mathbb{R}$ telle que $\varepsilon(z) \xrightarrow[z \to p]{} 0$ et pour tout $z \in U$:
+\[ f(z) = f(p) + \left<\nabla f(z) \mid z - p\right> + \varepsilon(z) \| z - p \| \]
+
+\section{Dérivation des fonctions composées}
+Dans toute cette section, $U$ désigne un ouvert non vide de $\mathbb{R}^2$ et $I$ désigne un intervalle non trivial.
+\subsection{Composition avec une fonction d'une variable}
+\begin{proposition}
+Soit $f \in C^1(U)$, $I$ un intervalle contenant $f(U)$ et $\theta \in C^1(I)$ \\
+Alors $\theta \circ f$ est une fonction de classe $C^1$, avec, pour tout $p \in U$
+\[ \frac{\partial(\theta \circ f)}{\partial x}(p) = \theta'\big(f(p)\big) \frac{\partial f}{\partial x}(p) \quad \text{ et } \quad \frac{\partial(\theta \circ f)}{\partial y}(p) = \theta'\big(f(p)\big) \frac{\partial f}{\partial y}(p) \]
+\end{proposition}
+
+\subsection{Première règle de la chaîne}
+\begin{theorem}
+Soit $f \in C^1(U)$ et $\gamma_1, \gamma_2 \in C^1(I)$\\
+ On suppose que la fonction $\gamma: t \mapsto \left( \gamma_1(t), \gamma_2(t)\right)$ est à valeurs dans $U$ \\
+Alors $f \circ \gamma: t \mapsto f\left( \gamma_1(t), \gamma_2(t)\right)$ est de classe $C^1$ et l'on a, pour tout $a \in I$
+\[ (f \circ \gamma)'(a) = \frac{\partial f}{\partial x}\big(\gamma(a)\big)\gamma_1'(a) + \frac{\partial f}{\partial y}\big(\gamma(a)\big)\gamma_2'(a) \]
+\end{theorem}
+
+\noindent \uline{Remarque}: Avec les mêmes notations que dans le théorème, on peut écrire de façon concise la dérivée de $f \circ \gamma$ à l'aide du gradient de $f$
+\[ \forall a \in I,\, (f \circ \gamma)'(a) = \left< \nabla f\big(\gamma(a)\big) \mid \gamma'(a) \right> \]
+où l'on a noté $\gamma'(a) = \left(\gamma_1'(a), \gamma_2'(a)\right)$
+
+\subsection{Dérivée selon un vecteur}
+\begin{proposition}
+Soit $f \in C^1(U)$, $p \in U$ et $v = \begin{pmatrix}
+h \\
+k
+\end{pmatrix} \in \mathbb{R}^2$ \\
+L'application $\varphi_v: t \mapsto f(p + tv)$ est définie au voisinage de $0$, dérivable en $0$, de dérivée
+\[ \varphi_v'(0) = h \frac{\partial f}{\partial x}(p) + k \frac{\partial f}{\partial y}(p) = \left< \nabla f(p) \mid v \right> \]
+On note $D_vf(p) = \varphi_v'(0)$ cette dérivée, et on l'appelle \uline{dérivée de $f$ en $p$ selon le vecteur $v$}
+\end{proposition}
+
+\noindent \uline{Remarque}: Si $v$ est un vecteur unitaire, l'inégalité de Cauchy-Schwarz donne
+\[ |D_vf(p)| = |\left< \nabla f(p) \mid v \right>| \leq \| \nabla f(p) \| \]
+En outre, la dérivée $D_vf(p)$ est alors maximale (resp. minimale) si $v$ est positivement (resp. négativement) colinéaire à $\nabla f(p)$: elle vaut dans ce cas $\pm \| \nabla f(p) \|$ \\
+Le gradient de $f$ en $p$ pointe donc dans la direction dans laquelle $f$ croît le plus vite (qui est aussi, en sens inverse, celle où elle décroît le plus vite). Cela correspond à la direction de plus grande pente sur le graphe $\Gamma_f$
+
+\subsection{Deuxième règle de la chaîne}
+\begin{theorem}
+Soit $f \in C^1(U)$. Soit $V$ un ouvert non vide de $\mathbb{R}^2$ et $\varphi, \psi \in C^1(V)$ deux fonctions telles que l'application $\Phi: (x, y) \mapsto \left(\varphi(x, y), \psi(x, y)\right)$ soit à valeurs dans $U$ \\
+Alors l'application composée
+\[ f \circ \Phi: \begin{cases}
+V \to \mathbb{R} \\
+(x, y) \mapsto f\left(\varphi(x, y), \psi(x, y)\right)
+\end{cases} \]
+est de classe $C^1$, et vérifie
+\[ \forall p \in V,\, \begin{cases}
+\partial_1(f \circ \Phi)(p) = \partial_1f\big(\Phi(p)\big) \partial_1 \varphi(p) + \partial_2 f\big(\Phi(p)\big) \partial_1 \psi(p) \\
+\partial_2(f \circ \Phi)(p) = \partial_1f\big(\Phi(p)\big) \partial_2 \varphi(p) + \partial_2 f\big(\Phi(p)\big) \partial_2 \psi(p)
+\end{cases} \]
+\end{theorem}
+
+\noindent \uline{Remarque}: Si l'on note $f: (x, y) \mapsto f(x, y)$ et $\Phi: (u, v) \mapsto \left(\varphi(u, v), \psi(u, v)\right)$, ces formules deviennent, selon la notation usuelle
+\[ \forall p \in V,\, \begin{cases}
+\displaystyle
+\frac{\partial(f \circ \Phi)}{\partial u}(p) = \frac{\partial f}{\partial x}\big(\Phi(p)\big) \frac{\partial \varphi}{\partial u}(p) + \frac{\partial f}{\partial y}\big(\Phi(p)\big) \frac{\partial \psi}{\partial u}(p) \\
+\displaystyle
+\frac{\partial(f \circ \Phi)}{\partial u}(p) = \frac{\partial f}{\partial x}\big(\Phi(p)\big) \frac{\partial \varphi}{\partial u}(p) + \frac{\partial f}{\partial y}\big(\Phi(p)\big) \frac{\partial \psi}{\partial u}(p) 
+\end{cases} \]
+
+\section{Extrema}
+Dans toute cette section, $U$ désigne un ouvert non vide de $\mathbb{R}^2$. En plus des notions générales d'extremum (sous-entendu: \uline{global}), la norme euclidienne permet de définir les extrema locaux.
+\begin{definition}
+Soit $X$ une partie non vide de $\mathbb{R}^2$, $f: X \to \mathbb{R}$ une fonction et $p \in X$
+\begin{itemize}
+\item On dit que $f$ admet un \uline{maximum local} en $p$ si
+\[ \exists \eta > 0: \forall z \in X \cap D(p, \eta),\, f(z) \leq f(p) \]
+\item On définit de même les notions de \uline{minimum local}
+\end{itemize}
+\end{definition}
+\begin{definition}
+Soit $f \in C^1(U)$ et $p \in U$ \\
+On dit que $p$ est un \uline{point critique} pour $f$ si $\frac{\partial f}{\partial x}(p) = \frac{\partial f}{\partial y}(p) = 0$, c'est-à-dire si $\nabla f(p) = (0, 0)$
+\end{definition}
+\begin{theorem}
+Soit $f \in C^1(U)$ et $p \in U$ \\
+Si $p$ admet un extremum local en $p$, alors $p$ est un point critique de $f$
+\end{theorem}
+\end{document}

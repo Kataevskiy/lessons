@@ -66,7 +66,7 @@ On parle aussi de \uline{barycentre} des $a_1, ...\, , a_n$ (et dans le cas $\la
 \begin{theorem}[Inégalité de Jensen / de convexité]
 Soit $f: I \to \mathbb{R}$ convexe, $a_1, ...\, , a_n \in \mathbb{R}$ et $\lambda_1, ...\, , \lambda_n \in \mathbb{R}_+$ tels que $\lambda_1 + ... + \lambda_n = 1$ \\
 Alors
-\[f(\sum_{i = 1}^n \lambda_i a_i) \leq \sum_{i = 1}^n \lambda_i f(a_i)\]
+\[f\left(\sum_{i = 1}^n \lambda_i a_i\right) \leq \sum_{i = 1}^n \lambda_i f(a_i)\]
 \end{theorem}
 
 \subsection{Position de sécantes}
@@ -79,12 +79,23 @@ Soit $f:I \to \mathbb{R}$ convexe et $a < b \in I$. Alors:
 \end{itemize}
 \end{proposition}
 
+\pagebreak
+
 \subsection{Pentes}
 \begin{proposition}[Inégalité de trois pentes]
 Soit $f: I \to \mathbb{R}$ et $s < t < u \in I$ \\
 Alors
 \[\frac{f(t) - f(s)}{t - s} \leq \frac{f(u) - f(s)}{u - s} \leq \frac{f(u) - f(t)}{u - t}\]
-\end{proposition}
+\end{proposition} \medskip
+
+\noindent \uline{Remarque}: Chacune des trois inégalités contenues dans le théorème est équivalent à deux autres \\
+et au faut que $\begin{pmatrix} t \\ f(t) \end{pmatrix}$ est sous la courbe joignant $\begin{pmatrix} s \\ f(s) \end{pmatrix}$ et $\begin{pmatrix} u \\ f(u) \end{pmatrix}$  \\
+Les trois inégalités équivalent à
+\[ (u - s)f(t) \leq (u - t)f(s) + (t - s)f(u) \]
+ou encore
+\[ f(t) \leq \underbrace{\frac{u - t}{u - s}}_{1 - \lambda}f(s) + \underbrace{\frac{t - s}{u - s}}_{\lambda}f(u) \]
+avec $\lambda$ tel que $t = (1 - \lambda) s + \lambda u$
+
 \begin{proposition}
 Une fonction $f: I \to \mathbb{R}$ est convexe si et seulement si, pour tout $a \in I$, la fonction \\
 taux d'accroissement
@@ -122,6 +133,8 @@ Soit $f \in D^1(I)$ convexe et $a < b \in I$ \\
 On a
 \[ f'(a) \leq \frac{f(b) - f(a)}{b - a} \leq f'(b) \]
 \end{corollaire}
+
+\pagebreak
 
 \subsection{Applications}
 Le critère de convexité pour les fonctions deux fois dérivables montre directement que:

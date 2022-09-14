@@ -1,0 +1,133 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\com}{com}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 1: Structures fondamentales}}
+\end{center}
+Dans la suite, $\mathbb{K}$ désigne $\mathbb{R}$ ou $\mathbb{C}$
+
+\section{Groupes, anneaux, corps, espaces vectoriels}
+\subsection{Structures algébriques usuelles}
+\uline{lci} $*$: $\begin{cases}
+E \times E \to E \\
+(x, y) \mapsto x * y
+\end{cases}$
+\begin{definition}
+Soit $M$ un ensemble muni d'une lci $*$ \\
+$(M, *)$ est un monoïde si:
+\begin{enumerate}
+\item $*$ est associative.
+\item $*$ possède un élément neutre $e_M$
+\end{enumerate}
+\end{definition}
+\begin{definition}
+Un groupe est un monoïde dont tous les éléments sont inversibles.
+\end{definition}
+\begin{definition}
+Soit $A$ un ensemble avec 2 lci: $+$ et $*$ \\
+$A$ est un anneau si:
+\begin{enumerate}
+\item $(A, +)$ est un groupe abélien.
+\item $(A, *)$ est un monoïde.
+\item $\forall a, x, y \in A \qquad \begin{cases}
+a * (x + y) = a * x + a * y \\
+(x + y) * a = x * a + y * a
+\end{cases}$
+\end{enumerate}
+\end{definition}
+\begin{definition}
+Un anneau commutatif $\neq \{ 0 \}$ dont tous les éléments non nuls sont inversibles est un corps.
+\end{definition}
+\begin{definition}
+Soit $(E, + , \bullet)$ avec $E$ ensemble, $*$ lci et $\bullet$: $\begin{cases}
+\mathbb{K} \times E \to E \\
+(\lambda, x) \mapsto \lambda \bullet x
+\end{cases}$
+(l.c. externe) \\
+$(E, +, \bullet)$ est un $\mathbb{K}$ espace vectoriel si:
+\begin{enumerate}
+\item $(E, +)$ groupe abélien.
+\item $\forall x \in E \qquad 1 \bullet x = x$
+\item $\forall \lambda \in \mathbb{K}$, $\forall x, y \in E \qquad \lambda \bullet (x + y) = \lambda \bullet x + \lambda \bullet y$
+\item $\forall \lambda, \mu \in \mathbb{K}$, $\forall x \in E \qquad (\lambda + \mu) \bullet x = \lambda \bullet x + \mu \bullet x$
+\item $\forall \lambda, \mu \in \mathbb{K}$, $\forall x \in E \qquad (\lambda \bullet \mu) \bullet x = \lambda \bullet (\mu \bullet x) = \mu \bullet (\lambda \bullet x)$
+\end{enumerate}
+\end{definition}
+
+\subsection{Sous-structures}
+\noindent \uline{Rappels}:
+\begin{enumerate}
+\item $G$ groupe, $H \subset G$ \\
+$H$ sous-groupe $\iff \begin{cases}
+1_G \in H \\
+\forall x, y \in H,\, xy \in H \\
+\forall x \in H,\, x^{-1} \in H
+\end{cases}$ \\
+$H$ est un groupe aussi pour la restriction.
+\item $A$ anneau, $B \subset A$ \\
+$B$ sous-anneau $\iff \begin{cases}
+\forall x, y \in B,\, x + y \in B,\, xy \in B \\
+1_A \in B \\
+\forall x \in B,\, -x \in B
+\end{cases}$ \\
+Le sous-anneau $B$ est en particulier un anneau.
+\item $K$ un corps, $L \subset K$ \\
+$L$ sous-corps de $K$ $\iff \begin{cases}
+L \text{ sous-anneau de } K \\
+\forall x \in L \setminus \{ 0 \},\, x^{-1} \in L
+\end{cases}$
+\item $E$ un $\mathbb{K}$-ev, $F \subset E$ \\
+$F$ sous-espace vectoriel de $E$ $\iff \begin{cases}
+\forall x, y \in F,\, x + y \in F \\
+\forall \lambda \in \mathbb{K},\, \forall x \in F,\, \lambda x \in F \\
+0 \in F
+\end{cases}$
+\end{enumerate} \medskip
+
+\noindent \uline{Démarche}: Pour montrer qu'un ensemble est un machin \footnote{monoïde, groupe, anneau, corps ou $\mathbb{K}$-ev}, on pourra le réaliser comme un sous-machin d'un machin connu.
+
+\begin{lemme}
+Soit $M = \begin{pmatrix}
+\alpha & \beta \\
+\gamma & \delta
+\end{pmatrix} \in GL_2(K)$ \\
+Alors
+\[ M^{-1} = \frac{1}{\det M} \begin{pmatrix}
+\delta & - \beta \\
+- \gamma & \alpha
+\end{pmatrix}\]
+\end{lemme}
+\begin{proposition}
+Soit $M$ un machin \footnotemark[1] et $(M_i)_{i \in I}$ une famille de sous-machins de $M$ \\
+Alors $\bigcap\limits_{i \in I} M_i$ est un sous-machin de $M$
+\end{proposition}
+\end{document}

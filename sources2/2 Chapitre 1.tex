@@ -23,13 +23,13 @@
 \newtheorem{corollaire}[proposition]{Corollaire}
 \newtheorem{lemme}[proposition]{Lemme}
 \newtheorem{definition}[proposition]{Définition}
+\newtheorem*{rappel}{Rappel}
 
 \DeclareMathOperator{\com}{com}
 \DeclareMathOperator{\re}{Re}
 \DeclareMathOperator{\im}{Im}
 
 \begin{document}
-\renewcommand{\labelitemi}{$*$}
 \begin{center}
 {\Large \textbf{Chapitre 1: Structures fondamentales}}
 \end{center}
@@ -84,7 +84,7 @@ $(E, +, \bullet)$ est un $\mathbb{K}$ espace vectoriel si:
 \end{definition}
 
 \subsection{Sous-structures}
-\noindent \uline{Rappels}:
+\begin{rappel} \hfill
 \begin{enumerate}
 \item $G$ groupe, $H \subset G$ \\
 $H$ sous-groupe $\iff \begin{cases}
@@ -111,8 +111,8 @@ $F$ sous-espace vectoriel de $E$ $\iff \begin{cases}
 \forall \lambda \in \mathbb{K},\, \forall x \in F,\, \lambda x \in F \\
 0 \in F
 \end{cases}$
-\end{enumerate} \medskip
-
+\end{enumerate}
+\end{rappel}
 \noindent \uline{Démarche}: Pour montrer qu'un ensemble est un machin \footnote{monoïde, groupe, anneau, corps ou $\mathbb{K}$-ev}, on pourra le réaliser comme un sous-machin d'un machin connu.
 
 \begin{lemme}
@@ -130,4 +130,131 @@ Alors
 Soit $M$ un machin \footnotemark[1] et $(M_i)_{i \in I}$ une famille de sous-machins de $M$ \\
 Alors $\bigcap\limits_{i \in I} M_i$ est un sous-machin de $M$
 \end{proposition}
+
+\subsection{Morphismes}
+\begin{rappel} \hfill
+\begin{enumerate}
+\item $f: G \to H$, $G, H$ groupes. \\
+$f$ morphisme de groupes $\iff \forall x, y \in G$, $f(x * y) = f(x) + f(y)$ \\
+Dans ces conditions: $\begin{cases}
+f(e_G) = e_H \\
+\forall x \in G,\, f(x^{-1}) = f(x)^{-1}
+\end{cases}$
+\item Soit $f: A \to B$, $A, B$ anneaux. \\
+$f$ morphisme d'anneaux $\iff \begin{cases}
+f(1_A) = 1_B \\
+\forall x, y \in A,\, \begin{cases}
+f(x * y) = f(x) + f(y) \\
+f(xy) = f(x) f(y)
+\end{cases}
+\end{cases}$ \\
+Automatiquement: $\begin{cases}
+f(0) = 0 \\
+f(-x) = -f(x) \\
+x \text{ inversible } \implies f(x) \text{ inversible et } f(x^{-1}) = f(x)^{-1}
+\end{cases}$
+\item Un morphisme de corps c'est un morphisme d'anneaux.
+\item $u: E \to F$ linéaire $\iff \begin{cases}
+\forall x, y \in E,\, u(x + y) = u(x) + u(y) \\
+\forall x \in E, \forall \lambda \in \mathbb{K},\, u(\lambda x) = \lambda u(x)
+\end{cases}$
+\end{enumerate}
+\end{rappel}
+\begin{rappel}
+Isomorphisme = morphisme bijectif. \\
+La composée de $2$ morphismes est un morphisme. La réciproque d'un isomorphisme est un isomorphisme. \\
+$G$ et $H$ sont dits isomorphes s'il existe $f: G \to H$ isomorphe. On note alors $G \underset{f}{\simeq} H$ ou $G \simeq H$
+\end{rappel}
+
+\pagebreak
+
+\begin{rappel}
+\hfill
+\begin{enumerate}
+\item $f: G \to H$ morphisme de groupes. \\
+$\ker f = \{ x \in G \mid f(x) = e_H \}$ \\
+( Respectivement, $\ker f = \{ x \in B \mid f(x) = 1 \}$ )
+\item Si $f: A \to B$ morphisme d'anneaux. \\
+$\ker f = \{ x \in A \mid f(x) = 0 \}$
+\item Si $u \in \mathcal{L}(E, F)$ \\
+$\ker u = \{x \in E \mid u(x) = 0\}$ \\
+$f$ injective $\iff \ker f = \{ \text{ neutre } \}$
+\end{enumerate}
+\end{rappel}
+\begin{rappel}
+\hfill
+\begin{enumerate}
+\item Soit $f: G \to H$ morphisme de machins\footnotemark[1]. \\
+Alors $f(G)$ est un sous-machin de $H$
+\item Si $f$ est $\begin{cases}
+\text{ un morphisme de groupes } \\
+\text{ une application linéaire} 
+\end{cases}$ alors $\ker f$ est $\begin{cases}
+\text{ un sous-groupe } \\
+\text{ un sous-espace vectoriel} 
+\end{cases}$
+\end{enumerate}
+\end{rappel}
+\begin{definition}
+Soit $E$ un $\mathbb{K}$-ev. \\
+Un hyperplan de $E$ est le noyau d'une forme linéaire non nulle de $E$, ie. d'un élément de $\mathcal{L}(E, K) \setminus \{ 0 \}$
+\end{definition}
+
+\subsection{Structure de $\mathbb{K}$-algèbre}
+\begin{definition}
+Soit: \begin{itemize}
+\item $\mathbb{K}$ un corps.
+\item $A$ un ensemble.
+\item $+, *$ deux lci sur $A$
+\item $\bullet$ une lce sur $A$ à opérateurs dans $\mathbb{K}$
+\end{itemize}
+On dit que $A$ est une $\mathbb{K}$-algèbre si: 
+\begin{enumerate}
+\item $(A, +,  *)$ est un anneau.
+\item $(A, +, \bullet)$ est un $\mathbb{K}$-ev.
+\item $\forall \lambda \in \mathbb{K}$, $\forall A, B \in A \qquad \lambda \bullet (ab) = (\lambda \bullet a) b = a (\lambda \bullet b)$
+\end{enumerate}
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{enumerate}
+\item Si $X$ est un ensemble, $\mathcal{F}(X, K) = K^X$ est une $\mathbb{K}$-algèbre commutative.
+\item $\mathbb{K}[X]$ est une $\mathbb{K}$-algèbre commutative.
+\item $M_n(\mathbb{K})$ est une $\mathbb{K}$-algèbre.
+\item Si $E$ est un $\mathbb{K}$-ev, $(\mathcal{L}(E), +, \circ, *)$ est une $\mathbb{K}$-algèbre.
+\end{enumerate}
+\end{proposition}
+\begin{proposition}
+Soit $L$ un surcorps de $\mathbb{K}$ \\
+Alors $L$ est une $\mathbb{K}$-algèbre.
+\end{proposition}
+\begin{definition}
+Soit $A$ une $\mathbb{K}$-algèbre. Soit $B \subset A$ \\
+$B$ est une sous-algèbre de $A$ si:
+\begin{itemize}
+\item $1_A \in B$
+\item $\forall x, y \in B \qquad x + y \in B \qquad xy \in B$
+\item $\forall \lambda \in \mathbb{K}$, $\forall x \in B \qquad \lambda x \in B$
+\end{itemize}
+\end{definition}
+
+\pagebreak
+
+\begin{definition}
+Soit $f: A \to B$, $A, B$ deux $\mathbb{K}$-algèbres. \\
+On dit que $f$ est un morphisme d'algèbres si $f$ est un morphisme d'anneaux linéaire, ie:
+\begin{enumerate}
+\item $f(1_A) = 1_B$ 
+\item $\forall x, y \in A \qquad f(x + y) = f(x) + f(y)$
+\item $\forall x, y \in A \qquad f(xy) = f(x) f(y)$ 
+\item $\forall \lambda \in \mathbb{K}$, $\forall x \in A \qquad f(\lambda x) = \lambda f(x)$
+\end{enumerate}
+Si de plus $f$ est bijective, on dit que $f$ est un isomorphisme. On écrit alors $A \simeq B$
+\end{definition}
+\begin{proposition}
+L'image d'une $\mathbb{K}$-algèbre par $f: A \to B$ morphisme est une sous-algèbre de $B$
+\end{proposition}
+
+\section{Ensembles quotients}
+\subsection{Généralités}
 \end{document}

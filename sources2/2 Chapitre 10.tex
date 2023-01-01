@@ -1,0 +1,344 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\im}{im}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 10. Algèbre générale}}
+\end{center}
+
+\section{Conjugaison dans un groupe. Théorème de Lagrange}
+\subsection{Morphisme de conjugaison}
+\begin{definition}
+Soit $H$ un groupe, $h \in G$ \\
+Alors
+\[ \varphi_h: \begin{cases}
+G \to G \\
+g \mapsto h g h^{-1}
+\end{cases} \] est un morphisme de conjugaison (ou encore un automorphisme intérieur).
+\end{definition}
+\begin{proposition}
+$\phi_h$ est bien un automorphisme et
+\[ \Phi: \begin{cases}
+G \to \text{Aut } G = \{ f: G \to G \mid f \text{ automorphisme} \} \\
+h \mapsto \varphi_h
+\end{cases}\]
+est un morphisme de groupes.
+\end{proposition}
+\begin{definition}
+Soit $G$ un groupe, $g, g' \in G$ \\
+On dit que $g$ et $g'$ sont conjugués s'il existe $h \in G$ tel que $g' = h g h^{-1}$
+\end{definition}
+\begin{proposition}
+Sur un groupe, la relation "être conjugué" est une relation d'équivalence. On appelle classe de conjugaison les classes pour cette relation.
+\end{proposition}
+
+\subsection{Classe à gauche, classe à droite selon un sous-groupe}
+\begin{definition}
+Soit $G$ un groupe, $H$ un sous-groupe. \\
+On définit la congruence à gauche modulo $H$ par
+\[ x \sim y \iff y \in x H \iff \exists h \in H ,\, y = x h \]
+\end{definition}
+\begin{proposition}
+La congruence à gauche modulo $H$ est une relation d'équivalence et la classe de $x$ est $\overline{x} = x H$
+\end{proposition}
+\begin{theorem}[Théorème de Lagrange]
+\hfill \\
+Soit $G$ un groupe fini. Le cardinal d'un sous-groupe de $G$ divise celui de $G$
+\end{theorem}
+
+\subsection{Relations compatibles avec une loi. Groupe quotient}
+\begin{definition}
+Soit $(M, *)$ un monoïde, $\equiv$ une relation d'équivalence sur $M$ \\
+On dit que $*$ et $\equiv$ sont compatibles si $\forall a, x, y \in M ,\, x \equiv M \implies \begin{cases}
+ a * x \equiv a * y \\
+ x * a \equiv y * a
+\end{cases}$
+\end{definition}
+\begin{theorem}
+Soit $(G, +)$ un groupe abélien. On note $G_{|H}$ le quotient de $G$ par la congruence modulo $H$ sur lequel on définit une loi quotient $+ : \overline{x} + \overline{y} = \overline{x + y}$ \\
+Alors $(G_{|H}, +)$ est un groupe (abélien) appelé groupe quotient de $G$ par $H$ 
+\end{theorem}
+\begin{definition}
+Un sous-groupe $H$ de $G$ tel que $\forall x \in G, x H x^{-1} \subset H$ est dit distingué.
+\end{definition}
+\begin{proposition}
+Si $H$ est distingué de $G$ alors $\equiv$ (congruence modulo $H$) et $\times$ sont compatibles.
+\end{proposition}
+\begin{theorem}
+$G_{|H}$ peut être muni d'une loi quotient qui en fait un groupe.
+\end{theorem}
+\begin{theorem}[Théorème d'isomorphisme]
+Soit $f: G \to G'$ un morphisme de groupes. On pose
+\[ \overline{f} : \begin{cases}
+G_{|\ker f} \to \im f \\
+\overline{x} \mapsto \overline{f}(\overline{x}) = f(x)
+\end{cases} \]
+$\overline{f}$ est bien définie et c'est un isomorphisme (canoniquement associé à $f$)
+\[ G_{|\ker f} \simeq \im f\]
+\end{theorem}
+
+\subsection{Ordre d'un élément dans un groupe}
+\begin{definition}
+Soit $G$ un groupe, $a \in G$ \\
+L'ordre de $a$ dans $G$ est le "cardinal" du sous-groupe engendré par $a$
+\end{definition}
+\begin{proposition}
+Si $a$ est d'ordre fini $n$ dans un groupe $G$ alors $n$ est le plus petit entier $k \geq 1$ avec $a^k = 1$
+\end{proposition}
+\begin{theorem}[Théorème de Largange]
+Soit $G$ un groupe fini de cardinal $n$, $a \in G$
+\begin{itemize}
+\item L'ordre de $a$ divise $n$
+\item $a^n = 1$
+\end{itemize}
+\end{theorem}
+
+\subsection{Le groupe symétrique}
+\begin{definition}
+Soit $a_1, ...,\, a_n \in E$ 2 à 2 distincts, $p \geq 2$ \\
+On note \[(a_1, a_2, ...,\, a_p): x \mapsto \begin{cases}
+a_{i + 1} \text{ si } x = a_i \text{ avec } i \in \llbracket 1, p - 1 \rrbracket \\
+a_1 \text{ si } x = a_p \\
+x \text{ si } x \not\in \{ a_1, ...,\, a_p \}
+\end{cases} \]
+$(a_1, ...,\, a_p)$ est appelé $p$-cycle, de support $\{ a_1, ...,\, a_p \}$ de longueur $p$ \\
+Si $p = 2$ on parle de transpositions.
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item Un $p$-cycle $\sigma$ et $S_E$ est un élément d'ordre $p$ de $(S_E, \circ)$
+\item Si $\sigma \in S_E$, $c = (a_1, ...,\, a_p)$ alors
+\[ \sigma \circ c \circ \sigma^{-1} = \sigma \circ (a_1, ...,\, a_p) \circ \sigma^{-1} = (\sigma(a_1), ...,\, \sigma(a_p)) \]
+\item $(a_1 a_2 ... a_p) = (a_1 a_2) \circ (a_2 a_3) \circ ... \circ (a_{p - 1} a_p)$
+\item Si $\sigma$ et $\sigma'$ sont des cycles à support disjoints, alors $\sigma \circ \sigma' = \sigma' \circ \sigma$ 
+\end{itemize}
+\end{proposition}
+\begin{theorem}[Théorème de décomposition en produit de cycles à support disjoint]
+\hfill \\
+Soit $\sigma \in S_E$ et soit $\Omega_1, ...,\, \Omega_n$ les orbites de $E$ sous l'action de $\sigma$ \\
+Alors il existe $c_1, ...,\, c_n$ cycles à supports disjoints tels que
+\[ \sigma = c_1 \circ c_2 \circ ... \circ c_n \]
+\end{theorem}
+\begin{corollaire}
+\hfill \begin{itemize}
+\item Les cycles engendrent $S_E$
+\item Les transpositions engendrent $S_E$: tout $\sigma \in S_E$ est un produit de transpositions.
+\end{itemize}
+\end{corollaire}
+
+\pagebreak
+
+\subsection{Signature d'une permutation}
+\begin{lemme}
+Soit $\sigma, \sigma' \in S_n$ \\
+On note $N(\sigma) = \text{Card} \left\{ (i, j) \in \llbracket 1, n \rrbracket \mid i < j \text{ et } \sigma(j) < \sigma(i) \right\}$ et $\varepsilon(\sigma) = (-1)^{N(\sigma)}$ \\
+Alors $\varepsilon(\sigma' \circ \sigma) = \varepsilon(\sigma') \varepsilon(\sigma)$
+\end{lemme}
+\begin{theorem}
+Il existe un unique morphisme de groupes non trivial
+\[ \varepsilon: \begin{cases}
+S_n \to \{ -1, 1 \} \\
+\sigma \mapsto \varepsilon(\sigma)
+\end{cases} \]
+appelée signature. Si $\sigma = \tau_1 \circ ... \circ \tau_2$ avec $\tau_i$ transpositions alors $\varepsilon(\sigma) = (-1)^{r}$
+\end{theorem}
+\begin{definition}
+$\sigma$ est dite paire si $\varepsilon(\sigma) = 1$ \\
+$\ker \varepsilon$ est un sous-groupe de $S_n$ appelé groupe alternée d'ordre $n$ noté $\mathfrak{A}_n$ \\
+On a $| \mathfrak{A}_n | = \frac{n!}{2}$
+\end{definition}
+
+\section{Congruence modulo un idéal}
+\subsection{Anneaux quotients}
+Ici les anneaux sont commutatifs.
+\begin{theorem}
+Soit $A$ un anneau et $I$ un idéal différent de $A$ \\
+$(A_I, +, \times)$ est un anneau commutatif appelé anneau quotient de $A$ par $I$
+\end{theorem}
+\begin{theorem}[Corps de rupture d'un polynôme irréductible]
+\hfill \\
+Soit $A = K[X]$ et $\Pi$ un polynôme irréductible de $K[X]$
+\[ L = \frac{K[X]}{\Pi K[X]} \]
+est appelé corps de rupture du polynôme $\Pi$ et
+\[ \underset{K}{\dim} \frac{K[X]}{\Pi K[X]} = \deg \Pi \]
+\end{theorem}
+\begin{theorem}[Théorème d'isomorphisme]
+Soit $f : A \to B$ un morphisme d'anneaux. \\
+Alors
+\[ \overline{f}: \begin{cases}
+A_{|\ker f} \to \im f \\
+\overline{x} \mapsto \overline{f}(\overline{x}) = f(x)
+\end{cases}\]
+est un isomorphisme.
+\[ A_{|\ker f} \simeq \im f \]
+On dit que $\overline{f}$ est l'isomorphisme canoniquement associé à $f$
+\end{theorem}
+
+\subsection{Congruences modulo $a$}*
+\begin{definition}
+Soit $A$ un anneau et $a \in A$ \\
+La congruence modulo $a$ est la congruence modulo $a A$. On la note pour $x, y \in A$
+\[ x \equiv y \mod a \iff y - x \in a A \iff a \mid y - x \]
+\end{definition}
+
+\subsection{Le petit théorème de Fermat}
+\begin{theorem}
+\hfill \begin{itemize}
+\item Si $a \in \mathbb{Z}$ et $p \nmid a$ ($p \in \mathbb{P}$) alors \\
+$a^{p - 1} \equiv 1 [p]$
+\item Si $a \in \mathbb{Z}$ et $p \in \mathbb{P}$ alors \\
+$a^p \equiv a [p]$ \\
+$\overline{a}^p = \overline{a}$ dans $\mathbb{F}_p = \mathbb{Z}_{|p\mathbb{Z}}$
+\end{itemize}
+\end{theorem}
+\begin{proposition}
+Dans $\mathbb{F}_p[X] = \mathbb{Z}_{|p\mathbb{Z}}[X]$
+\[ X^p - X = X(X - \overline{1}) ... (X - \overline{p - 1}) \]
+\[ X^{p - 1} - 1 = (X - \overline{1}) ... (X - \overline{p - 1} \]
+\[ \overline{(p - 1)!} = -1 \text{ (Théorème de Wilson) }\] 
+\end{proposition}
+
+\subsection{La caractérisation d'un anneau, d'un corps}
+\noindent Soit $A$ un anneau commutatif et 
+\[ f: \begin{cases}
+\mathbb{Z} \to A \\
+k \mapsto k 1_A = (1_A + ... + 1_A)
+\end{cases} \]
+$A_0 = \im f = \{k 1_A \}_{k \in \mathbb{Z}}$ \\
+$\ker f = n \mathbb{Z}$ avec $n \in \mathbb{N}^*$ unique car $\ker f$ est un idéal de $\mathbb{Z}$ \\
+Si $f$ est injective, alors $n = 1$ et $A_0 \simeq \mathbb{Z}$, on dit que $A$ est de caractéristique nulle \\
+Sinon, $n \geq 2$ et $A_0 \simeq \mathbb{Z}_{|n\mathbb{Z}}$, on dit que $A$ est de caractéristique $n$
+
+\subsection{Complément sur les corps}
+\begin{proposition}
+La caractéristique d'un corps est nulle ou finie égale à un nombre premier.
+\end{proposition}
+
+\subsubsection{Complément 1}
+\begin{theorem}
+Soit $P \in K[X]$, $P \neq 0$ \\
+Alors il existe un surcorps de $K$ sur lequel $P$ est scindé.
+\end{theorem}
+
+\subsubsection{Complément 2: construction de corps fini}
+\noindent En utilisant les corps de rupture on peut construire les corps de taille donné. \\
+Par exemple: $\Pi = X^3 + X + 1$ est irréductible dans $\mathbb{F}_2[X]$, ainsi
+\[ L = \mathbb{F}_8 = \frac{\mathbb{F}_2[X]}{\Pi} = \text{ Vect }(1, \alpha, \alpha^2) \]
+avec $\alpha^3 + \alpha + 1 = 0$
+
+\section{L'indicatrice d'Euler}
+\subsection{Le théorème chinois}
+\begin{theorem}[Théorème chinois]
+Soit $m, n \geq 1$ premiers entre eux. \\
+Alors 
+\[ \overline{f} : \begin{cases}
+\mathbb{Z}_{|mn\mathbb{Z}} \to \mathbb{Z}_{|m\mathbb{Z}} \to \mathbb{Z}_{|n\mathbb{Z}} \\
+\overline{\overline{k}} \mapsto (\dot{k}, \overline{k})
+\end{cases} \]
+est un isomorphisme d'anneaux: 
+\[ \mathbb{Z}_{|m\mathbb{Z}} \times \mathbb{Z}_{|n\mathbb{Z}} \simeq \mathbb{Z}_{|mn\mathbb{Z}} \]
+en tant qu'anneaux.
+\end{theorem}
+\noindent \uline{Extension}: Si $n_1, ...,\, n_r$ sont premiers $2$ à $2$ alors
+\[ \mathbb{Z}_{|n_1 \mathbb{Z}} \times ... \times \mathbb{Z}_{|n_r \mathbb{Z}} \simeq \mathbb{Z}_{|n_1 ... n_r \mathbb{Z}} \]
+
+\subsection{Expression de l'indicatrice d'Euler}
+\begin{definition}
+On note $\varphi(1) = 1$ et pour $n \geq 2$ \\
+$\varphi$ est le nombre d'entiers $k \in \llbracket 1, n \rrbracket$ tels que $k \wedge n = 1$ \\
+$\varphi: \mathbb{N}^* \to \mathbb{N}$ est appelée indicatrice d'Euler.
+\end{definition}
+\begin{proposition}
+Soit $n \geq 2$. On a:
+\begin{itemize}
+\item $\varphi(n) = \text{ Card} \{k \in \llbracket 0, n - 1 \rrbracket \mid k \wedge n = 1 \}$
+\item $\varphi(n) = \text{ Card} (\mathbb{Z}_{|n \mathbb{Z}})^\times$
+\item $\varphi(n) = \text{ Card} \{x \in \mathbb{Z}_{|n\mathbb{Z}} \mid x \text{ engendre } (\mathbb{Z}_{|n\mathbb{Z}}, +) \}$
+\item $\varphi(n) =$ nombre de racines n-ièmes primitives de l'unité.
+\item $\varphi(n) =$ nombre de générateurs de $(\mathbb{U}_n, \times)$
+\end{itemize}
+\end{proposition}
+\begin{theorem}[Théorème d'Euler-Fermat]
+Soit $n \geq 2$ \\
+Si $a$ est premier avec $n$ alors
+\[ a^{\varphi(n)} \equiv [n] \]
+\end{theorem}
+\begin{theorem}
+Si $m, n \in \mathbb{N}^*$
+\[ m \wedge n = 1 \implies \varphi(mn) = \varphi(m) \varphi(n) \]
+\end{theorem}
+\begin{lemme}
+Si $A$ et $B$ anneaux, alors $(A \times B)^\times = A^\times \times B^\times$
+\end{lemme}
+\begin{theorem}
+Soit $n = p_1^{\alpha_1} ... p_r^{\alpha_r}$ sa décomposition en facteurs premiers.
+\[ \varphi(n) = \left(p_1^{\alpha_1} - p_1^{\alpha_1 - 1}\right) ... \left(p_r^{\alpha_r} - p_r^{\alpha_r - 1}\right) \]
+\[ \varphi(n) = n \left( 1 - \frac{1}{p_1} \right) ... \left( 1 - \frac{1}{p_r} \right) \]
+\end{theorem}
+
+\subsection{Complément La formule sommatoire d'Euler}
+\begin{theorem}[formule sommatoire d'Euler]
+Pour $n \geq 1$ on a
+\[ n = \sum_{d \mid n} \varphi(d) \]
+\end{theorem}
+
+\section{Exercices classiques}
+\subsection{Théorème de Wilson}
+\begin{enumerate}
+\item Montrer que si $p$ est premier alors $(p - 1)! \equiv -1 [p]$
+\item Si $n \geq 2$ et $(n - 1)! \equiv -1[n]$ montrer que $n$ est premier.
+\end{enumerate}
+
+\subsection{Groupes tels que $x^2 = 1$}
+\noindent Soit $(G, \times)$ un groupe tel que $\forall x \in G$, $x^2 = 1_G$
+\begin{enumerate}
+\item Montrer que $G$ est abélien.
+\item Si $G$ est fini, montrer que $G \simeq \left( (\mathbb{Z}_{|2\mathbb{Z}})^n, + \right)$
+\end{enumerate}
+
+\subsection{Carrés de $\mathbb{F}_p$}
+\noindent Soit $p$ un nombre premier impair.
+\begin{enumerate}
+\item Dénombrer les carrés de $(\mathbb{Z}_{|p\mathbb{Z}})^*$
+\item Montrer que si $x \in (\mathbb{Z}_{|p\mathbb{Z}})^*$ alors $x$ carré $\iff x^{\frac{p - 1}{2}} = 1$
+\item Montrer que $-1$ carré dans $\mathbb{Z}_{|p\mathbb{Z}} \iff p \equiv 1 [4]$
+\item En déduire qu'il existe une infinité de nombres premiers $\equiv 1 [4]$
+\end{enumerate}
+
+\subsection{Groupe diagonal $\mathbb{D}_{2n}$}
+\noindent On note $\mathbb{D}_n$ le groupe des isométries affines du plan complexe qui laissent $\mathbb{U}_n$ globalement invariant.
+\begin{enumerate}
+\item Préciser les éléments de $\mathbb{D}_{2n}$ et son cardinal. \\
+$\mathbb{D}_{2n}$ est appelé le groupe diédral d'ordre $2n$
+\item Montrer que $\mathbb{D}_{2n}$ est engendré par deux éléments: \\
+$R$ d'ordre $n$, $S$ d'ordre $n$ tels que $SR = R^{-1}S$
+\item Réciproquement, si un groupe $G$, $G = <R, S>$ avec $R$ d'ordre $n$ et $S$ d'ordre $2$ et $SR = R^{-1}S$ montrer que $G \simeq \mathbb{D}_{2n}$
+\item Montrer que tout sous-groupe fini du groupe des isométries du plan complexe est isomorphe à $(\mathbb{Z}_{|n\mathbb{Z}})$ (cyclique) ou à $\mathbb{D}_{2n}$ (avec $n \geq 3$)
+\end{enumerate}
+\end{document}

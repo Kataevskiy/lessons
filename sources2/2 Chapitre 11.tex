@@ -1,0 +1,548 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator*{\mat}{Mat}
+\DeclareMathOperator{\com}{com}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Vect}{Vect}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 11. Déterminants}}
+\end{center}
+
+\section{Déterminants}
+\begin{definition}
+Soit $f \in \mathcal{L}^n(E^n, K)$ (fonctions $n$-linéaires) \\
+On dit que $f$ est alternée si $f(x_1, ...,\, x_n) = 0$ dès qu'il existe deux $x_i$ identiques. \\
+Une fonction alternée est antisymétrique.
+\end{definition}
+
+\begin{proposition}
+Soit $E$ un $K$-ev de dim finie, $f \in \mathcal{L}^n_a(E)$ (fonctions $n$-linéaires alternées) \\
+Si $(x_1, ...,\, x_n)$ est lié, $f(x_1, ...,\, x_n) = 0$ \\
+Si $\dim E < n$ alors $f = 0$
+\end{proposition}
+
+\subsection{Théorème fondamental}
+\begin{theorem}
+Si $E$ est de dimension finie $n$, alors $\mathcal{L}^n_a(E)$ est de dimension $1$ \\
+Plus précisément, si $(e_1, ...,\, e_n) = \mathcal{B}$ est une base de $E$, on pose
+\[ \det_\mathcal{B} : \begin{cases}
+E \to K \\
+(x_1, ...,\, x_n) \mapsto \sum\limits_{\sigma \in S_n} \varepsilon(\sigma) x_{\sigma(1), 1} ...\, x_{\sigma(n), n}
+\end{cases} \]
+où $x_j = \sum\limits_{i = 1}^{n}x_{ij} e_i$ \\
+Et alors
+\[ \mathcal{L}^n_a(E) = K \underset{\mathcal{B}}\det \]
+et de plus 
+\[ \underset{\mathcal{B}}\det(e_1, ...,\, e_n) = 1 \]
+\end{theorem}
+\begin{theorem}
+Soit $(e_1, ...,\, e_n) = \mathcal{B}$ et $(f_1, ...,\, f_n) = \mathcal{C}$ deux bases de $E$ \\
+Alors pour tout $(x_1, ...,\, x_n) \in E^n$
+\[ \underset{\mathcal{B}}\det(x_1, ...,\, x_n) = \underset{\mathcal{C}}\det(x_1, ...,\, x_n) \underset{\mathcal{B}}\det(f_1, ...,\, f_n) \]
+\end{theorem}
+\begin{corollaire}
+Soit $E$ un $K$-ev de dim finie $n$, $(e_1, ...,\, e_n) = \mathcal{B}$ base de $E$ et $(x_1, ...,\, x_n) \in E^n$ \\
+Alors
+\[ (x_1, ...,\, x_n) \text{ libre } \iff (x_1, ...,\, x_n) \text{ base } \iff \underset{\mathcal{B}}\det(x_1, ...,\, x_n) \neq 0 \]
+\end{corollaire}
+
+\subsection{Déterminant d'un endomorphisme}
+\noindent Soit $E$ un $K$-ev de dim finie $n$, $(e_1, ...,\, e_n) = \mathcal{B}$ une base de $E$ et $u \in \mathcal{L}(E)$ \\
+On considère $f: (x_1, ...,\, x_n) \mapsto \underset{\mathcal{B}}\det(u(x_1), ...,\, x(n))$ $n$-linéaire alternée. \\
+Il existe alors $\lambda \in K$ tel que $f = \lambda \underset{\mathcal{B}}\det$, qui ne dépend pas de la base choisie.
+\begin{definition}
+$\lambda$ est appelé déterminant de $u$: il vérifie pour toute base $\mathcal{B}$, en notant $\lambda = \det u$
+\[  \underset{\mathcal{B}}\det(u(x_1), ...,\, u(x_n)) = \det u \, \underset{\mathcal{B}}\det(x_1, ...,\, x_n) \]
+\[ \det u = \underset{(e_1, ...,\, e_n)}\det(u(e_1), ...,\, u(e_n)) \]
+\end{definition}
+
+\pagebreak
+
+\begin{theorem}
+Soit $u, v \in \mathcal{L}(E)$, $E$ de dim finie.
+\begin{itemize}
+\item $\det \text{ Id}_E = 1$
+\item $\det(v \circ u) = \det v \det u$
+\item $u \in GL(E) \iff \det u \neq 0$
+\end{itemize}
+et dans ces conditions
+\[ \det(n^{-1}) = \frac{1}{\det n} \]
+\end{theorem}
+
+\subsection{Déterminant d'une matrice}
+\begin{definition}
+Soit $A = (a_{ij})_{1 \leq i, j \leq n} \in M_n(K)$ \\
+Le déterminant de $A$ est 
+\[ \det A = \sum_{\sigma \in S_n} \varepsilon(\sigma) a_{\sigma(1), 1} ...\, a_{\sigma(n), n} \]
+\end{definition}
+\begin{proposition}
+Soit $n \in \mathcal{L}(E)$, $E$ de dim finie, $\mathcal{B} = (e_1, ...,\, e_n)$ base de $E$ \\
+Alors
+\[ \det u = \det \left(\mat\limits_{\mathcal{B}}(u)\right) \]
+\end{proposition}
+\begin{proposition}
+Soit $A \in M_n(K)$
+\begin{itemize}
+\item $\det A$ est une forme $K$-linéaire alternée sur des colonnes (ou lignes) de $A$. Elle est aussi antisymétrique.
+\item $\det A^T = \det A$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+\[ \det \begin{pmatrix}
+\lambda_1 & & & (*) \\
+ & \lambda_2 & & \\
+ & & \ddots & \\
+0  & & & \lambda_n
+\end{pmatrix} = \lambda_1 \lambda_2 ... \lambda_n \]
+\end{proposition}
+\begin{theorem}
+Soit $M, N \in M_n(K)$
+\begin{itemize}
+\item $\det I_n = 1$
+\item $\det M N = \det M \det N$
+\item $M \in GL_n(K) \iff \det M \neq 0$ \\
+Dans ces conditions
+\[ \det M^{-1} = \frac{1}{\det M} \]
+\item On a
+\[ \det MN = \det(u_{MN}) = \det(u_M \circ u_N) = \det(u_M) \det(u_N) = \det M \det N \]
+\end{itemize}
+\end{theorem}
+\begin{corollaire}
+Si $M$ et $N$ sont semblables dans $M_n(K)$ alors $\det M = \det N$
+\end{corollaire}
+\begin{proposition}
+Soit $A \in M_p(K)$, $B \in M_q(K)$, $C \in M_{p, q}(K)$ \\
+Alors
+\[ \det \left(\begin{array}{c|c}
+A & C \\
+\hline
+0 & B
+\end{array}\right) = \det A \det B \]
+\end{proposition}
+\noindent \uline{Extension} :
+\[ \det \begin{pmatrix}
+A_1 & & & * \\
+& A_2 & & & \\
+& & \ddots & \\
+0 & & & A_r
+\end{pmatrix} = \det A_1 \det A_2 ...\, \det A_r \]
+
+\pagebreak
+
+\subsection{Développement selon une rangée}
+\begin{definition}
+Soit $M = (a_{i,j})_{1 \leq i,j \leq n} \in M_n(\mathbb{C})$ \\
+On note $M_{i, j}$ la matrice obtenue en supprimant la $i$-ème ligne et la $j$-ème colonne pour $i, j \in \llbracket 1, n \rrbracket$ \\
+Alors
+\begin{itemize}
+\item $M_{i, j}$ est appelé mineur de $a_{i, j}$ dans $M$
+\item $D_{i, j} = (-1)^{i + j} \det M_{i, j}$ est appelé cofacteur de $a_{i, j}$ dans $M$
+\end{itemize}
+\end{definition}
+\begin{theorem}[Développement selon une rangée]
+Avec les notations précédentes
+\begin{itemize}
+\item Fixons la colonne $j_0$. On a alors
+\[ \det M = \sum_{i = 1}^n a_{i, j_0} D_{i, j_0} \]
+\item Fixons la ligne $i_0$. On a alors
+\[ \det M = \sum_{j = 1}^n a_{i_0, j} D_{i_0, j} \]
+\end{itemize}
+\end{theorem}
+\begin{theorem}[Déterminant de Vandermonde]
+Soit $\lambda_1, ...,\, \lambda_n \in K$ \\
+On a
+\[ V(\lambda_1, ...,\, \lambda_n) = \det \begin{pmatrix}
+1 & \lambda_1 & \lambda_1^2 & \cdots & \lambda_1^{n - 1} \\
+1 & \lambda_2 & \lambda_2^2 & \cdots & \lambda_2^{n - 1} \\
+\vdots \\
+1 & \lambda_2 & \lambda_2^2 & \cdots & \lambda_2^{n - 1} 
+\end{pmatrix} = \prod_{1 \leq i < j \leq n}(\lambda_j - \lambda_i)\]
+\end{theorem}
+
+\subsection{Comatrice}
+\begin{definition}
+Soit $M = (a_{i, j})_{1 \leq i, j \leq n} \in M_n(K)$, $D_{i, j}$ le cofacteur de $a_{i, j}$ dans $M$ \\
+La comatrice de $M$ est
+\[ \com(M) = (D_{i, j})_{1 \leq i, j \leq n} \]
+\end{definition}
+\begin{theorem}
+Soit $M \in M_n(K)$ \\
+Alors
+\[ M(\com M)^T = (\com M)^T M = (\det M) I_n \]
+\end{theorem}
+\begin{corollaire}
+Si $M \in GL_n(K)$ alors
+\[ M^{-1} = \frac{1}{\det M}(\com M)^T \]
+En particulier, si $K = \mathbb{K} = \mathbb{R} \text{ ou } \mathbb{C}$, $M \in GL_n(K) \mapsto M^{-1}$ est une application rationnelle donc continue.
+\end{corollaire}
+\noindent \uline{À savoir} : Si $ad - bc \neq 0$
+\[ \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}^{-1} = \frac{1}{ad - bc} \begin{pmatrix}
+d & -b \\
+-c & a
+\end{pmatrix} \]
+
+\pagebreak
+
+\section{Système linéaire}
+\subsection{Écriture d'un système}
+\noindent Soit $u \in \mathcal{L}(E, F)$, $b \in F$, $(e_1, ...,\, e_n) = \mathcal{B}$ base de $E$ et $(f_1, ...,\, f_n) = \mathcal{C}$ base de $F$ \\
+Une équation linéaire du type $u(x) = b$ est équivalente à $AX = B$ \\
+( avec $A = \mat\limits_{\mathcal{B}, \mathcal{C}}(u)$, $X$ colonne de $x$ dans $\mathcal{B}$ et $B$ colonne de $b$ dans $\mathcal{C}$ ) \\
+Si on écrit $A = (a_{ij})_{\substack{1 \leq i \leq p \\ 1 \leq j \leq n}} \in M_{p, n}(K)$, $X = \begin{pmatrix}
+x_1 \\
+\vdots \\
+x_p
+\end{pmatrix}$ et $B = \begin{pmatrix}
+b_1 \\
+\vdots \\
+b_p
+\end{pmatrix}$ alors on obtient le système linéaire équivalent
+\[ \begin{cases}
+a_{11} x_1 + ... + a_{1n}x_n = b_1 \\
+a_{21} x_1 + ... + a_ {2n}x_n = b_2 \\
+\vdots \\
+a_{p1} x_1 + ... + a_{pn}x_n = b_p
+\end{cases} \]
+\begin{proposition}
+On ne change pas l'ensemble des solutions d'un système en faisant des opérations élémentaires (permutations, dilatations et transvections des lignes)
+\end{proposition}
+
+\subsection{Solutions d'un système linéaire}
+\begin{proposition}
+Soit $(S) \, AX = B$ avec $A \in M_{pn}(K)$, $X \in K^n$, $B \in K^p$ et $r = \rg A$
+\begin{itemize}
+\item $S_0 = \ker A$ est une sous-espace de $K^n$ de dimension $n - 2$
+\item Si $B \notin \im A$ alors $\mathcal{S}_{(S)} = \emptyset$ ( le système n'a pas de solutions )
+\item Si $B = A X_0$ alors $\mathcal{S}_{(S)} = X_0 + \ker A$ ( sous-espace affine de dim $n - r$ )
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Si $A \in GL_n(K)$, $(S) \, AX = B$ est  dit de Cramer.
+\end{definition}
+\begin{proposition}
+Soit $(S) : AX = B$, $A \in M_{p, n}(K)$, $B \in K^p$
+\begin{itemize}
+\item Si $\rg A = P$, $(S)$ admet au moins une solution (cas lignes libres).
+\item Si $\rg A = n$, $(S)$ admet au plus une solution (cas colonnes libres).
+\item Si $\rg A = n = p$ ie. $A \in GL_n(K)$, $(S)$ admet une solution.
+\end{itemize}
+\end{proposition}
+\begin{proposition}[Formule de Cramer]
+Soit $A = (C_1 | ... | C_n) \in GL_n(K)$ et $(S) : AX = B$ \\
+Alors l'unique solution de $(S)$ est  
+\[X_0 = \begin{pmatrix}
+x_1 \\
+\vdots \\
+x_n
+\end{pmatrix} \text{ \quad avec \quad } x_i = \frac{\det\limits_{b.c.}\left(c_1, ...,\, c_{i - 1}, B, c_{i + 1}, ...,\, c_n\right)}{\det A} \]
+\end{proposition}
+\noindent \uline{Dans le cas $n = 2$} :
+$A = \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}$, $B = \begin{pmatrix}
+\lambda \\
+\mu
+\end{pmatrix}$, $ad - bc \neq 0$ alors $X_0 = \begin{pmatrix}
+x \\
+y
+\end{pmatrix}$ est solution avec
+\[ x = \frac{\begin{vmatrix}
+\lambda & b \\
+\mu & d
+\end{vmatrix}}{\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix}} \text{ \quad et \quad } y = \frac{\begin{vmatrix}
+a & \lambda \\
+c & \mu
+\end{vmatrix}}{\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix}} \]
+
+\subsection{Pivot de Gauss}
+\begin{theorem}
+À l'aide d'opérations élémentaires et quitte à numéroter les inconnues, tout système est équivalent à un système échelonné:
+\[ \begin{cases}
+a_{11} x_1 + a_{12} x_2 + ... + a_{1r} x_r + a_{1, r + 1} x_{r + 1} + ... + a_{1n} x_n = b_1 \\    
+0 + a_{22} x_2 + ... + a_{2r} x_r + a_{2, r + 1} x_{r + 1} + ... + a_{2n} x_n = b_2 \\
+\vdots \\
+0 + ... + 0 + a_{rr} x_r + a_{r, r + 1} x_{r + 1} + ... + a_{rn} x_n = b_r \\
+0 = b_{r + 1} \\
+\vdots \\
+0 = b_p      
+\end{cases} \]
+avec les pivots $a_{ii} \neq 0$ \\
+Si $(b_{r + 1}, ...,\, b_p) \neq (0, ...,\, 0)$ alors $S = \emptyset$ \\
+Sinon, on appelle $x_1, ...,\, x_r$ inconnues principales et $x_{r + 1}, ...,\, x_n$ inconnues secondaires. L'espace des solutions est alors un sous-espace affine de $K^n$ de dimension $n - r$ qu'on décrit de manière paramétrique à l'aide des paramètres $x_{r + 1}, ...,\, x_n$ ( inconnues secondaires ).
+\end{theorem}
+
+\subsection{Matrices d'opérations élémentaires}
+\begin{definition}
+On note $E_{i, j} = (\delta_{i, k} \delta_{j, l})_{1 \leq k, l \leq n}$ \\
+On définit pour $i \neq j$, $\lambda \in K$
+\[ T_{i, j} = I_n + \lambda E_{i, j} \]
+C'est une matrice de transvection. \\
+Pour $i \in \llbracket 1, n \rrbracket$ et $\mu \in K^*$ on pose
+\[ D_i(\mu) = I_n + (n - 1)E_{i, i} \]
+C'est une matrice de dilatation. \\
+Pour $\sigma \in S_n$ on pose
+\[ P_\sigma = \left( \begin{array}{c|c|c|c}
+e_{\sigma(1)} & e_{\sigma(2)} & \cdots & e_{\sigma(n)}
+\end{array} \right) \]
+C'est une matrice de permutation.
+\end{definition}
+\begin{proposition}
+\hfill
+\begin{itemize}
+\item $ \begin{cases}
+(K^*, \times) \to GL_n(K) \\
+\mu \mapsto D_i(\mu)
+\end{cases} $
+est un morphisme de groupes injectif et on a
+\[ D_i(\mu) D_i(\mu') = D_i'(\mu \mu') \]
+\item $ \begin{cases}
+(K, +) \to SL_n(K) \\
+\lambda \mapsto T_{i, j}(\lambda)
+\end{cases} $
+est un morphisme injectif de groupes et on a
+\[ T_{i, j}(\lambda) T_{i, j}(\lambda') = T_{i, j}(\lambda + \lambda') \]
+\item $ \begin{cases}
+(S_n, \circ) \to GL_n(K) \\
+\sigma \mapsto P_\sigma
+\end{cases} $
+est un morphisme injectif de groupes et on a 
+\[P_{\sigma'} P_{\sigma} = P_{\sigma' \circ \, \sigma} \]
+\item Quand on multiplie à gauche par ces matrices on agit sur les lignes. \\
+Quand on multiplie à droite on agit sur les colonnes.
+\end{itemize}
+\end{proposition}
+
+\subsection{Générateurs de $SL_n(K)$ et $GL_n(K)$}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item Les transvections engendrent $SL_n(K)$ \\
+Plus précisément, toute matrice de $SL_n(K)$ est un produit fini de transvections.
+\item Toute matrice $M \in GL_n(K)$ s'écrit $M = T_1 ... T_r D_n(\det A)$ \\
+Les matrices de dilatation et de transvections engendrent $GL_n(K)$
+\end{itemize}
+\end{theorem}
+
+\section{Dualité}
+\subsection{Dual d'un espace vectoriel}
+\begin{definition}
+Soit $E$ un $K$-ev. \\
+L'espace dual de $E$ est $E^* = \mathcal{L}(E, K)$
+\end{definition}
+\begin{proposition}
+Soit $E$ un $K$-ev, $H$ un hyperplan et $l, l' \in E^*$
+\begin{itemize}
+\item Si $e \in E \setminus H$ alors $E = H \oplus Ke$
+\item Si $L$ est un sev de $E$ avec $H \subset L$ alors $L = H$ ou $L = E$
+\item Si $H = \ker l = \ker l'$ alors il existe $\lambda \in K^*$ tel que $l' = \lambda l$
+\end{itemize}
+\end{proposition}
+\begin{definition}
+Soit $(e_1, ...,\, e_n)$ une base de $E$ \\
+On note pour tout $k \in \llbracket 1, n \rrbracket$
+\[ e_k^* : \begin{cases}
+E \to K \\
+x = \sum\limits_{i = 1}^n x_i e_i \mapsto x_k
+\end{cases} \]
+$(e_1^*, ...,\, e_n^*)$ est appelée la base duale de $(e_1, ...,\, e_n)$ \\
+Pour tout $i, j \in \llbracket 1, n \rrbracket$ on a alors
+\[ e_i^*(e_j) = \delta_{i, j} \]
+\end{definition}
+\begin{proposition}
+Soit $l \in E^*$ qui s'écrit $l = a_1 e_1^* + ... + a_n e_n^*$ \\
+Alors
+\[ l = \sum_{i = 1}^n l(e_i) e_i^* \]
+Si $x \in E$, il s'écrit
+\[ x = \sum_{i = 1}^n e_i^*(x) e_i \]
+\end{proposition}
+
+\subsection{Complément ENS : espace bidual, base biduale}
+\begin{definition}
+On appelle $E^{**} = \mathcal{L}(E^*, K)$ l'espace bidual de $E$
+\end{definition}
+\begin{proposition}
+Dans le cas où $E$ est de dimension finie, $E$ est canoniquement isomorphe à $E^{**}$
+\[ \Phi : \begin{cases}
+E \to E^{**} \\
+x \mapsto \tilde{x} : \begin{cases}
+E^* \to K\\
+l \to l(x)
+\end{cases}
+\end{cases} \]
+\end{proposition}
+\begin{definition}
+Si $(l_1, ...,\, l_n)$ est une base de $E^*$, on peut retrouver à l'aide le d'isomorphisme précédent une base $(\varepsilon_1, ...,\, \varepsilon_n)$ dont $(l_1, ...,\, l_n)$ est la base duale. On appelle alors $(\varepsilon_1, ...,\, \varepsilon_n)$ la base antéduale.
+\end{definition}
+
+\section{Polynôme caractéristique}
+\subsection{Polynôme caractéristique d'une matrice carrée}
+\begin{definition}
+Soit $A = (a_{i, j})_{1 \leq i, j \leq n} \in M_n(K)$ \\
+Le polynôme caractéristique de $A$, noté $\chi_A$ est 
+\[ \chi_A = \det(XI_n - A) = \begin{vmatrix}
+X - a_{11} & -a_{12} & \cdots & -a_{1n} \\
+-a_{21} & X - a_{22} & \cdots & -a_{2n} \\
+\vdots & & \ddots & \vdots \\
+-a_{n1} & \cdots & \cdots & X - a_{nn}
+\end{vmatrix}  \in K[X] \]
+\end{definition}
+\begin{proposition}
+Soit $A \in M_n(K)$, $\lambda \in K$ \\
+Alors
+\[ \lambda \text{ racine de } \chi_A \iff \lambda \text{ valeur propre de } A \iff \lambda \in \Sp(A) \]
+\end{proposition}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+Alors $\chi_A$ est un polynôme unitaire de $\deg n$ dont le coefficient constant est $(-1)^n \det A$\\
+ et celui de $X^{n - 1}$ est $- \Tr A$
+ \[ \chi_A = X^n - \Tr A X^{n - 1} + ... + (-1)^n \det A \]
+\end{theorem}
+\begin{corollaire}
+Toute matrice carrée complexe admet une valeur propre.
+\end{corollaire}
+\begin{definition}
+Soit $A \in M_n(K)$ \\
+Si $\chi_A$ est scindé sur $K$, ses racines différentes ou égales sont appelées valeurs propres de $A$ comptées avec multiplicité.
+\end{definition}
+\begin{proposition}
+Si $A \in M_n(K)$ alors $\chi_{A^T} = \chi_A$
+\end{proposition}
+\noindent \uline{Exemple fondamental} : Polynôme caractéristique d'une matrice compagnon. \\
+Soit $P = X^n + a_{n - 1} X^{n - 1} + ... + a_0 \in K[X]$ \\
+La matrice compagnon de $P$ est
+\[ C_p = \begin{pmatrix}
+0 & & 0 & -a_0 \\
+1 & \ddots & & -a_1 \\
+ & \ddots & 0 & \vdots \\
+0 & & 1 & -a_{n - 1}
+\end{pmatrix} \]
+Sot polynôme caractéristique est
+\[ \chi_{C_p} = P = X^n + a_{n - 1} X^{n - 1} + ... + a_0 \]
+
+\subsection{Polynôme caractéristique d'un endomorphisme}
+\begin{proposition}
+Deux matrices semblables de $M_n(K)$ ont le même polynôme caractéristique.
+\end{proposition}
+\begin{definition}
+Soit $E$ un $K$-ev de dim finie $n$ et $u \in \mathcal{L}(E)$ \\
+Si $\mathcal{B}$ est une base de $E$, $A = \mat\limits_\mathcal{B}(u)$ on définit $\chi_u = \chi_A$ le polynôme caractéristique de $u$ \\
+Par la proposition précédente $\chi_u$ est indépendant du choix de $\mathcal{B}$
+\end{definition}
+
+\pagebreak
+
+\begin{corollaire}
+Soit $E$ un $K$-ev de dim finie $n$ et $u \in \mathcal{L}(E)$ \\
+Alors $\chi_u$ est unitaire de degré $n$ et plus précisément
+\[ \chi_u = X^n - \Tr X^{n - 1} + ... + (-1)^n \det u \]
+Si $\lambda \in K$
+\[ \lambda \text{ racine de } \chi_u \iff \lambda \text{ valeur propre de } u \]
+Si $\chi_u$ est scindé sur $K$
+\[ \chi_u = (X - \lambda_1) ... (X - \lambda_n) \]
+$\lambda_1, ...,\, \lambda_n$ sont appelées valeurs propres de $u$ comptées avec multiplicité.
+\end{corollaire}
+\begin{proposition}
+Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$ et $F$ un sous-espace de $E$ stable par $u$ \\
+Alors $\chi_{u_F} \mid \chi_u$ ( où $u_F : x \in F \mapsto u(x) \in F$ )
+\end{proposition}
+
+\subsection{L'ouvert dense $GL_n(\mathbb{K})$}
+\begin{theorem}
+\hfill
+\begin{itemize}
+\item $GL_n(\mathbb{K})$ est un ouvert dense de $M_n(\mathbb{K})$
+\item $GL_n(E)$ est un ouvert dense de $\mathcal{L}(E)$ ( avec $E$ de dimension finie )
+\end{itemize}
+\end{theorem}
+
+\section{Exercices classiques}
+\subsection{Rang de la comatrice}
+\noindent Soit $A \in M_n(K)$ \\
+Montrer que 
+\[ \rg \com A = \begin{cases}
+n \text{ si } \rg A = n \\
+1 \text{ si } \rg A = n - 1 \\
+0 \text{ si } \rg A < n - 1
+\end{cases} \]
+
+\subsection{Matrices réelles semblables dans $M_n(\mathbb{C})$}
+\noindent Soit $A, B \in M_n(\mathbb{R})$. On suppose qu'elles sont semblables dans $M_n(\mathbb{C})$ \\
+Montrer que elles sont semblables dans $M_n(\mathbb{R})$
+
+\subsection{Le groupe $GL_n(\mathbb{Z})$}
+\noindent On note $GL_n(\mathbb{Z}) = \left\{ M \in M_n(\mathbb{Z}) \mid M \text{ inversible dans } M_n(\mathbb{R}),\, M^{-1} \in M_n(\mathbb{Z}) \right\} = M_n(\mathbb{Z})^\times $ \\
+C'est un groupe pour $\times$ ( et même un sous-groupe de $GL_n(\mathbb{R})$ ) \\
+Montrer que si $M \in M_n(\mathbb{Z})$
+\[ M \in GL_n(\mathbb{Z}) \iff \det M = \pm 1 \]
+\medskip
+
+\noindent $A$ anneau commutatif ( $A = \mathbb{Z}_{|n\mathbb{Z}},\, A = K[X]$ ) \\
+Si $M \in M_n(A)$, $GL_n(A) = M_n(A)^\times$
+\[ M \in GL_n(A) \iff \det M \in A^\times \]
+
+\subsection{Dual de $M_n(K)$}
+\begin{enumerate}
+\item Si $A \in M_n(K)$ on note $l_A : M \in M_n(K) \mapsto \Tr(AM) \in K$ \\
+Montrer que $A \in M_n(K) \mapsto l_A \in M_n(K)^*$ est un isomorphisme entre $M_n(K)$ et $M_n(K)^*$ \\
+En déduire que $\forall l \in M_n(K)^* \, \exists! A \in M_n(K) : \forall M,\, l(M) = \Tr(AM) $
+\item Soit $f \in M_n(K)^*$ telle que $f(XY) = f(YX)$ pour tout $X, Y \in M_n(K)$ \\
+Montrer qu'il existe $\lambda \in K$ tel que $f = \lambda \Tr$
+\item Montrer que tout hyperplan contient une matrice inversible.
+\end{enumerate}
+
+\subsection{Otrhogonalité duale}
+Soit $l_1, ...,\, l_p, u$ des formes linéaires sur $E$, $K$-ev.
+\begin{enumerate}
+\item Montrer que si $u$ s'annule sur $\bigcap\limits_{i = 1}^p \ker l_i$ alors $u \in \Vect(l_1, l_2, ...,\, l_p)$ ie. $u$ s'écrit $u = \lambda_1 l_1 + ... + \lambda_p l_p$ \\ 
+avec $\lambda_1, ...,\, \lambda_p \in K$ ( multiplicateurs de Lagrange )
+\item On suppose que $E$ est de dimension $p$ et que $\bigcap\limits_{i = 1}^p \ker l_i = \{ 0 \}$ \\
+Montrer que $(l_1, ...,\, l_n)$ est une base de $E^*$
+\end{enumerate}
+
+\subsection{L'identité $\chi_{AB} = \chi_{BA}$}
+\noindent Soit $A, B \in M_n(K)$
+\begin{enumerate}
+\item On suppose que $K = \mathbb{C}$ \\
+Montrer que $\chi_{AB} = \chi_{BA}$ quand $A$ est inversible, puis pour $A$ quelconque.
+\item Montrer que $\chi_{AB} = \chi_{BA}$ dans le cas général.
+\end{enumerate}
+\end{document}

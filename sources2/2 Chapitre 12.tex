@@ -1,0 +1,168 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator*{\Vect}{Vect}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\Mat}{Mat}
+
+\begin{document}
+\renewcommand{\labelitemi}{$*$}
+\begin{center}
+{\Large \textbf{Chapitre 12. Réduction des endomorphismes}}
+\end{center}
+
+\section{Sous-espaces stables. Polynômes d'endomorphisme}
+\subsection{Exemples de sous-espaces stables}
+\begin{definition}
+Soit $u \in \mathcal{L}(E)$, $F$ un sev de $E$ \\
+On dit que $F$ est stable sous $u$ su $u(F) \subset F$ \\
+On note alors $u_F$ l'induit de $u$ sur $F$
+\end{definition}
+\begin{proposition}
+Si $P \in K[X]$, $P(u)$ laisse stable $F$ et $\boxed{P(u)_F = P(u_F)}$
+\end{proposition}
+
+\subsection{Exemples de sous-espaces stables}
+\noindent \begin{itemize}
+\item Premier type: Soit $E$ un $K$-ev, $u \in \mathcal{L}(E)$, $e \in E$ \\
+Alors $F_e = \Vect\limits_{k \in \mathbb{N}}(u^k(e))$ est un sev stable par $u$, c'est même le plus petit sev stable contenant $e$
+\item Deuxième type: $\ker P(u)$ et $\im P(u)$
+\end{itemize}
+\begin{proposition}
+Soit $u, v \in \mathcal{L}(E)$ aveec $u \circ v = v \circ u$ \\
+Alors $\ker v$ et $\im v$ sont stables par $u$
+\end{proposition}
+\begin{corollaire}
+Soit $E$ un $K$-ev, $u \in \mathcal{L}(E)$ et $P \in K[X]$ \\
+Alors $\ker P(u)$ et $\im P(u)$ sont stables par $u$
+\end{corollaire}
+
+\subsection{Théorème de décomposition des noyaux}
+\begin{theorem}[ Théorème de décomposition des noyaux ]
+\hfill \\
+Soit $E$ un $K$-ev, $u \in \mathcal{L}(E)$ et $P, Q \in K[X]$ \uline{Premiers entre eux}. \\
+Alors
+\[ \boxed{\ker PQ(u) = \ker P(u) \oplus \ker Q(u)} \]
+\end{theorem}
+\begin{corollaire}
+Soit $E$ un $K$-ev, $u \in \mathcal{L}(E)$ et $P_1, ...,\, P_r \in K[X]$ premiers entre eux $2$ à $2$ \\
+Alors 
+\[ \boxed{ \ker P_1 P_2 ... P_r(u) = \bigoplus_{i = 1}^r \ker P_i(u)} \]
+\end{corollaire}
+
+\subsection{Polynôme minimal d'un endomorphisme}
+\begin{theorem}
+Soit $E$ est de dimension finie et $\Phi: \begin{cases}
+K[X] \to \mathcal{L}(E) \\
+P \mapsto P(u) \end{cases}$ un morphisme d'algèbres. \\
+Alors $\ker \Phi \neq \{ 0 \}$ et il existe un unique polynôme unitaire $\mu_u$ ( ou $\pi_u$ ) tel que $\ker \Phi = \mu_u K[X] $ \\
+Si $P \in K[X]$ alors $P(u) = 0 \iff \mu_n \mid P$ \\
+$\mu_u$ est donc le polynôme unitaire de plus petit degré ( non nul ) qui annule $u$ \\
+Par ailleurs $\im \Phi = K[u] = \Vect\limits_{k \in \mathbb{N}}(u^k)$ est une sous-algèbre de $\mathcal{L}(E)$ ( commutative ) \\ de dimension $\deg \mu_u = d$ et  de base $( \text{Id}, u, ...,\, u^{d - 1} )$
+\end{theorem}
+\begin{definition}
+Avec ces notations, $\mu_u$ s'appelle polynôme minimal de $u$
+\end{definition}
+\begin{proposition}
+Si $E$ de dimension finie \begin{itemize}
+\item $\boxed{\mu_u = 1 \iff E = \{ 0 \}}$
+\item $\boxed{\mu_u = X - \lambda \iff u = \lambda \text{Id}_E,\, E \neq \{ 0 \}}$
+\end{itemize}
+\end{proposition}
+\begin{theorem}
+Soit $A \in M_n(K)$ \\
+Alors $\Phi : \begin{cases}
+K[X] \to M_n(K) \\
+P \mapsto P(A)
+\end{cases}$ est un morphisme d'algèbres non injectif. \\
+Donc $\ker \Phi$ est un idéal différent de $\{ 0 \}$ qui s'écrit $\mu_A K[X]$ \\
+Si $P \in K[X]$, $P(A) = 0 \iff \mu_A = P$ \\
+et $\mu_A$ est donc le polynôme unitaire différent de $0$ de plus petit degré annulant $A$ \\
+Par ailleurs, si $d = \deg \mu_A$, $K[A]$ est une sous-algèbre commutative de $M_n(K)$ de dimension $d$, de base $( \text{Id}, A, ...,\, A^{d - 1})$
+\end{theorem}
+\begin{definition}
+$\mu_A$ est appelé polynôme minimal de $A$ ( aussi noté $\mu_A$ )
+\end{definition}
+
+\subsection{Racines de polynôme minimal}
+\begin{proposition}
+Soit $E$ un $K$-ev, $u \in \mathcal{L}(E)$, $Q \in K[X]$ \\
+Si $(e, \lambda)$ un couple propre de $u$ alors 
+\[ \boxed{Q(u)(e) = Q(\lambda)e} \]
+\end{proposition}
+\begin{proposition}
+\hfill \begin{itemize}
+\item Soit $E$ un $K$-ev de dimension finie, $u \in \mathcal{L}(E)$, $P$ un polynôme annulateur de $u$, $\lambda \in \Sp(u)$ \\
+Alors $\lambda$ est racine de $P$ : $\Sp_u \in Z(P)$
+\item Soit $A \in M_n(K)$, $\lambda \in \Sp(A)$, $P \in K[X]$ avec $P(A) = 0$ \\
+Alors $\lambda$ est racine de $P$
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+\hfill \begin{itemize}
+\item Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$ \\
+Les racines de $\mu_u$ sont exactement les valeurs propres de $u$
+\[ \boxed{\Sp u = Z(\mu_u)} \]
+\item Soit $A \in M_n(K)$ \\
+Les racines de $\mu_A$ sont exactement les valeurs propres de $A$
+\[ \boxed{\Sp A = Z(\mu_A)} \]
+\end{itemize}
+\end{proposition}
+
+\section{Diagonalisabilité}
+\subsection{Endomorphismes diagonalisables}
+\begin{definition}
+Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$ \\
+On dit que $u$ est diagonalisable s'il existe une base $\mathcal{B}$ de $E$ telle que 
+\[ \Mat_\mathcal{B}(u) = \begin{pmatrix}
+\lambda_1 & & & 0 \\
+& \lambda_2 & & \\
+& & \ddots & \\
+0 & & & \lambda_n
+\end{pmatrix} \in D_n(K) \]
+Autrement dit, s'il existe une base de vecteurs propres.
+\end{definition}
+
+\pagebreak
+
+\begin{theorem}
+Soit $E$ un $K$-ev de dimension finie $n$, $u \in \mathcal{L}(E)$ \\
+Les $5$ conditions suivantes sont équivalentes :
+\begin{itemize}
+\item $u$ est diagonalisable.
+\item Il existe $\lambda_1, ...\, \lambda_r \in K$ $2$ à $2$ distincts tels que
+\[ E = \bigoplus_{i = 1}^r \ker \left( u - \lambda_i \text{Id}_E \right) \]
+\item Il existe $\lambda_1, ...,\, \lambda_r \in K$ $2$ à $2$ distincts tels que
+\[ \prod_{i = 1}^r \left( u - \lambda_i \text{Id}_E \right) = 0 \]
+\item Il existe $P \in K[X]$ scindé à racines simples annulant $u$
+\item $\mu_u$ est scindé à racines simples.
+\end{itemize}
+Dans ces conditions
+\[ \boxed{E = \bigoplus_{\lambda \in \Sp u} \ker \left( u - \lambda \text{Id}_E \right)} \]
+\[ \boxed{\mu_u = \prod_{\lambda \in \Sp u} (X - \lambda)} \]
+( On dit que "la somme des sev propres rejoint $E$" )
+\end{theorem}
+\end{document}

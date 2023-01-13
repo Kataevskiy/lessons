@@ -26,10 +26,11 @@
 \DeclareMathOperator*{\Vect}{Vect}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Sp}{Sp}
-\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator*{\Mat}{Mat}
 
 \begin{document}
-\renewcommand{\labelitemi}{$*$}
+\renewcommand{\labelitemi}{\textbullet}
+\renewcommand{\labelenumi}{(\roman{enumi})}
 \begin{center}
 {\Large \textbf{Chapitre 12. Réduction des endomorphismes}}
 \end{center}
@@ -147,22 +148,112 @@ Autrement dit, s'il existe une base de vecteurs propres.
 \end{definition}
 
 \pagebreak
-
 \begin{theorem}
 Soit $E$ un $K$-ev de dimension finie $n$, $u \in \mathcal{L}(E)$ \\
 Les $5$ conditions suivantes sont équivalentes :
-\begin{itemize}
+\begin{enumerate}
 \item $u$ est diagonalisable.
-\item Il existe $\lambda_1, ...\, \lambda_r \in K$ $2$ à $2$ distincts tels que
+\item Il existe $\lambda_1, ...,\, \lambda_r \in K$ $2$ à $2$ distincts tels que
 \[ E = \bigoplus_{i = 1}^r \ker \left( u - \lambda_i \text{Id}_E \right) \]
 \item Il existe $\lambda_1, ...,\, \lambda_r \in K$ $2$ à $2$ distincts tels que
 \[ \prod_{i = 1}^r \left( u - \lambda_i \text{Id}_E \right) = 0 \]
 \item Il existe $P \in K[X]$ scindé à racines simples annulant $u$
 \item $\mu_u$ est scindé à racines simples.
-\end{itemize}
+\end{enumerate}
 Dans ces conditions
 \[ \boxed{E = \bigoplus_{\lambda \in \Sp u} \ker \left( u - \lambda \text{Id}_E \right)} \]
 \[ \boxed{\mu_u = \prod_{\lambda \in \Sp u} (X - \lambda)} \]
 ( On dit que "la somme des sev propres rejoint $E$" )
 \end{theorem}
+\begin{proposition}
+Soit $E$ un $K$-ev de dimension finie, $u \in \mathcal{L}(E)$ diagonalisable et $F$ un sev de $E$ stable par $u$ \\
+Alors $u_F$ est aussi diagonalisable et $\boxed{\mu_{u_F} \mid \mu_u}$
+\end{proposition}
+
+\subsection{Matrices carrés diagonalisables}
+\begin{definition}
+Soit $A \in M_n(K)$ \\
+$A$ est diagonalisable si $u_A : \begin{cases}
+K^n \to K^n \\
+X \mapsto AX
+\end{cases}$ est diagonalisable.
+\end{definition}
+\begin{proposition}
+Soit $A \in M_n(K)$ \\
+Alors $A$ diagonalisable $\iff$ $A$ est semblable à une matrice diagonalisable.
+\end{proposition}
+\begin{proposition}
+Soit $A \in M_n(K)$ \\
+Les $5$ conditions suivantes sont équivalents :
+\begin{enumerate}
+\item $A$ est diagonalisable.
+\item Il existe $P \in GL_n(K)$ tel que $P^{-1}AP \in D_n(K)$
+\item Il existe $\lambda_1, ...,\, \lambda_r \in K$ $2$ à $2$ distincts tels que
+\[ K^n = \bigoplus_{i = 1}^r \ker \left( A - \lambda_i I_n \right) \]
+\item Il existe $Q \in K[X]$ scindé à racines simples annulant $A$
+\item $\mu_A$ est scindé à racines simples.
+\end{enumerate}
+Dans ces conditions
+\[ \boxed{K^n = \bigoplus_{\lambda \in \Sp A} \ker \left( u - \lambda I_n \right)} \]
+\[ \boxed{\mu_A = \prod_{\lambda \in \Sp A} (X - \lambda)} \]
+\end{proposition}
+\begin{proposition}
+Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$, $\mathcal{B}$ base de $E$ et $A = \Mat\limits_{\mathcal{B}}(u)$ \\
+Alors $\boxed{u \text{ diagonalisable } \iff A \text{ diagonalisable }}$
+\end{proposition}
+\begin{proposition}
+Soit 
+\[ M = \begin{pmatrix}
+\boxed{A_1} & & 0 \\
+& \ddots &  \\
+0 & & \boxed{A_r}
+\end{pmatrix} \]
+Alors \[ \boxed{M \text{ diagonalisable } \iff A_1, ...,\, A_r \text{ diagonalisable }} \]
+\end{proposition}
+
+\subsection{Diagonalisabilité du polynôme caractéristique}
+\begin{proposition}
+\hfill \begin{itemize}
+\item Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$ \\
+Si $\chi_u$ est scindé à racines simples, $u$ est diagonalisable.
+\item Soit $A \in M_n(K)$ et $\chi_A$ scindé à racines simples \\
+Alors $A$ est diagonalisable.
+\end{itemize}
+\end{proposition}
+\begin{proposition}
+Soit $E$ un $K$-ev de dimension finie, $u \in \mathcal{L}(E)$ et $\lambda$ une valeur propre de $u$ \\
+On note $\alpha$ l'ordre de $\lambda$ comme racine de $\chi_u$ : multiplicité algébrique de $\lambda$ comme valeur propre de $u$ \\
+On note $\beta$ la dimension de $E_\lambda = \ker \left( u - \lambda \text{ Id } \right)$ : multiplicité géométrique de $\lambda$ \\
+Alors $\boxed{1 \leq \beta \leq \alpha}$
+\end{proposition}
+\begin{theorem}
+Soit $u \in \mathcal{L}(E)$, $E$ $K$-ev de dim finie et $\Sp u = \{ \lambda_1, ...,\, \lambda_r \}$ avec $\lambda_i$ $2$ à $2$ distincts. \\
+Pour $1 \leq i \leq r$ on note: \\
+$\beta_i = \dim \ker \left( u - \lambda \text{ Id } \right)$ : multiplicité géométrique\\
+$\alpha_i$ l'ordre de $\lambda_i$ comme racine de $\chi_u$ : multiplicité algébrique\\
+Alors 
+\[ \boxed{u \text{ diagonalisable } \iff \begin{cases}
+\chi_u \text{ scindé } \\
+\forall i \in \llbracket 1, r \rrbracket,\, \beta_i = \alpha_i
+\end{cases}} \]
+\end{theorem}
+\begin{definition}
+\hfill \\
+Diagonaliser un endomorphisme c'est trouver une base de vecteurs propres et les valeurs propres associés. \\
+diagonaliser une matrice $A$ c'est trouvé $P \in GL_n(K)$ et $D \in D_n(K)$ tels que $P^{-1}AP = D$
+\end{definition}
+\begin{proposition}
+Si $C_1, ...,\, C_n$ sont une base de vecteurs propres pour $A$ et $A C_i = \lambda_i C_i$\\
+Si 
+\[ P = \left(C_1 \mid \cdots \mid C_n \right) = \Mat \left( \text{ b.c. },  (C_1 \mid \cdots \mid C_n) \right) \]
+Alors
+\[ P^{-1} A P = \Mat_{(C_1, ...,\, C_n)}(u_A) = \begin{pmatrix}
+\lambda_1 & & 0 \\
+& \ddots & \\
+0 & & \lambda_n
+\end{pmatrix} = D \]
+\end{proposition}
+
+\section{Exercices classiques (1\textsuperscript{ère} série)}
+\renewcommand{\labelenumi}{\arabic{enumi}}
 \end{document}

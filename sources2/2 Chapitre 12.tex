@@ -27,6 +27,7 @@
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Sp}{Sp}
 \DeclareMathOperator*{\Mat}{Mat}
+\DeclareMathOperator{\Tr}{Tr}
 
 \begin{document}
 \renewcommand{\labelitemi}{\textbullet}
@@ -139,10 +140,10 @@ Les racines de $\mu_A$ sont exactement les valeurs propres de $A$
 Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$ \\
 On dit que $u$ est diagonalisable s'il existe une base $\mathcal{B}$ de $E$ telle que 
 \[ \Mat_\mathcal{B}(u) = \begin{pmatrix}
-\lambda_1 & & & 0 \\
+\lambda_1 & & & (0) \\
 & \lambda_2 & & \\
 & & \ddots & \\
-0 & & & \lambda_n
+(0) & & & \lambda_n
 \end{pmatrix} \in D_n(K) \]
 Autrement dit, s'il existe une base de vecteurs propres.
 \end{definition}
@@ -204,9 +205,9 @@ Alors $\boxed{u \text{ diagonalisable } \iff A \text{ diagonalisable }}$
 \begin{proposition}
 Soit 
 \[ M = \begin{pmatrix}
-\boxed{A_1} & & 0 \\
+\boxed{A_1} & & (0) \\
 & \ddots &  \\
-0 & & \boxed{A_r}
+(0) & & \boxed{A_r}
 \end{pmatrix} \]
 Alors \[ \boxed{M \text{ diagonalisable } \iff A_1, ...,\, A_r \text{ diagonalisable }} \]
 \end{proposition}
@@ -248,16 +249,16 @@ Si
 \[ P = \left(C_1 \mid \cdots \mid C_n \right) = \Mat \left( \text{ b.c. },  (C_1 \mid \cdots \mid C_n) \right) \]
 Alors
 \[ P^{-1} A P = \Mat_{(C_1, ...,\, C_n)}(u_A) = \begin{pmatrix}
-\lambda_1 & & 0 \\
+\lambda_1 & & (0) \\
 & \ddots & \\
-0 & & \lambda_n
+(0) & & \lambda_n
 \end{pmatrix} = D \]
 \end{proposition}
 
 \pagebreak
 
 \section{Exercices classiques (1\textsuperscript{ère} série)}
-\renewcommand{\labelenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
 \subsection{Diagonalisation simultanée}
 \noindent Soit $E$ un $K$-ev de dimension finie.
 \begin{enumerate}
@@ -359,4 +360,136 @@ Les $4$ conditions suivantes sont équivalentes:
 \item $u$ admet un polynôme annulateur scindé.
 \end{enumerate}
 \end{corollaire}
+\begin{corollaire}
+\hfill \begin{itemize}
+\item Toute matrice carrée complexe est trigonalisable.
+\item Tout endomorphisme d'un $\mathbb{C}$-ev de dimension finie est trigonalisable.
+\end{itemize}
+\end{corollaire}
+
+\pagebreak
+
+\begin{proposition}
+\hfill \begin{itemize}
+\item Soit $E$ un $K$-ev de dim finie $n$ et $u \in \mathcal{L}(E)$ \\
+Alors 
+\[ u \text{ nilpotent } \iff \chi_u = X^n \iff u \text{ trigonalisable et } \Sp(u) = \{ 0 \} \]
+Dans ces conditions il existe $\mathcal{B}$ base de $E$ telle que
+\[ \Mat_{\mathcal{B}}(u) = \begin{pmatrix}
+0 & & (*) \\
+ & \ddots & \\
+ (0) & & 0
+\end{pmatrix} \]
+et $\boxed{u^n = 0}$
+\item Soit $A \in M_n(K)$ \\
+Alors
+\[ A \text{ nilpotente } \iff \chi_A = X^n \iff \begin{cases}
+A \text{ trigonalisable } \\
+\Sp(A) = \{ 0 \}
+\end{cases} \]
+Dans ces conditions $A$ est semblable à $\begin{pmatrix}
+0 & & (*) \\
+& \ddots & \\
+(0) & & 0
+\end{pmatrix}$ et $A^n = 0$
+\end{itemize}
+\end{proposition}
+
+\section{Sous-espace caractéristique}
+\subsection{Présentation}
+\begin{definition}
+Soit $E$ un $K$-ev de dim finie, $u \in \mathcal{L}(E)$, $\lambda$ un valeur propre de $u$ et $\alpha$ sa multiplicité algébrique \\ ( son ordre comme racine de $\chi_u$ ) \\
+Le sous-espace caractéristique de $u$ associée à $\lambda$ est
+\[ \boxed{F_\lambda(u) = \ker\left( u - \lambda \text{Id}_E \right)^\alpha} \]
+\end{definition}
+\begin{theorem}
+Soit $E$ un $K$-ev de dim finie $u \in \mathcal{L}(E)$, $\lambda \in \Sp(u)$ de multiplicité algébrique $\alpha$ \\
+et racine d'ordre $p$ de $\mu_u$ \\
+Alors 
+\[ F_\lambda(u) = \ker\left(u - \text{Id}\right)^\alpha = \ker\left(u - \text{Id}\right)^p = \ker\left(u - \text{Id}\right)^n \]
+De plus $p$ est le rang à partir duquel les noyaux itérés de $u - \lambda \text{Id}$ stationnent.
+\end{theorem}
+\begin{theorem}
+Soit $E$ un $K$-ev de dimension finie, $u \in \mathcal{L}(E)$ trigonalisable et \\
+$\chi_u = \prod\limits_{i = 1}^r (X - \lambda_i)^{\alpha_i}$ avec les $\lambda_i \in K$ $2$ à $2$ différents et $\alpha_i \in \mathbb{N}^*$ \\
+Alors
+\[ \boxed{E = \bigoplus_{i = 1}^r F_{\lambda_i} = \bigoplus_{i = 1}^r \ker(u - \lambda_i \text{Id})^{\alpha_i}} \]
+De plus $\boxed{\dim F_{\lambda_i}(u) = \alpha_i}$
+\end{theorem}
+
+\pagebreak
+
+\subsection{Théorème de réduction par sous-espace caractéristique}
+\begin{theorem}[ Théorème de réduction par sev caractéristique ]
+Soit $E$ un $K$-ev de dimension finie $n$, $u \in \mathcal{L}(E)$ trigonalisable et
+$\chi_u = \prod\limits_{i = 1}^r (X - \lambda_i)^{\alpha_i}$ avec les $\lambda_i \in K$ $2$ à $2$ distincts et $\alpha_i \in \mathbb{N}^*$ \\
+Alors il existe une base $\mathcal{B}$ de $E$ telle que
+\[ \Mat\limits_{\mathcal{B}} = \begin{pmatrix}
+\boxed{T_1} & & & (0) \\
+& \boxed{T_2} & & \\
+& & \ddots & \\
+(0) & & & \boxed{T_r}
+\end{pmatrix} \]
+avec
+\[ T_i = \begin{pmatrix}
+\lambda_i & & (*) \\
+& \ddots & \\
+(0) & & \lambda_i
+\end{pmatrix} \] de taille $\alpha_i$ pour tout $i \in \llbracket 1, r \rrbracket$
+\end{theorem}
+
+\subsection{Réduction des matrices de taille $2$}
+\noindent Soit $A \in M_2(K)$ trigonalisable donc $\chi_A = (X - \lambda)(X - \mu)$ avec $\lambda, \mu \in K$
+\begin{itemize}
+\item Si $\lambda \neq \mu$ alors $\chi_A$ est scindé à racines simples. \\
+$A$ est diagonalisable et $A$ semblable à $\begin{pmatrix}
+\lambda & 0 \\
+0 & \mu
+\end{pmatrix}$
+\item Si $\lambda = \mu$ alors $\chi_A = (X - \lambda)^2$ et \\
+$A \text{ est diagonalisable } \iff A = \lambda I_2 $ \\
+Si $A$ n'est pas diagonalisable alors $A$ est trigonalisable et $A$ est semblable $\begin{pmatrix}
+\lambda & 1 \\
+0 & \lambda
+\end{pmatrix}$
+\end{itemize}
+Si $K = \mathbb{R}$ et $\chi_A = (X - \rho e^{i \theta})(X - \rho e^{-i \theta})$ \\
+Alors $A$ est semblable sur $\mathbb{R}$ à $\rho R_\theta = \rho \begin{pmatrix}
+\cos \theta & - \sin \theta \\
+\sin \theta & \cos \theta
+\end{pmatrix}$
+
+\section{Exercices classiques}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\subsection{Trigonalisation simultanée}
+\noindent Soit $E$ un $\mathbb{C}$-ev de dim finie $n$ et $u, v \in \mathcal{L}(E)$ avec $u \circ v = v \circ u$
+\begin{enumerate}
+\item Montrer que $u$ et $v$ possèdent un vecteur propre commun.
+\item Montrer que $u$ et $v$ sont cotrigonalisables ( il existe une base commune dans laquelle les matrices de \\
+$u$ et $v$ sont triangulaires supérieures.
+\item Soit $A, B \in M_n(\mathbb{C})$ \\
+Montrer que $AB = BA \implies \exists P \in GL_n(\mathbb{C})$, $P^{-1}AP \in T_n(\mathbb{C})$ et $P^{-1}BP \in T_n(\mathbb{C})$ \\
+La réciproque est-elle vraie?
+\end{enumerate}
+
+\subsection{Caractérisation de matrices nilpotents avec la trace}
+\noindent Soit $A \in M_n(\mathbb{C})$. On suppose que $\Tr A = \Tr A^2 = ... = \Tr A^n = 0$ \\
+Montrer que $A$ est nilpotente.
+
+\subsection{Sous-espaces stables}
+\noindent Soit $n \geq 1$
+\begin{enumerate}
+\item Montrer que si $A \in M_n(\mathbb{C})$ alors $A$ possède un sec stable de dimension $k$ avec $k \in \llbracket 0, n \rrbracket$ quelconque.
+\item Soit $A \in M_n(\mathbb{R})$ \\
+Montrer que $A$ possède une droite ou un plan stable.
+\item Soit $A \in M_n(K)$ et $H$ un hyperplan de $K^n$. Montrer que: \\
+$H$ stable par $A$ $\iff$ Il existe $L$ un vecteur propre de $A^T$ tel que $L^T X = 0$ est une équation de $H$
+\end{enumerate}
+
+\subsection{Réduction de matrices par blocs}
+\noindent Soit $A \in M_n(\mathbb{C})$ et $B = \begin{pmatrix}
+A & 2A \\
+-1 & 2A
+\end{pmatrix}$ \\
+Montrer que $A$ diagonalisable $\iff$ $B$ diagonalisable
 \end{document}

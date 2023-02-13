@@ -1,0 +1,263 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing{}
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollaire}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{\textbullet}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\begin{center}
+{\Large \textbf{Chapitre 15. Suites et séries de fonctions}}
+\end{center}
+\section{Modes de convergence d'une suite de fonctions}
+\noindent $X$ un ensemble non vide et $E, F$ evn.
+\subsection{Convergence simple}
+\begin{definition}
+Soit $f_n: X \to \mathbb{K}$ et $f: X \to \mathbb{K}$ ( $n \in \mathbb{N}$ ) \\
+On dit que $(f_n)_{n \geq 0}$ converge simplement vers $f$ si pour tout $x \in X \lim\limits_{x \to +\infty} f_n(x) = f(x)$ ie.
+\[(\forall x \in X)(\forall \varepsilon > 0)(\exists n_0 \in \mathbb{N})(\forall n \geq n_0)(|f_n(x) - f(x)|\leq \varepsilon) \]
+$f$ est alors unique et appelée limite simple de $(f_n)_{n \geq 0}$. On écrit $\lim\limits_{n \to +\infty}f_n = f$
+\end{definition}
+
+\subsection{Convergence uniforme}
+\begin{definition}
+Soit $f_n: X \to \mathbb{K}$ $(n \in \mathbb{N})$ et $f: X \to \mathbb{K}$ \\
+On dit que $(f_n)_{n \geq 0}$ converge uniformément vers $f$ si $\lim\limits_{n \to +\infty} \lVert f - f_n \rVert_\infty = 0$ ie.
+\[ \forall \varepsilon > 0 \quad \exists n_0 \in \mathbb{N} \quad \forall n \geq n_0 \quad \lVert f - f_n \rVert_\infty \leq \varepsilon \]
+\[ \forall \varepsilon > 0 \quad \exists n_0 \in \mathbb{N} \quad \forall n \geq n_0 \quad \forall x \in X \quad |f(x) - f_n(x)| \leq \varepsilon \]
+$f$ est appelée limite uniforme des $f_n$
+\end{definition}
+
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+
+\begin{proposition}
+Soit $f_n: X \to \mathbb{K}$ et $f:X \to \mathbb{K}$ ( $n \geq 0$ ) \\
+On suppose qu'il existe $N \geq 0$ et $(\alpha_n)_{n \geq N}$ suite de $\mathbb{R}_+$ avec
+\begin{enumerate}
+\item $\forall x \in X,\, n \in N \quad|f_n(x) - f(x)| \leq \alpha_n$
+\item $\lim\limits_{n \to +\infty} \alpha_n = 0$
+\end{enumerate}
+Alors $(f_n)_{n \geq 0}$ converge uniformément vers $f$
+\end{proposition}
+\begin{proposition}
+Soit $f_n, g_n: X \to \mathbb{K}$ ($n \geq 0$) \\
+Si $(f_n)$ ( resp. $(g_n)$ ) converge uniformément vers $f$ ( resp. $g$ ) alors $(f_n + g_n)$ ( resp. $\lambda f_n$ ) converge  \\
+uniformément vers $f + g$ ( resp. $\lambda f$ )
+\end{proposition}
+
+\subsection{Étude des exemples}
+\noindent Exemple $1$: \[f_n: \begin{cases}
+\mathbb{R}_+ \to \mathbb{R} \\
+x \mapsto n^\lambda x e^{-n x}
+\end{cases} \quad ( n \geq 1 ,\, \lambda \in \mathbb{R} ) \]
+$f_n$ converge simplement vers $0$ et converge uniformément sur $\mathbb{R}_+$ ssi $\lambda < 1$ \\
+Si $\lambda > 1$ il y a convergence uniforme sur $[a, +\infty[$ ( $a > 0$ ) \medskip 
+
+\noindent Exemple $2$: \[f_n: \begin{cases}
+\mathbb{R}_+ \to \mathbb{R} \\
+x \mapsto e^{-x} \sum\limits_{k = 0}^n \frac{(-1)^k x^k}{k!}
+\end{cases}\]
+Il y a convergence simple vers $f: x \mapsto e^{-2x}$ \\
+Il y a convergence uniforme sur $\mathbb{R}_+$
+
+\section{Continuité des limites uniformes}
+\subsection{Caractérisation de la continuité par limite uniforme}
+
+\noindent Ici $X$ est une partie non vide d'un evn.
+
+\begin{proposition}
+    Soit $f_n: X \to \mathbb{K}$, $a \in X$ ( $n \in \mathbb{N}$ ) \\
+    On suppose:
+    \begin{enumerate}
+        \item $\forall n \in \mathbb{N}$, $f_n$ est continue en $a$
+        \item $(f_n)_{n \geq 0}$ converge uniformément vers $f$
+    \end{enumerate}
+    Alors $f$ est continue en $a$
+\end{proposition}
+\begin{corollaire}
+    Les limites uniformes de fonctions continues sont continues.
+\end{corollaire}
+
+\subsection{Théorème de la double limite}
+\begin{theorem}[ Théorème de la double limite ou d'interversion des limites ]
+    \hfill \\
+    Soit $f_n: X \to \mathbb{K}$ avec $X \subset E$, $X \neq \emptyset$, $E$ evn ( $n \geq 0$ ), $a \in E$ adhérent à $X$ \\ 
+    ( $a$ peut être dans $\overline{\mathbb{R}}$ si $X \subset \mathbb{R}$ ) et $f: X \to \mathbb{K}$
+    \begin{enumerate}
+        \item Pour tout $n \in \mathbb{N}$, $\lim_{x \to a} f_n(x) = l_n \in \mathbb{K}$
+        \item $(f_n)_{n \geq 0}$ converge uniformément vers $f$
+    \end{enumerate}
+    Alors la suite $(f_n)_{n \in \mathbb{N}}$ converge dans $\mathbb{K}$ vers un élément $l \in \mathbb{K}$ et de plus $\lim_{x \to a}f(n) = l$ \\
+    Autrement dit:
+    \[ l = \lim_{n \to +\infty} \lim_{x \to a} f_n(x) = \lim_{x \to a} \lim_{n \to +\infty} f_n(x)\]
+\end{theorem}
+
+\section{Modes de convergence des séries de fonctions}
+\subsection{Convergence simple, absolue, uniforme}
+\begin{definition}
+    Soit $f_n: X \to \mathbb{K}$ ( $n \geq 0$ ) \\
+    On dit que $\sum f_n$ converge simplement si pour tout $x \in X$, $\sum f_n(x)$ converge. \\
+    On note alors
+    \[\sum_{n = 0}^{+\infty}f_n: x \mapsto \sum_{n = 0}^{+\infty} f_n(x)\]
+    On dit que $\sum f_n$ converge uniformément si $S_N = \sum\limits_{n = 0}^N f_n$ converge uniformément.
+\end{definition}
+\begin{corollaire}[ Théorème de la double limite ]
+    \hfill
+    \begin{enumerate}
+        \item Si les $f_n$ sont $\mathcal{C}^0$ et si $\sum f_n$ converge uniformément alors $\sum\limits_{n = 0}^{+\infty} f_n$ est continue.
+        \item Soit $f_n: X \to \mathbb{K}$ ( $X \subset E$, $a$ adhérent à $X$ ) \\
+        On suppose:
+        \begin{itemize}
+            \item $\sum f_n$ converge uniformément.
+            \item $\lim\limits_{x \to a} f_n(x) = l_n$
+        \end{itemize}
+        Alors $\sum l_n$ converge et
+        \[ \boxed{\lim_{x \to a} \sum_{n = 0}^{+\infty} f_n(x) = \sum_{n = 0}^{+\infty} \lim_{x \to a} f_n(x) = \sum_{n = 0}^{+\infty} l_n}\]
+    \end{enumerate}
+\end{corollaire}
+
+\subsection{Convergence normale}
+\begin{definition}
+    Soit $f_n(x): X \to \mathbb{K}$ ( $n \in \mathbb{N}$ ) \\
+    On dit que $\sum f_n$ converge normalement si à partir d'un certain rang $N$ les $f_n$ sont bornés et si $\sum\limits_{n \geq N} \lVert f_h \rVert_\infty < +\infty$
+\end{definition}
+\begin{proposition}
+    Si $\sum f_n$ converge normalement sur $X$ alors $\sum f_n$ converge uniformément et absolument sur $X$
+\end{proposition}
+\begin{proposition}
+    Soit $f_n: X \to \mathbb{K}$ ( $n \geq 0$ ) \\
+    On suppose qu'il existe $N \geq 0$ et $(\alpha_n)_{n \geq N}$ suite dans $\mathbb{R}_+$ avec:
+    \begin{enumerate}
+        \item $\forall n \geq N, \forall x \in X$, $|f_n(x)| \leq \alpha_n $
+        \item $\sum \alpha_n$ converge ie. $(\alpha_n)_{n \geq N}$ sommable.
+    \end{enumerate}
+    Alors il y a convergence normale de $\sum f_n$
+\end{proposition}
+
+\subsection{Cas des séries non normalement convergentes}
+\noindent Dans le cas où la série n'est pas normalement convergente on peut utiliser:
+\begin{itemize}
+    \item Le critère spécial des séries alternées.
+    \item La transformation D'Abel.
+\end{itemize}
+
+\subsection{Exemples des séries trigonométriques}
+\begin{definition}
+    Les séries trigonométriques sont les séries de fonctions
+    \[x \mapsto \frac{a_0}{2} + \sum_{n = 1}^{+\infty}\left(a_n \cos(nx) + b_n \sin(nx)\right)\]
+    avec $(a_n)_{n \geq 0}$ et $(b_n)_{n \geq 1}$ suites de $\mathbb{K}$
+    Ou encore
+    \[x \mapsto \sum_{n = -\infty}^{n = +\infty}c_n e^{inx}\]
+    avec $(c_n)_{n \in \mathbb{Z}}$ suite de $\mathbb{C}$
+\end{definition}
+
+\section{Intégration et dérivation d'une suite ou série de fonctions}
+\subsection{Interversion limite et intégrale}
+\begin{theorem}
+    Soit $f_n: [a, b] \to \mathbb{K}$ ( $n \in \mathbb{N}$ ) \\
+    On suppose les $f_n$ continues et \uline{convergentes uniformément} vers $f$ \\
+    Alors $f$ est continue et \[\int_{a}^{b}f = \lim_{n \to +\infty} \int_{a}^{b}f_n\]
+    Autrement dit \[\boxed{\int_{a}^{b}\lim_{n \to +\infty} f_n = \lim_{n \to +\infty} \int_{a}^{b} f_n}\]
+\end{theorem}
+\begin{corollaire}
+    Soit $f_n: [a, b] \to \mathbb{K}$ continues ( $n \geq 0$ ) \\
+    Si $\sum f_n$ converge uniformément, on a
+    \[\boxed{\int_{a}^{b}\left(\sum_{n = 0}^{+\infty}\right) = \sum_{n = 0}^{+\infty} \int_{a}^{b} f_n}\]
+\end{corollaire}
+
+\subsection{Dérivation d'une limite d'une suite de fonctions}
+\begin{theorem}[ Théorème de dérivation ]
+    Soit $f_n: I \to \mathbb{K}$ $\mathcal{C}^1$ ( $n \in \mathbb{N}$ ) avec $I$ intervalle de $\mathbb{R}$ \\
+    On suppose:
+    \begin{enumerate}
+        \item $(f_n)_{n \geq 0}$ converge simplement vers $f: I \to \mathbb{K}$
+        \item $(f_n')_{n \geq 0}$ converge uniformément sur tout segment de $I$ vers une fonction $g: I \to \mathbb{K}$
+    \end{enumerate}
+    Alors $(f_n)_{n \geq 0}$ converge uniformément sur tout segment de $I$, $f$ est $\mathcal{C}^1$ et $f' = f$
+    \[\left(\lim_{n \to +\infty} f_n\right)' = \lim_{n \to +\infty} f_n'\]
+\end{theorem}
+
+\begin{corollaire}
+    Soit $f_n: I \to \mathbb{K}$ $\mathcal{C}^k$ ( $n \in \mathbb{N}$ ) \\
+    On suppose:
+    \begin{enumerate}
+        \item $\forall i \in \llbracket 0, k-1 \rrbracket$ $f_n^{(i)}$ converge simplement.
+        \item $\sum f_n^{(k)}$ converge uniformément sur tout segment de $I$
+    \end{enumerate}
+    Alors $\sum f_n^{(i)}$ converge uniformément sur tout segment de $I$ \\
+    De plus, $\sum\limits_{n = 0}^{+\infty} f_n$ est de classe $\mathcal{C}^k$ et $\forall i \in \llbracket 0, k \rrbracket$
+    \[\boxed{\left(\sum_{n = 0}^{+\infty}f_n\right)^{(i)} = \sum_{n = 0}^{+\infty}f_n^{(i)}}\]
+\end{corollaire}
+\begin{corollaire}
+    Soit $f_n: I \to \mathbb{K}$ $\mathcal{C}^\infty$ ( $n \in \mathbb{N}$ ) \\
+    On suppose que pour tout $i \in \mathbb{N}$ $\left(f_n^{(i)}\right)$ converge uniformément sur tout segment de $I$ \\
+    Alors $\lim\limits_{n \to +\infty} f_n = f$ est de classe $\mathcal{C}^\infty$ et
+    \[ \forall i \in \mathbb{N} \quad \left(\lim_{n \to +\infty} f_n\right)^{(i)} = \lim_{n \to +\infty} f_n^{(i)} \]
+    De même, $\sum\limits_{n = 0}^{+\infty} f_n$ est de classe $\mathcal{C}^\infty$ et
+    \[ \forall i \in \mathbb{N} \quad \left(\sum\limits_{n = 0}^{+\infty} f_n\right)^{(i)} = \sum\limits_{n = 0}^{+\infty} f_n^{(i)} \]
+\end{corollaire}
+
+\subsection{Extension des résultats aux fonctions vectorielles}
+\noindent On peut tout généraliser aux suite / série de fonctions d'un evn de dimension finie.
+
+\section{Exemples d'approximation uniforme}
+\subsection{Approximation des fonctions continues par des fonctions en escalier}
+\begin{theorem}
+    Soit $f: [a, b] \to \mathbb{K}$ ( ou $E$ evn de dim finie ) continue par morceaux. \\
+    Alors pour tout $\varepsilon > 0$ il existe $l_n: [a, b] \to \mathbb{K}$ en escalier telle que $\lVert f - h \rVert_\infty \leq \varepsilon$ \\
+    Il existe $(h_n)_{n \geq 0}$ suite de $\mathcal{E}\left([a, b], \mathbb{K}\right)$ qui converge uniformément vers $f$
+\end{theorem}
+
+\subsection{Théorème de Weierstrass}
+\begin{theorem}[ Théorème de Weierstrass ]
+    Soit $f: [a, b] \to \mathbb{K}$ continue. \\
+    Pour tout $\varepsilon > 0$ il existe $P \in \mathbb{K}[X]$ tel que $\lVert f - P \rVert_\infty \leq \varepsilon$ \\
+    Il existe une suite $(P_n)_{n \geq 0}$ de $\mathbb{K}[X]$ qui converge uniformément vers $f$
+\end{theorem}
+
+\subsection{Densité des polynômes trigonométriques}
+\begin{theorem}[ Théorème de Weierstrass trigonométrique ]
+    Soit $f: \mathbb{R} \to \mathbb{K}$ continue $2\pi$-périodique \\
+    Pour tout $\varepsilon > 0$ il existe $P$ polynôme trigonométrique ( de période $2\pi$ ) tel que $\lVert f - P \rVert \leq \varepsilon$ \\
+    Il existe donc une suite de polynômes trigonométrique $(P_n)$ qui converge uniformément vers $f$
+\end{theorem}
+
+\section{Exercices classiques}
+\subsection{Suite des fonctions $M$-lipschitziennes}
+\begin{enumerate}
+    \item Soit $f_n: [a, b] \to \mathbb{K}$ ( $n \in \mathbb{N}$ ) $M$-lipschitzienne ( $M > 0$ ) qui converge simplement vers $f$ \\
+    Montrer que $f$ est $M$-lipschitzienne et que la convergence des $f_n$ est uniforme.
+    \item Extension: Soit $K$ un compact, $f_n: K \to K$ $M$-lipschitzienne convergente simplement vers $f$ \\
+    Montrer que la convergence est uniforme.
+\end{enumerate}
+
+\subsection{Le théorème de Dini ( Le prémier )}
+Soit $K$ un compact, $f_n: K \to \mathbb{R}$ ( $n \in N$ ) continues. \\
+On suppose:
+\begin{enumerate}
+    \item $\forall n \in N$ $f_n \leq f_{n + 1}$
+    \item $(f_n)_{n \geq 0}$ converge simplement vers $f$ \uline{continue} sur $K$
+\end{enumerate}
+Mq $(f_n)_{n \geq 0}$ converge uniformément vers $f$
+\end{document}

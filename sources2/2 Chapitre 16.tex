@@ -1,0 +1,98 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\onehalfspacing{}
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollary}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{\textbullet}
+
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\begin{center}
+{\Large \textbf{Chapitre 16. Intégrales à paramètre}}
+\end{center}
+
+\noindent \(I, J\) intervalles d'intérieur non vide, \(E\) un evn.
+
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+
+\section{Le théorème de convergence dominée}
+\subsection{Le théorème de convergence dominée}
+\begin{theorem}[ Théorème de convergence monotone ]
+    Soit \(g_n: I \to [0, +\infty]\) mesurables et \(g_n: I \to [0, +\infty]\) \\
+    On suppose que:
+    \begin{enumerate}
+        \item \((g_n)_{n \in \mathbb{N}}\) converge simplement vers \(g\)
+        \item \(\forall n \in \mathbb{N}\) \, \(0 \leq g_n \leq g_{n + 1}\)
+    \end{enumerate}
+    Alors dans \([0, +\infty]\)
+    \[\lim_{n \to +\infty}\int_{I} g_n = \int_{I} g \in [0, +\infty]\]
+\end{theorem}
+\begin{corollary}
+    Soit \(F_0 : I \to \mathbb{R}_+\) intégrable et \(F_n: I \to \mathbb{R}_+\) \((n \geq 1)\) mesurable. \\
+    On suppose:
+    \begin{enumerate}
+        \item \(\forall n \in \mathbb{N} \, 0 \leq F_{n + 1} \leq F_n\)
+        \item \((F_n)\) converge simplement vers 0
+    \end{enumerate}
+    Alors
+    \[\int_{I} F_n \xrightarrow[n \to +\infty]{} 0\]
+\end{corollary}
+
+\subsection{Énoncé du théorème de convergence dominée}
+\begin{theorem}[ Théorème de convergence dominée ]
+    Soit \(f_n: I \to \mathbb{K}\) continue par morceaux \((n \in \mathbb{N})\) \\
+    On suppose:
+    \begin{enumerate}
+        \item \((f_n)_{n \geq 0}\) converge simplement vers \(f: I \to \mathbb{K}\) continue par morceaux sur \(I\)
+        \item Il existe \(\varphi: I \to \mathbb{R}_+\) \uline{intégrable} telle que \(\forall n \in \mathbb{N}, \forall t \in I \quad |f_n(x)| \leq \varphi(t)\) ( Hypothèse de domination )
+    \end{enumerate}
+    Alors les \(f_n\) sont intégrables et \(f\) aussi et
+    \[\boxed{\int_{I}f_n \xrightarrow[n \to +\infty]{} \int_{I}f}\]
+    On a même
+    \[\lVert f_n - f \rVert_1 = \int_{I}|f_n - f| \xrightarrow[n \to +\infty]{} 0\]
+\end{theorem}
+
+\subsection{Premiers exemples d'application}
+\noindent Quelques exercices classiques:
+\begin{enumerate}
+    \item Montrer que \[I_n = \int_{0}^{\frac{\pi}{2}} \sin^{n}t dt \xrightarrow[n \to +\infty]{} 0\]
+    \item Soit \(f: [0, 1] \to \mathbb{K}\) continue. \\ Montrer que \[I_n = \int_{0}^{1} f\left(\frac{x}{n}\right) dx \xrightarrow[n \to +\infty]{} f(0)\]
+    \item Soit \(f: [0, 1] \to \mathbb{K}\) continue avec \(\lim\limits_{+\infty}f = 0\). \\ Montrer que \[I_n = \int_{0}^{1} f(nx) dx \xrightarrow[n \to +\infty]{} f(0)\]
+    \item Soit \(n \geq 1\) et \[I_n = \int_{1}^{+\infty}e^{-x^{n}} dx\] Montrer que \(I_n \xrightarrow[n \to +\infty]{} 0\) et \(I_n \underset{+\infty}{\sim} \frac{\alpha}{n}\) avec \(\alpha\) à exprimer avec une intégrale.
+    \item Montrer que \[I_n = \int_{0}^{n}\left(1 - \frac{x^2}{n^2}\right)^{n^2} dx \xrightarrow[n \to +\infty]{} \int_{0}^{+\infty}e^{-x^2} dx\]
+\end{enumerate}
+
+\subsection{Théorème de convergence dominée appliquée à l'interversion série / suite}
+\begin{corollary}[ Théorème de convergence dominée ]
+    Soit \(f_n: I \to \mathbb{K}\) continues par morceaux \((n \in \mathbb{N})\) \\
+    On suppose que:
+    \begin{enumerate}
+        \item \(\sum f_n\) converge simplement vers \(\sum\limits_{n = 0}^{+\infty} f_n\) \(\mathcal{C}^0\) par morceaux.
+        \item Il existe \(\varphi: I \to \mathbb{R}_+\) intégrable telle que \(\forall n \in \mathbb{N}\, \left| \sum\limits_{k = 0}^{n} f_k \right| \leq \varphi\) ( Domination )
+    \end{enumerate}
+    Alors les \(f_n\) sont intégrables, \(\sum f_n\) est intégrable et
+    \[\boxed{\int_{I} \sum_{n = 0}^{+\infty} f_n = \sum_{n = 0}^{+\infty}\int_{I} f_n}\]
+\end{corollary}
+
+\subsection{Le théorème d'intégration terme à terme}
+\end{document}

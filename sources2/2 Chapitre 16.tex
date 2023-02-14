@@ -113,7 +113,7 @@
     On suppose que:
     \begin{enumerate}
         \item \(\sum f_n\) converge simplement vers une fonction continue par morceaux.
-        \item \(\displaystyle \sum_{n \in \mathbb{N}}\int_{I}|f_n| < +\infty\)
+        \item \(\sum\limits_{n \in \mathbb{N}}\int\limits_{I}|f_n| < +\infty\)
     \end{enumerate}
     Alors \(\sum\limits_{n = 0}^{+\infty} f_n\) est intégrable et
     \[\boxed{\int_{I}\sum_{n = 0}^{+\infty}f_n = \sum_{n = 0}^{+\infty}\int_{I}}\]
@@ -204,4 +204,43 @@
     \[\Gamma^{(k)}(x) = \int_{0}^{+\infty}(\ln t)^k t^{x - 1} e^{-t} \,dt\]
     \(\Gamma\) est convexe et \(\lim\limits_{0^+} \Gamma = \lim\limits_{+\infty} \Gamma = +\infty\)
 \end{proposition}
+
+\subsection{Fonctions à support compact}
+\begin{definition}
+    Soit \(f: \mathbb{R}^n \to \mathbb{K}\) \\
+    Le support de \(f\) est \(S = \overline{\{ x \in \mathbb{R}^n \mid f(x) \neq 0\}}\) \\
+    On sit que \(f\) est à support compact si \(S\) est compact ie. borné, autrement dit:
+    \[\exists R > 0 \, \forall x \in \mathbb{R}^n,\, \lVert x\rVert > R \implies f(x) = 0\]
+\end{definition}
+\begin{definition}
+    Une suite de fonctions régularisantes est une suite de fonctions \\
+    \(\varphi: \mathbb{R} \to \mathbb{R}_+\) \(\mathcal{C}^{\infty}\) à support contenu dans \([-a_n, a_n]\) où:
+    \begin{itemize}
+        \item \(a_n\) est une suite de \(\mathbb{R}_+^*\)
+        \item \(a_n\) décroît.
+        \item \(a_n\) tend vers \(0\)
+    \end{itemize}
+    et vérifiant \(\int\limits_{\mathbb{R}} \varphi_n = 1\)
+\end{definition}
+
+\subsection{Intégrales doubles sur un pavé}
+\begin{theorem}[ Théorème de Fubini ]
+    Soit \(a \leq b,\, v \leq d\) et \(f:[a, b] \times [c, d] \to \mathbb{K}\) \\
+    Alors
+    \[\int_{a}^{b} \left(\int_{c}^{d} f(x, y) \,dy\right) \,dx = \int_{c}^{d} \left(\int_{a}^{b} f(x, y) \,dx\right) \,dy\]
+    Cette valeur commune est appelée
+    \[\iint\limits_{[a, b] \times [c, d]}f(x, y) \, dx dy\]
+\end{theorem}
+
+\subsection{Fonctions intégrables sur \(I \times J\)}
+\begin{proposition}
+    Soit \(f: I \times J \to \uline{\mathbb{R}_+}\) \\
+    Sous reserve de régularité de fonction on a dans \[0, +\infty\]
+    \[\int_{I} \left(\int_{J} f(x, y) \,dy\right) \,dx = \int_{J} \left(\int_{I} f(x, y) \,dx\right) \,dy\]
+    On note la valeur commune
+    \[\iint\limits_{I \times J} f \in [0, +\infty]\]
+    Si \(\iint\limits_{I \times J} f < +\infty\) on dit que \(f\) est intégrable.
+\end{proposition}
+
+\section{Convergence en moyenne quadratique}
 \end{document}

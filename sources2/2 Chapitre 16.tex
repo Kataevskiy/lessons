@@ -23,6 +23,7 @@
 \newtheorem{definition}[proposition]{Définition}
 
 \DeclareMathOperator{\re}{Re}
+\DeclareMathOperator*{\vect}{Vect}
 
 \begin{document}
 \renewcommand{\labelitemi}{\textbullet}
@@ -243,4 +244,24 @@
 \end{proposition}
 
 \section{Convergence en moyenne quadratique}
+\subsection{La convergence en moyenne}
+\begin{definition}
+    Soit \(f_n \in L^1(I, \mathbb{K})\) et \(f \in L^1(I, \mathbb{K})\) \(n \in \mathbb{N}\) \\
+    On dit que \(f_n\) converge en moyenne vers \(f\) si \[\lVert f_n - f \rVert_1 \to 0\] \\
+    On dit que \(f_n\) converge en moyenne quadratique vers \(f\) si \[\lVert f_n - f \rVert_2 = \sqrt{\int_{I}|f_n - f|^2} \to 0\]
+    On note \(L^\infty(I, \mathbb{K})\) l'ensemble des fonctions continues par morceaux sur \(I\) bornées. \\
+    Alors \[\boxed{L^\infty \subset L^2(I) \subset L^1(I)}\]
+    Ces inclusions sont strictes si \(I\) n'est pas un segment.
+\end{definition}
+
+\subsection{Complément: Base hilbertienne}
+\begin{theorem}[ Inégalité de Bessel-Parseval ]
+    Soit \(E\) préhilbertien, \((e_n)_{n \in \mathbb{N}}\) un système orthonormé et \(x \in E\) \\
+    Alors \(\left( \langle e_n, x \rangle^2 \right)_{n \in \mathbb{N}}\) est sommable ( ie. \(\left(\langle e_n, x \rangle \right)_{n \in \mathbb{N}} \in l^2\) ) et
+    \[\sum_{n \in \mathbb{N}} \langle e_n, x \rangle^2 \leq \lVert x \rVert^2\]
+\end{theorem}
+\begin{definition}
+    Soit \(E\) préhilbertien et \((e_n)_{n \in \mathbb{N}}\) un système orthonormé. \\
+    On dit que\((e_n)_{n \in \mathbb{N}}\) est une base hilbertienne si \(\overline{\vect\limits_{n \in \mathbb{N}}(e_n)} = E\)
+\end{definition}
 \end{document}

@@ -197,7 +197,18 @@ Il y a convergence uniforme sur $\mathbb{R}_+$
     Alors $(f_n)_{n \geq 0}$ converge uniformément sur tout segment de $I$, $f$ est $\mathcal{C}^1$ et $f' = f$
     \[\left(\lim_{n \to +\infty} f_n\right)' = \lim_{n \to +\infty} f_n'\]
 \end{theorem}
-
+\begin{corollaire}
+    Soit \(f_n: I \to \mathbb{K}\) \((n \in \mathbb{N})\) \(\mathcal{C}^k\) avec \(k \in \mathbb{N},\, k \geq 2\) \\
+    On suppose:
+    \begin{enumerate}
+        \item Pour tout \(0 \leq i \leq k - 1\), \(\left(f_n^{(i)}\right)_{n \geq 0}\) converge uniformément vers une fonction \(g_i\)
+        \item \(\left(f_n^{(k)}\right)_{n \geq 0}\) converge uniformément sur tout segments de \(I\) vers \(g_k\)
+    \end{enumerate}
+    On pose \(f = g_0 = \lim f_n\), chaque \(\left(f_n^{(i)}\right)_{n \geq 0}\) converge uniformément sur tout segment de \(I\) vers \(g_i\) \\
+    De plus \(g_0 = f\) est \(\mathcal{C}^k\) et pour \(0 \leq i \leq p\), \(f^{(i)} = g_i\) \\
+    Autrement dit
+    \[\boxed{\left(\lim_{n \to +\infty} f_n\right)^{(i)} = \lim_{n \to +\infty} f_n^{(i)}}\]
+\end{corollaire}
 \begin{corollaire}
     Soit $f_n: I \to \mathbb{K}$ $\mathcal{C}^k$ ( $n \in \mathbb{N}$ ) \\
     On suppose:

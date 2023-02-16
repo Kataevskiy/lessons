@@ -162,6 +162,9 @@
     Alors \[F: x \in J \mapsto \int_{I} f(x, t) \,dt\] est de classe \(\mathcal{C}^1\) et \(\forall x \in J\)
     \[F'(x) = \int_{I} \frac{\partial f}{\partial x}(x, t) \,dt\]
 \end{theorem}
+
+\pagebreak
+
 \begin{proposition}
     Soit \(f:\begin{cases} J \times I \to \mathbb{K} \\ (x, t) \mapsto f(x, t)\end{cases}\) et \(k \in \mathbb{N}^*\) \\
     On suppose:
@@ -186,7 +189,7 @@
     \[\boxed{F^{(i)}(x) = \int_{I} \frac{\partial^i f}{\partial x^i}(x, t) \,dt}\]
 \end{corollary}
 
-\subsection{La fonction \(\Gamma\) d'Euler (HP)}
+\subsection{La fonction \(\Gamma\) d'Euler (À savoir retrouver)}
 \begin{definition}
     Pour \(x > 0\) on pose
     \[\Gamma(x) = \int_{0}^{+\infty}t^{x - 1}e^{-t} \,dt\]
@@ -264,4 +267,40 @@
     Soit \(E\) préhilbertien et \((e_n)_{n \in \mathbb{N}}\) un système orthonormé. \\
     On dit que\((e_n)_{n \in \mathbb{N}}\) est une base hilbertienne si \(\overline{\vect\limits_{n \in \mathbb{N}}(e_n)} = E\)
 \end{definition}
+\begin{theorem}[ Identité de Parseval ]
+    Soit \(E\) préhilbertien, \((e_n)_{n \in \mathbb{N}}\) une base hilbertienne et \(x \in E\) \\
+    On a pour \(\lVert \rVert_E\) \[x = \sum_{n = 0}^{+\infty} \langle e_n, x \rangle e_n = \lim_{N \to +\infty} \sum_{n = 0}^{N} \langle e_n, x \rangle e_n\]
+    \[\boxed{\lVert x \rVert^2 = \sum_{n \in \mathbb{N}} \langle e_n, x \rangle^2}\]
+\end{theorem}
+\begin{definition}
+    \(\langle e_n, x \rangle\) est le coefficient de Fourrier de \(x\) selon \(e_n\) dans la base hilbertienne \((e_k)_{k \in \mathbb{N}}\)
+\end{definition}
+
+\subsection{Complément: séries de Fourrier}
+\begin{proposition}
+    Soit \(f \in \mathcal{C}_{2\pi}(\mathbb{R}, \mathbb{R})\) ( fonctions continues \(2\pi\)-périodiques ) muni de \(\langle f, g \rangle = \frac{1}{2\pi}\int\limits_{-\pi}^{\pi}fg\) \\
+    On note \(\begin{cases} c_k : x \mapsto \cos kx \\ s_k : x \mapsto \sin kx \end{cases}\) avec \(k \in \mathbb{N}\) \\
+    Alors \[f = \langle 1, f \rangle 1 + \sum_{n = 1}^{+\infty} \left(2 \langle c_n, f \rangle c_n + 2 \langle s_n, f \rangle s_n \right)\]
+    On pose \[a_n(f) = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos(nx) \,dx = 2 \langle c_n, f \rangle \quad \text{ et } \quad b_n(f) = \frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin(nx) \,dx = 2 \langle s_n, f \rangle\]
+    Alors \[\boxed{f = \frac{a_0(f)}{2} + \sum_{n = 1}^{+\infty}\left(a_n(f) c_n + b_n(f) s_n\right)}\]
+    Au sens de \(\lVert \rVert_2\)
+\end{proposition}
+
+\pagebreak
+
+\begin{corollary}[ Parseval ]
+    Si \(f \in \mathcal{C}_{2\pi}(\mathbb{R}, \mathbb{R})\) \\
+    Alors \[\boxed{\lVert f \rVert_2^2 = \frac{1}{2\pi}\int_{-\pi}^{\pi} f^2 = \frac{a_0(f)^2}{4} + \frac{1}{2} \sum_{n = 1}^{+\infty}\left(a_n(f)^2 + b_n(f)^2 \right)}\]
+\end{corollary}
+\begin{proposition}
+    Soit \(f \in \mathcal{C}_{2\pi}(\mathbb{R}, \mathbb{C})\) ( fonctions continues \(2\pi\)-périodiques ) muni de \(\langle f, g \rangle = \frac{1}{2\pi}\int\limits_{-\pi}^{\pi}\overline{f}g\) \\
+    On note \(e_n: x \mapsto e^{inx}\) \\
+    On pose \[c_n(f) = \langle e_n, f \rangle = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-inx} \,dx\]
+    Alors \[\boxed{f = \sum_{-\infty}^{+\infty} c_n(f) e_n}\]
+    \[ f = \lim_{n \to +\infty} \sum_{n = -N}^{N} c_n(f) e_n\]
+\end{proposition}
+\begin{corollary}[ Parseval ]
+    Si \(f \in \mathcal{C}_{2\pi}(\mathbb{R}, \mathbb{R})\) \\
+    Alors \[\boxed{\lVert f \rVert_2^2 = \frac{1}{2\pi}\int_{-\pi}^{\pi} |f|^2 = \frac{1}{2} \sum_{n \in \mathbb{Z}}|c_n(f)|^2}\]
+\end{corollary}
 \end{document}

@@ -239,7 +239,7 @@
 \subsection{Fonctions intégrables sur \(I \times J\)}
 \begin{proposition}
     Soit \(f: I \times J \to \uline{\mathbb{R}_+}\) \\
-    Sous reserve de régularité de fonction on a dans \[0, +\infty\]
+    Sous reserve de régularité de fonction on a dans \([0, +\infty\)]
     \[\int_{I} \left(\int_{J} f(x, y) \,dy\right) \,dx = \int_{J} \left(\int_{I} f(x, y) \,dx\right) \,dy\]
     On note la valeur commune
     \[\iint\limits_{I \times J} f \in [0, +\infty]\]
@@ -285,13 +285,13 @@
     Alors \[\boxed{f = \frac{a_0(f)}{2} + \sum_{n = 1}^{+\infty}\left(a_n(f) c_n + b_n(f) s_n\right)}\]
     Au sens de \(\lVert \rVert_2\)
 \end{proposition}
-
-\pagebreak
-
 \begin{corollary}[ Parseval ]
     Si \(f \in \mathcal{C}_{2\pi}(\mathbb{R}, \mathbb{R})\) \\
     Alors \[\boxed{\lVert f \rVert_2^2 = \frac{1}{2\pi}\int_{-\pi}^{\pi} f^2 = \frac{a_0(f)^2}{4} + \frac{1}{2} \sum_{n = 1}^{+\infty}\left(a_n(f)^2 + b_n(f)^2 \right)}\]
 \end{corollary}
+
+\pagebreak
+
 \begin{proposition}
     Soit \(f \in \mathcal{C}_{2\pi}(\mathbb{R}, \mathbb{C})\) ( fonctions continues \(2\pi\)-périodiques ) muni de \(\langle f, g \rangle = \frac{1}{2\pi}\int\limits_{-\pi}^{\pi}\overline{f}g\) \\
     On note \(e_n: x \mapsto e^{inx}\) \\

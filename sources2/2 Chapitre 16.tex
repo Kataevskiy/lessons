@@ -117,7 +117,7 @@
         \item \(\sum\limits_{n \in \mathbb{N}}\int\limits_{I}|f_n| < +\infty\)
     \end{enumerate}
     Alors \(\sum\limits_{n = 0}^{+\infty} f_n\) est intégrable et
-    \[\boxed{\int_{I}\sum_{n = 0}^{+\infty}f_n = \sum_{n = 0}^{+\infty}\int_{I}}\]
+    \[\boxed{\int_{I}\sum_{n = 0}^{+\infty}f_n = \sum_{n = 0}^{+\infty}\int_{I} f_n}\]
     De plus
     \[\left| \int_{I}\sum_{n = 0}^{+\infty}f_n \right| \leq \sum_{n = 0}^{+\infty} \int_{I}|f_n|\]
 \end{theorem}
@@ -129,7 +129,7 @@
     Soit \(g: I \to \mathbb{K}\) continue par morceaux. \\
     On suppose:
     \begin{enumerate}
-        \item Pour tout \(t \in I\), \(f(x, y) \xrightarrow[x \to a]{}g(t)\)
+        \item Pour tout \(t \in I\), \(f(x, t) \xrightarrow[x \to a]{}g(t)\)
         \item Pour tout \(x \in A\), \(t \mapsto f(x, t)\) est \(\mathcal{C}^0\) par morceaux.
         \item Il existe \(\varphi: I \to \mathbb{R}_+\) \uline{intégrable} telle que \(\forall (x, t) \in A \times I\), \(|f(x, t)| \leq \varphi\) ( Domination )
     \end{enumerate}
@@ -180,7 +180,7 @@
     \begin{enumerate}
         \item À \(t\) fixé \(x \mapsto f(x, t)\) est \(\mathcal{C}^{+\infty}\) sur \(J\)
         \item Pour tout \(k \in \mathbb{N}\), à \(x\) fixé \(t \mapsto \frac{\partial^i f}{\partial x^i}(x, t)\) est continue par morceaux.
-        \item Pour tout \(k \in \mathbb{N}\) il existe \(\varphi_k: I \to \mathbb{R}_+\) intégrable telle que \(\forall (x, t) \in J \times I\), \(\left| \frac{\partial^k f}{\partial x^k}(x, t) \right| \leq \varphi_k(t)\) ( Domination )
+        \item Pour tout \(k \in \mathbb{N}\) il existe \(\varphi_k: I \to \mathbb{R}_+\) intégrable avec \(\forall (x, t) \in J \times I\), \(\left| \frac{\partial^k f}{\partial x^k}(x, t) \right| \leq \varphi_k(t)\) ( Domination )
     \end{enumerate}
     Alors \[F: x \in J \mapsto \int_{I} f(x, t) \,dt\] est de classe \(\mathcal{C}^{+\infty}\) et \(\forall k \geq 0 ,\, x \in J\)
     \[\boxed{F^{(i)}(x) = \int_{I} \frac{\partial^i f}{\partial x^i}(x, t) \,dt}\]

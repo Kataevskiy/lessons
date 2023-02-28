@@ -1,0 +1,318 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\usepackage{empheq}
+
+\onehalfspacing{}
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollary}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{\textbullet}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+
+\begin{center}
+{\Large \textbf{Chapitre 17. Séries entières}}
+\end{center}
+
+\noindent Si \(r > 0\) on notera \(D(a, r) = \left] a - r, a + r \right[ \) dans \(\mathbb{R}\)
+
+\section{Rayon de convergence d'une série entière}
+\subsection{Généralités}
+\begin{definition}
+    On appelle série entière toute série de fonctions du type \(\sum u_n\) avec \(u_n: z \in \mathbb{K} \mapsto a_n z^n \in \mathbb{K}\)
+    avec \((a_n)_{n \in \mathbb{N}}\) suite de \(\mathbb{R}\) ou de \(\mathbb{C}\) \\
+    On la note \(\sum\limits_{n = 0}^{+\infty} a_n z^n\)
+\end{definition}
+\begin{theorem}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) une série entière. \\
+    Alors dans \([0, +\infty]\)
+    \begin{align*}
+        R &= \sup \left\{r \geq 0 \mid (a_n r^n)_{n \in \mathbb{N}} \text{ bornée }\right\} \\
+        &= \sup \left\{r \geq 0 \mid a_n r^n \xrightarrow[n \to +\infty]{}0 \right\} \\
+        &= \sup \left\{r \geq 0 \mid (a_n r^n)_{n \in \mathbb{N}} \text{ sommable } \right\}
+    \end{align*}
+    \(R\) est appelée rayon de convergence de \(\sum\limits_{n = 0}^{+\infty} a_n z^n\)
+\end{theorem}
+
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+
+\begin{theorem}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R > 0\)
+    \begin{enumerate}
+        \item Pour tout \(z \in \mathbb{K}\) avec \(|z|< R\) \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) converge absolument.
+        \item Pour tout \(z \in \mathbb{K}\) avec \(|z|> R\) \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) diverge grossièrement ( ie. \(a_n z^n \not\to 0\) )
+    \end{enumerate}
+\end{theorem}
+\begin{definition}
+    Si \(\mathbb{K} = \mathbb{C}\) ( rp. \(\mathbb{R}\) ) \(D(0, R)\) est appelé disque ( rp. intervalle ) ouvert
+    de convergence de \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) \\
+    Si \(\mathbb{K} = \mathbb{C}\) alors \(C(0, R)\) est appelé cercle d'incertitude de \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) \\
+    Si \(\mathbb{K} = \mathbb{R}\) alors \(\{-R, R\}\) sont appelés points d'incertitude. \\
+    La somme de la série entière est
+    \[S: z \mapsto \sum\limits_{n = 0}^{+\infty} a_n z^n\]
+    Son domaine de définition \(\mathcal{D}_S\) vérifie
+    \[D(0, R) \subset \mathcal{D}_S \subset \overline{D}(0, R)\]
+\end{definition}
+
+\subsection{La Règle de D'Alembert}
+\begin{proposition}[ Règle de D'alembert ]
+    Soit \(\sum a_n z^n\) une série entière avec \(a_n \neq 0\) pour tout \(n\) \\
+    Si \[\frac{|a_{n + 1}|}{|a_n|} \xrightarrow[n \to +\infty]{} L\]
+    Alors dans \([0, +\infty]\)
+    \[R = \frac{1}{L}\]
+\end{proposition}
+
+\subsection{Théorème de comparaison}
+\begin{theorem}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R_a\) et \(\sum\limits_{n = 0}^{+\infty} b_n z^n\) de rayon \(R_b\) \\
+    Alors:
+    \begin{enumerate}
+        \item Si pour tout \(n \in \mathbb{N}\) \(|a_n| \leq |b_n|\) alors \(R_b \leq R_a\)
+        \item Si \(|a_n| \underset{n \to +\infty}{=} O(|b_n|)\) alors \(R_b \leq R_a\)
+        \item Si \(|a_n| \underset{n \to +\infty}{\sim} |b_n|\) alors \(R_b = R_a\)
+    \end{enumerate}
+\end{theorem}
+
+\subsection{Rayon d'une somme, d'un produit}
+\begin{proposition}
+    On considère \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R_a\) et \(\sum\limits_{n = 0}^{+\infty} b_n z^n\) de rayon \(R_b\) \\
+    Notons \(R\) le rayon de \(\sum\limits_{n = 0}^{+\infty} (a_n + b_n) z^n\) \\
+    Alors:
+    \begin{itemize}
+        \item  \(R \geq \min(R_a, R_b)\) et même si \(R_a \neq R_b\) alors \(R = \min(R_a, R_b)\)
+        \item  Si \(|z| < \min(R_a, R_b)\) alors
+        \[\sum_{n = 0}^{+\infty}(a_n + b_n) z^n = \sum_{n = 0}^{+\infty} a_n z^n + \sum_{n = 0}^{+\infty} b_n z^n\]
+    \end{itemize}
+\end{proposition}
+\begin{definition}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) et \(\sum\limits_{n = 0}^{+\infty} b_n z^n\) deux séries entières. \\
+    La série entière produit de Cauchy de \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) et \(\sum\limits_{n = 0}^{+\infty} b_n z^n\) est \(\sum\limits_{n = 0}^{+\infty} c_n z^n\) avec
+    \[c_n = \sum_{k = 0}^{n} a_k b_{n - k} = \sum_{p + q = n} a_p b_q\]
+\end{definition}
+\begin{theorem}
+    \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R_a\) et \(\sum\limits_{n = 0}^{+\infty} b_n z^n\) de rayon \(R_b\) \\
+    Soit \(\sum\limits_{n = 0}^{+\infty} c_n z^n\) leur produit de Cauchy de rayon \(R\) \\
+    Alors \(R \geq \min(R_a, R_b)\) et si \(|z| < \min(R_a, R_b)\) alors
+    \[\boxed{\sum_{n = 0}^{+\infty}c_n z^n = \left(\sum_{n = 0}^{+\infty}a_n z^n\right) \left(\sum_{n = 0}^{+\infty} b_n z^n\right)}\]
+\end{theorem}
+
+\section{Propriétés des séries entières dans le disque ouvert de convergence}
+\subsection{Mode de convergence}
+\begin{theorem}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R \in \left]0, +\infty \right]\)
+    \begin{enumerate}
+        \item Il y a convergence absolue sur \(D(0, R)\)
+        \item Il y a convergence normale sur tout disque fermé \(\overline{D}(0, r)\) inclus dans le disque \uline{ouvert} de convergence \\
+        ( avec donc \(r < R\) ) \\
+        En particulier, il y a convergence uniforme sur tout \(\overline{D}(0, r)\) avec \(r < R\)
+    \end{enumerate}
+\end{theorem}
+\begin{corollary}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) une série de rayon \(R > 0\) \\
+    Il y a convergence normale sur tout compact contenu dans le disque ouvert \(D(0, R)\) \\
+    La fonction somme \(S: z \mapsto \sum\limits_{n = 0}^{+\infty} a_n z^n\) est continue sur \(D(0, R)\)
+\end{corollary}
+
+\subsection{Dérivation d'une série entière}
+\begin{definition}
+    \(\sum\limits_{n = 1}^{+\infty} n a_n z^{n - 1}\) ou \(\sum\limits_{n = 0}^{+\infty} (n + 1) a_{n + 1} z^n\) est appelée série entière dérivée de \(\sum\limits_{n = 0}^{+\infty} (n + 1) a_{n + 1} z^n\)
+\end{definition}
+\begin{proposition}
+    Si \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) a un rayon \(R\) alors sa série dérivée \(\sum\limits_{n = 1}^{+\infty} n a_n z^{n - 1}\) a le même rayon \(R\)
+\end{proposition}
+\begin{theorem}
+    Soit \(S: x \mapsto \sum\limits_{n = 0}^{+\infty} a_n x^n\) de rayon \(R\) ( \(a_n \in \mathbb{K}\) ) \\
+    Alors \(S\) est \(\mathcal{C}^{\infty}\)sur l'intervalle ouvert de convergence \(\left] -R, R \right[\) et on obtient \(S'\) en dérivant terme à terme: \\
+    Pour tout \(x \in \left] -R, R \right[\)
+    \[\boxed{S'(x) = \sum_{n = 1}^{+\infty} n a_n x^{n - 1} = \sum_{n = 0}^{+\infty} (n + 1) a_{n + 1} x^n}\]
+    Et si \(p \geq 1\)
+    \[\boxed{S^{(p)}(x) = \sum_{n = p}^{+\infty} n(n - 1) ... (n - p + 1) a_n x^{n - p} = \sum_{n = 0}^{+\infty} (n + p) ... (n + 1) a_{n + p} x^n}\]
+\end{theorem}
+
+\subsection{Unicité des coefficients}
+\begin{proposition}
+    Soit \(f(x) = \sum\limits_{n = 0}^{+\infty} a_n x^n\) ( \(x \in \mathbb{R}\) ) une série entière de rayon \(R > 0\) \\
+    Alors \(f\) est \(\mathcal{C}^{\infty}\) sur \(\left] -R, R \right[\) et
+    \[\boxed{a_n = \frac{f^{(n)}(0)}{n!}}\]
+    En particulier, les coefficients d'une série entière de rayon \(> 0\) sont uniquement déterminés par la fonction somme. \\
+    De plus, pour \(x \in \left] -R, R \right[\)
+    \[\boxed{f(x) = \sum_{n = 0}^{+\infty} \frac{f^{(n)}(0)}{n!}x^n}\]
+    ie. \(f\) est égale à sa série de Taylor.
+\end{proposition}
+\begin{corollary}
+    Si deux séries entières avec un rayon \(> 0\) coïncident sur un voisinage de \(0\) \\
+    ( ou de \(0^+\) ou de \(0^-\) ) alors elles ont les mêmes coefficients et sont donc égales.
+\end{corollary}
+
+\subsection{Intégration d'une série entière}
+\begin{proposition}
+    Soit \(f(x) = \sum\limits_{n = 0}^{+\infty} a_n x^n\) de rayon \(R > 0\) \\
+    On peut intégrer terme à terme la série sur tout segment \([a, b] \subset \left] -R, R \right[\) \\
+    En particulier si \(|x| < R\)
+    \[\boxed{\int_{0}^{x} f(t) \, dt = \int_{0}^{x} \sum_{n = 0}^{+\infty} a_n t^n \, dt = \sum_{n = 0}^{+\infty} \frac{a_n x^{n + 1}}{n + 1}}\]
+\end{proposition}
+\begin{proposition}
+    Soit \(f(z) = \sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R > 0\) \\
+    Si \(r \in \left[0, R \right[\) alors
+    \[\boxed{a_n r^n = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(re^{i\theta})e^{-in\theta} \, d\theta}\]
+\end{proposition}
+
+\pagebreak
+
+\subsection{Complément: fonctions holomorphes}
+\begin{definition}
+    Soit \(\Omega\) un ouvert de \(\mathbb{C}\) et \(f: \Omega \to \mathbb{C}\) \\
+    On dit que \(f\) est holomorphe ( ou \(\mathbb{C}\)-dérivable ) si pour tout \(z_0 \in \Omega\) \(\lim\limits_{\substack{z \to z_0 \\ z \neq z_0}} \frac{f(z) - f(z_0)}{z - z_0}\) existe. \\
+    Cette limite est notée \(f'(z_0)\)
+\end{definition}
+\begin{theorem}
+    Soit \(\sum\limits_{n = 0}^{+\infty} a_n z^n = f(z)\) une série entière de rayon \(R > 0\) \\
+    Alors \(f\) est holomorphe sur \(D(0, R)\) \\
+    Pour tout \(z \in D(0, R)\)
+    \[f'(z) = \sum_{n = 1}^{+\infty} n a_n z^{n - 1}\]
+    En particulier \(f\) est \(\mathcal{C}^{\infty}\) sur \(D(0, R)\)
+\end{theorem}
+
+\section{Fonctions développables en séries entières}
+\subsection{Position du problème}
+\begin{definition}
+    Soit \(f: U \to \mathbb{K}\), \(U \subset \mathbb{K}\), \(a \in U\) voisinage de \(a\) \\
+    On dit que \(f\) est développable en série entière en \(a\) ( DSE en \(a\) ) s'il existe \(r > 0\), \((a_n)_{n \geq 0} \in \mathbb{K}^{\mathbb{N}}\) tel que  \\
+    \(\forall x \in U\), \(|x - a| < r \implies f(x) = \sum\limits_{n = 0}^{+\infty} a_n (x - a)^n\) \\
+    Si \(U\) est un ouvert et si \(f\) est DSE en tout point \(a \in U\) on dit que \(f\) est analytique.
+\end{definition}
+\begin{proposition}
+    Soit \(f: I \to \mathbb{K}\) DSE en \(a \in \overset{\circ}{I}\) alors:
+    \begin{enumerate}
+        \item \(f\) est \(\mathcal{C}^{\infty}\) au voisinage de \(a\)
+        \item Au voisinage de \(a\)
+        \[\boxed{f(x) = \sum_{n = 0}^{+\infty} \frac{f^{(n)}(a)}{n!}(x - a)^n}\]
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Application du développement de l'exponentielle}
+\begin{proposition}
+    L'exponentielle
+    \[\boxed{e^z = \sum_{n = 0}^{+\infty} \frac{z^n}{n!}}\]
+    a un rayon \uline{infini}. \\
+    Par opération, il en va de même pour \(\cos,\, \sin,\, \cosh,\, \sinh \) qui ont toutes un rayon \uline{infini} \\
+    Pour tout \(x \in \mathbb{R}\)
+    \begin{empheq}[box=\fbox]{align*}
+        \cosh(x) &= \sum_{n = 0}^{+\infty} \frac{x^{2n}}{(2n)!} \\
+        \sinh(x) &= \sum_{n = 0}^{+\infty} \frac{x^{2n + 1}}{(2n + 1)!} \\
+        \cos(x) &= \sum_{n = 0}^{+\infty} \frac{(-1)^n x^{2n}}{(2n)!} \\
+        \sin(x) &= \sum_{n = 0}^{+\infty} \frac{(-1)^n x^{2n + 1}}{(2n + 1)!}
+    \end{empheq}
+\end{proposition}
+
+\pagebreak
+
+\subsection{Méthode de l'équation différentielle}
+\noindent Pour montrer qu'une fonction \(f\) est DSE en \(0\) on peut:
+\begin{itemize}
+    \item Trouver une équation différentielle sur \(f\) d'ordre 1 ou 2 à coefficients polynomiaux.
+    \item Analyse: on suppose \(f\) DSE en 0 avec un rayon \(R > 0\) et on injecte dans l'équation différentielle. \\
+    Par unicité des coefficients et les conditions de Cauchy on obtient les coefficients \(a_n\)
+    \item Synthèse: On pose \(g(x) = \sum\limits_{n = 0}^{+\infty} a_n x^n\) avec les \(a_n\) trouvés. \\
+    On montre que \(R_g > 0\), que \(g\) vérifie le même problème de Cauchy que \(f\) et donc \(f = g\)
+\end{itemize}
+\medskip
+\noindent \uline{Exercice}: DSE en 0 de \(f(t) = \cos(\alpha \arcsin(t))\) pour \(\alpha \in \mathbb{R}\)
+
+\subsection{La série de binôme de Newton}
+\begin{theorem}[ Série du binôme ]
+    Soit \(\alpha \in \mathbb{R} \setminus \mathbb{N}\) \\
+    La fonction \(x \mapsto (1 + x)^\alpha\) est développable de 0 en série entière avec un rayon égal à 1 et si \(|x| < 1\)
+    \[\boxed{(1 + x)^\alpha = \sum_{n = 0}^{+\infty} \frac{\alpha (\alpha - 1) ... (\alpha - n + 1)}{n!}x^n = \sum_{n = 0}^{+\infty}\binom{\alpha}{n} x^n}\]
+\end{theorem}
+\begin{proposition}
+Pour \(|x| < 1\)
+\begin{empheq}[box=\fbox]{align*}
+    \frac{1}{1 + x} &= \sum_{n = 0}^{+\infty} (-1)^n x^n \\
+    \frac{1}{1 - x} &= \sum_{n = 0}^{+\infty} x^n
+\end{empheq}
+\begin{empheq}[box=\fbox]{align*}
+    \ln(1 + x) &= \sum_{n = 0}^{+\infty} \frac{(-1)^n x^{n + 1}}{n + 1} = \sum_{n = 1}^{+\infty} \frac{(-1)^{n - 1} x^n}{n} \\
+    \ln(1 - x) &= - \sum_{n = 1}^{+\infty} \frac{x^n}{n}
+\end{empheq}
+\[\boxed{\arctan(x) = \sum_{n = 0}^{+\infty} \frac{(-1)^n x^{2n + 1}}{2n + 1}}\]
+\[\boxed{\frac{1}{\sqrt{1 + x}} = \sum_{n = 0}^{+\infty} \frac{(-1)^n \binom{2n}{n}}{4^n} x^n}\]
+\[\boxed{\arcsin(x) = \sum_{n = 0}^{+\infty} \frac{\binom{2n}{n} x^{2n + 1}}{(2n + 1) 4^n}}\]
+\end{proposition}
+
+\subsection{Complément: Développement en série entière des fractions rationnelles}
+\begin{theorem}
+    Soit \(F \in \mathbb{C}(X)\) dont 0 n'est pas pôle. On note \(a_1, ...,\, a_p\) ses pôles. \\
+    Alors \(F\) est développable en série entière en 0 avec un rayon \(R = \inf(|a_1|,\, |a_2|, ...,\,|a_p|)\) ( si \(p = 0,\, R = +\infty\) )
+\end{theorem}
+
+\section{Comportement aux points d'incertitude}
+\subsection{Cas où \(\sum\limits_{n \in \mathbb{N}} |a_n| R^n < +\infty\)}
+\begin{proposition}
+    Si \(\sum\limits_{n = 0}^{+\infty} a_n z^n\) est de rayon \(R \in \left] 0, +\infty \right[\) ( fini ) et si \(\sum\limits_{n \in \mathbb{N}} |a_n| R^n < +\infty\) alors
+    \[f: \begin{cases} \overline{D}(0, R) \to \mathbb{C} \\
+    z \mapsto \sum\limits_{n = 0}^{+\infty} a_n z^n \end{cases}\]
+    est continue sur \(\overline{D}(0, R)\)
+\end{proposition}
+
+\subsection{Cas où \(R = 1\) est les coefficients sont positifs}
+\begin{proposition} \hfill
+    \begin{enumerate}
+        \item Si \(\sum\limits_{n \in \mathbb{N}} a_n < +\infty\) alors \(f: x \mapsto \sum\limits_{n = 0}^{+\infty} a_n x^n\) est continue sur \([-1, 1]\)
+        \item Si \(\sum\limits_{n \in \mathbb{N}} a_n = +\infty\) alors \(\lim\limits_{x \to 1^{-}} \sum\limits_{n = 0}^{+\infty} a_n x^n = +\infty\)
+    \end{enumerate}
+    Dans \([0, +\infty]\) on a donc
+    \[\lim_{x \to 1^{-}} \sum_{n = 0}^{+\infty} a_n x^n = \sum_{n \in \mathbb{N}} a_n\]
+\end{proposition}
+
+\subsection{Le théorème d'Abel-radial}
+\begin{theorem}[ Théorème d'Abel-radial ]
+    Soit \(f(x) = \sum\limits_{n = 0}^{+\infty} a_n x^n\) une série entière de rayon \(R \in \left] 0, +\infty \right[\) ( \(\forall n \in \mathbb{N},\, a_n \in \mathbb{K},\, x \in \mathbb{R}\) ) \\
+    Si \(\sum a_n R^n\) converge, alors \(f\) est continue en \(R\) ( et donc sur \(\left] -R, R \right]\) ) \\
+    Autrement dit
+    \[\lim_{x \to R^{-}} \sum_{n = 0}^{+\infty} a_n x^n = \sum_{n = 0}^{+\infty} a_n R^n\]
+\end{theorem}
+
+\section{Exercices classiques}
+\subsection{Exercice type: traitement d'équations différentielles d'ordre 2}
+\noindent On considère \((E)\) \(4xy'' + 2y' - y = 0\) \\
+Trouver les solutions sur \(\mathbb{R}_{+}^{*},\, \mathbb{R}_{-}^{*},\, \mathbb{R}_{-}\) \\
+( Indication: on en cherchera une DSE )
+
+\subsection{Équivalent d'une série entière au point d'incertitude}
+\noindent Soit \((a_n)_{n \geq 0}\) suite de \(\mathbb{R}_+\), \((b_n)_{n \in \mathbb{N}}\) suite de \(\mathbb{R}\) avec \(b_n \underset{+\infty}{=} o(a_n)\) et \((c_n)_{n \in \mathbb{N}}\) suite de \(\mathbb{R}\) avec \(c_n \underset{+\infty}{\sim} a_n\) \\
+No suppose de plus \(f(x) = \sum\limits_{n = 0}^{+\infty} a_n x^n\), \(g(x) = \sum\limits_{n = 0}^{+\infty} b_n x^n\) et \(h(x) = \sum\limits_{n = 0}^{+\infty} c_n x^n\) pour \(|x| < 1\)
+\begin{enumerate}
+    \item Montrer que le rayon de \(g\) et de \(h\) est \(\geq 1\), \(\lim\limits_{x \to 1^-} f(x) = +\infty\)
+    \item Monter que \(g(x) \underset{x \to 1^-}{=} o(f(x))\)
+    \item Montrer que \(h(x) \underset{x \to 1^-}{\sim} f(x)\)
+\end{enumerate}
+
+\subsection{Analycité, inversion, composition}
+\noindent Soit \(f(z) = \sum\limits_{n = 0}^{+\infty} a_n z^n\) de rayon \(R > 0\)
+\begin{enumerate}
+    \item Montrer que si \(a_0 \neq 0\) ie. \(f(0) \neq 0\) alors \(\frac{1}{f}\) est DSE en \(0\)
+    \item Montrer que si \(|z_0| < R\) alors \(f\) est DSE en \(z_0\) ( Analycité ) \\
+    \(f\) est donc analytique sur \(D(0, R)\)
+    \item Soit \(g(z) = \sum\limits_{n = 1}^{+\infty} b_n z^n\) ( \(b_0 = 0\) ie. \(g(0) = 0\) ) avec un rayon \(R' > 0\) \\
+    Montrer que \(f \circ g(z) = f(g(z))\) est DSE en \(0\)
+\end{enumerate}
+\end{document}

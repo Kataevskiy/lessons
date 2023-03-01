@@ -1,0 +1,234 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+
+\usepackage{empheq}
+
+\onehalfspacing{}
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollary}[proposition]{Corollaire}
+\newtheorem{lemme}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{Cov}
+
+\begin{document}
+\renewcommand{\labelitemi}{\textbullet}
+
+\begin{center}
+{\Large \textbf{Chapitre 18. Probabilités discrètes ( 2\textsuperscript{ème} partie )}}
+\end{center}
+\noindent \((\Omega, \mathcal{T}, \mathbb{P})\) est un espace probabilisé.
+
+\section{Variance d'une variable aléatoire discrète}
+\subsection{Moment d'ordre \(p\)}
+\begin{definition}
+    Soit \(X\) une v.a.d. \(X: \Omega \to \mathbb{K}\) \\
+    On dit que \(X\) admet un moment d'ordre \(p\) ( \(p \in \mathbb{N}^*\) ) si \(\mathbb{E}\left(|X|^p\right) < +\infty\)
+\end{definition}
+\begin{proposition}
+    Soit \(X: \Omega \to \mathbb{K}\) une vad et \(1 \leq q \leq p\) dans \(\mathbb{N}\)
+    \begin{enumerate}
+        \item Si \(X\) admet un moment d'ordre \(p\) il admet un moment d'ordre \(q\)
+        \item Si \(X, Y: \Omega \to \mathbb{K}\) vad admettent des moments d'ordre \(p\), il en va de même de \(\lambda X + \mu Y\) avec \(\lambda, \mu \in \mathbb{K}\)
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Variance}
+\begin{definition}
+    On note:
+    \[L^1(\Omega) = L^1 = \left\{ X: \Omega \to \mathbb{R} \mid \mathbb{E}(|X|) < + \infty \right\}\]
+    \[L^2(\Omega) = L^2 = \left\{ X: \Omega \to \mathbb{R} \mid \mathbb{E}(|X|^2) < + \infty \right\}\]
+    On a \(L^2(\Omega) \subset L^1(\Omega)\)
+\end{definition}
+\begin{proposition}[ Inégalité de Cauchy-Schwarz ]
+    Soit \(X, Y \in L^2(\Omega)\) \\
+    Alors \(X Y\) admet une espérance et \[\mathbb{E}(XY)^2 \leq \mathbb{E}(X^2) \mathbb{E}(Y^2)\] 
+    avec égalité ssi \(\exists (\lambda, \mu) \in \mathbb{R}^2 \setminus \{ 0 \} \), \(\lambda X + \mu Y = 0\) p.s.
+\end{proposition}
+\begin{corollary}
+    Si \(X \in L^2(\Omega)\) alors \(X\) admet une espérance et
+    \[\boxed{\mathbb{E}(|X|) \leq \sqrt{\mathbb{E}(X^2)}}\]
+\end{corollary}
+\begin{definition}
+    Soit \(X \in L^2(\Omega)\) \\
+    On appelle variance de \(X\) le réel
+    \[\var(X) = V(X) = \mathbb{E}\left((X - \mathbb{E}(X))^2\right)\]
+    L'écart type de \(X\) est
+    \[\sigma_X = \sqrt{\var X} = \sqrt{\mathbb{E}\left((X - \mathbb{E}(X))^2 \right)}\]
+\end{definition}
+\begin{proposition}
+    \hfill \begin{enumerate}
+        \item Si \(X \in L^2(\Omega)\) alors
+        \[\boxed{\var(X) = \mathbb{E}(X^2) - \mathbb{E}(X)^2}\]
+        \item Si \(a, b \in \mathbb{R}\) alors
+        \begin{empheq}[box=\fbox]{align*}
+            \var(X - a) &= \var(X) \\
+            \var(bX) &= b^2 \var(X)
+        \end{empheq}
+    \end{enumerate}
+\end{proposition}
+
+\pagebreak
+
+\begin{definition}
+    Soit \(X: \Omega \to \mathbb{R}\) une vard (variable aléatoire réelle discrète)
+    \begin{enumerate}
+        \item Si \(X \in L^1\), on pose \(\overset{\circ}{X} = X - \mathbb{E}(X)\) \\
+        C'est la variable contrée associée à \(X\)
+        \item Si \(X \in L^2\), on pose \(\overset{\sim}{X} = \frac{X - \mathbb{E}(X)}{\sigma_X}\) \\
+        C'est la variable centrée réduite associée à \(X\)
+    \end{enumerate}
+\end{definition}
+
+\subsection{Covariance}
+\begin{definition}
+    Soit \(X, Y \in L^2(\Omega)\) \\
+    Alors \((X - \mathbb{E}(X))(Y - \mathbb{E}(Y)) = \overset{\circ}{X} \overset{\circ}{Y}\) admet une espérance appelée covariance de \(X\) et \(Y\) et notée
+    \[\cov(X, Y) = \mathbb{E}\left((X - \mathbb{E}(X))(Y - \mathbb{E}(Y))\right) = \mathbb{E}(\overset{\circ}{X} \overset{\circ}{Y}) = \cov(Y, X)\]
+\end{definition}
+\begin{proposition}[ Inégalité de Cauchy-Schwarz ]
+    Soit \(X, Y \in L^2(\Omega)\) \\
+    Alors:
+    \[\boxed{\cov(X, Y) = \mathbb{E}(XY) - \mathbb{E}(X) \mathbb{E}(Y)}\]
+    \[\boxed{\var(X + Y) = \var(X) + \var(Y) + 2\cov(X, Y)}\]
+    \[\boxed{\cov(X, Y)^2 \leq \var(X) \var(Y)}\]
+\end{proposition}
+\begin{proposition}
+    \hfill \begin{enumerate}
+        \item Soit \(X, Y \in L^2(\Omega)\) indépendants \\
+        Alors \[\boxed{\cov(X, Y) = 0}\] \[\boxed{\var(X + Y) = \var(X) + \var(Y)}\]
+        \item Si \(X_1, ...,\, X_n \in L^2(\Omega)\) indépendantes, alors
+        \[\boxed{\var(X_1 + ... + X_n) = \var(X_1) + ... + \var(X_n)}\]
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Variance des lois discrètes classiques}
+\subsubsection{Loi de Bernoulli}
+\noindent Si \(X \sim \mathcal{B}(p)\) alors
+\[\boxed{\var X = p(1 - p) = pq}\]
+
+\subsubsection{Loi binomiale}
+\noindent Si \(X \sim \mathcal{B}(n, p)\) alors
+\[\boxed{\var X = npq}\]
+
+\subsubsection{Loi géométrique}
+\noindent Si \(X \sim \mathcal{G}_{\mathbb{N}^*}(p)\) avec \(0 < p < 1\) alors
+\[\boxed{\var X = \frac{q}{p^2}}\]
+Si \(X \sim \mathcal{G}_{\mathbb{N}}(p)\) alors \(Y = X + 1\) et \(\var X = \var Y = \frac{q}{p^2}\)
+
+\subsubsection{Loi de Poisson}
+\noindent Si \(X \sim \mathcal{P}(\lambda)\) alors
+\[\boxed{\var X = \mathbb{E}(X) = \lambda}\]
+
+\subsection{Inégalité de Markov et de Tchebychev}
+\begin{proposition}[ Inégalité de Markov ]
+    Soit \(X\) une vard sur \(\Omega\) possédant une espérance. \\
+    Alors pour tout \(\varepsilon > 0\)
+    \[\boxed{\mathbb{P}(|X| \geq \varepsilon) \leq \frac{\mathbb{E}(|X|)}{\varepsilon}}\]
+\end{proposition}
+\begin{corollary}[ Inégalité de Bienaymé-Tchebychev ]
+    Soit \(X\) une vard à variance finie et \(\varepsilon > 0\) \\
+    Alors \[\boxed{\mathbb{P}\left(|X - \mathbb{E}(X)| > \varepsilon\right) \leq \frac{\var(X)}{\varepsilon^2}}\]
+\end{corollary}
+
+\section{Fonctions génératrices}
+\subsection{Généralités}
+\noindent Ici \(X: \Omega \to \mathbb{N}\)
+\begin{definition}
+    On pose \[G_X: \begin{cases} 
+    [-1, 1] \to \mathbb{R} \\
+    s \mapsto \mathbb{E}(s^X) \end{cases}\]
+    C'est la fonction génératrice de \(X\)
+\end{definition}
+\begin{proposition}
+    Soit \(X: \Omega \to \mathbb{N}\) une vad, \(G_X\) sa fonction génératrice et \(p_n = \mathbb{P}(X = n)\) pour \(n \in \mathbb{N}\)
+    \begin{enumerate}
+        \item Le domaine de définition de \(G_X\) contient \([-1, 1]\) et si \(s \in [-1, 1]\) alors \(G_X(s) = \sum\limits_{n = 0}^{+\infty}p_n s^n\) \\
+        En particulier \(G_X\) est une série entière de rayon \(R \geq 1\) \\
+        De plus pour \(s \in [-1, 1]\), \(|G_X(s)| \leq 1\) et \(G_X(1) = 1\)
+        \item \(G_X\) est continue sur \([-1, 1]\) et \(\mathcal{C}^{\infty}\) sur \(\left] -1, 1 \right[\)
+        \item Pour tout \(n \in \mathbb{N}\)
+        \[\boxed{p_n = \mathbb{P}(X = n) = \frac{G_X^{(n)}(0)}{n!}}\]
+        \(G_X\) caractérise la loi de \(X\)
+    \end{enumerate}
+\end{proposition}
+\begin{proposition}
+    \hfill \begin{enumerate}
+        \item Soit \(X, Y: \Omega \to \mathbb{N}\) vad indépendantes. \\
+        Alors pour tout \(s \in [-1, 1]\)
+        \[\boxed{G_{X + Y}(s) = G_X(s) G_Y(s)}\]
+        \item Si \(X_1, ...,\, X_n: \Omega \to \mathbb{N}\) vad indépendantes alors pour tout \(s \in [-1, 1]\)
+        \[\boxed{G_{X_1 + ... + X_n}(s) = G_{X_1}(s) ... G_{X_n}(s)}\] 
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Fonctions génératrices des lois classiques}
+\subsubsection{Loi uniforme sur \(\llbracket 1, n \rrbracket\)}
+\noindent Si \(X \sim \mathcal{U}(\llbracket 1, N \rrbracket)\) alors
+\[\boxed{G_X(s) = \frac{s}{N} \frac{1 - s^N}{1 - s}}\]
+
+\subsubsection{Loi de Bernoulli}
+\noindent Si \(X \sim \mathcal{B}(p)\) alors
+\[\boxed{G_X(s) = q + sp}\]
+
+\subsubsection{Loi binomiale}
+\noindent Si \(X \sim \mathcal{B}(n, p)\) alors
+\[\boxed{G_X(s) = (q + sp)^n}\]
+
+\subsubsection{Loi de Poisson}
+\noindent Si \(X \sim \mathcal{P}(\lambda)\) alors
+\[\boxed{G_X(s) = e^{\lambda(s - 1)}}\]
+
+\subsubsection{Loi géométrique}
+\noindent Si \(X \sim \mathcal{G}_{\mathbb{N}^*}(p)\) avec \(0 < p < 1\) alors
+\[\boxed{G_X(s) = \frac{sp}{1 - sq}}\]
+Si \(X \sim \mathcal{G}_{\mathbb{N}}(p)\) alors
+\[\boxed{G_X(s) = \frac{p}{1 - sq}}\]
+
+\subsection{Obtention des moments}
+\begin{proposition}
+    Soit \(X: \Omega \to \mathbb{N}\) une vad, \(r \geq 1\) \\
+    Alors \(X\) admet un moment d'ordre \(r\) \(\iff\) \(G_X\) est \(\mathcal{C}^r\) sur \([0, 1]\) \\
+    \(X\) est d'espérance finie \(\iff\) \(G_X\) est \(\mathcal{C}^1\) sur \([0, 1]\) \\
+    \(X\) est à variance finie \(\iff\) \(G_X\) est \(\mathcal{C}^2\) sur \([0, 1]\) \\
+    Dans ces conditions, respectivement:
+    \[G_X^{(r)}(1) = \mathbb{E}(X(X - 1)...(X - r + 1))\]
+    \[\boxed{G_X'(1) = \mathbb{E}(X)}\]
+    \[\boxed{\var X = \mathbb{E}(X(X - 1)) + \mathbb{E}(X) - \mathbb{E}(X)^2 = G_X''(1) + G_X'(1) - G_X'(1)^2}\]
+\end{proposition}
+
+\pagebreak
+
+\section{Convergence de variables aléatoires}
+\subsection{Convergence en probabilité}
+\begin{definition}
+    Soit \(X_n: \Omega \to \mathbb{K}\) ( \(n \in \mathbb{N}\) ) vad et \(X: \Omega \to \mathbb{K}\) \\
+    On dit que \((X_n)_{n \geq 0}\) converge en probabilité vers \(X\) si \(\forall \varepsilon > 0,\, \mathbb{P}(|X_n - X| > \varepsilon) \xrightarrow[n \to +\infty]{} 0\)
+\end{definition}
+
+\subsection{Loi faible des grands nombres}
+\begin{theorem}[ Loi faible des grandes nombres ]
+    \hfill \\
+    Soit \(X_n: \Omega \to \mathbb{R}\) vard \uline{indépendantes} de même loi et \uline{à variance finie}. \\
+    On note \(m = \mathbb{E}(X_1)\) leur espérance commune. \\
+    Alors \(\frac{S_n}{n} = \frac{X_1 + ... + X_n}{n}\) converge en probabilité vers \(m\). \\
+    Plus précisément, pour tout \(\varepsilon > 0\)
+    \[\boxed{\mathbb{P}\left(\left|\frac{S_n}{n} - m\right| > \varepsilon \right) \leq \frac{\var(X_1)}{n \varepsilon^2} \xrightarrow[n \to +\infty]{} 0}\]
+\end{theorem}
+\end{document}

@@ -1,0 +1,540 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+\usepackage{empheq}
+
+\usepackage{mathabx}
+
+\onehalfspacing{}
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollary}[proposition]{Corollaire}
+\newtheorem{lemma}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\DeclareMathOperator*{\mat}{Mat}
+\DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\Sp}{Sp}
+
+\begin{document}
+\renewcommand{\labelitemi}{\textbullet}
+
+\begin{center}
+{\Large \textbf{Chapitre 14. Produit scalaire, groupe orthogonal}}
+\end{center}
+\begin{proposition}
+    Soit \(K\) un corps de caractéristique différent de 2 \\
+    Si \(X = \begin{pmatrix}
+        x_1 \\
+        \vdots \\
+        x_n
+    \end{pmatrix}\), \(Y = \begin{pmatrix}
+        y_1 \\
+        \vdots \\
+        y_n
+    \end{pmatrix} \in K^n\) et \(A = (a_{ij})_{1 \leq i, j \leq n}\) alors
+    \[\boxed{X^T A Y = \sum_{1 \leq i, j \leq n} a_{ij} x_i y_j}\]
+    \[\boxed{e_i^T A e_j = a_{ij}}\]
+    En particulier, si pour tout \(X, Y \in K^n\), \(X^T A Y = X^T B Y\) alors \(A = B\)
+\end{proposition}
+
+\section{Forme bilinéaire symétrique}
+\subsection{Généralités}
+\begin{definition}
+    Soit \(E\) un \(K\)-ev et \(\varphi: E \times E \to K\) une fbs ( forme bilinéaire symétrique ) \\
+    La forme quadratique associée à \(\varphi\) est
+    \[q: \begin{cases}
+        E \to K \\
+        x \mapsto q(x) = \varphi(x, x)
+    \end{cases}\]
+    \(\varphi\) est la forme polaire de \(q\)
+\end{definition}
+\begin{proposition}[ Identité de polarisation ]
+    Avec ces notations
+    \begin{empheq}[box=\fbox]{align*}
+        \varphi(x, y) &= \frac{1}{2}\left(q(x + y) - q(x) - q(y)\right) \\
+        &= \frac{1}{2} \left(q(x) + q(y) - q(x - y)\right) \\
+        &= \frac{1}{4} \left(q(x + y) - q(x - y)\right)
+    \end{empheq}
+    À une forme quadratique ne correspond qu'une unique forme polaire.
+\end{proposition}
+
+\subsection{Expression matricielle}
+\begin{definition}
+    Soit \(E\) un \(K\)-ev de dimension finie, \(\mathcal{B}=(e_1, ...,\, e_n)\) une base de \(E\) et \(\varphi: E \times E \to K\) fbs et \(q\) sa forme quadratique. \\
+    On pose \(\mat\limits_{\mathcal{B}}(\varphi) = \mat\limits_{\mathcal{B}}(q) = (\varphi(e_i, e_j))_{1 \leq i, j \leq n} \in S_n(K)\)
+\end{definition}
+\begin{proposition}
+    Avec ces notations, si \(x, y \in E\) de colonnes \(X\) et \(Y\) dans la base \(\mathcal{B}\) et \(A = \mat\limits_{\mathcal{B}}(\varphi)\) on a
+    \[\boxed{\varphi(x, y) = X^T A Y = Y^T A X}\]
+\end{proposition}
+\begin{definition}
+    Soit \(A \in S_n(K) = \{ M \in M_n(K) \mid M^T = M \}\) \\
+    \(\varphi_A: (X, Y) \in K \times K \mapsto X^T A Y \) est une fbs sur \(K^n\) appelée fbs canoniquement associée à \(A\)
+\end{definition}
+
+\pagebreak
+
+\begin{proposition}
+    Soit \(E\) \(K\)-ev, \(\varphi\) une fbs sur \(E\) de dim. finie. \\
+    Soit \(\mathcal{B},\, \mathcal{C}\) deux bases et \(A = \mat\limits_{\mathcal{B}}(\varphi),\, B = \mat\limits_{\mathcal{C}}(\varphi),\, P = \mat(\mathcal{B}, \mathcal{C})\) \\
+    Alors \[\boxed{B = P^T A P}\]
+\end{proposition}
+\begin{definition}
+    Soit \(A, B \in S_n(K)\) \\
+    On dit que \(A\) et \(B\) sont congruentes s'il existe \(P \in GL_n(K)\) avec \(B = P^T A P\)
+\end{definition}
+\begin{definition}
+    Soit \(\varphi\) une fbs sur \(E\) de dim. finie. \\
+    Le rang de \(\varphi\) ( ou de \(q\) sa forme quadratique ) est \(\rg \varphi = \rg A\) où \(A = \mat\limits_{\mathcal{B}}(\varphi)\) avec \(\mathcal{B}\) une base de \(E\)
+\end{definition}
+
+\subsection{Orthogonalité selon un fbs}
+\begin{definition}
+    Soit \(\varphi\) une fbs sur \(E\) \(K\)-ev \\
+    \(x, y \in E\) sont dits orthogonaux pour \(\varphi\) si \(\varphi(x, y) = 0\). On écrit \(x \perp y\) ou \(x \perp^\varphi y\) \\
+    On dit que \(x \in E\) est isotrope si \(x \perp x\) ie. \(\varphi(x, x) = 0\) \\
+    Si \(A \subset E\) 
+    \[A^\perp = A^{\perp(\varphi)} = \{x \in E \mid \forall a \in A,\, \varphi(x, a) = 0 \}\]
+    Le noyau de \(\varphi\) est 
+    \[E^\perp = \{x \in E \mid \forall y \in E,\, \varphi(x, y) = 0\}\]
+    On dit que \(\varphi\) est non dégénérée si \(E^\perp = \{ 0 \}\)
+\end{definition}
+\begin{proposition}
+    Soit \(\varphi\) une fbs sur \(E\) de dim. finie et \(A = \mat\limits_{\mathcal{B}}(\varphi)\) avec \(\mathcal{B}\) une base de \(E\) \\
+    Alors \[\boxed{\varphi \text{ non dégénérée } \iff A \text{ inversible }}\]
+\end{proposition}
+\begin{proposition}
+    Soit \(E\) un \(K\)-ev de dim. finie et \(\varphi\) une fbs sur \(E\) \uline{non dégénérée}. \\
+    Alors \[H: \begin{cases}
+        E \to E^* \\
+        x \mapsto \varphi(x, \cdot)
+    \end{cases} \quad \text{ avec } \quad \varphi(x, \cdot): \begin{cases}
+        E \to K \\
+        y \mapsto \varphi(x, y)
+    \end{cases}\]
+    est un isomorphisme: \(\forall l \in E^*,\, \exists! x \in E,\, \forall y : l(y) = \varphi(x, y)\)
+\end{proposition}
+
+\subsection{Bases orthogonales}
+\begin{definition}
+    Soit \(\varphi\) une fbs sur \(E\) de dim. finie. \\
+    \((e_1, ...,\, e_n) = \mathcal{B}\) base de \(E\) est dite orthogonale si \(\forall i \neq j,\, \varphi(e_i, e_j) = 0\) \\
+    \(\mathcal{B}\) est une base orthogonale \(\iff\) \(\mat\limits_{\mathcal{B}}(\varphi) \in D_n(K)\) \\
+    Dans ces conditions \(\rg(\varphi)\) est le nombre de coefficients différents de 0 sur la diagonale.
+\end{definition}
+\begin{theorem}
+    Soit \(\varphi\) une fbs sur \(E\) de dimension finie. \\
+    Alors \(\varphi\) possède une base orthogonale.
+\end{theorem}
+\begin{lemma}
+    Si \(x \in E\) est non isotrope, alors \(E = Kx \oplus (Kx)^\perp\)
+\end{lemma}
+
+\pagebreak
+
+\begin{corollary}
+    \hfill
+    \begin{enumerate}
+        \item Soit \(E\) un \(K\)-ev de dim. finie \(n\), \(\varphi\) une fbs sur \(E\) \\
+        Il existe une base \((e_1, ...,\, e_n)\) orthogonale de \(E\) telle que
+        \[\varphi(x, y) = \lambda_1 x_1 y_1 + ... + \lambda_r x_r y_r \quad \text{ où } \quad x = \sum_{i = 1}^{n} x_i e_i,\, y = \sum_{i = 1}^{n} y_i e_i\]
+        \[q(x) = \lambda_1 x_1^2 + ... + \lambda_r x_r^2 \]
+        avec \(\lambda_1, ...,\, \lambda_r \in K^*\) et \(r = \rg \varphi\)
+        \item Si \(A \in S_n(K)\) alors il existe \(P \in GL_n(K)\) tel que
+        \[P^{-1}AP = \begin{pmatrix}
+            \lambda_1 & & & & & & \\
+            & \lambda_2 & & & & (0) & \\
+            & & \ddots & & & & \\
+            & & & \lambda_r & & & \\
+            & & & & 0 & & \\
+            & (0) & & & & \ddots & \\
+            & & & & & & 0
+        \end{pmatrix} \in D_n(K)\]
+        avec \(\lambda_i \in K^*\) et \(r = \rg A\)
+    \end{enumerate}
+\end{corollary}
+
+\section{Formes positives, produit scalaire}
+\subsection{Matrices positives}
+\noindent Ici \(E\) est \(\mathbb{R}\)-ev
+\begin{definition}
+    Soit \(A \in S_n(\mathbb{R})\) \\
+    On dit que \(A\) est positive si \(\varphi_A\) est une fbs positive: \(\forall x \in \mathbb{R}^n,\ X^T A X \geq 0\) \\
+    On note \[S_n^+(\mathbb{R}) = \{A \in S_n(\mathbb{R}) \mid A \text{ positive }\}\]
+    On dit que \(A\) est définie positive si \(\varphi_A\) est un produit scalaire: \(\forall X \in \mathbb{R}^n \setminus \{0\},\, X^T A X > 0\) \\
+    On note \[S_n^{++}(\mathbb{R}) = \{A \in S_n(\mathbb{R}) \mid A \text{ définie positive }\}\]
+\end{definition}
+
+\subsection{Exemples d'espaces préhilbertiens réels}
+\subsubsection{Espaces préhilbertiens fonctionnels}
+\noindent \(E = \mathcal{C}([a, b], \mathbb{R})\) muni de
+\[ \langle f, g \rangle = \int_{a}^{b} fg\]
+
+\subsubsection{Espace de Legendre}
+\noindent \(E = \mathcal{C}([-1, 1], \mathbb{R})\) muni de 
+\[\langle f, g \rangle = \int_{-1}^{1} fg\]
+
+\subsubsection{Espace d'Hermite}
+\noindent \(E = \left\{ f: \mathbb{R} \to \mathbb{R} \mid f \text{ continue et } x \mapsto f(x)^2 e^{-x^2} \text{ intégrable }\right\}\) muni de 
+\[\langle f, g \rangle = \int_{\mathbb{R}} f(x) g(x) e^{-x^2} \,dx\]
+\(E\) contient en particulier les fonctions polynomiales.
+\begin{lemma}
+    Si \(f, g \in L^2(I, \mathbb{K})\) alors \(fg \in L^1(I, \mathbb{K})\)
+\end{lemma}
+
+\subsubsection{Espace de Laguerre}
+\noindent \(E = \left\{ f: \mathbb{R_+} \to \mathbb{R} \mid f \text{ continue et } x \mapsto f(x)^2 e^{-x} \text{ intégrable sur } \mathbb{R}_+ \right\}\) muni de
+\[\langle f, g \rangle = \int_{\mathbb{R}_+} f(x) g(x) e^{-x} \,dx\]
+
+\subsection{Théorème de représentation des formes linéaires}
+\begin{corollary}
+    Soit \(E\) un espace euclidien. \\
+    Tout \(l \in E^*\) s'écrit de manière unique
+    \[l: \begin{cases}
+        x \mapsto \langle e, x \rangle \\
+        E \to \mathbb{R}
+    \end{cases}\]
+    avec \(e \in E\)
+\end{corollary}
+
+\subsection{Orthogonalité dans les espaces préhilbertiens}
+\begin{proposition}[ Pythagore ]
+    Soit \(x, y \in E\) \\
+    Alors 
+    \[x \perp y \iff \lVert x + y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2\]
+\end{proposition}
+\begin{proposition}
+    \hfill
+    \begin{enumerate}
+        \item \(A \subset B \subset C \implies B^\perp \subset A^\perp\)
+        \item \(A \subset A^{\perp \perp}\)
+        \item Si \(F = \vect A\) alors \(A^\perp = F^\perp\)
+    \end{enumerate}
+\end{proposition}
+\begin{proposition}
+    Si \((E_i)_{i \in I}\) famille de sev de \(E\) 2 à 2 \(\perp\) alors \(\sum\limits_{i \in I} E_i\) est directe, on la note
+    \[\overset{\perp}{\bigoplus_{i \in I}} E_i\]
+\end{proposition}
+\begin{theorem}
+    Soit \(E\) un espace préhilbertien et \(F\) un sev de \uline{dimension finie}. \\
+    Alors:
+    \begin{enumerate}
+        \item \(F \oplus F^\perp = E\)
+        \item \(F^{\perp \perp} = F\)
+    \end{enumerate}
+    On définit la projection orthogonale sur \(F\) par  \(p_F = p_{F, F^\perp}\) \\
+    Si \((e_1, ...,\, e_p)\) est une BON de \(F\) alors
+    \[\boxed{p_F(x) = \sum_{i = 1}^{p} \langle e_i, x \rangle e_i}\]
+\end{theorem}
+\begin{proposition}
+    Si \(E\) est préhilbertien, \(F\) sev de dim. finie, on peut considérer: \\
+    \(p_F = p_{F, F^\perp} =\) projection orthogonale sur \(F\) \\
+    \(s_F = s_{F, F^\perp}: x = x_F + x_{F^\perp} \mapsto x_F - x_{F^\perp} =\) symétrie orthogonale par rapport à \(F\)
+    \[\boxed{s_F = 2p_F - \text{ Id }}\]
+\end{proposition}
+\begin{proposition}
+    Soit \(E\) un espace euclidien et \((e_1, ...,\, e_p)\) un système orthonormé ( SON ). \\
+    On peut compléter \((e_1, ...,\, e_p)\) en une BON \((e_1, ...,\ e_n)\) de \(E\)
+\end{proposition}
+\begin{theorem}[ Orthonormalisation au sens de Gram-Schmidt ]
+    \hfill \\
+    Soit \(N = \llbracket 1, n \rrbracket\) ou \(\mathbb{N}^*\) et \((a_i)_{i \in \mathbb{N}}\) un système libre de \(E\), espace préhilbertien réel. \\
+    Alors il existe un unique système \((e_i)_{i \in N}\) tel que:
+    \begin{enumerate}
+        \item \((e_i)_{i \in N}\) est un système orthonormé.
+        \item \(\forall k \in N\), \(\vect(e_1, ...,\, e_k) = \vect(a_1, ...,\, a_k)\)
+        \item \(\forall k \in N\), \(\langle e_k, a_k \rangle > 0\) 
+    \end{enumerate}
+    \((e_i)_{i \in N}\) est appelé orthonormalisé au sens de Gram-Schmidt des \(a_i\)
+\end{theorem}
+
+\subsection{Distance à un sous-espace de dimension finie}
+\begin{theorem}[ Inégalité de Bessel ]
+    Soit \(E\) un espace préhilbertien réel et \(F\) un sev de dimension finie de \(E\) \\
+    Soit \((e_1, ...,\, e_p)\) une BON de \(F\), \(p = \dim F\) est \(x \in F\) \\
+    Alors \(d(x, F)\) est atteinte en un unique point, le projeté orthogonal de \(x\) sur \(F\), \(p_F(x)\) \\
+    De plus
+    \[p_F(x) = \langle e_1, x \rangle e_1 + ... + \langle e_p, x \rangle e_p\]
+    \[d(x, F) = \sqrt{\lVert x \rVert^2 - \sum_{i = 1}^{p} \langle e_i, x \rangle^2}\]
+    Et en particulier
+    \[\sum_{i = 1}^{p} \langle e_i, x \rangle^2 \leq \lVert x \rVert^2\]
+\end{theorem}
+
+\subsection{Adaptation aux espaces préhilbertiens complexes}
+\begin{definition}
+    Un produit scalaire hermitien sur \(E\) un \(\mathbb{C}\)-ev est:
+    \begin{enumerate}
+        \item linéaire à droite: \(\forall x,\, y \mapsto \langle x, y \rangle\) linéaire.
+        \item semi-linéaire à gauche: \(\forall y ,\, \langle x + \lambda x', y \rangle = \langle x, y \rangle + \overline{\lambda} \langle x', y \rangle\) et \(\langle x, y \rangle = \overline{\langle y, x \rangle}\)
+        \item \(\forall x \neq 0,\, \langle x, x \rangle > 0\)
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    \(M \in M_n(\mathbb{C})\) est dite hermitienne si \(M^* = M\), ce qui signifie \(\forall k, l :\, \overline{M_{k, l}} = M_{l, k}\)
+\end{definition}
+\begin{proposition}
+    On garde les résultats suivants:
+    \begin{enumerate}
+        \item Existence du BON dans \(E\) hermitien.
+        \item \(F\) sev de dim. finie de \(E\) préhilbertien complexe: \begin{itemize}
+            \item \(F \oplus F^\perp = E\) et \(F^{\perp \perp} = F\)
+            \item \(p_F(x) = \sum\limits_{k = 1}^{n} \langle e_k, x \rangle e_k\) si \((e_1, ...,\, e_n)\) BON de \(F\)
+            \item \(\lVert p_F(x) \rVert^2 = \sum\limits_{k = 1}^{n} | \langle e_k, x \rangle |^2 \leq \lVert x \rVert^2\)
+        \end{itemize}
+        \item ON au sens de GS toujours valable.
+        \item \(\langle \lambda x, \lambda x \rangle = \lambda \overline{\lambda} \langle x, x \rangle = |\lambda|^2 \langle x, x \rangle \)
+    \end{enumerate}
+\end{proposition}
+
+\section{Isométries vectorielles et matrices orthogonales}
+\subsection{Isométries vectorielles d'un espace euclidien}
+\begin{definition}
+    Soit \(E\) un espace euclidien et \(u \in \mathcal{L}(E)\) \\
+    On dit que \(u\) est un isomorphisme orthogonal ou encore isométrie vectorielle si \(u\) conserve le produit scalaire:
+    \[\forall x ,y \in E \quad \langle u(x), u(y) \rangle = \langle x, y \rangle\]
+    ( ie. u conserve la norme )
+    \[\lVert u(x) \rVert  = \lVert x \rVert\]
+    On note \(O(E)\) l'ensemble des isométries vectorielles de \(E\)
+\end{definition}
+\begin{proposition}
+    \(O(E) \subset GL(E)\) \\
+    C'est un sous-groupe de \(GL(E)\) appelé groupe orthogonal de \(E\)
+\end{proposition}
+\begin{proposition}
+    \[\boxed{u \in O(E) \implies \Sp u \subset \{-1, 1\}}\]
+    De plus
+    \[\boxed{\ker(u - \text{ Id }) \perp \ker(u + \text{ Id})}\]
+\end{proposition}
+\begin{proposition}
+    Soit \(E\) euclidien, \(u \in O(E)\) \\
+    Si \(F\) est un sev stable par \(u\) alors \(F^\perp\) est stable par \(u\)
+\end{proposition}
+\begin{proposition}
+    Soit \(E\) un espace euclidien, \((e_1, ...,\, e_n)\) une BON et \(u \in \mathcal{L}(E)\) \\
+    Alors \[\boxed{u \in O(E) \iff (u(e_1), ...,\, u(e_n)) \text{ BON }}\]
+\end{proposition}
+
+\subsection{Matrices orthogonales}
+\begin{definition}
+    Soit \(A \in M_n(\mathbb{R})\) \\
+    ON dit que \(A\) est orthogonale si les colonnes de \(A\) forment une BON de \(\mathbb{R}^n\) pour le produit scalaire canonique. \\
+    On note \(O(n)\) l'ensemble des matrices orthogonales de \(M_n(\mathbb{R})\)
+\end{definition}
+\begin{proposition}
+    Si \(A \in M_n(\mathbb{R})\)
+    \begin{empheq}[box=\fbox]{align*}
+        A \in O(n) &\iff A^T A = I_n \\
+        &\iff A A^T = I_n \\
+        &\iff \text{ les lignes de } A \text{ forment une BON de } \mathbb{R}^n \\
+        &\iff A \in GL_n(\mathbb{R}) \text{ et } A^{-1} = A^T
+    \end{empheq}
+    \(O(n)\) est un sous-groupe de \(GL_n(\mathbb{R})\) appelé groupe orthogonal d'ordre \(n\)
+\end{proposition}
+\begin{proposition}
+    Soit \(u \in \mathcal{L}(E)\), \(E\) espace euclidien, \(\mathcal{B}\) une BON de \(E\) et \(A = \mat\limits_{\mathcal{B}}(u)\) \\
+    Alors
+    \[\boxed{u \in O(E) \iff A \in O(n)}\]
+\end{proposition}
+\begin{proposition}
+    Si \(\mathcal{B}\) BON de \(E\) et \(P = \mat(\mathcal{B}, \mathcal{B}')\) alors
+    \[\boxed{P \in O(n) \iff \mathcal{B}' \text{ BON }}\]
+\end{proposition}
+
+\pagebreak
+
+\begin{proposition}
+    Si \(A \in O(n)\), \(u_A \in O(\mathbb{R}^n)\) alors
+    \[\boxed{\Sp A = \Sp u_A \subset \{-1, 1\}}\]
+    et \[\boxed{\ker(A - I_n) \perp \ker(A + I_n)}\]
+\end{proposition}
+
+\subsection{Groupe spécial orthogonal}
+\begin{proposition}
+    Si \(E\) euclidien, \(u \in O(E)\) alors \(\det(u) = \pm 1\)
+\end{proposition}
+\begin{definition}
+    Soit \(E\) euclidien et \(n \in \mathbb{N}^*\) \\
+    On note \(SO(n) = SL_n(\mathbb{R}) \cap O(n) = \{A \in O(n) \mid \det A = 1\}\) le groupe spécial orthogonal d'ordre \(n\) \\
+    \(SO(E) = SL_n(E) \cap O(E)\) est le groupe orthogonal de \(E\)
+\end{definition}
+\begin{definition}
+    Si \(n \in SO(E)\) on dit que \(n\) est une rotation de \(E\) \\
+    Si \(A \in SO(n)\) on dit que \(A\) est une matrice orthogonale positive. \\
+    Si \(u \in O(E) \setminus SO(E)\), \(u\) est une "antirotation".
+\end{definition}
+\begin{definition}
+    Soit \(E\) \(\mathbb{R}\)-ev de dim. finie. \\
+    Choisir une orientation de \(E\) c'est décréter une base \(\mathcal{B}_0\) directe. \\
+    Si \(\mathcal{B}\) est une autre base, \(\mathcal{B} \text{ directe } \iff \det \mat(\mathcal{B}_0, \mathcal{B}) > 0\)
+\end{definition}
+\begin{definition}
+    Soit \(E\) un espace euclidien orienté et \(\mathcal{B}\) une base orthonormé directe, \(n = \dim E\) \\
+    On appelle produit mixte de \((x_1, ...,\, x_n) \in E^n\) le déterminant \([x_1, ...,\, x_n] = \det\limits_{\mathcal{B}}(x_1, ...,\, x_n)\) \\
+    Il est indépendant de la base \(\mathcal{B}\) orthonormée directe.
+\end{definition}
+
+\subsection{Groupe orthogonal d'un plan euclidien orienté}
+\begin{definition}
+    Si \(\theta \in \mathbb{R}\) on va noter 
+    \[R_\theta = \begin{pmatrix}
+        \cos \theta & - \sin \theta \\
+        \sin \theta & \cos \theta
+    \end{pmatrix}\]
+    Si \(\theta, \theta' \in \mathbb{R}\), \(R_\theta R_{\theta'} = R_{\theta + \theta'} = R_{\theta'}R_\theta\)
+\end{definition}
+\begin{theorem}
+    Soit \(f: \begin{cases}
+        (\mathbb{R}, +) \to (SO(2), \times) \\
+        \theta \mapsto R_\theta
+    \end{cases}\) \\
+    \(f\) est un morphisme surjectif de groupes de noyau \(\ker f = 2 \pi \mathbb{Z}\) \\
+    En particulier \(SO(2) \approx \mathbb{R} / 2 \pi \mathbb{Z} \)
+\end{theorem}
+\begin{definition}
+    Soit \((\vec{i}, \vec{j})\) une BON directe de \(P\) et \(\theta \in \mathbb{R}\) \\
+    On rappelle rotation d'angle \(\theta\) de \(P\) l'endomorphisme \(r_\theta \in \mathcal{L}(P)\) tel que \(\mat\limits_{(\vec{i}, \vec{j})} r_\theta = R_\theta\) \\
+    \(r_\theta\) est indépendant de la base orthonormée directe choisie.
+\end{definition}
+\begin{proposition}
+    Soit \(P\) un plan euclidien orienté et \(u \in SO(P)\) \\
+    Alors il existe \(\theta \in \mathbb{R}\) tel que \(u = r_\theta\) \\
+    En particulier \(SO(P)\) est un groupe abélien et \(SO(P) \approx SO(2) \approx \mathbb{R} / 2 \pi \mathbb{Z}\)
+\end{proposition}
+\begin{proposition}
+    Soit \(P\) un plan euclidien, \(u \in O(P) \setminus SO(P)\) ( "antirotation" ). \\
+    Alors \(u\) est une réflexion ie. une symétrie orthogonale par rapport à une droite \(\Delta : u = s_\Delta\)
+\end{proposition}
+\begin{proposition}
+    \[\boxed{O(P) = \{ \text{ rotation d'angle } \theta \in \mathbb{R},\, \text{ symétrie orthogonale } s_\Delta\}}\]
+\end{proposition}
+
+\section{Réduction des matrices orthogonales}
+\subsection{Cas général}
+\begin{theorem}
+    Soit \(E\) un espace euclidien et \(u \in O(E)\) \\
+    Si \(\theta \in \mathbb{R}\), \(R_\theta = \begin{pmatrix}
+        \cos \theta & - \sin \theta \\
+        \sin \theta & \cos \theta
+    \end{pmatrix}\) alors il existe une base orthonormée de \(E\) telle que
+    \[\mat_{\mathcal{B}}(u) = \begin{pmatrix}
+        \boxed{R_{\theta_1}} & & & & & & & & \\
+        & \ddots & & & & & & & \\
+        & & \boxed{R_{\theta_p}} & & & & & & \\
+        & & & -1 & & & & & \\
+        & & & & \ddots & & & & \\
+        & & & & & -1 & & & \\
+        & & & & & & 1 & & \\
+        & & & & & & & \ddots & \\
+        & & & & & & & & 1
+    \end{pmatrix} \text{ avec } \theta_i \not\equiv 0 [\pi]\]
+\end{theorem}
+\begin{corollary}
+    Soit \(A \in O(n)\) \\
+    Il existe \(P \in O(n)\) telle que
+    \[P^{-1} A P = P^T A P = \begin{pmatrix}
+        \boxed{R_{\theta_1}} & & & & & & & & \\
+        & \ddots & & & & & & & \\
+        & & \boxed{R_{\theta_p}} & & & & & & \\
+        & & & -1 & & & & & \\
+        & & & & \ddots & & & & \\
+        & & & & & -1 & & & \\
+        & & & & & & 1 & & \\
+        & & & & & & & \ddots & \\
+        & & & & & & & & 1
+    \end{pmatrix} \text{ avec } \theta_i \not\equiv 0 [\pi]\]
+\end{corollary}
+\begin{proposition}
+    Les réflexion engendrent \(O(E)\)
+\end{proposition}
+
+\subsection{Rotation en dimension 3}
+\begin{theorem}
+    Soit \(M \in SO(3)\) \\
+    \(M\) est orthogonalement semblable à une matrice
+    \[A_\theta = \begin{pmatrix}
+        \cos \theta & - \sin \theta & 0 \\
+        \sin \theta & \cos \theta & 0 \\
+        0 & 0 & 1
+    \end{pmatrix} \text{ avec } \theta \in \mathbb{R}\]
+    \[\boxed{\exists P \in O(n) \quad P^{-1} M P = P^T M P = A_\theta}\]
+\end{theorem}
+
+\pagebreak
+
+\begin{definition}
+    Soit \(E\) un espace euclidien de dim. 3 \\
+    Soit \(\vec{k}\) un vecteur unitaire, \(\Delta = \mathbb{R} \vec{k}\), \(p = \vec{k^\perp}\) orienté par \((\vec{i}, \vec{j})\) base de \(P\) avec \(\vec{i}n \vec{j}, \vec{k}\) directe orthonormée. \\
+    La rotation d'axe \(\Delta\) orienté par \(\vec{k}\) et d'angle \(\theta\) est l'endomorphisme \(r_{\theta, \vec{k}}\) tel que
+    \[\mat_{(\vec{i}, \vec{j}, \vec{k})}(r_{\theta, \vec{k}}) = A_\theta = \begin{pmatrix}
+        \cos \theta & - \sin \theta & 0 \\
+        \sin \theta & \cos \theta & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}\]
+\end{definition}
+\begin{theorem}
+    Soit \(u \in SO(E)\), \(E\) euclidien orienté de dimension 3. \\
+    Il existe \(\theta \in \mathbb{R}\) et \(\vec{k}\) unitaire tel que
+    \[\boxed{u = r_{\theta, \vec{k}}}\]
+\end{theorem}
+
+\section{Exercices classiques}
+\subsection{Projecteur \(p\) tel que \(\vvvert p \vvvert = 1\)}
+\noindent Soit \(E\) un espace euclidien, \(p\) un projecteur. On suppose que \(\forall x \in E\), \(\lVert p(x) \rVert \leq \lVert x \rVert\) \\
+Montrer que \(p\) est un projecteur orthogonal.
+
+\subsection{Décomposition \(QR\)}
+\noindent Soit \(A \in GL_n(\mathbb{R})\) \\
+Montrer que il existe un unique couple \((Q, R)\) avec: \\
+\(\begin{cases}
+    A = QR \\
+    Q \in O(n) \\
+    R \text{ est une matrice triangulaire à coefficients diagonaux} > 0
+\end{cases}\)
+
+\subsection{Décomposition de Cholevski - Inégalité d'Hadamard}
+\begin{enumerate}
+    \item Soit \(A \in S_n^{++}(\mathbb{R})\) \\
+    Montrer qu'il existe une unique \(B \in M_n(\mathbb{R})\) triangulaire supérieure à coefficients diagonaux \(> 0\) tel que \(A = B^T B\) ( Cholevski )
+    \item Montrer que si \(A \in S_n^{++}(\mathbb{R})\), \(A = (a_{ij})_{1 \leq i, j \leq n}\) alors \\
+    \(0 \leq \det A \leq a_{11} a_{22} ... a_{nn}\) ( Hadamard )
+\end{enumerate}
+
+\subsection{Matrices de Gram - Inégalité d'Hadamard}
+\noindent Soit \(E\) un espace préhilbertien, \(x_1, ...,\, x_n \in E\) \\
+La matrice de Gram de \(x_1, ...,\, x_n\) est \(A = (\langle x_i, x_j \rangle)_{1 \leq i, j \leq n} = G(x_1, ...,\, x_n) \in S_n(\mathbb{R})\)
+\begin{enumerate}
+    \item Monter que \(A \in S_n^+(\mathbb{R})\) et même \((x_1, ...,\, x_n) \text{ libre } \implies A \in S_n^{++}(\mathbb{R})\) \\
+    Soit \(F = \vect(x_1, ...,\, x_n)\), \((e_1, ...,\, e_r)\) une base orthonormée de \(F\) et \(P = \mat\limits_{(e_1, ...,\, e_r)}(x_1, ...,\, x_n)\)
+    \item Montrer que \(A = G(x_1, ...,\, x_n) = P^T P\) et en déduire que \(\rg A = \rg(x_1, ...,\, x_n)\) \\
+    On suppose que \((x_1, ...,\, x_n)\) libre \((r = n)\) et \((e_1, ...,\, e_n) = \mathcal{B}_0\) est l'ON au sens de Gram-Schmidt de \((x_1, ...,\, x_n)\)
+    \item Montrer que \(|\det_{\mathcal{B}_0}(x_1, ...,\, x_n )| = \sqrt{\det G(x_1, ...,\, x_n)}\)
+    \item Montrer que \(\det(G(x_1, ...,\, x_n)) \leq \lVert x_1 \rVert^2 ... \lVert x_n \rVert^2\) et préciser le cas d'égalité.
+    \item Soit \(M \in M_n(\mathbb{R})\) \(M = \left( C_1 \mid ... \mid C_n\right)\) \\
+    Montrer que \(|\det M| \leq \lVert C_1 \rVert \times ... \times \lVert C_n \rVert\) ( norme euclidienne canonique ) et le cas d’égalité quand \(M\) est inversible.
+    \item Soit \(x \in E\). Montrer que \(d(x, F)^2 = \frac{\det G(x_1, ...,\, x_n, x)}{\det G(x_1, ...,\, x_n)}\)
+\end{enumerate}
+
+\subsection{Racines de polynômes orthogonaux}
+\noindent Soit \(\mu: [a, b] \to \mathbb{R}_+^*\) avec \(a < b\). Sur \(\mathbb{R}[X]\) on pose \(\langle P, Q \rangle = \int\limits_{a}^{b} PQ \mu\)
+\begin{enumerate}
+    \item Monter qu'il existe une unique suite \((P_n)_{n \geq 0}\) de \(\mathbb{R}[X]\) orthonormés telle que \(\deg P_n = n\) \\
+    Que dire de la suite \((Q_n)\) avec \(\deg Q_n = n\) et les \(Q_n\) 2 à 2 \(\perp\)?
+    \item Monter que les \(P_n\) sont scindés à racines simples toutes dans \(\left] a, b \right[\)
+    \item Il existe \((a_n),(b_n),(c_n)\) trois suites réelles avec \(\forall n \geq 0 :\, X P_{n + 1} = a_n P_{n + 2} + b_n P_{n + 1} + c_n P_n\)
+\end{enumerate}
+\end{document}

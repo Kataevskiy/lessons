@@ -1,0 +1,199 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{ulem}
+\usepackage{stmaryrd}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{mathpazo}
+\usepackage{empheq}
+
+\onehalfspacing
+
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Théorème}
+\newtheorem{corollary}[proposition]{Corollaire}
+\newtheorem{lemma}[proposition]{Lemme}
+\newtheorem{definition}[proposition]{Définition}
+
+\begin{document}
+\renewcommand{\labelitemi}{\textbullet}
+\begin{center}
+{\Large \textbf{Chapitre 13. Équations différentielles linéaires (1\textsuperscript{ère} partie)}}
+\end{center}
+
+\section{Équations scalaires d'ordre 1}
+\noindent $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$ et $I$ intervalle tel que $\overset{\circ}{I} \neq \emptyset$
+
+\subsection{Généralités}
+\begin{definition}
+    Une équation différentielle linéaire scalaire d'ordre 1 est une équation du type
+    \[(E) \quad a(x)y' + b(x)y = c(x)\]
+    avec \(a, b, c: I \to \mathbb{K}\) continues, données et \(y: I \to \mathbb{K}\) dérivable, inconnue. \\
+    On dit que \((E)\) est régulière si \(a\) ne s'annule pas: \((E)\) peut être mis sous la forme
+    \[(E) \quad y' + \varphi(x)y = \psi(x)\]
+\end{definition}
+
+\subsection{Solutions des équation régulières}
+\begin{theorem}
+    Soit \(\varphi, \psi : I \to \mathbb{K}\) continues et
+    \begin{align*}
+        (E)& \quad y' + \varphi y = \psi \\
+        (E_0)& \quad y' + \varphi y = 0
+    \end{align*}
+    Soit \(x_0 \in I\) \\
+    Les solutions de \((E_0) \quad y' + \varphi y = 0\) sont les fonctions
+    \[\boxed{x \mapsto C\exp\left(-\int_{x_0}^{x} \varphi(t) \,dt \right)}\]
+    où \(C\) est une constante arbitraire dans \(\mathbb{K}\)
+\end{theorem}
+\begin{theorem}[ Méthode de variation de la constante ]
+    \hfill \\
+    Soit \[(E) \quad y' + \varphi y = \psi\]
+    avec \(\varphi, \psi: I \to \mathbb{K}\) continues. \\
+    Soit \(Y\) une solution non nulle de \((E_0) \quad y' + \varphi y = 0\) \\
+    Les solutions non nulles de \((E)\) sont les fonctions \(x \mapsto \lambda(x) Y(x)\) avec \(\lambda: I \to \mathbb{K}\) \(\mathcal{C}^1\) vérifiant \(\forall x \in I\)
+    \[\boxed{\lambda'(x) Y(x) = \psi(x)}\]
+    ie.
+    \[\boxed{\lambda' Y = \psi}\]
+\end{theorem}
+\begin{theorem}[ Théorème de Cauchy-Lipschitz ]
+    \hfill \\
+    Soit \[(E) \quad y' + \varphi y = \psi\]
+    avec \(\varphi, \psi \in \mathcal{C}(I, \mathbb{K})\) \\
+    L'espace des solutions de \((E)\) est une droite affine de \(\mathcal{C}^1(I, \mathbb{K})\) \\
+    De plus, si on se donne \(x_0 \in I,\, y_0 \in \mathbb{K}\) alors il existe une unique solution \(y\) de \((E)\) \\
+    vérifiant \(y(x_0) = y_0\) ( Condition fe Cauchy )
+\end{theorem}
+
+\subsection{Exemples d'équations non régulières}
+\noindent Pour les équations non régulières on procède par analyse-synthèse. \medskip
+
+\noindent \uline{Exercice}: Résoudre sur \(\mathbb{R}\) \[(E) \quad x^2 y' + y = 1\]
+
+\section{Équations scalaires d'ordre 2}
+\begin{definition}
+    Une équation différentielle linéaire scalaire d'ordre 2 est une équation du type
+    \[(E) \quad a(x)y'' + b(x)y' + c(x)y = d(x)\]
+    avec \(a, b, c, d: I \to \mathbb{K}\) continues, données et \(y: I \to \mathbb{K}\) dérivable 2 fois, inconnue. \\
+    On dit que \((E)\) est régulière si \(a\) ne s'annule pas: \((E)\) peut être mis sous la forme
+    \[(E) \quad y'' + \varphi(x)y' + \psi(x)y = \theta(x)\]
+\end{definition}
+
+\subsection{Cas des équations régulières}
+\begin{theorem}[ Théorème de Cauchy-Lipschitz ]
+    Soit \(\varphi, \psi, \theta: I \to \mathbb{K}\) continues, \(x_0 \in I\) et \(y_0, y_1 \in \mathbb{K}\) \\
+    Soit \[(E) \quad y'' + \varphi(x)y' + \psi(x)y = \theta(x)\]
+    avec \(x \in I\) \\
+    Alors il existe une uniques solution \(y\) de \((E)\) vérifiant \(y(x_0) = y_0,\, y'(x_0) = y_1\) ( conditions de Cauchy )
+\end{theorem}
+\begin{corollary}[ Théorème de Cauchy-Lipschitz ]
+    Soit \(\varphi, \psi, \theta: I \to \mathbb{K}\) continues. \\
+    Soit \begin{align*}
+        (E)& \quad y'' + \varphi y' + \psi y = \theta \\
+        (E_0)& \quad y'' + \varphi y' + \psi y = 0
+    \end{align*}
+    Alors les solutions de \((E_0)\) constituent un sec de dimension 2 \(S_0\) de \(\mathcal{C}^2(I, \mathbb{R})\) \\
+    Les solutions de l'équation complète constituent un sous-espace affine de dimension 2 de \(\mathcal{C}^2(I, \mathbb{K})\) dont la direction est \(S_0\)
+\end{corollary}
+
+\subsection{Méthode de variations de la constante}
+\begin{definition}
+    Soit 
+    \[(E_0) \quad y'' + \varphi y' + \psi y = 0\]
+    avec \(\varphi, \psi: I \to \mathbb{K}\) continues. \\
+    Soit \(y, z\) deux solutions de \((E_0)\)
+    \begin{enumerate}
+        \item Si \((y, z)\) est libre, on dit que \((y, z)\) est un couple de solutions indépendantes \\
+        ( c'est alors la base de \(S_0\) ens. des solutions )
+        \item On définit le wronskien de \((y, z)\) par
+        \[W_{(y, z)}: \begin{cases}
+            I \to \mathbb{K} \\
+            x \mapsto \begin{vmatrix}
+                y(x) & z(x) \\
+                y'(x) & z'(x)
+            \end{vmatrix}
+        \end{cases}\]
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Soit 
+    \[(E_0) \quad y'' + \varphi y + \psi y = 0\]
+    avec \(\varphi, \psi: I \to \mathbb{K}\) continues. \\
+    Soit \(y, z\) deux solutions de \((E_0)\) \\
+    Si \((y, z)\) sont indépendantes alors \(\forall x \in I\), \(W_{(y, z)}(x) \neq 0\) \\
+    S'il existe \(x_0 \in I\) avec \(W_{(y, z)}(x_0) \neq 0\) alors \((y, z)\) sont indépendantes ( et le wronskien ne s'annule jamais ). \\
+    En particulier un wronskien est identiquement nul ou il ne s'annule jamais.
+\end{theorem}
+\begin{theorem}[ Méthode de variations des constantes ]
+    Soit \(\varphi, \psi, \theta: I \to \mathbb{K}\) \(\mathcal{C}^0\) et
+    \begin{align*}
+        (E)& \quad y'' + \varphi y' + \psi y = \theta \\
+        (E_0)& \quad y'' + \varphi y + \psi y = 0
+    \end{align*}
+    Soit \((y, z)\) un système fondamental de solutions de \((E_0)\) \\
+    Alors les solutions de \((E)\) sont les fonctions
+    \[\boxed{\lambda y + \mu z}\] 
+    avec \(\lambda, \mu: I \to \mathbb{K}\) \(\mathcal{C}^1\) vérifiant
+    \[\boxed{\begin{pmatrix}
+        y & z \\
+        y' & z'
+    \end{pmatrix} \begin{pmatrix}
+        \lambda ' \\
+        \mu'
+    \end{pmatrix} = \begin{pmatrix}
+        0 \\
+        \theta
+    \end{pmatrix}}\]
+\end{theorem}
+
+\subsection{Étude qualitative de solutions d'équation d'ordre 2}
+\begin{lemma}[ Lemme de Gromwall (HP) ]
+    Soit \(a \in \mathbb{R} \), \(C \in \mathbb{R}_+\), \(u, v: \left[ a, +\infty \right[ \to \mathbb{R}_+\) continues \\
+    On suppose que \(\forall x \geq a\)
+    \[u(x) \leq C + \int_{a}^{x} u(t) v(t) \, dt\]
+    Alors
+    \[\boxed{u(x) \leq C \exp \int_{a}^{x} v(t) \, dt}\]
+\end{lemma}
+
+\noindent \uline{Exercice}: Soit \(y\) une solution sur \(\mathbb{R}_+\) de
+\[(E) \quad y'' + xy = 0\]
+Montrer que \(y\) est bornée.
+
+\subsection{Exemples d'équations non régulières}
+\noindent Pour les équations non régulières on procède par analyse-synthèse. \medskip
+
+\noindent \uline{Exercice}: Résoudre sur \(\mathbb{R}\)
+\[(E) \quad (x + 1)y'' + (x - 1)y' - 2y = 0\]
+
+\pagebreak
+
+\section{Exercices classiques}
+\subsection{Caractère isolé des zéros d'un système d'équations d'ordre 2 - Entrelacement}
+\noindent Soit 
+\[(E) \quad y'' + q(x)y = 0\]
+avec \(q: I \to \mathbb{R}\) continue.
+\begin{enumerate}
+    \item Que peut-on dire d'une solution \(y\) de \(E\) telle que \(y(x_0) = y'(x_0) = 0\)? \\
+    Soit \(y\) une solution non identiquement nulle.
+    \item Montrer que les zéros de \(y\) sont isolés ie. sur un voisinage de \(x_0\) avec \(y(x_0) = 0\) \(y\) ne s'annule qu'en \(x_0\) \\ 
+    En déduire que sur un segment \(y\) ne possède qu'un nombre fini de zéros. \\
+    Montrer qu'il y a une quantité au plus dénombrable de zéros.
+    \item On suppose que \(y\) possède deux zéros \(\alpha < \beta\) dans \(I\) \\
+    Soit \(z\) solution tel que \((y, z)\) sont indépendantes. Montrer que \(z\) s'annule entre \(\alpha\) et \(\beta\)
+\end{enumerate}
+
+\subsection{Exercice type: Le changement de variables}
+\noindent Pour une équation du second ordre on peut tenter un changement de variables pour se ramener à une équation à coefficients constantes. \\
+Exemple:
+\[(1 + x^2)y'' + xy' + k^2y = 0\]
+avec \(k > 0\)
+( indication: faire un changement de variable \(x = \sinh(t)\) )
+\end{document}
